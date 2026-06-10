@@ -19,7 +19,7 @@ __pycache__/
 venv/
 
 # LaTeX build artifacts
-thesis_draft/main.pdf
+thesis/main.pdf
 *.aux
 *.bbl
 *.bcf
@@ -36,19 +36,22 @@ thesis_draft/main.pdf
 *.synctex.gz
 *.toc
 
-# Private/raw research data that must not be committed
+# Restricted/raw research data that must not be committed
 *private*
 *PRIVATE*
-pilot_outputs/**/responses/
-pilot_outputs/**/screenshots_private/
-pilot_outputs/**/ocr_text_private/
-pilot_outputs/**/api_log_private.csv
-pilot_outputs/**/chatgpt_app_log_private.csv
-pilot_outputs/**/claude_api_log_private.csv
-pilot_outputs/**/gemini_api_log_private.csv
-pilot_outputs/**/second_coder_key_PRIVATE.csv
-pilot_outputs/**/second_coder_sheet_BLIND.csv
+data/private/
+restricted_archive/
+**/responses/
+**/screenshots_private/
+**/ocr_text_private/
+**/api_log_private.csv
+**/chatgpt_app_log_private.csv
+**/claude_api_log_private.csv
+**/gemini_api_log_private.csv
+**/second_coder_key_PRIVATE.csv
+**/second_coder_sheet_BLIND.csv
 app_collection_kit/
 
-# Generated local exports
+# Local export folders
+thesis-public/
 thesis-github-ready/

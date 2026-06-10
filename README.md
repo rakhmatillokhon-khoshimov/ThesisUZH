@@ -1,12 +1,12 @@
 # Auditing Access Channel Effects in LLM Behavior
 
-This repository contains the public thesis package for a Master's thesis on
-observable differences between a bare OpenAI API condition and the official
-ChatGPT consumer-app deployment.
+This repository contains the thesis source, summary data, analysis code, and
+compiled PDF for a Master's thesis on observable differences between a bare
+OpenAI API condition and the official ChatGPT consumer-app deployment.
 
-The empirical comparison uses a frozen 60-prompt diagnostic suite. The public
-repository includes the redacted prompt bank, thesis source, generated summary
-tables, figures, analysis scripts, and final PDF. Private raw prompts, raw model
+The empirical comparison uses a frozen 60-prompt diagnostic suite. The repository
+includes the redacted prompt bank, thesis source, derived summary tables,
+figures, analysis scripts, and final PDF. Restricted prompt text, raw model
 outputs, screenshots, API response JSON files, and second-coder handoff packets
 are intentionally excluded.
 
@@ -25,34 +25,34 @@ differences.
 
 ## Repository Layout
 
-- `thesis_draft/` - LaTeX thesis source.
-- `docs/` - final thesis PDF and plain-text abstract.
-- `meeting_visuals/` - figures used by the thesis.
-- `pilot_outputs/20260608/analysis_scaleup_cleaned/` - public-safe generated
-  analysis summaries and LaTeX tables.
-- `prompt_bank_60.csv` - shared/redacted 60-prompt bank.
-- `prompt_taxonomy.*`, `taxonomy_coding_guide.md` - prompt and coding
+- `thesis/` - LaTeX thesis source.
+- `docs/` - final thesis PDF, abstract, and data-access note.
+- `figures/` - figures used by the thesis and presentation.
+- `results/analysis/` - reviewed summary data, statistics, and LaTeX tables.
+- `data/prompts/prompt_bank_60.csv` - shared/redacted 60-prompt bank.
+- `data/prompts/prompt_taxonomy.*`, `data/prompts/taxonomy_coding_guide.md` - prompt and coding
   definitions.
-- `*.py` - analysis and table-generation scripts retained for auditability.
-- `presentations/` - current supervisor progress presentation.
+- `scripts/` - analysis and table-generation scripts retained for auditability.
+- `protocols/` - collection, coding, transcription QA, and reliability protocols.
+- `slides/` - supervisor progress presentation.
 
 ## Build the Thesis
 
 From the repository root:
 
 ```bash
-cd thesis_draft
+cd thesis
 pdflatex main.tex
 pdflatex main.tex
 ```
 
-The checked public export was verified to compile to an 88-page PDF.
+The repository was verified to compile to an 88-page PDF.
 
 ## Reproducibility Boundary
 
-This public export is designed to compile the thesis and inspect the summary
+This repository is designed to compile the thesis and inspect the summary
 analysis artifacts. It is not a full raw-data release. The following materials
-remain local/private:
+remain restricted:
 
 - `prompt_bank_60_private.csv` and other executable high-risk prompt files;
 - raw API logs, raw app logs, API JSON response folders, and screenshot archives;
@@ -60,7 +60,7 @@ remain local/private:
 - second-coder handoff packets and primary-label keys;
 - `.env` files and API credentials.
 
-See `PUBLIC_DATA_NOTICE.md` for the exact exclusion policy.
+See `docs/DATA_ACCESS.md` for the exact exclusion policy.
 
 ## Key Results Snapshot
 
@@ -72,16 +72,3 @@ See `PUBLIC_DATA_NOTICE.md` for the exact exclusion policy.
 - Within-channel API lexical similarity exceeded API-vs-app similarity on 60/60
   prompts.
 - Human inter-rater reliability remains pending in the public thesis text.
-
-## Suggested GitHub Setup
-
-```bash
-cd /Users/rakhmatillokhonkhoshimov/Thesis/thesis-github-ready
-git init
-git add .
-git commit -m "Initial public thesis repository"
-```
-
-Before pushing, keep the repo public-safe by checking that no files with
-`private`, `PRIVATE`, `screenshots_private`, `responses`, or `.env` appear in
-`git status`.
