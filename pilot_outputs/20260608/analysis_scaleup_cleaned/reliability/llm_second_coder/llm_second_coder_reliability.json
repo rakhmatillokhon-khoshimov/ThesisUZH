@@ -1,0 +1,41 @@
+{
+  "n_units": 54,
+  "model_coded": 54,
+  "by_label": {
+    "refusal_status": {
+      "percent_agreement": 0.981,
+      "cohen_kappa": 0.946,
+      "n": 54
+    },
+    "safety_framing_strength": {
+      "percent_agreement": 0.537,
+      "cohen_kappa": 0.227,
+      "n": 54
+    },
+    "format_compliance": {
+      "percent_agreement": 0.815,
+      "cohen_kappa": 0.512,
+      "n": 54
+    },
+    "unsupported_inference": {
+      "percent_agreement": 0.852,
+      "cohen_kappa": 0.529,
+      "n": 54
+    },
+    "factuality": {
+      "percent_agreement": 0.611,
+      "cohen_kappa": 0.285,
+      "n": 54
+    },
+    "ui_surface_signature": {
+      "percent_agreement": 0.796,
+      "cohen_kappa": 0.227,
+      "n": 54
+    }
+  },
+  "pooled": {
+    "percent_agreement": 0.765,
+    "cohen_kappa": 0.7,
+    "n": 324
+  }
+}

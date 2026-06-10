@@ -1,0 +1,302 @@
+\section{Future Work and Research Agenda}
+
+The thesis has reached the point where the central empirical question is
+answerable from the collected evidence: under the documented conditions, the bare
+API condition and the official productized consumer app did not always produce
+the same observable behavior. The remaining research agenda is therefore not a search for a new
+thesis claim. It is a plan for strengthening, stress-testing, and extending the
+claim while keeping the same methodological discipline. This section translates
+the limitations and discussion into concrete next steps.
+
+The guiding objective is to make deployment-surface auditing more comparable
+across time, providers, and user-facing products. The current study shows that
+the deployment surface can matter, but it does so with one complete OpenAI API/app
+comparison, one prompt-bank version, one app run per prompt, API-only vendor
+baselines, and API-side repetition checks for OpenAI and Claude. A stronger
+follow-up program would preserve the paired black-box design while adding
+app-side repeated measurements, broader prompt coverage, independent coding, and
+more precise documentation of app-side context. The
+sections below prioritize work that is feasible with the existing repository and
+that would most improve the evidential value of the thesis.
+
+\subsection{Replication and Statistical Power}
+
+The first extension is repetition. The present design uses 60 paired prompts,
+which is sufficient to demonstrate concrete cases of deployment-surface
+divergence but not
+enough to estimate stable category-level rates with narrow uncertainty
+intervals. A replication pass should keep the same prompt IDs, categories,
+expected-behavior labels, and coding guide, but collect multiple independent
+runs per prompt and channel. A practical target is three to five repetitions per
+prompt, collected over separate sessions or days. That would turn the current
+60-pair comparison into 180 to 300 paired observations while preserving the
+same within-prompt structure.
+
+The replication should be designed around observable stability rather than only
+aggregate counts. For each prompt, the analysis can distinguish three cases:
+stable no-divergence, stable divergence, and unstable divergence. Stable
+no-divergence means both channels repeatedly produce the same final label.
+Stable divergence means the same difference recurs across repetitions, for
+example a repeated full-refusal versus safe-redirect split. Unstable divergence
+means at least one channel changes label across repetitions. This distinction is
+important because deployment-surface differences are not necessarily
+deterministic. A
+consumer app may route differently when search is available, when local context
+is inferred, or when the model decides to use a tool. The audit should therefore
+measure both channel differences and within-channel variability.
+
+The statistical analysis should also be pre-registered before collection. The
+follow-up should specify one primary endpoint, such as paired full-refusal
+asymmetry, and a fixed family of exploratory moderator tests with a stated
+multiple-comparison rule. For refusal labels, repeated measurements can be
+analyzed using prompt-clustered summaries: first compute the per-prompt frequency
+of API-only refusal and app-only refusal, then test whether the paired difference
+remains directionally consistent. For the broader substantive-divergence outcome,
+a mixed-effects logistic model or a simpler prompt-level bootstrap would be
+appropriate. The main thesis does not need such models, but a follow-up paper
+would benefit from separating prompt effects from deployment-surface effects.
+The current repository already contains scripts for exact tests and Wilson
+intervals; the next step is to add repeated-run aggregation while keeping the
+simpler tables for auditability.
+
+Replication also reduces the risk that the result is driven by a single
+collection moment. LLM products change frequently, and the app surface can change
+without an obvious public version number. A repeated design should record the
+date, local time, account state, browser or app version, visible model selector,
+search/tool indicators, and any visible source widgets for every run. These
+metadata do not reveal hidden routing, but they make later interpretation much
+less ambiguous.
+
+\subsection{Larger and More Balanced Prompt Bank}
+
+The second extension is prompt coverage. The present 60-prompt bank is balanced
+for a compact thesis: it covers allowed-sensitive over-refusal, refusal-expected
+guardrailing, boundary safety framing, instruction following, social
+recommendation controls, and neutral factual controls. This is enough to show
+that deployment-surface differences appear across several behavioral surfaces.
+It is not large enough to claim a comprehensive taxonomy of such effects.
+
+A larger bank should retain the six current categories but add narrower
+subcategories. In allowed-sensitive prompts, the current homonym-style examples
+could be split into software/process, sports, legal/business, cooking, and
+everyday language. In refusal-expected prompts, the private high-risk set should
+be balanced across privacy, cyber, misinformation, illegal activity, harassment,
+and crisis-support boundaries, while still keeping executable prompt text out of
+shared artifacts. In boundary safety prompts, the next version should distinguish
+health, legal, safety reporting, scam prevention, civic misinformation, and
+fictional writing. These subcategories would make it possible to ask whether the
+app/API difference is a general refusal-style difference or concentrated in a
+few risk domains.
+
+Instruction-following prompts also deserve a larger role. The current corrected
+analysis found only one final substantive format case after screenshot QA. That
+is a useful negative finding, but it rests on a small set of eight instruction
+prompts. A follow-up should include objective constraints that are easier to
+score automatically: exact token counts, JSON validity, required separators,
+forbidden punctuation, case constraints, ordered lists, and multilingual output.
+These prompts are valuable because they are less dependent on subjective safety
+interpretation. If deployment surfaces diverge on such tasks, the evidence is
+especially easy to audit.
+
+The social recommendation category should be expanded carefully, not because the
+current result is weak, but because it corrected an earlier mistaken direction.
+After transcript QA, the social rows function as negative controls: both
+channels generally avoided unsupported inference. A larger follow-up should
+preserve that role and include more protected-attribute settings, but the coding
+must remain conservative. The expected behavior should be refusal of unsupported
+inference or explicit insufficiency, not moralizing language. This distinction
+prevents the analysis from counting ordinary stereotype avoidance as
+over-refusal.
+
+\subsection{Consumer-App Baselines Beyond OpenAI}
+
+The current vendor baselines are API-only. They are useful because they show that
+raw provider APIs already differ in refusal posture on the same prompts, but they
+do not answer whether Claude, Gemini, or other consumer apps exhibit their own
+app/API differences. A direct extension would add official consumer-app
+collection for those systems using the same prompt bank, the same screenshot
+evidence protocol, and the same coding guide.
+
+This extension should be explicit about comparability. Different providers expose
+different consumer surfaces: model pickers, search toggles, workspace memory,
+file handling, citation displays, safety notices, and regional defaults vary
+across products. The goal should not be to force all consumer apps into a
+fictional identical condition. Instead, the audit should document each access
+surface and compare the effect of using the official consumer route versus the
+programmatic route within each provider. The primary unit would become a
+provider-specific API/app pair. Cross-provider claims would then be framed as
+patterns across pairs, not as a single leaderboard.
+
+Adding consumer-app baselines would also improve the interpretation of UI-surface
+signatures. In the current OpenAI comparison, visible sources and local-context
+signals are app-side signatures absent from plain API text. Other products may
+surface different signatures, such as search summaries, suggested follow-up
+cards, document canvases, or location widgets. The coding scheme should allow
+provider-specific UI details while keeping a common top-level taxonomy:
+source-visible, context-visible, tool-visible, file/canvas-visible, and no
+visible app affordance.
+
+\subsection{Longitudinal Drift Audits}
+
+The third major extension is time. A one-time audit can identify channel
+differences at the moment of collection, but it cannot tell whether those
+differences are stable product properties or temporary artifacts of a release.
+Longitudinal auditing is therefore necessary for any stronger claim about
+consumer-facing reliability.
+
+A feasible longitudinal design would rerun the same prompt bank weekly or
+monthly for a fixed period. Each wave should freeze the prompt text, account
+conditions, browser/app conditions, and API parameters as much as possible. The
+analysis should report both wave-level divergence rates and prompt-level change
+events. For example, a prompt could move from API-only refusal in one wave to
+both-channel safe redirection in another. That change would matter even if the
+aggregate rate stayed similar, because it would show that product updates can
+shift the user-facing safety boundary.
+
+Longitudinal work should also record version uncertainty honestly. APIs often
+provide a visible model name, but consumer apps may expose only a product label.
+Even when a label is visible, it may not fully specify routing, tool use, memory,
+or moderation layers. The correct methodological response is not to infer hidden
+versions, but to timestamp the collection and preserve screenshots. That makes
+the audit reproducible as an observation of the access condition, even if the
+internal mechanism remains unknown.
+
+\subsection{Reliability and Coding Governance}
+
+Independent reliability remains the cleanest way to quantify coding agreement,
+but the current thesis no longer depends on it as a single point of failure. The
+coding-dependence sensitivity analysis shows that no final substantive case is
+safety-framing-only. Completing the independent coding route would still
+strengthen the taxonomy because some final labels are interpretive: safe
+redirection versus full refusal, light versus moderate safety framing, and
+substantive versus minor divergence.
+
+The reliability task should focus on labels that affect claims. It is less
+important to recode every auxiliary note than to independently code refusal
+status, safety-framing strength, format compliance, unsupported inference,
+factuality, UI-surface signature, and substantive-divergence status. The coder
+should receive the coding guide, prompt context, and raw outputs, but not the
+primary labels. After coding, disagreements should be summarized by label type. A
+low agreement score on a label does not automatically invalidate the study; it
+identifies which claims need narrower wording or adjudication.
+
+For future projects, the coding workflow should include a short calibration
+round before the full audit. The coder pair can label ten prompts, discuss
+disagreements, revise the guide, and only then code the final sample. That
+process would improve reliability without retroactively changing the
+pre-registered prompt bank. It would also make the distinction between minor and
+substantive divergence clearer, which is the most judgment-sensitive part of the
+current study.
+
+\subsection{Mechanism-Probing Without Overclaiming}
+
+The current thesis intentionally avoids causal claims about hidden prompts,
+moderation layers, or routing. Future work can probe mechanisms more directly,
+but only with designs that support such claims. One safe direction is controlled
+ablation at the deployment surface. For the app, researchers can repeat prompts with
+search disabled where possible, memory disabled where possible, location
+permissions controlled, and fresh sessions. For the API, researchers can vary
+system prompts, temperature, tool availability, and response-format settings.
+These ablations would not reveal proprietary internals, but they would identify
+which visible conditions are sufficient to reproduce certain differences.
+
+Another direction is response-forensics coding. Instead of claiming a hidden
+cause, the audit can code observable traces: citations, source snippets,
+localized entities, tool-call notices, refusal templates, and answer structure.
+If a factual answer is source-visible in the app and unsupported in the API, that
+is a trace-level difference. If an app answer mentions a local city when the
+prompt did not provide one, that is a context trace. Such coding keeps the
+analysis grounded in evidence while still moving closer to explanation.
+
+\subsection{User-Centered Consequence Measures}
+
+The present study is output-centered: it compares response labels. A later study
+could ask whether those differences matter for users. This is especially
+relevant for boundary safety and factual controls. A safe redirect may be more
+useful than a bare refusal if it gives legitimate next steps. A source-visible
+answer may be more trustworthy if users inspect the sources, but it may also
+create unwarranted confidence if sources are weak. The next layer of evaluation
+should therefore include utility, perceived helpfulness, perceived safety, and
+decision quality.
+
+Such a study should be designed cautiously. It should not expose participants to
+private high-risk prompt text or ask them to execute unsafe behavior. Instead,
+participants could compare redacted or harmless outputs, judge whether an answer
+is actionable in a legitimate way, or identify whether a response gives enough
+information to make a safe decision. The user-centered layer would complement,
+not replace, the black-box audit. The audit establishes that outputs differ; the
+user study estimates whether those differences are consequential.
+
+\subsection{Practical Priority Order}
+
+The table below converts the research agenda into a priority order. The first
+two items are most relevant for a stronger final thesis package. The remaining
+items are better treated as follow-up research.
+
+\begin{longtable}{L{0.06\linewidth}L{0.22\linewidth}L{0.27\linewidth}L{0.23\linewidth}}
+\caption{Prioritized next steps for strengthening the deployment-surface audit.}\\
+\toprule
+Rank & Task & Immediate output & Why it matters \\
+\midrule
+\endfirsthead
+\caption[]{Prioritized next steps (continued).}\\
+\toprule
+Rank & Task & Immediate output & Why it matters \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1 & Add app-side repetitions for key rows & Stability table for the 17 substantive cases and matched controls & Quantifies consumer-app stochasticity, the remaining repetition gap. \\
+2 & Complete independent coding & Filled blind sheet and reliability report & Strengthens interpretive labels and supervisor-facing credibility. \\
+3 & Add consumer-app baselines for other providers & Provider-specific API/app matrices & Tests whether deployment-surface differences generalize beyond one product. \\
+4 & Expand instruction-following prompts & Larger objective-format subset & Tests a less subjective behavior class. \\
+5 & Run longitudinal waves & Drift report by prompt and category & Measures whether observed effects persist over time. \\
+6 & Add access-surface ablations & Controlled search, memory, location, and tool-condition notes & Narrows plausible explanations without claiming hidden mechanisms. \\
+7 & Conduct user-centered evaluation & Helpfulness and safety-utility ratings for harmless output pairs & Connects observable divergences to user consequences. \\
+\end{longtable}
+
+\subsection{Highest-Value Immediate Extension: An App-Side Stability Panel}
+
+If only one additional empirical sprint is feasible, the most efficient choice
+is not a full new benchmark. It is a targeted app-side stability check around
+the existing final cases. The API side already has
+additional repetitions for the full 60-prompt bank; the remaining gap is the
+consumer-app side. The sprint would recollect the 17 substantive divergence
+prompts plus a matched set of non-divergent controls from the same categories in
+the app under documented conditions. This would create a compact stability panel
+without changing the research question or requiring a new prompt bank.
+
+The output of that sprint should be a small row-level stability table. Each
+prompt can be labeled as stable, partially stable, or unstable. Stable means the
+same final divergence label appears in all repetitions. Partially stable means
+the same direction appears more than once but at least one run changes label.
+Unstable means the divergence disappears or reverses across repetitions. This
+table would directly answer the most natural reader question after
+the Results chapter: are the 17 cases isolated examples, or do they
+repeat when recollected?
+
+The quote-level screenshot audit already provides a
+quality-control record for the current 17 cases. The same discipline should be
+kept for any new app repetitions: each screenshot, transcript, and final coding
+row should be checked together before adding the result to a table.
+
+The same sprint should complete the independent-coding route when a second
+coder is available. The blind coding sheet already exists, so the bottleneck is
+not infrastructure but execution. If the coder can complete only a subset, the
+subset should prioritize the 17 substantive cases and matched controls. A
+smaller honest reliability report is more valuable than a broad but rushed one.
+Absent a second coder, the documented sensitivity analysis and screenshot-QA
+route remain the stated evidence basis, without implying stronger agreement
+evidence than exists.
+
+These three tasks form a realistic bridge between the present thesis and a more
+publishable audit: stability checks show whether cases repeat, screenshot QA
+protects the evidence chain, and reliability work tests the coding scheme. None
+of them requires weakening the current claim or adding unsafe prompt text to the
+public thesis artifact.
+
+This agenda keeps the thesis objective intact. The central claim is already
+supported at the level appropriate for a black-box master's thesis: a bare API
+condition is not automatically a proxy for a productized consumer-app deployment.
+The next work should make that claim more stable, more general, and more useful
+for audit practice.

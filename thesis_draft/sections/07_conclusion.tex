@@ -1,0 +1,62 @@
+\section{Conclusion}
+
+This thesis treats deployment surface as a first-class condition in LLM audits.
+The core argument is simple: bare API access is not automatically a proxy for the
+official consumer-app experience. APIs are reproducible and essential for
+controlled evaluation, but consumer applications can expose related model
+families through additional product layers, visible sources, local context,
+formatting behavior, tools, retrieval, and different refusal styles. If those
+layers change the observable output, then the deployment surface must be part of
+the audit design.
+
+The methodological contribution is a reproducible protocol for comparing API and
+consumer-app behavior using fixed prompts, structured logs, screenshot-backed app
+evidence, transcript QA, visible UI-surface coding, pairwise manual review, and
+conservative statistical summaries. The thesis also contributes a practical
+coding variable, \texttt{ui\_surface\_signature}, for recording visible
+app-specific affordances without inferring hidden mechanisms.
+
+The empirical contribution is a completed 60-prompt bare OpenAI API versus
+productized ChatGPT app comparison with full pairwise coverage. Manual review of
+corrected prompt-echo-cleaned transcripts finds 17 substantive observable
+divergences, but the thesis does not treat all 17 as equally strong. The core
+behavioral subset is smaller: six refusal-boundary cases, three factual-support
+cases, and one format-compliance case. The strongest corrected patterns are:
+
+\begin{itemize}
+  \item on refusal-expected prompts, the API more often gives bare full refusals,
+  while the app gives bounded safe redirects;
+  \item the app exposes visible sources and account-localized context absent from
+  plain API text responses, which are retained as product-surface findings rather
+  than the main behavioral result;
+  \item on short factual controls, the app's retrieval-backed or source-visible
+  answers are sometimes coded as supported where the API's memory-based answer is
+  coded as a possible mismatch;
+  \item after correction, socially sensitive BBQ-style rows do not support an
+  API-over-refusal claim and instead serve as negative controls.
+\end{itemize}
+
+These findings support the thesis claim that deployment surface is
+audit-relevant. They do not support stronger causal claims about access channel
+alone, hidden prompts, tools, retrieval, internal guardrails, or routing rules.
+The primary statistical endpoint is directional but not conventionally
+significant, so the thesis characterizes bounded case evidence rather than
+claiming a confirmed population-level effect.
+
+The broader lesson is methodological. LLM evaluations should state the deployment
+surface they measure and avoid generalizing API-only findings to consumer-app
+settings without validation. This is especially important for safety,
+compliance, factuality, and fairness work, where the user-facing answer matters
+as much as the underlying model family. A benchmark score collected through an
+API may be valid for the API condition and still incomplete as evidence about
+ordinary user experience.
+
+Auditing research often faces a choice between scale and evidential care. This
+thesis deliberately chose care: a frozen diagnostic bank, screenshot-preserved
+app evidence, a correction audit that reduced its own headline count, repetition
+checks at both the label and text level, sensitivity analyses, and explicit
+claim boundaries. The result is a small but defensible body of evidence for a
+simple proposition with practical consequences: the deployment surface through
+which a language model is reached is part of the system under audit. Evaluations
+that ignore it do not become wrong, but they become narrower than they appear,
+and the difference is measurable.

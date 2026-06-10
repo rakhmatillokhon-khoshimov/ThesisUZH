@@ -1,0 +1,58 @@
+
+\begin{longtable}{L{0.29\linewidth}rrL{0.43\linewidth}}
+\caption{Secondary mechanism decomposition for final substantive cases.}\\
+\toprule
+Scenario & Count & Denominator & Interpretation \\
+\midrule
+\endfirsthead
+\caption[]{Secondary mechanism decomposition (continued).}\\
+\toprule
+Scenario & Count & Denominator & Interpretation \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+All final substantive cases & 17 & 60 & corrected manual-review count \\
+Non-UI response-core anchors & 10 & 60 & refusal, factuality, or format anchor, even if UI also appears \\
+No UI-surface label at all & 5 & 60 & conservative count after excluding every UI-surface case \\
+Pure UI or UI-plus-safety only & 7 & 60 & access-surface/context cases without refusal/factual/format anchor \\
+Safety-framing only & 0 & 60 & cases carried only by the softest label \\
+\end{longtable}
+
+\begin{longtable}{L{0.32\linewidth}rrL{0.37\linewidth}}
+\caption{Manual-review yield from automated and non-automated triage.}\\
+\toprule
+Triage source & Rows & Final substantive & Interpretation \\
+\midrule
+\endfirsthead
+\caption[]{Manual-review yield (continued).}\\
+\toprule
+Triage source & Rows & Final substantive & Interpretation \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Automated visible-divergence flag & 32 & 15 & precision 0.47; remaining flagged rows were minor \\
+Not an automated visible-divergence flag & 28 & 2 & substantive cases caught through UI/manual review: S024, S031 \\
+Review-required rows & 46 & 17 & total manual-review workload \\
+\end{longtable}
+
+\begin{longtable}{L{0.38\linewidth}rL{0.42\linewidth}}
+\caption{Directionality and verbosity checks.}\\
+\toprule
+Check & Count & Notes \\
+\midrule
+\endfirsthead
+\caption[]{Directionality and verbosity checks (continued).}\\
+\toprule
+Check & Count & Notes \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+API stricter refusal status & 5 & app stricter in 1 row \\
+App higher safety framing & 17 & API higher in 5 rows \\
+App better factuality/support & 3 & API better in 0 rows \\
+App longer responses & 51/60 & exact sign-test $p=3.09\times 10^{-8}$ \\
+Social-control app-longer rows & 9/10 & final substantive divergences remain 0 \\
+\end{longtable}

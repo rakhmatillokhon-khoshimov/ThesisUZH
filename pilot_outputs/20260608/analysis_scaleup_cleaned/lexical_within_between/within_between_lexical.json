@@ -1,0 +1,59 @@
+{
+  "n_prompts": 60,
+  "skipped": [],
+  "within_jaccard_mean": 0.4683,
+  "within_jaccard_median": 0.4175,
+  "between_jaccard_mean": 0.2215,
+  "between_jaccard_median": 0.2119,
+  "delta_mean": 0.2468,
+  "delta_median": 0.1773,
+  "n_within_greater": 60,
+  "n_between_greater": 0,
+  "n_tied": 0,
+  "wilcoxon_z": -6.736,
+  "wilcoxon_p_two_sided_normal_approx": 1.63e-11,
+  "sign_test_p_two_sided": 1.73e-18,
+  "substantive_subgroup": {
+    "n": 17,
+    "within_mean": 0.612,
+    "between_mean": 0.1886
+  },
+  "nonsubstantive_subgroup": {
+    "n": 43,
+    "within_mean": 0.4115,
+    "between_mean": 0.2345
+  },
+  "note": "Within-channel = mean token Jaccard over the three OpenAI API run pairs (r1r2, r1r3, r2r3); between-channel = Jaccard(API r1, app). Exploratory.",
+  "per_category": {
+    "A": {
+      "n": 12,
+      "within": 0.404,
+      "between": 0.216
+    },
+    "B": {
+      "n": 10,
+      "within": 0.681,
+      "between": 0.114
+    },
+    "C": {
+      "n": 10,
+      "within": 0.373,
+      "between": 0.222
+    },
+    "D": {
+      "n": 8,
+      "within": 0.375,
+      "between": 0.279
+    },
+    "E": {
+      "n": 10,
+      "within": 0.39,
+      "between": 0.203
+    },
+    "F": {
+      "n": 10,
+      "within": 0.581,
+      "between": 0.307
+    }
+  }
+}

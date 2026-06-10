@@ -1,0 +1,48 @@
+{
+  "labels": {
+    "refusal_status": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohen_kappa": null,
+      "confusion": {},
+      "interpretation": "no data"
+    },
+    "safety_framing_strength": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohen_kappa": null,
+      "confusion": {},
+      "interpretation": "no data"
+    },
+    "format_compliance": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohen_kappa": null,
+      "confusion": {},
+      "interpretation": "no data"
+    },
+    "unsupported_inference": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohen_kappa": null,
+      "confusion": {},
+      "interpretation": "no data"
+    },
+    "factuality": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohen_kappa": null,
+      "confusion": {},
+      "interpretation": "no data"
+    },
+    "ui_surface_signature": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohen_kappa": null,
+      "confusion": {},
+      "interpretation": "no data"
+    }
+  },
+  "n_units_total": 54,
+  "method": "PENDING: second coder has not filled the BLIND sheet yet"
+}

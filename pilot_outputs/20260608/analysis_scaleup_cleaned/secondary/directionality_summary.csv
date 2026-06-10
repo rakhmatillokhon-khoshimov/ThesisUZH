@@ -1,0 +1,7 @@
+label,same,api_higher,app_higher,app_better,api_better,api_pass_app_fail,app_pass_api_fail,not_applicable_mismatch,other
+refusal_status_all,54,5,1,,,,,,
+safety_framing_all,38,5,17,,,,,,
+refusal_status_final,11,5,1,,,,,,
+safety_framing_final,11,1,5,,,,,,
+factuality,57,,,3,,,,,
+format_compliance,59,,,,,1,,,

@@ -1,0 +1,235 @@
+\section{Discussion}
+
+The completed scale-up supports a narrower claim than ``the same model behaves
+differently because of access channel.'' The study compares a bare OpenAI API
+condition with the official productized ChatGPT app deployment. The app
+screenshots show a \texttt{4o} label, which improves model-family comparability,
+but the app also includes hidden instructions, tools, retrieval, UI rendering,
+session state, and possible account or location context. Those components cannot
+be separated with this design. The defensible claim is therefore about
+observable deployment-surface differences.
+
+Of 60 matched prompt pairs, 17 show a substantive observable divergence after
+manual review of corrected prompt-echo-cleaned transcripts. The important
+interpretive move is to tier those cases. Ten are response-core cases: six
+refusal-boundary differences, three factual-support differences, and one
+format-compliance difference. Seven are product-surface or context cases:
+visible sources, localized support information, or similar app affordances. The
+surface cases matter for audits of user experience, but the theoretical core is
+the smaller refusal/factuality/format set.
+
+\subsection{What the Deployment Surface Changes}
+
+The results show three broad kinds of deployment-surface difference. The first
+is refusal granularity. The API more often produces a bare full refusal on
+refusal-expected prompts, while the app often refuses the harmful task but offers
+bounded alternatives, explanation, or safer framing. The second is factual
+support. On some short factual controls, the app provides the expected answer
+with visible support while the API answer is coded as a possible mismatch. The
+third is UI surface. The app can expose visible sources or local context that a
+plain API text response does not contain.
+
+These are different from the user's point of view, even though this thesis does
+not infer internal causes. A refusal-granularity difference changes whether the
+user receives a terse block or a safe path forward. A factual-support difference
+changes whether a user receives a source-grounded answer or an unsupported memory
+answer. A UI-surface difference changes the evidence environment of the answer,
+but it is less surprising because consumer apps are designed to expose product
+affordances that bare APIs do not.
+
+\subsection{Refusal Posture Is Not a Simple Safety Ranking}
+
+The corrected results do not support a simple claim that the app is safer, less
+safe, stricter, or more permissive than the API. The refusal pattern is more
+specific. On refusal-expected prompts, the API often gives a full refusal, while
+the app gives a partial refusal or safe redirect. That can look less restrictive
+if the only metric is full-refusal count. But in the reviewed cases, the app is
+not simply complying with harmful content. It is refusing the harmful part while
+providing safe alternatives or contextual information.
+
+This distinction matters because many safety evaluations collapse behavior into
+binary refusal/compliance labels. Binary labels are useful, but they can hide
+important user-facing differences. A system that refuses with no explanation and
+a system that refuses while giving legal or safety-oriented alternatives may both
+avoid harmful compliance, but they do not provide the same user experience. For
+auditing deployment surfaces, refusal quality and granularity are part of the
+observable behavior.
+
+\subsection{The Importance of Negative Controls}
+
+The corrected Category E result is a useful guardrail against overclaiming.
+Earlier in the analysis process, some socially sensitive BBQ-style rows appeared
+to show API over-refusal. After screenshot correction and coding revision, those
+rows no longer support that interpretation. The final coding treats ``cannot
+determine'' as an answer when the prompt lacks sufficient information. Category E
+therefore contributes zero final substantive cases.
+
+This negative result is important. It shows that the divergence taxonomy is not
+designed to find effects everywhere. Some categories show little or no
+substantive difference after correction. That strengthens the credibility of the
+positive findings in Categories B and F, and it also narrows the thesis claim:
+the observed deployment-surface difference is not a generic social-sensitivity
+over-refusal pattern. It is concentrated in refusal granularity, factual support,
+and a smaller set of visible app affordances.
+
+\subsection{UI-Surface Signatures as Context, Not the Core Result}
+
+The UI-surface signature is a useful methodological addition, but it should not
+be confused with the strongest behavioral result. Many LLM evaluations compare
+text outputs only. In consumer applications, however, the output is not only
+text. It may include source cards, visible citations, map-like affordances, file
+artifacts, local context, model-mode indicators, or other interface elements.
+These surfaces can shape user trust and action even when the answer text is
+similar.
+
+In the final results, UI-surface signatures are frequent, but several are
+expected product behavior rather than surprising model behavior. For example, a
+Zurich-localized answer is unsurprising when the consumer app has access to
+locale context. The reason to keep these cases is not that they are theoretically
+deep; it is that they show why app audits need screenshot-backed evidence and
+UI-surface coding. Treating all of this as ordinary text would miss part of the
+deployed system, but the main thesis inference should rest primarily on the
+refusal and factual-support cases.
+
+\subsection{Implications for API-Only Evaluations}
+
+The practical implication is straightforward: API-only evaluations should be
+labeled as API evaluations. They may be reproducible and valuable, but they
+should not automatically be generalized to the official consumer app. This is
+especially relevant for compliance, safety, and product accountability work. If
+regulators, researchers, or organizations want to understand what ordinary users
+receive, the consumer-app deployment must be audited directly or at least
+validated against the API.
+
+This does not make API evaluation obsolete. APIs remain essential for scale,
+control, and repeatability. The point is that API evaluation answers a narrower
+question: what happens under the bare API condition. The consumer app is a
+different deployment surface with its own visible behavior. A mature audit program
+should record both where possible.
+
+\subsection{Interpretation of the Statistical Result}
+
+The statistical summary is intentionally modest. The McNemar exact test gives
+$p=0.062$ for full-refusal discordance, which is directional but not significant
+at $\alpha=.05$. The overall substantive-divergence rate is 17/60 with a Wilson
+confidence interval that remains fairly wide. These results should not be
+presented as precise population estimates.
+
+The value of the statistics is different: they discipline the interpretation.
+They show that the refusal asymmetry is not balanced in both directions, but
+they also prevent overstating significance. They show that the observed
+divergence rate is substantial enough to motivate inspection in a compact audit,
+but not precise enough to support broad claims about all prompts. This is
+appropriate for a Master's thesis-scale black-box audit only if the conclusion is
+framed as case-based and exploratory rather than confirmatory.
+
+\subsection{Where the Cases Concentrate, and Whether It Is Noise}
+
+Two further analyses sharpen the interpretation beyond the headline rate, but
+neither should be over-read. First, the retained cases are not uniform across the
+bank. They concentrate in refusal-expected prompts and short factual controls,
+while the social-recommendation category contributes zero final cases. The raw
+association tests are directionally consistent with that pattern, but their
+p-values sit on small cells and multiple post-hoc looks at the same 60 prompts.
+They are therefore hypothesis-generating, not confirmatory. The stronger point
+is descriptive: the case evidence is not spread randomly across every category;
+it clusters where refusal posture and factual support are directly at stake.
+
+Second, the API-side divergences are unlikely to be caused only by API
+run-to-run stochasticity, and this now holds at two levels of analysis. At the
+label level, two additional independent repetitions of the API
+channels show that the primary refusal label is highly reproducible within a
+channel---perfectly stable on the OpenAI core channel (Fleiss $\kappa=1.0$) and
+near-stable on Claude ($\kappa=0.74$). At the text level, the within-channel
+versus between-channel comparison shows that on all 60 prompts the API's
+independent repetitions resemble each other more than the API resembles the app
+(mean token Jaccard $0.47$ versus $0.22$), with the largest gap on
+refusal-expected prompts. Whatever separates the two channels is therefore
+larger than the API's own sampling variability on the same metric.
+This strengthens the refusal finding on
+the API side. It does not fully settle within-app stochasticity, because the app
+collection has not yet been repeated. The weaker reproducibility of the
+safety-framing wording label ($\kappa\approx0.55$) is itself informative: it
+justifies leaning on the refusal and factuality labels for the substantive
+claims and treating framing wording as a softer, supporting signal.
+
+\subsection{Coding Reliability Without Making IRR a Single Point of Failure}
+
+Independent coding would still be the cleanest way to quantify agreement on the
+taxonomy. However, the coding-dependence sensitivity analysis shows that the
+main result is not carried by the most subjective label. No final substantive
+case is safety-framing-only. Every final case has a non-framing anchor: visible
+UI surface, factual-control support, exact format compliance, or a refusal
+boundary/full-refusal contrast. Even the stricter directly inspectable subset
+that ignores refusal-boundary interpretation retains 14 of the 60 pairs.
+
+This distinction matters for how the reliability limitation should be read. The
+absence of completed inter-rater reliability weakens claims about the exact
+taxonomy labels and should be reported honestly. It does not erase the evidence
+chain for the core deployment-surface claim, because the positive cases are tied to
+screenshots, expected-answer checks, format constraints, and excerpt-level
+evidence rather than only to subjective framing judgments.
+
+\subsection{Evidence Discipline and Correction}
+
+One of the strongest methodological lessons from the project is that screenshot
+evidence must be treated carefully. Without prompt-echo cleaning and targeted
+screenshot correction, the thesis would have reported two misleading claims: a
+false format failure for S038 and an inflated social over-refusal story. The
+corrected result is smaller but more trustworthy.
+
+This is a general lesson for app audits. Consumer-app evidence is closer to the
+real user surface, but it is harder to collect cleanly than API evidence. Screenshots
+must be named, archived, transcribed, checked, and sometimes corrected. The audit
+pipeline should preserve both the raw evidence and the correction audit. That is
+why the appendix includes the correction table and reviewed coding summary.
+
+\subsection{Cross-Vendor Context}
+
+The Claude and Gemini API baselines show that raw API conditions differ by
+vendor. Even when restricted to APIs, vendors differ on refusal-expected prompts.
+This is useful context, but it is not another app-comparison result. It
+reinforces the general methodological point that a single access point is not
+representative of the LLM ecosystem and may not be representative of a provider's
+own consumer experience.
+
+The thesis keeps the vendor baselines secondary because there are no Claude or
+Gemini app collections. Treating those API baselines as equivalent to app
+comparisons would repeat the same methodological mistake the thesis criticizes.
+
+The four-channel agreement analysis adds only secondary context. On refusal
+posture, the app agrees more often with the Gemini and Claude APIs than with the
+OpenAI API, because the plain OpenAI Responses API is the lone channel that
+issues bare full refusals in this collection. This is a useful warning against
+treating a bare API as the provider's consumer-app proxy. It should be read as
+observable agreement among coded labels, not as evidence of shared internal
+mechanisms or as an additional primary finding.
+
+\subsection{What This Thesis Does Not Show}
+
+The thesis does not show that one deployment surface is globally better. It does
+not show that the app always uses retrieval, that the API never uses safety
+context, or that refusal differences are caused by a particular hidden policy.
+It also does not show that the observed rates generalize to all possible prompts.
+The prompt bank is diagnostic, not representative.
+
+The correct interpretation is narrower and stronger: under documented collection
+conditions, the bare API condition and productized app deployment produced
+different observable behavior on a frozen benchmark-grounded prompt suite. Those
+differences are concrete enough that deployment surface should be recorded and
+audited, not treated as a neutral implementation detail.
+
+\subsection{Practical Recommendations}
+
+For researchers, the recommendation is to report the deployment surface as part
+of the experimental condition and avoid generalizing from API-only evidence to
+consumer apps without validation. For benchmark designers, the recommendation is
+to add fields for UI-surface signatures and tool visibility when app collection
+is part of the study. For safety evaluators, the recommendation is to distinguish
+bare refusal from safe redirection. For thesis-scale audits, the recommendation
+is to keep a correction audit so that OCR and UI artifacts do not become
+behavioral claims.
+
+These recommendations are modest but actionable. They do not require internal
+provider access. They require only disciplined black-box collection, paired
+comparisons, visible-surface coding, and conservative interpretation.

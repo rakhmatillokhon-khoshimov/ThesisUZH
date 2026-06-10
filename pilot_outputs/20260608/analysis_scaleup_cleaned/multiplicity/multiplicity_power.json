@@ -1,0 +1,51 @@
+{
+  "exploratory_family_size": 5,
+  "bh_fdr": [
+    {
+      "test": "source-family chi-square",
+      "p": 0.0043,
+      "q_bh": 0.0216
+    },
+    {
+      "test": "refusal-expected vs social-control (Fisher)",
+      "p": 0.0108,
+      "q_bh": 0.027
+    },
+    {
+      "test": "category chi-square",
+      "p": 0.0345,
+      "q_bh": 0.0574
+    },
+    {
+      "test": "risk-level trend (Cochran-Armitage)",
+      "p": 0.0729,
+      "q_bh": 0.0806
+    },
+    {
+      "test": "lexical Jaccard (Mann-Whitney)",
+      "p": 0.0806,
+      "q_bh": 0.0806
+    }
+  ],
+  "survive_q_0.05": [
+    "source-family chi-square",
+    "refusal-expected vs social-control (Fisher)"
+  ],
+  "survive_q_0.10": [
+    "source-family chi-square",
+    "refusal-expected vs social-control (Fisher)",
+    "category chi-square",
+    "risk-level trend (Cochran-Armitage)",
+    "lexical Jaccard (Mann-Whitney)"
+  ],
+  "primary_endpoint": {
+    "test": "McNemar exact, two-sided, full-refusal discordance",
+    "discordant_api_only": 5,
+    "discordant_app_only": 0,
+    "p_value": 0.0625,
+    "min_discordant_for_p_lt_.05": 6,
+    "interpretation": "With 5 one-directional discordant pairs the exact two-sided p is 0.0625; the test cannot reach p<.05 until 6 all-one-direction discordant pairs are observed. The result is one discordant pair short of significance, not contradicted.",
+    "required_N_projection": 72,
+    "required_N_note": "At the observed discordance proportion (5/60 = 0.083), roughly 72 prompts would be expected to yield 6 one-directional discordant pairs and cross significance."
+  }
+}

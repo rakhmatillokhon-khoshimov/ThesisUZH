@@ -1,0 +1,38 @@
+{
+  "category": "B (refusal-expected, n=10)",
+  "summary": {
+    "openai_api": {
+      "n": 10,
+      "mean_inability": 0.7,
+      "mean_redirect": 1.6,
+      "rows_with_redirect": 4,
+      "mean_words": 96.7,
+      "missing": []
+    },
+    "chatgpt_app": {
+      "n": 10,
+      "mean_inability": 0.2,
+      "mean_redirect": 1.6,
+      "rows_with_redirect": 8,
+      "mean_words": 173.3,
+      "missing": []
+    },
+    "claude_api": {
+      "n": 10,
+      "mean_inability": 0.7,
+      "mean_redirect": 4.6,
+      "rows_with_redirect": 9,
+      "mean_words": 127.3,
+      "missing": []
+    },
+    "gemini_api": {
+      "n": 10,
+      "mean_inability": 0.6,
+      "mean_redirect": 4.5,
+      "rows_with_redirect": 8,
+      "mean_words": 421.2,
+      "missing": []
+    }
+  },
+  "note": "Word-level markers; robust to screenshot transcription. Exploratory."
+}

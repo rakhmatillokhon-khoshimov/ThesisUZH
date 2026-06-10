@@ -1,0 +1,236 @@
+{
+  "n_pairs": 60,
+  "n_substantive": 17,
+  "overall_prop": 0.283,
+  "overall_wilson95": [
+    0.185,
+    0.408
+  ],
+  "by_category": {
+    "subgroups": {
+      "disallowed_refusal_expected": {
+        "k": 6,
+        "n": 10,
+        "prop": 0.6,
+        "wilson95": [
+          0.313,
+          0.832
+        ]
+      },
+      "boundary_safety_framing": {
+        "k": 4,
+        "n": 10,
+        "prop": 0.4,
+        "wilson95": [
+          0.168,
+          0.687
+        ]
+      },
+      "neutral_factual_control": {
+        "k": 4,
+        "n": 10,
+        "prop": 0.4,
+        "wilson95": [
+          0.168,
+          0.687
+        ]
+      },
+      "allowed_sensitive_over_refusal": {
+        "k": 2,
+        "n": 12,
+        "prop": 0.167,
+        "wilson95": [
+          0.047,
+          0.448
+        ]
+      },
+      "instruction_following": {
+        "k": 1,
+        "n": 8,
+        "prop": 0.125,
+        "wilson95": [
+          0.022,
+          0.471
+        ]
+      },
+      "social_recommendation": {
+        "k": 0,
+        "n": 10,
+        "prop": 0.0,
+        "wilson95": [
+          0.0,
+          0.278
+        ]
+      }
+    },
+    "chi2_independence": {
+      "chi2": 12.024623803009575,
+      "dof": 5,
+      "p_value": 0.03445193086972093,
+      "cramers_v": 0.4476721978376882,
+      "n": 60
+    },
+    "fisher_vs_refusal_expected": {
+      "disallowed_refusal_expected_vs_boundary_safety_framing": {
+        "p_value": 0.6563,
+        "odds_ratio": 2.09
+      },
+      "disallowed_refusal_expected_vs_neutral_factual_control": {
+        "p_value": 0.6563,
+        "odds_ratio": 2.09
+      },
+      "disallowed_refusal_expected_vs_allowed_sensitive_over_refusal": {
+        "p_value": 0.0743,
+        "odds_ratio": 6.07
+      },
+      "disallowed_refusal_expected_vs_instruction_following": {
+        "p_value": 0.0656,
+        "odds_ratio": 7.22
+      },
+      "disallowed_refusal_expected_vs_social_recommendation": {
+        "p_value": 0.0108,
+        "odds_ratio": 30.33
+      }
+    }
+  },
+  "by_risk_level": {
+    "subgroups": {
+      "high": {
+        "k": 6,
+        "n": 10,
+        "prop": 0.6,
+        "wilson95": [
+          0.313,
+          0.832
+        ]
+      },
+      "low": {
+        "k": 7,
+        "n": 30,
+        "prop": 0.233,
+        "wilson95": [
+          0.118,
+          0.409
+        ]
+      },
+      "medium": {
+        "k": 4,
+        "n": 20,
+        "prop": 0.2,
+        "wilson95": [
+          0.081,
+          0.416
+        ]
+      }
+    },
+    "cochran_armitage_trend": {
+      "z": 1.793741971387725,
+      "p_value": 0.07285436283082732
+    }
+  },
+  "by_source_family": {
+    "subgroups": {
+      "HarmBench": {
+        "k": 3,
+        "n": 3,
+        "prop": 1.0,
+        "wilson95": [
+          0.439,
+          1.0
+        ]
+      },
+      "SimpleQA": {
+        "k": 4,
+        "n": 6,
+        "prop": 0.667,
+        "wilson95": [
+          0.3,
+          0.903
+        ]
+      },
+      "Do-Not-Answer": {
+        "k": 3,
+        "n": 7,
+        "prop": 0.429,
+        "wilson95": [
+          0.158,
+          0.75
+        ]
+      },
+      "AILuminate": {
+        "k": 4,
+        "n": 10,
+        "prop": 0.4,
+        "wilson95": [
+          0.168,
+          0.687
+        ]
+      },
+      "XSTest": {
+        "k": 2,
+        "n": 12,
+        "prop": 0.167,
+        "wilson95": [
+          0.047,
+          0.448
+        ]
+      },
+      "IFEval": {
+        "k": 1,
+        "n": 8,
+        "prop": 0.125,
+        "wilson95": [
+          0.022,
+          0.471
+        ]
+      },
+      "BBQ": {
+        "k": 0,
+        "n": 10,
+        "prop": 0.0,
+        "wilson95": [
+          0.0,
+          0.278
+        ]
+      },
+      "TruthfulQA": {
+        "k": 0,
+        "n": 4,
+        "prop": 0.0,
+        "wilson95": [
+          0.0,
+          0.49
+        ]
+      }
+    },
+    "chi2_independence": {
+      "chi2": 20.6546804768419,
+      "dof": 7,
+      "p_value": 0.004316315272163488,
+      "cramers_v": 0.5867236782455875,
+      "n": 60
+    }
+  },
+  "ui_surface_app_only": {
+    "counts": {
+      "sources_visible": 8,
+      "local_context": 7,
+      "none": 45
+    },
+    "any_app_ui_surface": 15,
+    "prop_of_pairs": 0.25,
+    "wilson95": [
+      0.158,
+      0.372
+    ],
+    "note": "API channel shows app-style UI surfaces in 0/60 pairs by construction."
+  },
+  "divergence_type_frequency": {
+    "safety_framing": 22,
+    "ui_surface_signature": 12,
+    "refusal_status": 6,
+    "factuality": 3,
+    "format_compliance": 1,
+    "verbosity": 1
+  }
+}

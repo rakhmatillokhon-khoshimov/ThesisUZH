@@ -1,0 +1,404 @@
+\section{Related Work}
+
+This thesis sits at the intersection of algorithm auditing and LLM evaluation.
+It draws on audit methodology for studying opaque deployed systems, safety and
+refusal benchmarks for constructing risky and benign prompts, instruction and
+factuality benchmarks for verifiable controls, and bias benchmarks for socially
+sensitive inference tasks. The review is organized around the methodological
+problem that motivates the thesis: existing benchmarks are often carefully
+designed, but their results are usually tied to a single access surface, most
+often an API. The sections below first situate the thesis in the auditing and
+accountability tradition, then review the LLM systems and benchmark families the
+prompt bank draws on, and finally narrow to the access-channel question itself.
+
+\subsection{Algorithm Auditing and Accountability}
+
+Algorithm auditing treats a deployed computational system as an object of
+empirical study. Rather than relying only on documentation or provider claims,
+auditors send controlled inputs to a system and compare outputs across cases,
+conditions, or identities. Sandvig et al.\ \cite{sandvig_auditing} frame this
+style of research as a way to detect discrimination and systematic behavior in
+opaque internet platforms, adapting the logic of classical housing-discrimination
+audits to software systems. Their central insight is methodological: when the
+internal mechanism is unavailable, one can still construct controlled tests that
+reveal patterns in observable outputs. Diakopoulos \cite{diakopoulos_accountability}
+develops the same idea as a journalistic practice, using systematic probing to
+hold ``computational power structures'' accountable, and Kroll et al.\
+\cite{kroll_accountable} analyze, from a legal and technical perspective, why
+post-hoc external scrutiny is necessary when systems cannot be made fully
+transparent in advance.
+
+Empirical audits in this tradition have repeatedly shown that deployed
+commercial systems behave differently from what documentation or marketing
+suggests. Buolamwini and Gebru's Gender Shades study \cite{gender_shades} found
+large intersectional accuracy disparities in commercial gender-classification
+products, and the follow-up by Raji and Buolamwini \cite{raji_actionable} showed
+that publicly naming audited products measurably changed vendor behavior.
+Obermeyer et al.\ \cite{obermeyer_bias} dissected a widely used healthcare risk
+algorithm and located its racial bias in a proxy-variable choice, a finding that
+was only visible by comparing observable predictions against outcomes. These
+studies matter for the present thesis not because of their domains but because
+of their epistemic position: each treated the deployed product, not the
+underlying model in isolation, as the unit of audit.
+
+A second strand of this literature concerns how audits should be embedded in
+practice and what they can validly claim. Raji et al.\ \cite{raji_gap} propose
+an end-to-end internal auditing framework intended to close the gap between
+high-level AI principles and concrete deployment decisions. Selbst et al.\
+\cite{selbst_abstraction} warn that fairness work fails when it abstracts away
+the sociotechnical context in which a system runs, and Suresh and Guttag
+\cite{suresh_guttag} catalogue how distinct harms enter at distinct stages of
+the machine-learning life cycle, including deployment. Binns
+\cite{binns_fairness} connects fairness measurement to longer-standing debates
+in political philosophy, and Barocas and Selbst \cite{barocas_selbst} analyze
+why facially neutral data practices can produce disparate impact. The textbook
+treatment by Barocas, Hardt, and Narayanan \cite{barocas_fairness_ml}
+consolidates this measurement perspective. The shared lesson is that the system
+under audit is the system as deployed, with its data, defaults, and interfaces,
+not an abstraction of it. This thesis applies that lesson to LLM access
+channels: the consumer app is the deployed condition most users encounter, and
+it is audited as such rather than abstracted into ``the model.''
+
+The broader critical literature supplies the motivation for treating deployed
+products with suspicion of convenient assumptions. Gillespie
+\cite{gillespie_algorithms} analyzes how algorithmic systems acquire public
+relevance and authority; Burrell \cite{burrell_black_box} distinguishes forms of
+opacity, including deliberate corporate secrecy, that block internal
+inspection; Noble \cite{noble_algorithms} and Eubanks \cite{eubanks_automating}
+document harms from deployed ranking and eligibility systems on real
+populations; and Crawford \cite{crawford_atlas} situates AI systems in their
+material and political supply chains. Closer to the interface, Amershi et al.\
+\cite{human_ai_guidelines} codify how user-facing AI products shape interaction
+through interface defaults, and Green and Chen \cite{green_limits} show
+empirically that the same algorithmic output can lead to different outcomes
+depending on how humans receive and use it. Both points anticipate a core claim
+of this thesis: the surface through which an answer is delivered is part of the
+behavior worth auditing, not packaging around it.
+
+\subsection{From Documentation to Black-Box Inspection}
+
+One response to opaque systems is standardized documentation. Model cards
+\cite{model_cards} ask providers to report intended use, evaluation conditions,
+and known limitations; datasheets for datasets \cite{datasheets} and data
+statements \cite{data_statements} do the same for training data. These
+artifacts are valuable, but they describe the model or dataset as an artifact,
+not the productized deployment a user reaches: a model card rarely specifies
+the hidden system prompt, tool wiring, retrieval behavior, or interface
+rendering of a consumer app, and these are exactly the layers this thesis finds
+to matter observably. Documentation and auditing are therefore complements: the
+former states what a provider intends, the latter checks what a deployment
+does.
+
+A second response is post-hoc explainability. Local surrogate methods such as
+LIME \cite{lime} and Shapley-value attribution \cite{shap} explain individual
+predictions of accessible models. For closed commercial LLM deployments these
+techniques have limited reach: there is no feature space or gradient access at
+the product boundary, and the deployment stack can change without notice. The
+practical alternative for proprietary conversational systems remains controlled
+input--output probing, which is the method adopted here. The thesis accordingly
+makes no interpretability claims; it codes observable outputs under documented
+access conditions.
+
+\subsection{API and WebUI Access-Channel Studies}
+
+The closest direct precedent for this thesis is work on API/WebUI content
+moderation disparities. Lipphardt et al.\ \cite{dualstandards} examine content
+moderation differences between API and WebUI interfaces in large language models
+and show that the access route itself can be an empirically relevant condition.
+Their study matters because it shifts the evaluation question from only
+``which model is being tested?'' to also ``which deployed access surface is
+being tested?'' This is the same methodological move made in the present thesis.
+
+The contribution here is narrower and complementary. Rather than focusing only
+on content moderation disparity, this audit compares a fixed 60-prompt bank
+across the OpenAI API and the official ChatGPT app, then codes refusal status,
+safety framing, factuality, format compliance, unsupported inference, and
+visible UI-surface signatures. This makes it possible to separate several
+observable deployment-surface differences: bare refusal versus safe redirection, visible
+sources, local context, and factual support. Dual Standards is therefore a
+related-work anchor, not a prompt source or replacement for the paired local
+audit.
+
+\subsection{LLM Development and the Deployment Stack}
+
+The systems audited here descend from a short but consequential line of work.
+Brown et al.\ \cite{gpt3} showed that a sufficiently large autoregressive
+language model can perform many tasks from prompts alone, which made the
+prompt, rather than task-specific training, the interface to model behavior.
+Ouyang et al.\ \cite{instructgpt} then aligned such models to human preferences
+with reinforcement learning from human feedback, defining the
+instruction-following assistants that consumer products now expose. Anthropic's
+work on assistant alignment formulated the helpful--honest--harmless framing
+\cite{helpful_harmless} and proposed Constitutional AI \cite{constitutional_ai},
+which trains harmlessness against an explicit set of principles. LaMDA
+\cite{lamda} is an early example of a dialog system whose safety and
+groundedness were tuned as product properties, including retrieval-style
+grounding. The significance for this thesis is that alignment and safety
+behavior are trained, provider-specific properties layered onto the base model:
+there is no single canonical ``model behavior'' that an access channel merely
+transmits.
+
+Documentation of recent frontier systems makes the deployment layering
+explicit. The GPT-4 technical report \cite{gpt4_report} describes
+post-training, safety mitigations, and system-level interventions added between
+the base model and the served product. Meta's Llama 2 and Llama 3 reports
+\cite{llama2,llama3} document safety fine-tuning and release accompanying
+system-level safeguards; because their weights are open, the gap between a raw
+model and a productized deployment is directly visible in those ecosystems. For
+closed systems, the same layering exists but is observable only from the
+outside, which is precisely the audit problem studied here.
+
+This line of scaling also generated the critical literature on its risks.
+Bender et al.\ \cite{stochastic_parrots} question what scaled language models
+actually learn and warn against mistaking fluency for grounded competence;
+Bommasani et al.\ \cite{foundation_models} name the homogenization risk of many
+products inheriting the behavior, and the flaws, of a few foundation models;
+and Weidinger et al.\ \cite{weidinger_risks} taxonomize the resulting harm
+classes. The homogenization point sharpens the access-channel question: when
+one provider's model family backs both an API and a consumer app, evaluators
+are tempted to treat results from one surface as covering the other. The
+present results show that this inference is not free.
+
+\subsection{Benchmark Evaluation and Its Access Assumptions}
+
+Modern LLM evaluation is organized around shared benchmarks. MMLU \cite{mmlu}
+measures multitask knowledge, GSM8K \cite{gsm8k} grade-school mathematical
+reasoning, and HumanEval \cite{codex} program synthesis; BIG-bench
+\cite{bigbench} aggregates hundreds of heterogeneous tasks, and HELM
+\cite{helm} deliberately standardizes scenarios, metrics, and conditions so that
+models can be compared holistically. Instruction-tuned and chat-style systems
+added their own evaluation layer: Self-Instruct \cite{self_instruct} and
+Alpaca \cite{alpaca} demonstrate how cheaply instruction-following variants can
+be produced from a base model, and MT-Bench \cite{mtbench} and G-Eval
+\cite{geval} use strong LLMs as judges of open-ended responses.
+
+Two properties of this ecosystem motivate the present audit. First, almost all
+of these benchmarks are executed against programmatic endpoints under scripted
+conditions, because that is what scales; the benchmark literature is, in
+effect, an API-condition literature. HELM makes the standardization explicit
+and is transparent about it, but the consumer surface remains outside the
+standardized frame. Second, the proliferation of cheaply derived variants and
+judge models means that ``the model'' named in a benchmark result is already a
+bundle of base model, tuning data, and serving configuration. This thesis takes
+the next step and treats the full deployment stack, including the consumer
+interface, as part of what a behavioral measurement is about.
+
+\subsection{LLM Safety and Refusal Evaluation}
+
+Safety evaluations ask whether models refuse harmful instructions while still
+answering benign requests. HarmBench \cite{harmbench} provides a standardized
+framework for automated red-teaming and robust refusal evaluation. Do-Not-Answer
+\cite{donotanswer} curates prompts that responsible models should decline and
+supports low-cost automatic evaluation. MLCommons' AILuminate effort
+\cite{ailuminate} formalizes hazard categories for product-level risk and
+reliability assessment. These projects are important because they show how
+unsafe or sensitive behavior can be turned into repeatable prompt sets.
+Moderation classifiers such as Llama Guard \cite{llama_guard} additionally show
+that providers can interpose a separate safety model between user and LLM; from
+a black-box perspective, such components are part of the deployment stack and
+indistinguishable from the model itself, which is one more reason to audit the
+deployed bundle rather than assume a bare model.
+
+Recent refusal and jailbreak-evaluation work reinforces the same design space.
+SORRY-Bench \cite{sorrybench} systematically evaluates safety refusal,
+StrongREJECT \cite{strongreject} provides a jailbreak/refusal evaluation
+benchmark, and WildGuard \cite{wildguard} connects prompt harmfulness, response
+harmfulness, and refusal detection in an open moderation tool. RefusalBench
+\cite{refusalbench_bio} further illustrates why refusal rate alone can misstate
+calibration: in biological-research prompts, strict refusal varies widely across
+models and can penalize safe, useful engagement. These sources help position the
+refusal labels and redaction policy, although the final prompt bank for this
+thesis uses Do-Not-Answer and HarmBench for its high-risk refusal-expected rows
+rather than importing raw prompts from all available refusal benchmarks.
+
+For this thesis, these benchmarks provide two kinds of structure. First, they
+identify prompt families where refusal is expected. Category B uses
+refusal-expected prompts from Do-Not-Answer and HarmBench, with raw high-risk
+text kept only in private local files. Second, they motivate boundary prompts
+where the right answer is neither unrestricted compliance nor blanket refusal.
+For example, educational cybersecurity, self-harm support, public-safety
+escalation, and news-literacy prompts are answerable but require safe framing.
+These prompts form Category C.
+
+The deployment-surface question adds a further layer. A refusal benchmark run through
+an API may measure one safety posture, while a consumer application may add
+safe-completion language, visible sources, local emergency context, or different
+refusal granularity. The key issue is therefore not only whether a model refuses,
+but how refusal is expressed through a particular access surface.
+
+\subsection{Red-Teaming and Jailbreak Research}
+
+A complementary literature attacks safety behavior rather than measuring it.
+Ganguli et al.\ \cite{ganguli_redteam} describe large-scale manual red-teaming
+of assistant models and the lessons of scaling it; Perez et al.\
+\cite{redteam_lms} automate the search for failure-inducing prompts using
+language models themselves. On the adversarial side, Zou et al.\
+\cite{universal_attacks} construct universal adversarial suffixes that transfer
+across models, Chao et al.\ \cite{pair} show black-box jailbreaks can be found
+in tens of queries, and Shen et al.\ \cite{do_anything_now} characterize the
+in-the-wild ``DAN'' prompt ecosystem. Wei et al.\ \cite{jailbroken} explain
+such failures as products of competing training objectives and mismatched
+generalization between capability and safety training.
+
+This thesis is not an attack study: Category B uses straightforward harmful
+requests, not adversarial wrappers, and the audit asks how each surface
+declines rather than whether it can be broken. The jailbreak literature is
+nevertheless relevant for one structural reason: attacks are developed,
+reported, and patched against specific deployed surfaces, and transfer between
+surfaces is an explicit research variable in that literature. That is an
+implicit acknowledgment that the API condition and the product condition are
+not interchangeable, which is the assumption this thesis tests directly with
+benign instruments.
+
+\subsection{Over-Refusal and Calibration}
+
+Safety systems can fail in the opposite direction by refusing benign requests.
+XSTest \cite{xstest} targets this problem by testing prompts that contain words
+or structures associated with unsafe content but are clearly safe in context.
+Examples include ordinary programming, sports, food, or photography uses of
+terms that can have violent meanings. OR-Bench \cite{orbench} extends the
+over-refusal problem to a larger benchmark setting.
+
+Over-refusal is important for deployment-surface auditing because refusal calibration
+may differ by surface. A provider may choose one refusal style for API access and
+another for the consumer app. The app may also include more explanatory framing
+or safe alternatives, which changes the coding boundary between a full refusal
+and a partial safe redirect. Category A in the prompt suite draws on XSTest and
+OR-Bench-style allowed-sensitive prompts to test whether one channel refuses or
+over-warns where the other answers normally.
+
+The corrected results of this thesis also show why calibration claims require
+careful coding. In an earlier pass, some socially sensitive rows appeared to show
+API over-refusal. After transcript correction and a stricter treatment of
+``cannot determine'' answers, those rows became negative controls rather than
+positive over-refusal evidence. The stronger refusal difference is in Category B:
+the API more often gives a bare full refusal, while the app gives a bounded safe
+redirect.
+
+\subsection{Instruction Following}
+
+Instruction-following benchmarks test whether a model satisfies explicit,
+verifiable constraints. IFEval \cite{ifeval} is useful because many of its
+constraints can be checked without subjective semantic judgment: output must be
+lowercase, avoid commas, contain a certain number of placeholders, or follow a
+specified format. Such prompts are valuable in a deployment-surface study because
+they separate product-layer effects from broad answer quality. If the API and
+app both understand the prompt but only one satisfies a strict format
+constraint, the difference is visible and concrete.
+
+The consumer-app setting complicates format evaluation. App responses may include
+rendered markdown, visual separators, code blocks, or extra conversational
+phrasing. A screenshot transcript may also introduce artifacts that look like
+format failures. This is why the thesis treats format compliance conservatively.
+The final analysis includes only one format-compliance divergence after
+prompt-echo cleaning and screenshot correction. Cases that initially looked like
+format failures, such as S035 and S038, were removed from the final claim once
+the screenshot evidence was checked.
+
+\subsection{Factuality, Hallucination, and Retrieval}
+
+Factuality benchmarks test whether models provide correct answers to factual
+questions. SimpleQA \cite{simpleqa} targets short-form factuality, while
+TruthfulQA \cite{truthfulqa} examines whether models reproduce common falsehoods
+or misconceptions. Beyond benchmarks, a substantial literature measures and
+detects hallucination: Maynez et al.\ \cite{maynez_factuality} distinguish
+faithfulness from factuality in generation, Ji et al.\
+\cite{hallucination_survey} survey hallucination across natural language
+generation, FActScore \cite{factscore} decomposes long-form output into
+atomically checkable facts, and SelfCheckGPT \cite{selfcheckgpt} detects likely
+hallucination from the inconsistency of multiple sampled outputs. The
+sampling-consistency idea in SelfCheckGPT is methodologically close to the
+within-channel repetition check used in this thesis: both treat agreement
+across independent samples from the same system as an internal noise floor
+against which other differences can be judged.
+
+A parallel line of work changes the factual support of an answer by adding
+retrieval. Dense passage retrieval \cite{dpr} and retrieval-augmented
+generation \cite{rag} ground answers in retrieved documents; WebGPT
+\cite{webgpt} couples a model to a browser and trains it to cite sources;
+GopherCite \cite{verified_quotes} optimizes answers supported by verified
+quotes; and retrieval augmentation measurably reduces hallucination in dialog
+\cite{blenderbot2}. In API-only evaluation, factual answers typically reflect
+parametric memory under the selected settings. In a consumer app, the visible
+product may add exactly the retrieval and citation machinery this literature
+describes. The deployment surface can therefore change not only presentation
+but the factual support available to the user.
+
+This thesis uses neutral factual controls for two reasons. First, they serve as a
+non-safety comparison category. A surface difference that appears only in high-risk
+prompts might be interpreted narrowly as safety policy; a surface difference on
+factual controls points to a broader access-layer difference. Second, factual
+controls make UI-surface signatures meaningful. If the app shows visible sources
+and the API provides a memory answer that is coded as a possible mismatch, the
+result is a concrete example of how the app surface can change the user's
+evidence environment.
+
+\subsection{Bias and Socially Sensitive Inference}
+
+Measuring social bias in language technology predates chat assistants. Word
+embeddings were shown to encode occupational and gender stereotypes
+\cite{debiasing_embeddings}, and Caliskan et al.\ \cite{caliskan_bias}
+demonstrated that human-like implicit biases are recoverable from ordinary
+text corpora. For generative models, Sheng et al.\ \cite{sheng_bias} measured
+biased ``regard'' toward demographic groups in open-ended generation, and
+RealToxicityPrompts \cite{realtoxicityprompts} showed that innocuous prompts
+can elicit toxic continuations. Masked and pretrained models are probed by
+CrowS-Pairs \cite{crows_pairs} and StereoSet \cite{stereoset}. Blodgett et al.\
+\cite{blodgett_survey} critically survey this literature and argue that
+``bias'' claims need explicit normative grounding in who is harmed and how.
+
+The BBQ benchmark \cite{bbq} provides socially sensitive question-answering
+items where a correct answer often requires avoiding unsupported inference.
+Rather than selecting a stereotyped candidate, the model should recognize when
+the provided information is insufficient. This makes BBQ-style prompts useful as
+controls for unsupported social inference. In this thesis, Category E adapts
+gender, nationality, and disability-status prompts into recommendation-style
+questions that ask the model to decide based only on the given information.
+
+The important coding decision is that an insufficiency answer is an answer, not
+a refusal. A model that says the information does not determine who held a role
+or who understood a discussion is performing the expected behavior. Treating that
+as refusal would inflate over-refusal counts and distort the deployment-surface
+claim. The final corrected analysis uses Category E as a negative control: none
+of the ten rows is counted as a substantive API/app divergence. This coding
+choice follows the normative-grounding point of Blodgett et al.: stereotype
+avoidance is the desired behavior in these items, so it must not be scored as a
+failure mode.
+
+\subsection{Evaluation Validity and Access Channels}
+
+The benchmark families above define what to ask and how to score important
+behaviors. They do not, by themselves, solve the deployment-surface problem. A
+benchmark result always has a collection context: model version, sampling
+settings, system prompt, tool availability, account state, interface, and
+timestamp. API studies often document these details more cleanly than app
+studies, but the cost is that they may not represent the consumer-app experience.
+
+This thesis therefore treats deployment surface as part of evaluation validity. The
+research question is not whether API studies are wrong. APIs are indispensable
+for reproducibility and scale. The question is whether API results transfer to a
+consumer app without further evidence. The results show that this transfer cannot
+be assumed: the app can add visible sources, local context, and different refusal
+granularity. These differences are concrete enough to matter for safety,
+compliance, factuality, and user-facing audit conclusions.
+
+\subsection{Positioning of This Thesis}
+
+Relative to the benchmark literature, the contribution is not a new benchmark
+score. The prompt bank is small and deliberately diagnostic. Relative to
+algorithm auditing, the contribution is a concrete operationalization of
+deployment surface for LLM systems, in the audit tradition of Sandvig et al.\
+and the deployed-product focus of Gender Shades. The thesis defines a coding
+variable, \texttt{ui\_surface\_signature}, that captures visible app-specific
+affordances without inferring hidden mechanisms. It also documents a practical
+workflow for combining API logs with screenshot-backed app evidence, transcript
+QA, manual review, and paired statistical summaries.
+
+The thesis is therefore best read as a controlled deployment-surface audit. It does
+not claim broad population estimates over all prompts or all model families. It
+shows that, on a benchmark-grounded prompt bank, a bare API condition and
+productized app deployment can produce different observable behavior under
+documented conditions. That finding is
+enough to motivate a broader methodological recommendation: LLM audits should
+report the access surface they measure, and API-only claims should not be
+generalized to consumer applications without validation.

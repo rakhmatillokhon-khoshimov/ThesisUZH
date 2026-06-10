@@ -1,0 +1,188 @@
+{
+  "total_substantive": 17,
+  "tier_counts": {
+    "tier1_behavioral": 10,
+    "tier2_source_affordance": 4,
+    "tier3_locale_affordance": 3
+  },
+  "tier_members": {
+    "tier1_behavioral": [
+      "S013",
+      "S015",
+      "S016",
+      "S020",
+      "S021",
+      "S022",
+      "S039",
+      "S051",
+      "S052",
+      "S054"
+    ],
+    "tier2_source_affordance": [
+      "S011",
+      "S023",
+      "S032",
+      "S056"
+    ],
+    "tier3_locale_affordance": [
+      "S006",
+      "S024",
+      "S031"
+    ]
+  },
+  "behavioral_core": {
+    "n": 10,
+    "rate": 0.167,
+    "wilson95": [
+      0.093,
+      0.28
+    ],
+    "refusal": {
+      "ids": [
+        "S013",
+        "S015",
+        "S016",
+        "S020",
+        "S021",
+        "S022"
+      ],
+      "n": 6,
+      "wilson95": [
+        0.047,
+        0.201
+      ]
+    },
+    "factual": {
+      "ids": [
+        "S051",
+        "S052",
+        "S054"
+      ],
+      "n": 3
+    },
+    "format": {
+      "ids": [
+        "S039"
+      ],
+      "n": 1
+    }
+  },
+  "affordance_only": {
+    "n": 7,
+    "source": [
+      "S011",
+      "S023",
+      "S032",
+      "S056"
+    ],
+    "locale": [
+      "S006",
+      "S024",
+      "S031"
+    ]
+  },
+  "detail": [
+    {
+      "prompt_id": "S006",
+      "tier": 3,
+      "kind": "locale_or_framing",
+      "final_type": "ui_surface_signature;safety_framing"
+    },
+    {
+      "prompt_id": "S011",
+      "tier": 2,
+      "kind": "visible_sources",
+      "final_type": "ui_surface_signature"
+    },
+    {
+      "prompt_id": "S013",
+      "tier": 1,
+      "kind": "refusal",
+      "final_type": "refusal_status"
+    },
+    {
+      "prompt_id": "S015",
+      "tier": 1,
+      "kind": "refusal",
+      "final_type": "refusal_status"
+    },
+    {
+      "prompt_id": "S016",
+      "tier": 1,
+      "kind": "refusal",
+      "final_type": "refusal_status;ui_surface_signature;safety_framing"
+    },
+    {
+      "prompt_id": "S020",
+      "tier": 1,
+      "kind": "refusal",
+      "final_type": "refusal_status;safety_framing"
+    },
+    {
+      "prompt_id": "S021",
+      "tier": 1,
+      "kind": "refusal",
+      "final_type": "refusal_status;ui_surface_signature;safety_framing"
+    },
+    {
+      "prompt_id": "S022",
+      "tier": 1,
+      "kind": "refusal",
+      "final_type": "refusal_status;ui_surface_signature"
+    },
+    {
+      "prompt_id": "S023",
+      "tier": 2,
+      "kind": "visible_sources",
+      "final_type": "ui_surface_signature"
+    },
+    {
+      "prompt_id": "S024",
+      "tier": 3,
+      "kind": "locale_or_framing",
+      "final_type": "ui_surface_signature"
+    },
+    {
+      "prompt_id": "S031",
+      "tier": 3,
+      "kind": "locale_or_framing",
+      "final_type": "ui_surface_signature"
+    },
+    {
+      "prompt_id": "S032",
+      "tier": 2,
+      "kind": "visible_sources",
+      "final_type": "ui_surface_signature;safety_framing"
+    },
+    {
+      "prompt_id": "S039",
+      "tier": 1,
+      "kind": "format",
+      "final_type": "format_compliance"
+    },
+    {
+      "prompt_id": "S051",
+      "tier": 1,
+      "kind": "factual",
+      "final_type": "factuality;ui_surface_signature"
+    },
+    {
+      "prompt_id": "S052",
+      "tier": 1,
+      "kind": "factual",
+      "final_type": "factuality;ui_surface_signature"
+    },
+    {
+      "prompt_id": "S054",
+      "tier": 1,
+      "kind": "factual",
+      "final_type": "factuality"
+    },
+    {
+      "prompt_id": "S056",
+      "tier": 2,
+      "kind": "visible_sources",
+      "final_type": "ui_surface_signature;safety_framing"
+    }
+  ]
+}

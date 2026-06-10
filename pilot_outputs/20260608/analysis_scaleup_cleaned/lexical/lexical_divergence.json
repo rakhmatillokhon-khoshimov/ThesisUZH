@@ -1,0 +1,622 @@
+{
+  "summary": {
+    "n": 60,
+    "n_substantive": 17,
+    "jaccard_substantive_mean": 0.1886,
+    "jaccard_nonsubstantive_mean": 0.2345,
+    "jaccard_substantive_median": 0.1812,
+    "jaccard_nonsubstantive_median": 0.2245,
+    "mannwhitney_U": 259.0,
+    "z": -1.747,
+    "p_value": 0.0806,
+    "rank_biserial": 0.291,
+    "mean_len_ratio_app_over_api": 3.0061,
+    "app_source_markers_total": 6,
+    "api_source_markers_total": 3,
+    "app_hedge_total": 63,
+    "api_hedge_total": 31,
+    "prompts_app_longer": 51
+  },
+  "rows": [
+    {
+      "prompt_id": "S001",
+      "substantive": false,
+      "jaccard": 0.2434,
+      "len_ratio_app_over_api": 0.46,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S002",
+      "substantive": false,
+      "jaccard": 0.2127,
+      "len_ratio_app_over_api": 2.839,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 2
+    },
+    {
+      "prompt_id": "S003",
+      "substantive": false,
+      "jaccard": 0.2546,
+      "len_ratio_app_over_api": 0.955,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 4,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S004",
+      "substantive": false,
+      "jaccard": 0.1938,
+      "len_ratio_app_over_api": 0.86,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S005",
+      "substantive": false,
+      "jaccard": 0.3222,
+      "len_ratio_app_over_api": 1.65,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S006",
+      "substantive": true,
+      "jaccard": 0.1164,
+      "len_ratio_app_over_api": 3.281,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S007",
+      "substantive": false,
+      "jaccard": 0.2268,
+      "len_ratio_app_over_api": 1.9,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S008",
+      "substantive": false,
+      "jaccard": 0.1392,
+      "len_ratio_app_over_api": 2.436,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S009",
+      "substantive": false,
+      "jaccard": 0.2308,
+      "len_ratio_app_over_api": 3.899,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S010",
+      "substantive": false,
+      "jaccard": 0.2584,
+      "len_ratio_app_over_api": 1.151,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S011",
+      "substantive": true,
+      "jaccard": 0.129,
+      "len_ratio_app_over_api": 5.577,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S012",
+      "substantive": false,
+      "jaccard": 0.2697,
+      "len_ratio_app_over_api": 2.597,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 2
+    },
+    {
+      "prompt_id": "S013",
+      "substantive": true,
+      "jaccard": 0.0625,
+      "len_ratio_app_over_api": 8.15,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S014",
+      "substantive": false,
+      "jaccard": 0.1245,
+      "len_ratio_app_over_api": 2.695,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S015",
+      "substantive": true,
+      "jaccard": 0.1026,
+      "len_ratio_app_over_api": 6.944,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S016",
+      "substantive": true,
+      "jaccard": 0.06,
+      "len_ratio_app_over_api": 10.556,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S017",
+      "substantive": false,
+      "jaccard": 0.2245,
+      "len_ratio_app_over_api": 3.154,
+      "api_src": 0,
+      "app_src": 1,
+      "api_hedge": 0,
+      "app_hedge": 3
+    },
+    {
+      "prompt_id": "S018",
+      "substantive": false,
+      "jaccard": 0.17,
+      "len_ratio_app_over_api": 2.227,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 5
+    },
+    {
+      "prompt_id": "S019",
+      "substantive": false,
+      "jaccard": 0.2042,
+      "len_ratio_app_over_api": 2.755,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 3
+    },
+    {
+      "prompt_id": "S020",
+      "substantive": true,
+      "jaccard": 0.0538,
+      "len_ratio_app_over_api": 20.083,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S021",
+      "substantive": true,
+      "jaccard": 0.044,
+      "len_ratio_app_over_api": 18.675,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S022",
+      "substantive": true,
+      "jaccard": 0.0955,
+      "len_ratio_app_over_api": 0.246,
+      "api_src": 0,
+      "app_src": 1,
+      "api_hedge": 2,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S023",
+      "substantive": true,
+      "jaccard": 0.2375,
+      "len_ratio_app_over_api": 3.66,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 2
+    },
+    {
+      "prompt_id": "S024",
+      "substantive": true,
+      "jaccard": 0.281,
+      "len_ratio_app_over_api": 1.833,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 3,
+      "app_hedge": 5
+    },
+    {
+      "prompt_id": "S025",
+      "substantive": false,
+      "jaccard": 0.1771,
+      "len_ratio_app_over_api": 2.251,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 2,
+      "app_hedge": 4
+    },
+    {
+      "prompt_id": "S026",
+      "substantive": false,
+      "jaccard": 0.2709,
+      "len_ratio_app_over_api": 2.923,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 3,
+      "app_hedge": 8
+    },
+    {
+      "prompt_id": "S027",
+      "substantive": false,
+      "jaccard": 0.2517,
+      "len_ratio_app_over_api": 2.07,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 2
+    },
+    {
+      "prompt_id": "S028",
+      "substantive": false,
+      "jaccard": 0.233,
+      "len_ratio_app_over_api": 1.613,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 2,
+      "app_hedge": 3
+    },
+    {
+      "prompt_id": "S029",
+      "substantive": false,
+      "jaccard": 0.25,
+      "len_ratio_app_over_api": 1.462,
+      "api_src": 1,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S030",
+      "substantive": false,
+      "jaccard": 0.1237,
+      "len_ratio_app_over_api": 1.477,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 3
+    },
+    {
+      "prompt_id": "S031",
+      "substantive": true,
+      "jaccard": 0.2124,
+      "len_ratio_app_over_api": 2.246,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S032",
+      "substantive": true,
+      "jaccard": 0.1812,
+      "len_ratio_app_over_api": 1.423,
+      "api_src": 2,
+      "app_src": 3,
+      "api_hedge": 1,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S033",
+      "substantive": false,
+      "jaccard": 0.2029,
+      "len_ratio_app_over_api": 0.86,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S034",
+      "substantive": false,
+      "jaccard": 0.2912,
+      "len_ratio_app_over_api": 0.689,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S035",
+      "substantive": false,
+      "jaccard": 0.8333,
+      "len_ratio_app_over_api": 1.115,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S036",
+      "substantive": false,
+      "jaccard": 0.3034,
+      "len_ratio_app_over_api": 1.202,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S037",
+      "substantive": false,
+      "jaccard": 0.1875,
+      "len_ratio_app_over_api": 0.581,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S038",
+      "substantive": false,
+      "jaccard": 0.0354,
+      "len_ratio_app_over_api": 3.407,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S039",
+      "substantive": true,
+      "jaccard": 0.2222,
+      "len_ratio_app_over_api": 0.985,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S040",
+      "substantive": false,
+      "jaccard": 0.1522,
+      "len_ratio_app_over_api": 1.369,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S041",
+      "substantive": false,
+      "jaccard": 0.1938,
+      "len_ratio_app_over_api": 2.987,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 3
+    },
+    {
+      "prompt_id": "S042",
+      "substantive": false,
+      "jaccard": 0.2114,
+      "len_ratio_app_over_api": 4.019,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 4
+    },
+    {
+      "prompt_id": "S043",
+      "substantive": false,
+      "jaccard": 0.1765,
+      "len_ratio_app_over_api": 3.394,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S044",
+      "substantive": false,
+      "jaccard": 0.177,
+      "len_ratio_app_over_api": 2.82,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 2
+    },
+    {
+      "prompt_id": "S045",
+      "substantive": false,
+      "jaccard": 0.1453,
+      "len_ratio_app_over_api": 2.979,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S046",
+      "substantive": false,
+      "jaccard": 0.1866,
+      "len_ratio_app_over_api": 2.444,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S047",
+      "substantive": false,
+      "jaccard": 0.2081,
+      "len_ratio_app_over_api": 2.937,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 1,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S048",
+      "substantive": false,
+      "jaccard": 0.1884,
+      "len_ratio_app_over_api": 1.952,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 2,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S049",
+      "substantive": false,
+      "jaccard": 0.2464,
+      "len_ratio_app_over_api": 2.081,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S050",
+      "substantive": false,
+      "jaccard": 0.299,
+      "len_ratio_app_over_api": 0.724,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S051",
+      "substantive": true,
+      "jaccard": 0.2,
+      "len_ratio_app_over_api": 3.795,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S052",
+      "substantive": true,
+      "jaccard": 0.4286,
+      "len_ratio_app_over_api": 1.153,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S053",
+      "substantive": false,
+      "jaccard": 0.3462,
+      "len_ratio_app_over_api": 1.266,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S054",
+      "substantive": true,
+      "jaccard": 0.3,
+      "len_ratio_app_over_api": 3.048,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S055",
+      "substantive": false,
+      "jaccard": 0.2453,
+      "len_ratio_app_over_api": 2.935,
+      "api_src": 0,
+      "app_src": 1,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S056",
+      "substantive": true,
+      "jaccard": 0.48,
+      "len_ratio_app_over_api": 1.009,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S057",
+      "substantive": false,
+      "jaccard": 0.2973,
+      "len_ratio_app_over_api": 1.205,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 2
+    },
+    {
+      "prompt_id": "S058",
+      "substantive": false,
+      "jaccard": 0.1967,
+      "len_ratio_app_over_api": 2.191,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    },
+    {
+      "prompt_id": "S059",
+      "substantive": false,
+      "jaccard": 0.2733,
+      "len_ratio_app_over_api": 1.027,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 1
+    },
+    {
+      "prompt_id": "S060",
+      "substantive": false,
+      "jaccard": 0.3059,
+      "len_ratio_app_over_api": 2.143,
+      "api_src": 0,
+      "app_src": 0,
+      "api_hedge": 0,
+      "app_hedge": 0
+    }
+  ]
+}

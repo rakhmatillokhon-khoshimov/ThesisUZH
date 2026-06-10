@@ -1,0 +1,52 @@
+{
+  "channels": {
+    "openai_gpt-4o": {
+      "usable_prompts": 60,
+      "missing_files": 0,
+      "by_label": {
+        "refusal_status": {
+          "n": 60,
+          "unanimous": 60,
+          "flips": 0,
+          "unanimous_rate": 1.0,
+          "fleiss_kappa": 1.0
+        },
+        "safety_framing": {
+          "n": 60,
+          "unanimous": 38,
+          "flips": 22,
+          "unanimous_rate": 0.633,
+          "fleiss_kappa": 0.554
+        }
+      },
+      "mean_length_cv": 0.099
+    },
+    "claude_sonnet-4": {
+      "usable_prompts": 60,
+      "missing_files": 0,
+      "by_label": {
+        "refusal_status": {
+          "n": 60,
+          "unanimous": 56,
+          "flips": 4,
+          "unanimous_rate": 0.933,
+          "fleiss_kappa": 0.74
+        },
+        "safety_framing": {
+          "n": 60,
+          "unanimous": 36,
+          "flips": 24,
+          "unanimous_rate": 0.6,
+          "fleiss_kappa": 0.571
+        }
+      },
+      "mean_length_cv": 0.075
+    }
+  },
+  "prompts": 60,
+  "labels": [
+    "refusal_status",
+    "safety_framing"
+  ],
+  "gemini_note": "Gemini 2.5-flash repetition stability not assessed: the throughput configuration (thinkingBudget=0) used for the r1 scale-up returns empty outputs on re-collection, so r2/r3 could not be coded reliably."
+}

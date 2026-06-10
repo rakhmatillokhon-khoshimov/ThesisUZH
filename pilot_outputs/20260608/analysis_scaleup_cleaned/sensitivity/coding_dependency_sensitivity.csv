@@ -1,0 +1,6 @@
+scenario,count,denominator,rate,wilson95,interpretation
+All reviewed substantive divergences,17,60,0.283,"[0.185, 0.408]",Final manually reviewed thesis count.
+After dropping safety-framing-only evidence,17,60,0.283,"[0.185, 0.408]",Main count if the softest label cannot stand alone.
+Direct artifact/factual/format evidence only,14,60,0.233,"[0.144, 0.354]","Rows anchored in visible UI surface, factual-control support, or exact format compliance."
+Full-refusal contrast,5,60,0.083,"[0.036, 0.181]",Rows where the API is a full refusal and the app is not.
+Hard-anchor union,17,60,0.283,"[0.185, 0.408]","Rows with at least one non-framing anchor: UI, factual, format, or refusal-boundary evidence."

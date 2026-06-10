@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-06-09T12:29:49.572152+02:00",
+  "method": "delayed_intra_coder_reliability_proxy",
+  "sample_size": 12,
+  "sample_prompt_ids": [
+    "S002",
+    "S007",
+    "S008",
+    "S009",
+    "S015",
+    "S016",
+    "S018",
+    "S041",
+    "S044",
+    "S048",
+    "S052",
+    "S057"
+  ],
+  "cohen_kappa_by_label": {
+    "refusal_status": 1.0,
+    "safety_framing": 1.0,
+    "format_compliance": 1.0,
+    "unsupported_inference": 1.0,
+    "factuality": 1.0
+  },
+  "interpretation": "Proxy using deterministic re-application of review rules; replace with true delayed self-recoding when time permits."
+}

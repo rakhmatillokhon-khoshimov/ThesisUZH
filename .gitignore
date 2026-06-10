@@ -1,0 +1,54 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# LaTeX build artifacts
+thesis_draft/main.pdf
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+
+# Private/raw research data that must not be committed
+*private*
+*PRIVATE*
+pilot_outputs/**/responses/
+pilot_outputs/**/screenshots_private/
+pilot_outputs/**/ocr_text_private/
+pilot_outputs/**/api_log_private.csv
+pilot_outputs/**/chatgpt_app_log_private.csv
+pilot_outputs/**/claude_api_log_private.csv
+pilot_outputs/**/gemini_api_log_private.csv
+pilot_outputs/**/second_coder_key_PRIVATE.csv
+pilot_outputs/**/second_coder_sheet_BLIND.csv
+app_collection_kit/
+
+# Generated local exports
+thesis-github-ready/
