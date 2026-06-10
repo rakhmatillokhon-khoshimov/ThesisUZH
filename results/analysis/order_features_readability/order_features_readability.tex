@@ -1,0 +1,48 @@
+\begin{table}[htbp]
+\centering
+\caption{Collection-order and prompt-feature checks for the 17 substantive divergences (exploratory). No shallow ordering or prompt-surface feature accounts for which prompts diverge.}
+\label{tab:order-feature-checks}
+\small
+\begin{tabular}{lllr}
+\toprule
+Check & Substantive & Non-substantive & $p$ \\
+\midrule
+Session order (median index) & 23 & 34 & 0.594 \\
+First vs.\ second session half & 10/17 first half & 20/30 of first half & 0.568 \\
+Prompt length (median words) & 13 & 19 & 0.253 \\
+Interrogative phrasing & 12/17 & 34/43 & 0.511 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Channel style profile across all 60 prompts (descriptive). Means per response; Flesch Reading Ease computed with a deterministic syllable estimator. App values inherit the OCR-transcription caveat.}
+\label{tab:channel-style-profile}
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Channel & Words & Sentences & Words/sent. & Flesch RE & TTR \\
+\midrule
+OpenAI API & 123 & 9 & 20.0 & 46 & 0.76 \\
+ChatGPT app & 241 & 10 & 35.7 & 26 & 0.65 \\
+Claude API & 156 & 5 & 47.1 & 11 & 0.70 \\
+Gemini API & 436 & 28 & 22.4 & 43 & 0.58 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Bootstrap robustness for the headline rates (20{,}000 prompt-level resamples, seed 20260610), alongside the Wilson intervals already reported.}
+\label{tab:bootstrap-rates}
+\small
+\begin{tabular}{lrll}
+\toprule
+Rate & Estimate & Bootstrap 95\% & Wilson 95\% \\
+\midrule
+Overall substantive (17/60) & 0.28 & [0.18, 0.40] & [0.18, 0.41] \\
+Tier-1 behavioral core (10/60) & 0.17 & [0.08, 0.27] & [0.09, 0.28] \\
+\bottomrule
+\end{tabular}
+\end{table}

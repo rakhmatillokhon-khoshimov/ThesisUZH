@@ -433,6 +433,51 @@ honest conclusion is therefore that the current dataset gives a directional,
 underpowered refusal signal and a set of concrete cases, not a confirmed
 population-level effect.
 
+\subsection{Collection-Order, Prompt-Surface, and Interval Robustness Checks}
+\label{sec:order-robustness}
+
+Three further inexpensive checks probe whether the retained case set could be an
+artifact of how the data were collected, of which prompts were asked, or of how
+the uncertainty intervals were computed
+(\texttt{analyze\_order\_features\_readability.py}; all exploratory).
+
+First, collection order. The sixty app rows were collected in a single
+sequential session with a recorded \texttt{prompt\_order\_index}. If substantive
+divergence reflected within-session drift --- rate limiting, accumulated
+account state, or collection fatigue --- the seventeen cases should cluster by
+session position. They do not: the median session index is $23$ for substantive
+versus $34$ for non-substantive rows (Mann--Whitney $p=0.594$), and ten of the
+seventeen cases fall in the first half of the session (Fisher exact $p=0.568$).
+
+Second, shallow prompt-surface features. Substantive and non-substantive prompts
+do not detectably differ in prompt length (median $13$ versus $19$ words;
+Mann--Whitney $p=0.253$) or in interrogative phrasing ($12/17$ versus $34/43$
+interrogative; Fisher exact $p=0.511$). Together with the category concentration
+reported above, this supports reading the divergences as driven by what the
+prompts ask --- refusal pressure and factual support --- rather than by how long
+or how phrased they are.
+
+\begin{table}[htbp]
+  \centering
+  \input{../results/analysis/order_features_readability/order_feature_checks}%
+\end{table}
+
+Third, the interval method. A percentile bootstrap over prompts ($20{,}000$
+resamples, fixed seed) reproduces the Wilson intervals already reported: overall
+substantive rate $17/60=0.28$ with bootstrap $[0.18,0.40]$ against Wilson
+$[0.185,0.408]$, and tier-1 behavioral-core rate $10/60=0.17$ with bootstrap
+$[0.08,0.27]$ against Wilson $[0.09,0.28]$. The headline rates are not an
+artifact of the interval construction.
+
+Finally, a descriptive four-channel style profile (retained in the artifact
+folder rather than printed, because sentence-segmentation and readability
+metrics inherit list-formatting and OCR-transcription caveats) extends the
+verbosity observation across vendors: mean answer length on the same sixty
+prompts ranges from $123$ words (OpenAI API) through $156$ (Claude API) and
+$241$ (ChatGPT app) to $437$ (Gemini API). Response style is a channel trait in
+its own right across all four collected surfaces, which further cautions against
+reading verbosity differences as substantive divergence.
+
 \subsection{Objective Lexical Divergence}
 
 The substantive-divergence label is a human judgment. As an independent,

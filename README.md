@@ -46,7 +46,7 @@ pdflatex main.tex
 pdflatex main.tex
 ```
 
-The repository was verified to compile to an 88-page PDF.
+The repository was verified to compile to an 89-page PDF.
 
 ## Reproducibility Boundary
 

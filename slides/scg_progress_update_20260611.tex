@@ -53,7 +53,7 @@
 \end{column}
 \begin{column}{0.32\textwidth}
 \begin{block}{\oktext{3. Complete draft}}
-\small Thesis draft compiles at \textbf{88 pages}: all chapters written, 4 figures, 25 tables, 81 metadata-verified references, all numbers auto-generated from the pipeline.
+\small Thesis draft compiles at \textbf{89 pages}: all chapters written, 4 figures, 26 tables, 81 metadata-verified references, all numbers auto-generated from the pipeline.
 \end{block}
 \end{column}
 \end{columns}
@@ -67,7 +67,7 @@ Matched API/app pairs & 20 (pilot) & \textbf{60 (scale-up)} \\
 Substantive divergences & 5 (pilot, method test) & \textbf{17, tiered: 10 core + 7 affordance} \\
 Statistics & none & \textbf{McNemar exact + Wilson CIs, declared exploratory split} \\
 Repetitions & none & \textbf{API r2/r3 for OpenAI + Claude (label + text level)} \\
-Thesis draft & outline & \textbf{88 pp., compiles clean, submission package ready} \\
+Thesis draft & outline & \textbf{89 pp., compiles clean, submission package ready} \\
 \bottomrule
 \end{tabular}
 \end{frame}
@@ -283,6 +283,35 @@ Claude API & 56/60 & 0.74 \\
 \slidefoot{Bounds API-side stochasticity only; app side is still single-shot (the remaining repetition gap --- see open items).}
 \end{frame}
 
+%% ── SLIDE 9b: Session/prompt/interval robustness ────────────────────────
+\begin{frame}[shrink=12]{Could it be the session, the prompts, or the interval method? Also no}
+\framesubtitle{Three new robustness checks (10 June), all exploratory, all from existing data}
+\begin{columns}[T,totalwidth=\textwidth]
+\begin{column}{0.52\textwidth}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{0.42\columnwidth}llr}
+\toprule
+\textbf{Check} & \textbf{Subst.} & \textbf{Other} & $p$ \\
+\midrule
+Session order (median idx) & 23 & 34 & 0.59 \\
+First vs.\ second half & 10/17 & --- & 0.57 \\
+Prompt length (median w.) & 13 & 19 & 0.25 \\
+Interrogative phrasing & 12/17 & 34/43 & 0.51 \\
+\bottomrule
+\end{tabular}\\[6pt]
+\small Divergence does not cluster by collection position and is not predicted by shallow prompt-surface features --- it tracks \emph{what the prompts ask} (refusal pressure, factual support), consistent with the moderator pattern.
+\end{column}
+\begin{column}{0.44\textwidth}
+\textbf{Interval robustness}\\[3pt]
+\small Percentile bootstrap (20k resamples) reproduces Wilson: overall $[0.18,0.40]$ vs.\ $[0.185,0.408]$; tier-1 $[0.08,0.27]$ vs.\ $[0.09,0.28]$.\\[8pt]
+\textbf{Four-channel style profile (descriptive)}\\[3pt]
+\small Mean words per answer on the same 60 prompts: API 123 $\rightarrow$ Claude 156 $\rightarrow$ app 241 $\rightarrow$ Gemini 437. Response style is a channel trait on every surface --- one more reason verbosity is never counted as divergence.
+\end{column}
+\end{columns}
+\slidefoot{Script: \texttt{analyze\_order\_features\_readability.py}; outputs under \texttt{analysis\_scaleup\_cleaned/order\_features\_readability/}. New Results subsection + table in the draft.}
+\end{frame}
+
 %% ── SLIDE 10: Channel agreement ─────────────────────────────────────────
 \begin{frame}[shrink=12]{Which channels behave alike?}
 \framesubtitle{The app's nearest refusal-posture neighbor is not its own provider's API}
@@ -335,7 +364,7 @@ Intra-coder proxy & Deterministic re-application of review rules, $\kappa=1.0$ o
 \begin{column}{0.52\textwidth}
 \small
 \begin{itemize}
-  \item \textbf{88 pages}, compiles clean: 0 undefined references, 4 figures, 25 tables.
+  \item \textbf{89 pages}, compiles clean: 0 undefined references, 4 figures, 26 tables.
   \item Full chapters: Intro, Related Work (literature review across auditing, safety, factuality, bias; \textbf{81 verified references, all cited}), Methods, Results, Discussion, Limitations, Future Work, Conclusion, reproducibility appendix.
   \item Claim discipline throughout: deployment-stack construct named central limitation; one primary endpoint; everything else explicitly exploratory.
   \item Results tables/figures auto-load from generated artifacts --- prose cannot drift from data.

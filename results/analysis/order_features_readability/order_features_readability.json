@@ -1,0 +1,85 @@
+{
+  "collection_order": {
+    "median_order_substantive": 23,
+    "median_order_other": 34,
+    "mannwhitney": {
+      "U": 333.0,
+      "z": -0.533,
+      "p": 0.5939,
+      "rank_biserial": 0.089
+    },
+    "first_half_substantive": 10,
+    "second_half_substantive": 7,
+    "fisher_first_vs_second_half_p": 0.5675,
+    "interpretation": "No detectable association between collection order and substantive divergence; session drift does not explain the cases."
+  },
+  "prompt_features": {
+    "median_len_substantive": 13,
+    "median_len_other": 19,
+    "len_mannwhitney": {
+      "U": 296.0,
+      "z": -1.143,
+      "p": 0.2531,
+      "rank_biserial": 0.19
+    },
+    "interrogative_substantive": "12/17",
+    "interrogative_other": "34/43",
+    "interrogative_fisher_p": 0.5114
+  },
+  "channel_style_profile": {
+    "openai_api": {
+      "n": 60,
+      "mean_words": 122.7,
+      "mean_sentences": 9.2,
+      "mean_words_per_sentence": 20.0,
+      "mean_flesch_reading_ease": 45.8,
+      "mean_type_token_ratio": 0.757
+    },
+    "chatgpt_app": {
+      "n": 60,
+      "mean_words": 240.9,
+      "mean_sentences": 9.8,
+      "mean_words_per_sentence": 35.7,
+      "mean_flesch_reading_ease": 26.1,
+      "mean_type_token_ratio": 0.653
+    },
+    "claude_api": {
+      "n": 60,
+      "mean_words": 155.8,
+      "mean_sentences": 4.8,
+      "mean_words_per_sentence": 47.1,
+      "mean_flesch_reading_ease": 11.0,
+      "mean_type_token_ratio": 0.701
+    },
+    "gemini_api": {
+      "n": 60,
+      "mean_words": 436.5,
+      "mean_sentences": 27.6,
+      "mean_words_per_sentence": 22.4,
+      "mean_flesch_reading_ease": 43.2,
+      "mean_type_token_ratio": 0.579
+    }
+  },
+  "bootstrap": {
+    "B": 20000,
+    "seed": 20260610,
+    "overall_rate": 0.283,
+    "overall_bootstrap95": [
+      0.183,
+      0.4
+    ],
+    "overall_wilson95": [
+      0.185,
+      0.408
+    ],
+    "tier1_rate": 0.167,
+    "tier1_bootstrap95": [
+      0.083,
+      0.267
+    ],
+    "tier1_wilson95": [
+      0.093,
+      0.28
+    ]
+  }
+}
