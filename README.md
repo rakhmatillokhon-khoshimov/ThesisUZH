@@ -27,14 +27,13 @@ differences.
 
 - `thesis/` - LaTeX thesis source.
 - `docs/` - final thesis PDF, abstract, and data-access note.
-- `figures/` - figures used by the thesis and presentation.
+- `figures/` - figures used by the thesis.
 - `results/analysis/` - reviewed summary data, statistics, and LaTeX tables.
 - `data/prompts/prompt_bank_60.csv` - shared/redacted 60-prompt bank.
 - `data/prompts/prompt_taxonomy.*`, `data/prompts/taxonomy_coding_guide.md` - prompt and coding
   definitions.
 - `scripts/` - analysis and table-generation scripts retained for auditability.
 - `protocols/` - collection, coding, transcription QA, and reliability protocols.
-- `slides/` - supervisor progress presentation.
 
 ## Build the Thesis
 
@@ -42,11 +41,18 @@ From the repository root:
 
 ```bash
 cd thesis
-pdflatex main.tex
-pdflatex main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+biber main
+makeglossaries main
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The repository was verified to compile to an 83-page PDF.
+On this macOS TeX Live install, `make thesis` falls back to
+`/usr/local/texlive/2025/bin/universal-darwin/makeglossaries` if
+`makeglossaries` is not on `PATH`.
+
+The repository was verified to compile to a 108-page PDF.
 
 ## Reproducibility Boundary
 

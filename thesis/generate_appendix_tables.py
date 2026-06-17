@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate claim-safe appendix tables for the thesis draft."""
+"""Regenerate claim-safe appendix tables for the thesis source."""
 
 from __future__ import annotations
 

@@ -666,11 +666,9 @@ def main() -> int:
     summary["prompt_bank"] = str(args.prompt_bank)
     summary["valid_ui_surface_values"] = sorted(VALID_UI_SURFACES)
 
-    write_csv(out_dir / "pilot_pairwise_results.csv", PAIRWISE_FIELDS, pair_rows)
     write_csv(out_dir / "pairwise_results.csv", PAIRWISE_FIELDS, pair_rows)
     write_csv(out_dir / "api_only_results_summary.csv", API_ONLY_FIELDS, api_only_rows)
     (out_dir / "results_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    write_examples(out_dir / "divergence_examples_shared.md", pair_rows)
     print(json.dumps(summary, indent=2))
     return 0
 

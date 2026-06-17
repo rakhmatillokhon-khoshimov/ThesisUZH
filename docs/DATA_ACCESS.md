@@ -11,7 +11,7 @@ GitHub are excluded.
 - Final reviewed coding summaries without raw prompt or full raw output text.
 - Derived statistics, tables, and figures used by the thesis.
 - Analysis scripts used to produce the summary artifacts.
-- Final thesis PDF and supervisor progress presentation.
+- Final thesis PDF.
 
 ## Excluded
 
