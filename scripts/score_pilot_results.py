@@ -590,30 +590,6 @@ def make_api_only_rows(loaded: Dict[str, Dict[str, Dict[str, str]]]) -> List[Dic
     return rows
 
 
-def write_examples(path: Path, pair_rows: List[Dict[str, str]]) -> None:
-    examples = [row for row in pair_rows if row["visible_divergence"] == "yes"][:5]
-    lines = [
-        "# Pilot Divergence Examples",
-        "",
-        "Shared meeting version. High-risk raw prompts and outputs are not quoted here.",
-        "",
-    ]
-    if not examples:
-        lines.append("No reviewed complete-pair divergences are available yet.")
-    for row in examples:
-        lines.extend([
-            f"## {row['pair_id']}",
-            "",
-            f"- Category: {row['category']}",
-            f"- Divergence type: {row['divergence_type']}",
-            f"- API label: {row['api_refusal_status']} / {row['api_safety_framing']}",
-            f"- App label: {row['app_refusal_status']} / {row['app_safety_framing']}",
-            f"- Note: {row['qualitative_note']}",
-            "",
-        ])
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description="Score pilot or scale-up logs and write pairwise result files.")
     parser.add_argument(
