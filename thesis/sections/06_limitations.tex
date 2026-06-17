@@ -35,22 +35,35 @@ be treated as independent discoveries. This thesis therefore uses them as
 exploratory diagnostics and keeps the main inference on the paired refusal test,
 the tiered case evidence, and the correction audit.
 
-\subsection{Repetition Coverage Is Asymmetric Across Channels}
+\subsection{Repetition Coverage Remains Targeted}
 
-The substantive divergence analysis is based on one submission per prompt per
+The substantive divergence analysis begins from one submission per prompt per
 channel. To bound stochasticity, the API channels were re-collected for two
 additional repetitions, and the resulting within-channel stability is high for
 the refusal label (Fleiss $\kappa=1.0$ for OpenAI \texttt{gpt-4o}, $\kappa=0.74$
 for Claude; see Table~\ref{tab:stability}). The same repetitions also show, at
 the raw-text level, that the API resembles its own re-runs more than it
 resembles the app on every prompt in the bank
-(Figure~\ref{fig:withinbetween}). This reduces concern that the API
-side of the refusal result is merely stochastic. The remaining limitation is that
-the repetition evidence is asymmetric: the consumer
-app, which depends on manual screenshot collection, is still single-shot, so
-within-app stochasticity is not yet quantified. The cleanest extension is to
-collect two or three app repetitions for the high-divergence categories (Category
-B and the factual controls), where a flip would most affect the claim.
+(Figure~\ref{fig:withinbetween}). This reduces concern that the API side of the
+refusal result is merely stochastic.
+
+The app side was also repeated, but only for the high-value subset: the 17 final
+substantive cases were collected twice more in fresh ChatGPT-app chats. This is
+the right stress test for the thesis claim because it targets exactly the rows
+where an app-side flip would matter most. The result strengthens the core
+interpretation: all six refusal-boundary cases and all three factual-support
+cases reproduced in both app repetitions. It does not, however, turn the study
+into a fully repeated 60-prompt app panel. Two visible-source-only cases did not
+reproduce their original UI-surface anchor, and the single format case reproduced
+in only one of two repetitions. The app repetition evidence should therefore be
+read as a targeted robustness check for the retained cases, not as a general
+estimate of app-side stability across the whole prompt bank.
+
+Because the app repetitions were collected through a browser-agent workflow, the
+transcripts and screenshot identifiers are recorded, while the local PNG archive
+must remain part of the private evidence package. This does not change the
+label-level repetition result, but it limits how much the late repetition panel
+can substitute for the original screenshot-backed 60-pair collection.
 
 A second gap is that Gemini repetition stability could not be measured: the
 high-throughput configuration used for the scale-up (thinking disabled) returns

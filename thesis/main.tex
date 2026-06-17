@@ -114,7 +114,13 @@ show that the OpenAI API refusal label is perfectly stable within that channel
 (Fleiss $\kappa=1.0$), and on every one of the 60 prompts the API's independent
 re-runs resemble each other more than the API resembles the app (mean token
 Jaccard 0.47 versus 0.22), so API-side sampling noise does not account for the
-observed API--app differences; app-side repetition remains outstanding.
+observed API--app differences. A targeted ChatGPT-app repetition check on the
+17 final cases adds two fresh app runs per prompt: 14 of the 17 original core
+anchors reproduce in both repetitions, one reproduces in one of two, and two do
+not reproduce. Crucially, all six refusal-boundary cases and all three
+factual-support cases reproduce in both app repetitions, while the less stable
+cases are the single format-compliance case and two visible-source-only
+affordance cases.
 An independent blind second-coder pass on 54 coding units shows strong agreement
 for refusal status, format compliance, unsupported inference, and acceptable
 agreement for factuality; UI-surface agreement is moderate, while

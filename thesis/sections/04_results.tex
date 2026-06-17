@@ -118,6 +118,51 @@ has the user's locale, and the thesis does not treat them as evidence of a deepe
 behavioral difference. The remainder of this chapter leads with the Tier-1 core
 and is explicit about which claims rest on behavior versus affordance.
 
+\subsection{Targeted ChatGPT-App Repetition Check}
+
+The largest remaining robustness question was whether the ChatGPT-app side of
+the 17 final cases was merely a single-sample artifact. To address this directly,
+the 17 final substantive prompts were recollected twice in fresh ChatGPT-app
+chats (\texttt{r2} and \texttt{r3}) and rescored against the same non-framing
+anchor used in the original case: refusal status, factuality, exact format
+compliance, or visible UI/local-context signature. Safety-framing strength is not
+used as a persistence anchor because the independent reliability pass showed
+that label to be weak.
+
+\begin{longtable}{L{0.30\linewidth}rrL{0.34\linewidth}}
+\caption{Targeted ChatGPT-app repetition check for the 17 final cases.}\\
+\toprule
+Case family & Cases & Stable in both app repetitions & Interpretation \\
+\midrule
+\endfirsthead
+\caption[]{Targeted ChatGPT-app repetition check (continued).}\\
+\toprule
+Case family & Cases & Stable in both app repetitions & Interpretation \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Refusal-boundary anchors & 6 & 6 & All Category B refusal-granularity cases reproduced in both fresh app runs. \\
+Factual-support anchors & 3 & 3 & All factual-control cases where the app gave the expected supported answer reproduced in both fresh app runs. \\
+Pure UI/context affordance cases & 7 & 5 & Local-context/source-surface cases mostly reproduced, but S023 and S032 did not reproduce the original visible-source anchor. \\
+Format-compliance anchor & 1 & 0 & S039 reproduced the app-side format failure in one of two app repetitions and passed in the other. \\
+\midrule
+All final cases & 17 & 14 & One additional case was partially persistent, leaving two cases unstable under the original-anchor rule. \\
+\end{longtable}
+
+At the prompt level, 14 of the 17 original anchors reproduced in both app
+repetitions, one reproduced in one of two repetitions (S039), and two did not
+reproduce (S023 and S032). This materially narrows the app-side \emph{n=1}
+concern for the core result: all six refusal-boundary cases and all three
+factual-support cases were stable in both app repetitions. The repetition check
+also improves the caution of the weaker claims. The single format-compliance
+case should be read as fragile rather than stable, and two visible-source-only
+cases should remain illustrative UI-surface examples rather than durable
+behavioral evidence. The screenshot identifiers for these late repetitions are
+recorded in the collection log, but the local PNG archive still needs to be kept
+with the private evidence package; the main interpretive value here is the
+transcript-level persistence of the refusal and factuality anchors.
+
 \subsection{Substantive Divergences by Category}
 
 The auto-generated category and UI-surface tables follow.
@@ -634,8 +679,10 @@ near-stable ($56/60$, $\kappa=0.74$). Answer length varies little (mean
 coefficient of variation $0.10$ and $0.07$). The within-channel refusal noise
 floor on the OpenAI API channel is zero flips, whereas the API-versus-app
 comparison produced six refusal-status divergences. This reduces the chance that
-the OpenAI API side is merely unstable, but it does not close the app-side
-repetition gap because the ChatGPT app was not repeated in the same way. The
+the OpenAI API side is merely unstable. The targeted ChatGPT-app repetition
+check reported above complements this by testing the final-case subset on the
+app side; it is not a full 60-prompt app repetition panel, but it directly
+targets the rows where app-side instability would most affect the claim. The
 softer \texttt{safety\_framing} label is less reproducible ($\kappa\approx0.55$),
 which is consistent with treating framing wording, like verbosity, as a weaker
 signal than the refusal and factuality labels. Gemini repetition stability is not

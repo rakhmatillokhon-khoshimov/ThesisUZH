@@ -1,27 +1,29 @@
 \section{Future Work and Research Agenda}
 
 The current study is intentionally compact: one OpenAI API/app pair, a frozen
-60-prompt diagnostic bank, one ChatGPT app submission per prompt, API-only
-vendor baselines, and API-side repetition checks. The result is sufficient for a
-case-based black-box thesis claim, but not for population-level rates, causal
-mechanism attribution, or app-side stability claims. Future work should therefore
-strengthen the same design rather than search for a different thesis.
+60-prompt diagnostic bank, API-only vendor baselines, API-side repetition
+checks, and a targeted ChatGPT-app repetition check for the 17 final cases. The
+result is sufficient for a case-based black-box thesis claim, but not for
+population-level rates, causal mechanism attribution, or broad app-side stability
+claims over the entire prompt bank. Future work should therefore strengthen the
+same design rather than search for a different thesis.
 
-\subsection{Highest-Value Immediate Extension: App-Side Stability}
+\subsection{Highest-Value Extension: Broader App-Side Stability}
 
-The most useful next empirical step is a targeted ChatGPT app stability panel,
-not a large new prompt bank. The API side already has additional repetitions for
-the full 60-prompt bank. The remaining gap is the consumer app, where the current
-evidence is single-shot. A feasible sprint would recollect the 17 final
-substantive divergence prompts for two additional app repetitions, ideally in
-fresh sessions and with the visible model selector captured when possible.
+The most useful empirical extension is no longer a first targeted ChatGPT app
+stability panel; that panel has been collected for the 17 final cases. The next
+step is broader app-side repetition coverage, not a large new prompt bank. A
+follow-up should repeat either the full 60-prompt ChatGPT-app collection or a
+pre-registered larger subset, ideally in fresh sessions and with the visible
+model selector captured when possible.
 
 The output should be a compact prompt-level table: stable, partially stable, or
 unstable. Stable means the same divergence label appears again. Partially stable
 means the same direction recurs but at least one run changes label. Unstable
 means the divergence disappears or reverses. This directly answers the main
-reader question left by the Results chapter: whether the final cases are
-persistent examples or isolated app samples.
+reader question beyond the current targeted panel: whether non-divergent rows
+remain non-divergent and whether the observed stability pattern holds outside
+the final-case subset.
 
 The same repetition pass should keep the current evidence discipline. Each new
 row needs a screenshot, transcript, visible UI-surface note, and final coding
@@ -101,11 +103,11 @@ Rank & Task & Immediate output & Why it matters \\
 \endhead
 \bottomrule
 \endfoot
-1 & ChatGPT app repetitions for the 17 final cases & Stability table with screenshots and transcripts & Tests the remaining app-side stochasticity gap. \\
-2 & Independent blind coding & Reliability report on pre-resolution labels & Quantifies where the taxonomy is dependable. \\
-3 & Larger prompt bank & Better-powered confirmatory audit & Separates durable patterns from small-cell effects. \\
-4 & Other consumer apps & Provider-specific API/app matrices & Tests whether the access-surface issue generalizes. \\
-5 & Longitudinal waves & Drift report by prompt and category & Measures persistence over product updates. \\
+1 & Full-bank ChatGPT app repetitions & Stability table with screenshots and transcripts & Tests whether the targeted stability pattern holds beyond the 17 final cases. \\
+2 & Larger prompt bank & Better-powered confirmatory audit & Separates durable patterns from small-cell effects. \\
+3 & Other consumer apps & Provider-specific API/app matrices & Tests whether the access-surface issue generalizes. \\
+4 & Longitudinal waves & Drift report by prompt and category & Measures persistence over product updates. \\
+5 & Broader reliability coding & Multi-coder reliability report on a larger subset & Quantifies where the taxonomy remains dependable at scale. \\
 6 & Surface ablations & Search, memory, locale, tool, and system-prompt condition notes & Narrows plausible explanations without claiming hidden mechanisms. \\
 \end{longtable}
 

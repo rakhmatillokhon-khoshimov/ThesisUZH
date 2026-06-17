@@ -137,20 +137,27 @@ They are therefore hypothesis-generating, not confirmatory. The stronger point
 is descriptive: the case evidence is not spread randomly across every category;
 it clusters where refusal posture and factual support are directly at stake.
 
-Second, the API-side divergences are unlikely to be caused only by API
-run-to-run stochasticity, and this now holds at two levels of analysis. At the
-label level, two additional independent repetitions of the API
-channels show that the primary refusal label is highly reproducible within a
-channel---perfectly stable on the OpenAI core channel (Fleiss $\kappa=1.0$) and
-near-stable on Claude ($\kappa=0.74$). At the text level, the within-channel
-versus between-channel comparison shows that on all 60 prompts the API's
-independent repetitions resemble each other more than the API resembles the app
-(mean token Jaccard $0.47$ versus $0.22$), with the largest gap on
-refusal-expected prompts. Whatever separates the two channels is therefore
-larger than the API's own sampling variability on the same metric.
-This strengthens the refusal finding on
-the API side. It does not fully settle within-app stochasticity, because the app
-collection has not yet been repeated. The weaker reproducibility of the
+Second, the observed differences are unlikely to be caused only by ordinary
+sampling noise. At the API label level, two additional independent repetitions
+show that the primary refusal label is highly reproducible within a channel:
+perfectly stable on the OpenAI core channel (Fleiss $\kappa=1.0$) and
+near-stable on Claude ($\kappa=0.74$). At the API text level, the
+within-channel versus between-channel comparison shows that on all 60 prompts
+the API's independent repetitions resemble each other more than the API
+resembles the app (mean token Jaccard $0.47$ versus $0.22$), with the largest
+gap on refusal-expected prompts. Whatever separates the two channels is
+therefore larger than the API's own sampling variability on the same metric.
+
+The targeted app repetition check adds the missing app-side view for the cases
+that matter most. The six refusal-boundary cases and three factual-support cases
+all reproduced their original app-side anchor in both fresh app repetitions.
+That makes the central refusal/factuality finding more defensible than a pure
+single-shot app comparison. The same check also disciplines the weaker cases:
+S039 reproduced only once, and two visible-source-only UI cases did not
+reproduce their original anchor. The correct reading is therefore not that every
+one of the 17 examples is equally persistent. The durable core is the refusal
+and factual-support set; the format and some UI-surface cases are useful
+examples but weaker as stability evidence. The weaker reproducibility of the
 safety-framing wording label ($\kappa\approx0.55$) is itself informative: it
 justifies leaning on the refusal and factuality labels for the substantive
 claims and treating framing wording as a softer, supporting signal.
