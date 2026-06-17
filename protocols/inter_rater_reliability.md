@@ -41,6 +41,12 @@ Preferred option:
 - Primary coder: thesis author.
 - Second coder: a supervisor-approved second person from SCG or another trained coder.
 
+Acceptable fallback if SCG cannot provide someone:
+
+- A genuinely independent coder outside the project may code the blind sheet if
+  the supervisor agrees, the coder has not helped with the thesis analysis, and
+  the primary labels/key remain hidden until after coding.
+
 Fallback option:
 
 - The primary coder performs delayed self-recoding after at least 7 days.
@@ -82,12 +88,20 @@ Interpretation should be cautious:
 
 These thresholds are guidelines, not hard acceptance rules.
 
-## Current Next Step
+## Completed Reliability Pass
 
-Give only `second_coder_sheet_BLIND.csv`, `protocols/second_coder_instructions.md`, and
-`taxonomy_coding_guide.md` to the independent coder. Keep
-`second_coder_key_PRIVATE.csv` private until after coding. The coder should pay
-particular attention to:
+The current thesis reports an independent blind second-coder pass on the
+prepared 54-unit sheet after supervisor approval of the coder route. The coder
+received only the blind sheet, the coding guide, and the second-coder
+instructions. The primary-label key remained private until after coding.
+
+Agreement is strongest for refusal status, format compliance, unsupported
+inference, and factuality; UI-surface signatures are moderate; safety-framing
+strength is weak and should be treated only as descriptive context. The key
+lesson for interpretation is that safety framing must not carry a substantive
+claim alone.
+
+Future reliability extensions should still pay particular attention to:
 
 - distinguishing safety framing from ordinary explanatory language;
 - distinguishing verbosity from substantive behavioral divergence;

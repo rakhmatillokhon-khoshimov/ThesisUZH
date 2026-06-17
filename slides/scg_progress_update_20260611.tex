@@ -12,7 +12,6 @@
 \usepackage{graphicx}
 
 \title{Scale-up complete: 60-prompt bare-API vs.\ ChatGPT-app audit}
-\subtitle{Progress update since 29 May 2026 (and the 5 June written update)}
 \author{Rakhmatillokhon Khoshimov}
 \date{11 June 2026}
 \institute{Department of Informatics \\ Social Computing Group}
@@ -43,7 +42,7 @@
 \begin{columns}[T,totalwidth=\textwidth]
 \begin{column}{0.32\textwidth}
 \begin{block}{\oktext{1. App side complete}}
-\small ChatGPT app collected for all 60 prompts (8 June, screenshot-backed). Validation gate passes: 60/60 rows, visible \texttt{4o} label on every screenshot, transcription QA applied.
+\small ChatGPT app collected for all 60 prompts (8 June, screenshot-backed). Validation gate passes: 60/60 rows, screenshots archived, transcription QA applied. The app model label is not reliably captured in-frame.
 \end{block}
 \end{column}
 \begin{column}{0.32\textwidth}
@@ -53,7 +52,7 @@
 \end{column}
 \begin{column}{0.32\textwidth}
 \begin{block}{\oktext{3. Complete draft}}
-\small Thesis draft compiles at \textbf{89 pages}: all chapters written, 4 figures, 26 tables, 81 metadata-verified references, all numbers auto-generated from the pipeline.
+\small Thesis draft compiles at \textbf{83 pages}: all chapters written, 4 figures, 25 tables, 81 metadata-verified references, all numbers auto-generated from the pipeline.
 \end{block}
 \end{column}
 \end{columns}
@@ -67,7 +66,7 @@ Matched API/app pairs & 20 (pilot) & \textbf{60 (scale-up)} \\
 Substantive divergences & 5 (pilot, method test) & \textbf{17, tiered: 10 core + 7 affordance} \\
 Statistics & none & \textbf{McNemar exact + Wilson CIs, declared exploratory split} \\
 Repetitions & none & \textbf{API r2/r3 for OpenAI + Claude (label + text level)} \\
-Thesis draft & outline & \textbf{89 pp., compiles clean, submission package ready} \\
+Thesis draft & outline & \textbf{83 pp., compiles clean, submission package ready} \\
 \bottomrule
 \end{tabular}
 \end{frame}
@@ -84,7 +83,7 @@ Thesis draft & outline & \textbf{89 pp., compiles clean, submission package read
 \textbf{Channel} & \textbf{Model logged} & \textbf{Rows} & \textbf{Role} \\
 \midrule
 OpenAI API & \texttt{gpt-4o} & 60 & core \\
-ChatGPT app & \texttt{4o} in footer & \textbf{60} & core \\
+ChatGPT app & model label not reliably visible & \textbf{60} & core \\
 Claude API & \texttt{claude-sonnet-4} & 60 & baseline \\
 Gemini API & \texttt{gemini-2.5-flash} & 60 & baseline \\
 \bottomrule
@@ -99,7 +98,7 @@ Gemini API & \texttt{gemini-2.5-flash} & 60 & baseline \\
   \item screenshot archived for every app row;
   \item no empty outputs, no \texttt{needs\_review} rows;
   \item shared logs keep Category B text redacted;
-  \item visible \texttt{4o} model label on all 60 app screenshots.
+  \item app model label treated as an unresolved deployment-stack limitation.
 \end{itemize}
 \end{column}
 \end{columns}
@@ -339,8 +338,8 @@ Claude API & 57/60 \\
 \end{frame}
 
 %% ── SLIDE 11: Reliability ───────────────────────────────────────────────
-\begin{frame}[shrink=12]{Reliability status: what is solved, what still needs a human}
-\framesubtitle{The main claim no longer hangs on the softest label; true IRR still requires a second coder}
+\begin{frame}[shrink=12]{Reliability status: independent coding completed}
+\framesubtitle{Strong core labels; safety framing remains weak}
 \small
 \renewcommand{\arraystretch}{1.25}
 \begin{tabularx}{\textwidth}{p{0.26\textwidth}Xp{0.16\textwidth}}
@@ -348,13 +347,13 @@ Claude API & 57/60 \\
 \textbf{Check} & \textbf{Result} & \textbf{Status} \\
 \midrule
 Coding-dependence sensitivity & No final case rests on safety framing alone; hard-anchor evidence (UI surface, factual control, format, full-refusal contrast) covers all 17. & \oktext{Done} \\[2pt]
-Automated second rater (convergent check) & Independent LLM coded the 54 blind units: refusal $\kappa=0.95$ (98\% agreement), pooled $\kappa=0.70$. Lower on visual UI label, as expected from text-only input. & \oktext{Done --- not IRR} \\[2pt]
-Intra-coder proxy & Deterministic re-application of review rules, $\kappa=1.0$ on 12 sampled rows. Disclosed as proxy. & \oktext{Done --- proxy} \\[2pt]
-\textbf{Human inter-rater reliability} & Blind sheet ready: 27 prompts / 54 units, prompt context + raw outputs, no primary labels; kappa script prepared. & \opentext{Needs 2nd coder} \\
+\textbf{Human inter-rater reliability} & 54 blind units coded independently. Refusal, format, and unsupported inference: $\kappa=1.00$; factuality: $\kappa=0.72$; UI surface: $\kappa=0.54$. & \oktext{Done} \\[2pt]
+Soft-label warning & Safety-framing strength is weak ($\kappa=0.06$, weighted $\kappa=0.27$), so it stays descriptive and never carries a final claim alone. & \opentext{Caution} \\[2pt]
+Unverified raters & Retained only as local diagnostics; not used as human IRR evidence. & \oktext{Separated} \\
 \bottomrule
 \end{tabularx}
 \vspace{0.15cm}
-\small \textbf{Ask:} could SCG suggest someone for $\sim$2--3 hours of blind coding? Packet is self-contained (\texttt{second\_coder\_handoff\_PRIVATE.zip}).
+\small \textbf{Implication:} the strongest claims should stay anchored in refusal status, factual support, format compliance, and visible UI evidence, not safety-framing strength alone.
 \end{frame}
 
 %% ── SLIDE 12: Thesis draft status ───────────────────────────────────────
@@ -364,7 +363,7 @@ Intra-coder proxy & Deterministic re-application of review rules, $\kappa=1.0$ o
 \begin{column}{0.52\textwidth}
 \small
 \begin{itemize}
-  \item \textbf{89 pages}, compiles clean: 0 undefined references, 4 figures, 26 tables.
+  \item \textbf{83 pages}, compiles clean: 0 undefined references, 4 figures, 25 tables.
   \item Full chapters: Intro, Related Work (literature review across auditing, safety, factuality, bias; \textbf{81 verified references, all cited}), Methods, Results, Discussion, Limitations, Future Work, Conclusion, reproducibility appendix.
   \item Claim discipline throughout: deployment-stack construct named central limitation; one primary endpoint; everything else explicitly exploratory.
   \item Results tables/figures auto-load from generated artifacts --- prose cannot drift from data.
@@ -375,7 +374,7 @@ Intra-coder proxy & Deterministic re-application of review rules, $\kappa=1.0$ o
 \small
 \begin{itemize}
   \item Thesis PDF (byte-matched copy);
-  \item \texttt{abstract\_en.txt} (357 words, per fact-sheet);
+  \item \texttt{abstract\_en.txt} (375 words, per fact-sheet);
   \item declaration-of-independence template (to sign);
   \item UZH-style cover page with logo and required items.
 \end{itemize}
@@ -396,6 +395,8 @@ Intra-coder proxy & Deterministic re-application of review rules, $\kappa=1.0$ o
   \item[\cmark] 17 corrected substantive divergences, tiered 10/4/3.
   \item[\cmark] Directional refusal asymmetry (5 vs.\ 0; $p=0.0625$, owned as underpowered).
   \item[\cmark] API-side stability at label level ($\kappa=1.0$) and text level (60/60 within $>$ between).
+  \item[\cmark] Human IRR completed: core labels strong/acceptable; UI surface moderate.
+  \item[\cmark] Coding-dependence sensitivity: no final case rests on safety framing alone.
   \item[\cmark] Negative controls: social rows 0/10; verbosity excluded by design.
   \item[\cmark] Cross-vendor API context incl.\ nearest-neighbor result.
 \end{itemize}
@@ -405,9 +406,9 @@ Intra-coder proxy & Deterministic re-application of review rules, $\kappa=1.0$ o
 \begin{itemize}
   \item[\xmark] Causal attribution to system prompt, tools, retrieval, or routing (deployment-stack confound is the stated central limitation).
   \item[\xmark] Population-level rates beyond this diagnostic bank and collection window.
-  \item[\xmark] App-side stability claims (app still single-shot).
-  \item[\xmark] Human inter-rater reliability (blind sheet pending).
-  \item[\xmark] Claude/Gemini \emph{app} claims; their consumer apps are uncollected.
+  \item[\xmark] App-side stability unless the scoped 17-case ChatGPT repetition packet is collected.
+  \item[\xmark] Strong standalone claims from safety-framing strength.
+  \item[\xmark] Claude/Gemini \emph{app} claims; app sheets are prepared but uncollected and out of current scope.
 \end{itemize}
 \end{column}
 \end{columns}
@@ -423,14 +424,14 @@ Intra-coder proxy & Deterministic re-application of review rules, $\kappa=1.0$ o
 & \textbf{Item} & \textbf{Proposal / question} & \textbf{Owner} \\
 \midrule
 1 & Draft review & I send the 88-page PDF today; written comments or discussion at next meeting --- whichever you prefer. & Aleksandra \\[2pt]
-2 & Second coder for IRR & $\sim$2--3 h blind coding of 27 prompts; packet self-contained. Could SCG suggest someone? Fallback: delayed self-recode reported as intra-coder only. & Aleksandra + me \\[2pt]
-3 & App-side repetitions & Re-run the 17 divergent prompts in the app, 2 reps. Optional matched controls can be added if time allows; the core ask closes the main remaining stochasticity gap. Worth prioritizing over extra polish? & me (decision: priority) \\[2pt]
+2 & Reliability interpretation & Human IRR is now complete; question is whether the safety-framing caution is framed strongly enough. & Aleksandra \\[2pt]
+3 & App-side repetitions & Re-run the 17 divergent prompts in the ChatGPT app, 2 reps. This is the only app collection worth prioritizing before submission; Claude/Gemini apps stay future work unless specifically requested. & me (decision: priority) \\[2pt]
 4 & Registration status & Confirm the registration form was officially accepted (start 1 March 2026; submission target 1 July). I will check with Daniela. & me \\[2pt]
 5 & Defense window & Fact sheet: defense 4--6 weeks after submission. Should we propose dates to Prof.\ Hannak now? & Aleksandra \\
 \bottomrule
 \end{tabularx}
 \vspace{0.15cm}
-\small\textbf{Plan to 1 July:} this week: draft to you + registration check; next week: incorporate comments, app repetitions if approved, IRR if coder found; final week: freeze, format check, submit from UZH address to \texttt{studies@ifi.uzh.ch}.
+\small\textbf{Plan to 1 July:} this week: draft review + remaining app repetitions; next week: incorporate comments; final week: freeze, format check, submit from UZH address to \texttt{studies@ifi.uzh.ch}.
 \end{frame}
 
 \end{document}

@@ -35,11 +35,12 @@ visible** - never guess hidden system prompts or routing.
 ## Process
 
 1. Code every row independently.
-2. Save the filled file as `second_coder_sheet_BLIND.csv` (same name) in the
+2. Save the filled file as `second_coder_sheet_BLIND.csv` or a dated copy in the
    `reliability/` folder.
-3. The primary coder runs:
+3. After verifying that the coder was genuinely independent and blind to the
+   primary labels/key, the primary coder runs:
    ```bash
-   python3 scripts/compute_inter_rater_reliability.py
+   python3 scripts/compute_inter_rater_reliability.py --confirm-independent
    ```
    This produces Cohen's kappa (plus weighted kappa for `safety_framing_strength`),
    percent agreement, and confusion tables per label.

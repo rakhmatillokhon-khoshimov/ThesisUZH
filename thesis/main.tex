@@ -17,14 +17,20 @@
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \newcommand{\thesistitle}{Auditing Access Channel Effects in LLM Behavior}
-\newcommand{\thesistype}{Master's Thesis in Informatics}
+\newcommand{\thesistype}{Master's Thesis}
 \newcommand{\studentname}{Rakhmatillokhon Khoshimov}
+\newcommand{\studentemail}{rakhmatillokhon.khoshimov@uzh.ch}
 \newcommand{\studentid}{23060361}
 \newcommand{\majorprogram}{MSc Artificial Intelligence}
 \newcommand{\departmentname}{Department of Informatics of the University of Zurich}
 \newcommand{\responsibleprofessor}{Prof. Dr. Anik\'o Hannak}
 \newcommand{\additionalsupervisor}{Dr. Aleksandra Urman}
 \newcommand{\submissiondate}{1 July 2026}
+\newcommand{\scgurl}{www.ifi.uzh.ch/scg}
+\newcommand{\uzhlogo}{%
+  \IfFileExists{../assets/uzh_logo.png}{\includegraphics[height=1.8cm]{../assets/uzh_logo.png}}{%
+  \IfFileExists{../../uzh_logo.png}{\includegraphics[height=1.8cm]{../../uzh_logo.png}}{}}%
+}
 
 \begin{document}
 \onehalfspacing
@@ -32,47 +38,52 @@
 \hypersetup{pageanchor=false}
 \begin{titlepage}
 \thispagestyle{empty}
-\noindent\IfFileExists{../assets/uzh_logo.png}{\includegraphics[width=4.2cm]{../assets/uzh_logo.png}}{}
-\begin{center}
-\vspace*{1.8cm}
-{\LARGE \thesistitle\par}
-\vspace{2.4cm}
-{\Large \thesistype\par}
-\vspace{0.7cm}
-submitted by\par
-\vspace{0.5cm}
-{\Large \studentname\par}
-\vspace{0.2cm}
-Student ID no. \studentid\par
-\vspace{0.2cm}
-\majorprogram\par
-\vfill
-\departmentname\par
-\vspace{0.8cm}
-\responsibleprofessor\par
-\vspace{0.4cm}
-Supervisor: \additionalsupervisor\par
-\vspace{1.4cm}
-Submission of the thesis: \submissiondate\par
-\end{center}
+\setlength{\textwidth}{16cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{8mm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+\setlength{\topskip}{0cm}
+\enlargethispage{5cm}
+\noindent
+\setlength{\unitlength}{1mm}
+\begin{picture}(160,226)
+\centering
+\put(-10,203){\line(1,0){170}}
+\put(104,43){\line(1,0){55}}
+\put(104,155){\line(1,0){55}}
+\put(104,178){\line(1,0){55}}
+\put(102,1){\line(0,1){200}}
+\put(-10,110){\parbox[b]{105mm}{\begin{center}
+    \huge\sffamily\textbf{\thesistitle}
+\end{center}}}
+\put(104,92){\parbox[b]{60mm}{\fontsize{11}{12}\selectfont
+    \sffamily\textbf{\studentname}\\
+    University of Zurich\\
+    Student ID no.: \studentid\\
+    \studentemail\\
+    \majorprogram
+}}
+\put(104,169){\makebox(54,9){\sffamily\thesistype}}
+\put(104,161){\makebox(54,9){\fontsize{11}{12}\sffamily\textbf{Submission of the thesis}}}
+\put(104,155){\makebox(54,9){\fontsize{11}{12}\sffamily\submissiondate}}
+\put(-10,215){\makebox(80,11)[l]{\uzhlogo}}
+\put(104,32){\parbox[b]{50mm}{\flushleft\fontsize{10}{12}\selectfont
+    \sffamily Supervisor\\
+    \textbf{\sffamily\additionalsupervisor}
+}}
+\put(104,4){\parbox[b]{55mm}{\flushleft\fontsize{10}{12}\selectfont\sffamily
+    \textbf{\responsibleprofessor}\\
+    Social Computing Group\\
+    \departmentname\\
+    \url{\scgurl}
+}}
+\end{picture}
 \end{titlepage}
 \hypersetup{pageanchor=true}
 
 \pagenumbering{roman}
-
-\section*{Acknowledgments}
-\addcontentsline{toc}{section}{Acknowledgments}
-
-I thank Dr. Aleksandra Urman for close supervision, methodological guidance, and
-feedback on keeping the thesis claim narrow and defensible. I also thank Prof.
-Dr. Anik\'o Hannak for serving as the responsible professor and for supporting a
-Social Computing Group project on auditing access-channel effects. The empirical
-work in this thesis benefited from discussions about benchmark selection,
-consumer-app evidence, coding discipline, and the risks of over-interpreting
-black-box outputs. Any remaining mistakes in the analysis, coding, or prose are
-my responsibility.
-
-\clearpage
 
 \section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
@@ -84,10 +95,11 @@ context, and visible interface affordances. This thesis asks whether conclusions
 from a bare API condition transfer to a productized consumer-app deployment. The
 design does not isolate access channel as a causal mechanism: it compares the
 OpenAI Responses API (\texttt{gpt-4o}, no custom system prompt) with the official
-ChatGPT app, whose screenshots show a \texttt{4o} label but whose hidden system
-prompt, tools, retrieval, and session state cannot be separated from the app
-condition. Using a frozen six-category, 60-prompt suite grounded in recognized
-benchmarks, each response is coded for refusal status, safety framing,
+ChatGPT app, whose archived screenshots do not reliably preserve an in-frame
+model label and whose hidden system prompt, tools, retrieval, routing, and
+session state cannot be separated from the app condition. Using a frozen
+six-category, 60-prompt suite grounded in recognized benchmarks, each response is
+coded for refusal status, safety framing,
 instruction following, unsupported inference, factuality, verbosity, and visible
 UI-surface signatures. Manual review identifies 17 substantive observable
 divergences. Ten of these have response-core anchors: six refusal-boundary
@@ -101,13 +113,17 @@ on small cells rather than confirmatory evidence. Two additional API repetitions
 show that the OpenAI API refusal label is perfectly stable within that channel
 (Fleiss $\kappa=1.0$), and on every one of the 60 prompts the API's independent
 re-runs resemble each other more than the API resembles the app (mean token
-Jaccard 0.47 versus 0.22), so neither label-level nor text-level sampling noise
-accounts for the observed divergences; app-side repetition and human
-inter-rater reliability remain outstanding. A coding-dependence sensitivity
-check shows that no final substantive case rests on safety framing alone: every
-final case has a non-framing evidence anchor such as visible UI surface,
-factual-control support, exact format compliance, or a refusal-boundary
-contrast. The
+Jaccard 0.47 versus 0.22), so API-side sampling noise does not account for the
+observed API--app differences; app-side repetition remains outstanding.
+An independent blind second-coder pass on 54 coding units shows strong agreement
+for refusal status, format compliance, unsupported inference, and acceptable
+agreement for factuality; UI-surface agreement is moderate, while
+safety-framing strength is weak (Cohen's $\kappa=0.06$, weighted
+$\kappa=0.27$). The thesis therefore treats safety framing only as descriptive
+context. A coding-dependence sensitivity check further shows that no final
+substantive case rests on safety framing alone, and every final case has a
+non-framing evidence anchor such as visible UI surface, factual-control support,
+exact format compliance, or a refusal-boundary contrast. The
 contribution is therefore a compact, reproducible protocol and a conservative
 case-based audit of observable deployment-surface differences, not a population
 estimate or a causal decomposition of hidden product mechanisms.
@@ -116,6 +132,20 @@ estimate or a causal decomposition of hidden product mechanisms.
 \noindent\textbf{Keywords:} large language models; algorithm auditing; access
 channels; ChatGPT; API evaluation; refusal behavior; UI-surface signatures;
 black-box auditing.
+
+\clearpage
+
+\section*{Acknowledgments}
+\addcontentsline{toc}{section}{Acknowledgments}
+
+I thank Dr. Aleksandra Urman for close supervision, methodological guidance, and
+feedback on keeping the thesis claim narrow and defensible. I also thank Prof.
+Dr. Anik\'o Hannak for serving as the responsible professor and for supporting a
+Social Computing Group project on auditing access-channel effects. The empirical
+work in this thesis benefited from discussions about benchmark selection,
+consumer-app evidence, coding discipline, and the risks of over-interpreting
+black-box outputs. Any remaining mistakes in the analysis, coding, or prose are
+my responsibility.
 
 \clearpage
 
@@ -150,6 +180,9 @@ XSTest & Exaggerated Safety Test suite, used for allowed-sensitive over-refusal 
 \addcontentsline{toc}{section}{List of Figures}
 \clearpage
 \pagenumbering{arabic}
+% The unnumbered Acronyms longtable in the front matter advances the table
+% counter; reset it so the first numbered table in the body is Table 1.
+\setcounter{table}{0}
 
 \input{sections/01_introduction}
 \clearpage

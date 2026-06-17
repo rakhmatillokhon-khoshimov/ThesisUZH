@@ -6,7 +6,7 @@ audit without exposing private high-risk prompt text. The goal is not to make th
 appendix a second results chapter. Instead, it records the practical research
 objects that support the main claims: the prompt-bank design, the coding scheme,
 the reviewed coding sheet, the transcript-correction audit, the reliability
-route, and the local artifact inventory.
+	route, and the local artifact inventory.
 
 The appendix deliberately uses the shared redacted prompt bank rather than the
 private collection bank. Category B rows are therefore described by benchmark,
@@ -165,14 +165,17 @@ the optional vendor robustness rows.
 
 \subsection{Reliability Materials}
 
-The preferred reliability plan is true second-coder reliability on a blind sheet.
-The current prepared sample contains all final substantive divergence prompts and
-additional non-divergent controls, yielding 27 prompts and 54 coding units. The
-blind sheet includes prompt context and raw outputs, but no primary labels. The
-second coder should receive only the private handoff packet, not the private key
-with the primary coder's labels. Once the sheet is filled, the reliability script
-reports percent agreement, Cohen's kappa for categorical labels, and weighted
-kappa for the ordered safety-framing label.
+The reliability check uses true second-coder reliability on a blind sheet. The
+sample contains all final substantive divergence prompts and additional
+non-divergent controls, yielding 27 prompts and 54 coding units. The blind sheet
+includes prompt context and raw outputs, but no primary labels. The second coder
+received only the blind sheet, the coding guide, and the second-coder
+instructions; the private key with the primary coder's labels was retained
+locally until after the completed sheet was returned.
+
+The reliability script reports percent agreement, Cohen's kappa for categorical
+labels, and weighted kappa for the ordered safety-framing label. The reported
+human IRR values are computed on the pre-resolution blind coding labels.
 
 \begin{longtable}{L{0.34\linewidth}L{0.56\linewidth}}
 \caption{Reliability artifacts prepared for the final study.}\\
@@ -188,17 +191,16 @@ Artifact & Purpose \\
 \bottomrule
 \endfoot
 \path{protocols/second_coder_instructions.md} & Instructions for the independent coder, including the rule not to inspect primary labels. \\
-\path{second_coder_sheet_BLIND.csv} & Blind coding sheet containing prompt context, raw outputs, and empty label columns. \\
-\path{second_coder_handoff_PRIVATE.zip} & Private packet for the independent coder; excludes the primary-coder key. \\
-\path{second_coder_key_PRIVATE.csv} & Private key containing primary labels for later agreement computation. \\
-\path{compute_inter_rater_reliability.py} & Computes agreement metrics once the blind sheet has been filled. \\
-\path{inter_rater_reliability.json} & Current output file; marked pending until second-coder labels exist. \\
+\path{second_coder_sheet_BLIND.csv} & Blind coding sheet containing prompt context, raw outputs, and second-coder labels. \\
+\path{second_coder_sheet_BLIND_FRIEND_20260617.csv} & Preserved dated copy of the independent second-coder return used for the reported IRR computation. \\
+\path{second_coder_handoff_PRIVATE.zip} & Private packet for an independent coder; excludes the primary-coder key. \\
+\path{second_coder_key_PRIVATE.csv} & Private primary-label key retained locally for future agreement computation; not a public artifact. \\
+\path{compute_inter_rater_reliability.py} & Computes agreement metrics after a genuinely independent blind sheet has been filled. \\
+\path{inter_rater_reliability.json} & Human IRR metrics reported after independence confirmation. \\
 \end{longtable}
 
-Until the blind sheet is independently completed, the thesis must not claim
-inter-rater reliability. If no independent second coder completes the sheet, the
-weaker fallback is a delayed self-recoding pass reported explicitly as
-intra-coder reliability.
+If disagreement resolution is performed for future documentation, it should not
+change the reported kappa values, which are based on pre-resolution labels.
 
 \subsection{Reproducibility and Artifact Inventory}
 

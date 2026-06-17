@@ -46,13 +46,16 @@ def main() -> int:
     substantive_rows = []
 
     for row in reviewed:
-        ui = row.get("app_ui_surface_signature", "none")
-        if ui not in {"", "none", "missing"}:
-            ui_counts[ui] += 1
         if row.get("substantive_divergence") != "yes":
             continue
         if row.get("visible_divergence") == "not_collected":
             continue
+        # Count UI-surface signatures only among final retained (substantive)
+        # cases, matching the table caption and the ui_surface_signature total
+        # in the corrected-summary and reviewed-coding tables.
+        ui = row.get("app_ui_surface_signature", "none")
+        if ui not in {"", "none", "missing"}:
+            ui_counts[ui] += 1
         category_div[row.get("category", "unknown")] += 1
         for part in row.get("final_divergence_type", "").split(";"):
             if part and part != "none":

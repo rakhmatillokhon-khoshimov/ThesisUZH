@@ -62,13 +62,15 @@ thinking enabled despite the lower throughput.
 \subsection{The Deployment-Stack Confound (Construct Validity)}
 
 This is the central limitation, and it is a limit on the construct rather than a
-detail of execution. Every app screenshot in this study showed a \texttt{4o}
-label, so the comparison is not confounded by an obviously different model in the
-way it might first appear. But a shared model label is not a shared condition. The
-bare Responses API call carries no system prompt, no tools, no retrieval, and no
-session or locale state, whereas the consumer app bundles a system prompt, tool
-and retrieval availability, session handling, and account or location context
-together with the same model. The comparison construct is therefore the whole
+detail of execution. The API condition has an explicit \texttt{gpt-4o} model
+label, but the archived app screenshots do not reliably preserve an in-frame app
+model label. The comparison therefore cannot rule out model-label, routing, or
+product-configuration differences inside the app condition. Even a visible app
+label would not be enough to make the conditions identical: the bare Responses
+API call carries no system prompt, no tools, no retrieval, and no session or
+locale state, whereas the consumer app may bundle system instructions, tool and
+retrieval availability, routing, session handling, and account or location
+context together with the model. The comparison construct is therefore the whole
 \emph{deployment stack}, and this design cannot decompose it: an observed
 difference could come from the system prompt, from tool or retrieval availability,
 from locale, or from any combination, and the black-box data cannot attribute it
@@ -107,22 +109,21 @@ while still preserving visual evidence for UI-surface signatures.
 Manual review is necessary because many differences require judgment. For
 example, distinguishing a full refusal from a safe redirect, or a minor caution
 from substantive safety framing, cannot always be done reliably with simple
-string rules. The weakness is that the current final labels depend on a primary
-coder unless the prepared second-coder sheet is completed before submission.
+string rules. The independent blind reliability pass confirms this split. Core
+labels such as refusal status, format compliance, unsupported inference, and
+factuality show acceptable-to-strong agreement, while
+\texttt{safety\_framing\_strength} has weak agreement (Cohen's $\kappa=0.06$;
+weighted $\kappa=0.27$).
 
-The thesis does not claim inter-rater reliability until a second coder fills the
-blind sheet. If no second coder is available, delayed self-recoding can provide a
-weaker intra-coder check, but it cannot replace true independent agreement. This
-is a remaining quality risk for the taxonomy as a coding instrument.
-
-The risk is mitigated, but not eliminated, by the coding-dependence sensitivity
-check. No final substantive divergence depends on safety framing alone. Every
+This limits how safety-framing differences should be interpreted. They are useful
+as descriptive context, but they should not carry a final substantive claim by
+themselves. The coding-dependence sensitivity check addresses exactly this
+problem: no final substantive divergence depends on safety framing alone. Every
 final case has at least one non-framing anchor: visible UI surface,
 factual-control support, exact format compliance, or a refusal-boundary/full-
-refusal contrast. Thus the absence of completed inter-rater reliability weakens
-confidence in the exact label boundaries, especially for safety framing, but it
-does not make the main deployment-surface finding depend on the softest
-subjective label.
+refusal contrast. Thus the reliability limitation narrows the interpretation of
+the softest label, but it does not make the main deployment-surface finding
+depend on that label.
 
 \subsection{Temporal Drift}
 

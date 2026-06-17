@@ -46,7 +46,7 @@ pdflatex main.tex
 pdflatex main.tex
 ```
 
-The repository was verified to compile to an 89-page PDF.
+The repository was verified to compile to an 83-page PDF.
 
 ## Reproducibility Boundary
 
@@ -71,4 +71,7 @@ See `docs/DATA_ACCESS.md` for the exact exclusion policy.
 - OpenAI API refusal label stability across three API runs: Fleiss `kappa=1.0`.
 - Within-channel API lexical similarity exceeded API-vs-app similarity on 60/60
   prompts.
-- Human inter-rater reliability remains pending in the public thesis text.
+- Human inter-rater reliability on 54 blind coding units: refusal status,
+  format compliance, and unsupported inference `kappa=1.0`; factuality
+  `kappa=0.72`; UI-surface signature `kappa=0.54`; safety-framing strength
+  `kappa=0.06` and is treated only as descriptive context.

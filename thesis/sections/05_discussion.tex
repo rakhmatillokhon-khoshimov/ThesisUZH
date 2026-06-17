@@ -3,11 +3,13 @@
 The completed scale-up supports a narrower claim than ``the same model behaves
 differently because of access channel.'' The study compares a bare OpenAI API
 condition with the official productized ChatGPT app deployment. The app
-screenshots show a \texttt{4o} label, which improves model-family comparability,
-but the app also includes hidden instructions, tools, retrieval, UI rendering,
-session state, and possible account or location context. Those components cannot
-be separated with this design. The defensible claim is therefore about
-observable deployment-surface differences.
+screenshots archive the consumer surface, but they do not reliably preserve an
+in-frame model label. Even if a product label is visible in some app sessions,
+the app also includes hidden instructions, tools, retrieval, UI rendering,
+session state, routing, and possible account or location context. Those
+components cannot be separated with this design. The defensible claim is
+therefore about observable deployment-surface differences, not a clean
+same-model causal manipulation.
 
 Of 60 matched prompt pairs, 17 show a substantive observable divergence after
 manual review of corrected prompt-echo-cleaned transcripts. The important
@@ -153,22 +155,26 @@ safety-framing wording label ($\kappa\approx0.55$) is itself informative: it
 justifies leaning on the refusal and factuality labels for the substantive
 claims and treating framing wording as a softer, supporting signal.
 
-\subsection{Coding Reliability Without Making IRR a Single Point of Failure}
+\subsection{Coding Reliability Without Letting a Soft Label Carry the Claim}
 
-Independent coding would still be the cleanest way to quantify agreement on the
-taxonomy. However, the coding-dependence sensitivity analysis shows that the
-main result is not carried by the most subjective label. No final substantive
-case is safety-framing-only. Every final case has a non-framing anchor: visible
-UI surface, factual-control support, exact format compliance, or a refusal
-boundary/full-refusal contrast. Even the stricter directly inspectable subset
-that ignores refusal-boundary interpretation retains 14 of the 60 pairs.
+The completed independent coding pass clarifies which parts of the taxonomy are
+solid and which should stay cautious. Agreement is strongest for refusal status,
+format compliance, unsupported inference, and factuality. UI-surface signatures
+are moderate. Safety-framing strength is weak, which confirms that fine-grained
+judgments about caution wording are difficult to reproduce.
 
-This distinction matters for how the reliability limitation should be read. The
-absence of completed inter-rater reliability weakens claims about the exact
-taxonomy labels and should be reported honestly. It does not erase the evidence
-chain for the core deployment-surface claim, because the positive cases are tied to
-screenshots, expected-answer checks, format constraints, and excerpt-level
-evidence rather than only to subjective framing judgments.
+This distinction matters for how the results should be read. The
+coding-dependence sensitivity analysis shows that the main result is not carried
+by the weakest label. No final substantive case is safety-framing-only. Every
+final case has a non-framing anchor: visible UI surface, factual-control support,
+exact format compliance, or a refusal boundary/full-refusal contrast. Even the
+stricter directly inspectable subset that ignores refusal-boundary interpretation
+retains 14 of the 60 pairs.
+
+The evidence chain for the core deployment-surface claim is therefore not only a
+matter of subjective framing judgment. The positive cases are tied to screenshots,
+expected-answer checks, format constraints, and excerpt-level evidence, while
+safety framing remains a useful but secondary descriptor.
 
 \subsection{Evidence Discipline and Correction}
 

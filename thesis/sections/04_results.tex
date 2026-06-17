@@ -3,10 +3,11 @@
 This chapter reports the corrected 60-prompt scale-up. The core comparison is a
 bare OpenAI Responses API condition (\texttt{gpt-4o}, no custom system prompt)
 against the official productized ChatGPT app deployment, one submission per
-prompt under documented conditions. The app screenshots record a visible
-\texttt{4o} label, but the app condition also includes product layers that cannot
-be decomposed: hidden instructions, tools, retrieval, session handling, and UI
-rendering. Claude and Gemini API runs are reported separately as vendor
+prompt under documented conditions. The API model label is explicit; the app
+screenshots are screenshot-backed evidence of the consumer deployment but do not
+reliably preserve an in-frame model label. The app condition also includes
+product layers that cannot be decomposed: hidden instructions, tools, retrieval,
+session handling, routing, and UI rendering. Claude and Gemini API runs are reported separately as vendor
 robustness baselines. All counts describe observable behavior; no causal claim is
 made about hidden system prompts, internal guardrails, tools, retrieval, or
 routing.
@@ -35,10 +36,11 @@ Gemini API (\texttt{gemini-2.5-flash}) & 60 & vendor baseline \\
 The pairwise base is 60 complete OpenAI-API-versus-ChatGPT-app pairs. The app
 log passes the validation gate: 60 matching prompt IDs, no missing screenshots,
 no empty outputs, and no remaining \texttt{needs\_review} transcription rows. The
-app log also records the visible model label as \texttt{4o} in the screenshot
-footer for all 60 rows. The final analysis therefore has no missing-pair
-adjustment. Every prompt in the bank contributes one API output and one app
-output to the core comparison.
+final analysis therefore has no missing-pair adjustment. Every prompt in the bank
+contributes one API output and one app output to the core comparison. Model-label
+comparability is handled as a construct-validity limitation rather than as a
+completed control, because the archived screenshots do not reliably capture a
+visible app model label.
 
 \subsection{Transcription QA and Corrected Counts}
 
@@ -457,10 +459,7 @@ reported above, this supports reading the divergences as driven by what the
 prompts ask --- refusal pressure and factual support --- rather than by how long
 or how phrased they are.
 
-\begin{table}[htbp]
-  \centering
-  \input{../results/analysis/order_features_readability/order_feature_checks}%
-\end{table}
+\input{../results/analysis/order_features_readability/order_feature_checks}
 
 Third, the interval method. A percentile bootstrap over prompts ($20{,}000$
 resamples, fixed seed) reproduces the Wilson intervals already reported: overall
@@ -651,29 +650,45 @@ refusal cases, factual controls, UI-surface cases, and S039. In that subset, the
 OpenAI API refusal label is stable across all three runs for every listed row;
 the observed variability is instead confined to the softer safety-framing label.
 
-\subsection{Reliability Status}
+\subsection{Human Inter-Rater Reliability}
 
-A second-coder blind double-coding sheet, private handoff packet, and kappa
-computation are prepared. The sheet includes 27 prompts and 54 coding units, with
-all final substantive divergence prompts plus controls. It includes prompt
-context and raw outputs, but no primary labels. Until a second coder completes
-the sheet, the thesis does not claim inter-rater reliability. This remains an
-external dependency rather than a completed result.
+The independent blind second-coder pass covers 54 coding units from 27 prompts:
+all final substantive cases and matched controls. Table~\ref{tab:human-irr}
+reports agreement before any disagreement resolution. The result is deliberately
+read label by label rather than collapsed into one headline number.
 
-As an interim convergent check while the human slot is open, an independent
-language model applied the same fixed rubric to the blind sheet, and its labels
-were scored against the primary labels (\texttt{run\_llm\_second\_coder.py}). This
-is reported as automated second-rater agreement, \emph{not} as the human
-inter-rater reliability the protocol requires.
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{lrrrl}
+\toprule
+Label & $N$ & Agreement & Cohen's $\kappa$ & Interpretation \\
+\midrule
+\texttt{refusal\_status} & 54 & 1.00 & 1.00 & strong \\
+\texttt{safety\_framing\_strength} & 54 & 0.41 & 0.06 & weak \\
+\texttt{format\_compliance} & 54 & 1.00 & 1.00 & strong \\
+\texttt{unsupported\_inference} & 54 & 1.00 & 1.00 & strong \\
+\texttt{factuality} & 54 & 0.93 & 0.72 & acceptable \\
+\texttt{ui\_surface\_signature} & 54 & 0.85 & 0.54 & moderate \\
+\bottomrule
+\end{tabular}
+\caption[Human inter-rater reliability on the 54-unit blind sample]{Human
+inter-rater reliability on the 54-unit blind sample. The safety-framing label
+has linearly weighted $\kappa=0.27$; both kappa values indicate that it should be
+treated as a soft descriptive label rather than a standalone claim anchor.}
+\label{tab:human-irr}
+\end{table}
 
-The generated automated-rater table is retained locally but not printed in the
-main chapter, because it is not human inter-rater reliability.
+The strongest thesis labels are therefore reliable: refusal status, format
+compliance, and unsupported-inference coding show perfect agreement, while
+factuality is acceptable for an exploratory audit and visible UI-surface coding
+is moderate. The weak safety-framing result is also useful, because it identifies
+the label that should not carry a substantive claim by itself.
 
-The decisive refusal-status label is almost perfectly reproducible by the
-independent automated rater (Cohen's $\kappa=0.95$; $98\%$ agreement), and the
-pooled agreement across all labels is substantial ($\kappa=0.70$). This is
-consistent with the refusal labels, but it is not a substitute for a human
-second coder. Agreement is lower on the ordinal safety-framing strength and, as
-expected, on \texttt{ui\_surface\_signature}: the latter is a visual feature the
-primary coder read from screenshots, whereas the automated rater saw only
-transcribed text and cannot see source cards or localized UI.
+This is why the coding-dependence sensitivity check remains important. It shows
+that no final substantive case depends on safety framing alone. Every final case
+has at least one non-framing anchor: visible UI surface, factual-control support,
+exact format compliance, or a refusal-boundary/full-refusal contrast. The final
+17-case inventory is therefore conservative: its core cases are supported by
+labels with acceptable-to-strong reliability, while the weakest label is retained
+only as descriptive context.

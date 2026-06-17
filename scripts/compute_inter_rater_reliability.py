@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Compute TRUE inter-rater reliability between the primary coder and a second
-coder.
+"""Compute inter-rater reliability between the primary coder and a second coder.
 
 Inputs:
   * the filled BLIND sheet (``second_coder_sheet_BLIND.csv`` with coder2 labels);
@@ -10,8 +9,11 @@ For each double-coded label it reports Cohen's kappa, percent agreement, N, and
 a confusion table. ``safety_framing_strength`` is ordinal, so a linearly
 weighted kappa is also reported. No external dependencies.
 
-This replaces the deterministic re-application proxy with a real second-coder
-estimate once the BLIND sheet has been independently coded.
+Safeguard: filled label columns are not enough to make the result true human
+inter-rater reliability. By default this script writes a pending-status file if
+second-coder labels are present but independence has not been explicitly
+confirmed. Use ``--confirm-independent`` only after verifying that the coder did
+not see the primary labels/key and did not participate in the primary analysis.
 """
 from __future__ import annotations
 
@@ -109,9 +111,20 @@ def interpret(kappa: float | None) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser()
     d = ROOT / "results/analysis/reliability"
-    ap.add_argument("--blind", type=Path, default=d / "second_coder_sheet_BLIND.csv")
+    default_blind = d / "second_coder_sheet_BLIND_CODER2.csv"
+    if not default_blind.exists():
+        default_blind = d / "second_coder_sheet_BLIND.csv"
+    ap.add_argument("--blind", type=Path, default=default_blind)
     ap.add_argument("--key", type=Path, default=d / "second_coder_key_PRIVATE.csv")
     ap.add_argument("--out-json", type=Path, default=d / "inter_rater_reliability.json")
+    ap.add_argument(
+        "--confirm-independent",
+        action="store_true",
+        help=(
+            "Report true human IRR. Use only after confirming the second coder "
+            "was genuinely independent and blind to the primary labels/key."
+        ),
+    )
     args = ap.parse_args()
 
     blind = {r["coding_unit_id"]: r for r in read_csv(args.blind)}
@@ -141,20 +154,37 @@ def main() -> int:
         entry["interpretation"] = interpret(entry["cohen_kappa"])
         report["labels"][lab] = entry
 
-    report["method"] = (
-        "true_inter_rater" if any_coded
-        else "PENDING: second coder has not filled the BLIND sheet yet"
-    )
+    if any_coded and not args.confirm_independent:
+        report = {
+            "method": "not_reported",
+            "status": "pending_independence_confirmation",
+            "n_units_total": 0,
+            "labels": {},
+            "note": (
+                "Second-coder label columns are present, but true human IRR is "
+                "not reported unless --confirm-independent is passed after "
+                "verifying a genuinely blind independent coding process."
+            ),
+        }
+    elif any_coded:
+        report["method"] = "true_inter_rater"
+        report["status"] = "reported_after_independence_confirmation"
+    else:
+        report["method"] = "not_reported"
+        report["status"] = "pending_second_coder_labels"
 
     args.out_json.parent.mkdir(parents=True, exist_ok=True)
     args.out_json.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
     print(f"Method: {report['method']}")
-    print(f"{'label':28} {'N':>4} {'%agree':>7} {'kappa':>7}  interpretation")
-    for lab, e in report["labels"].items():
-        pa = "" if e["percent_agreement"] is None else f"{e['percent_agreement']:.2f}"
-        kp = "" if e["cohen_kappa"] is None else f"{e['cohen_kappa']:.2f}"
-        print(f"{lab:28} {e['n']:>4} {pa:>7} {kp:>7}  {e['interpretation']}")
+    if report["labels"]:
+        print(f"{'label':28} {'N':>4} {'%agree':>7} {'kappa':>7}  interpretation")
+        for lab, e in report["labels"].items():
+            pa = "" if e["percent_agreement"] is None else f"{e['percent_agreement']:.2f}"
+            kp = "" if e["cohen_kappa"] is None else f"{e['cohen_kappa']:.2f}"
+            print(f"{lab:28} {e['n']:>4} {pa:>7} {kp:>7}  {e['interpretation']}")
+    else:
+        print(report.get("note", "No reportable human IRR values."))
     print(f"\nWrote {args.out_json}")
     if not any_coded:
         print("\nNo second-coder labels found yet. Fill the BLIND sheet, then rerun.")

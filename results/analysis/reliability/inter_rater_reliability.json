@@ -1,48 +1,157 @@
 {
   "labels": {
     "refusal_status": {
-      "n": 0,
-      "percent_agreement": null,
-      "cohen_kappa": null,
-      "confusion": {},
-      "interpretation": "no data"
+      "n": 54,
+      "percent_agreement": 1.0,
+      "cohen_kappa": 1.0,
+      "confusion": {
+        "answered": {
+          "answered": 43,
+          "full_refusal": 0,
+          "partial_refusal_or_safe_redirect": 0
+        },
+        "full_refusal": {
+          "answered": 0,
+          "full_refusal": 5,
+          "partial_refusal_or_safe_redirect": 0
+        },
+        "partial_refusal_or_safe_redirect": {
+          "answered": 0,
+          "full_refusal": 0,
+          "partial_refusal_or_safe_redirect": 6
+        }
+      },
+      "interpretation": "strong"
     },
     "safety_framing_strength": {
-      "n": 0,
-      "percent_agreement": null,
-      "cohen_kappa": null,
-      "confusion": {},
-      "interpretation": "no data"
+      "n": 54,
+      "percent_agreement": 0.407,
+      "cohen_kappa": 0.063,
+      "confusion": {
+        "light": {
+          "light": 4,
+          "moderate": 5,
+          "none": 8,
+          "strong": 1
+        },
+        "moderate": {
+          "light": 1,
+          "moderate": 0,
+          "none": 0,
+          "strong": 0
+        },
+        "none": {
+          "light": 12,
+          "moderate": 3,
+          "none": 16,
+          "strong": 0
+        },
+        "strong": {
+          "light": 0,
+          "moderate": 2,
+          "none": 0,
+          "strong": 2
+        }
+      },
+      "weighted_kappa": 0.274,
+      "interpretation": "weak (revise coding guide)"
     },
     "format_compliance": {
-      "n": 0,
-      "percent_agreement": null,
-      "cohen_kappa": null,
-      "confusion": {},
-      "interpretation": "no data"
+      "n": 54,
+      "percent_agreement": 1.0,
+      "cohen_kappa": 1.0,
+      "confusion": {
+        "fail": {
+          "fail": 1,
+          "not_applicable": 0,
+          "pass": 0
+        },
+        "not_applicable": {
+          "fail": 0,
+          "not_applicable": 46,
+          "pass": 0
+        },
+        "pass": {
+          "fail": 0,
+          "not_applicable": 0,
+          "pass": 7
+        }
+      },
+      "interpretation": "strong"
     },
     "unsupported_inference": {
-      "n": 0,
-      "percent_agreement": null,
-      "cohen_kappa": null,
-      "confusion": {},
-      "interpretation": "no data"
+      "n": 54,
+      "percent_agreement": 1.0,
+      "cohen_kappa": 1.0,
+      "confusion": {
+        "avoids_unsupported_inference": {
+          "avoids_unsupported_inference": 6,
+          "not_applicable": 0
+        },
+        "not_applicable": {
+          "avoids_unsupported_inference": 0,
+          "not_applicable": 48
+        }
+      },
+      "interpretation": "strong"
     },
     "factuality": {
-      "n": 0,
-      "percent_agreement": null,
-      "cohen_kappa": null,
-      "confusion": {},
-      "interpretation": "no data"
+      "n": 54,
+      "percent_agreement": 0.926,
+      "cohen_kappa": 0.718,
+      "confusion": {
+        "expected_supported": {
+          "expected_supported": 3,
+          "not_applicable": 0,
+          "possible_factual_mismatch": 2
+        },
+        "not_applicable": {
+          "expected_supported": 0,
+          "not_applicable": 46,
+          "possible_factual_mismatch": 0
+        },
+        "possible_factual_mismatch": {
+          "expected_supported": 2,
+          "not_applicable": 0,
+          "possible_factual_mismatch": 1
+        }
+      },
+      "interpretation": "acceptable for exploratory audit"
     },
     "ui_surface_signature": {
-      "n": 0,
-      "percent_agreement": null,
-      "cohen_kappa": null,
-      "confusion": {},
-      "interpretation": "no data"
+      "n": 54,
+      "percent_agreement": 0.852,
+      "cohen_kappa": 0.542,
+      "confusion": {
+        "local_context": {
+          "local_context": 1,
+          "none": 4,
+          "other": 0,
+          "sources_visible": 0
+        },
+        "none": {
+          "local_context": 0,
+          "none": 40,
+          "other": 1,
+          "sources_visible": 0
+        },
+        "other": {
+          "local_context": 0,
+          "none": 0,
+          "other": 0,
+          "sources_visible": 0
+        },
+        "sources_visible": {
+          "local_context": 0,
+          "none": 3,
+          "other": 0,
+          "sources_visible": 5
+        }
+      },
+      "interpretation": "moderate"
     }
   },
   "n_units_total": 54,
-  "method": "PENDING: second coder has not filled the BLIND sheet yet"
+  "method": "true_inter_rater",
+  "status": "reported_after_independence_confirmation"
 }
