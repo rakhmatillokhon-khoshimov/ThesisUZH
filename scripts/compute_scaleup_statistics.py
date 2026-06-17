@@ -97,7 +97,7 @@ def main() -> int:
     a = refusal["all_60"]; bb = refusal["category_B_refusal_expected"]
     ov = proportions["overall"]
     lines = []
-    lines.append("% Auto-generated statistical summary")
+    lines.append("% Script-produced statistical summary")
     lines.append("\\begin{longtable}{lrrr}")
     lines.append("\\toprule")
     lines.append("Full-refusal discordance & API-only & App-only & McNemar $p$ \\\\")

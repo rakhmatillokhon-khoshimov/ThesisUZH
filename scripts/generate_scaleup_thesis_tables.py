@@ -82,7 +82,7 @@ def main() -> int:
         )
 
     lines = [
-        "% Auto-generated scale-up results tables",
+        "% Script-produced scale-up results tables",
         partial_note,
         "",
         "\\begin{longtable}{llr}",
