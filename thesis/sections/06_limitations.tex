@@ -1,11 +1,11 @@
-\section{Limitations}
+\chapter{Limitations}
 
 The study is intentionally narrow. Its strength is that it makes a specific
 bare-API-versus-productized-app comparison under documented conditions. Its
 limitations follow from that same design. This section states the main threats
 to validity and how they affect interpretation.
 
-\subsection{Prompt-Bank Size and Representativeness}
+\section{Prompt-Bank Size and Representativeness}
 
 The 60-prompt bank is diagnostic, not representative. It is large enough to
 cover several important behavioral families, but it is not a random sample of
@@ -19,7 +19,7 @@ Results chapter reports Wilson intervals and describes category findings as
 indicative rather than precise. Future work should repeat the design with larger
 category samples and multiple repetitions.
 
-\subsection{Statistical Power and Multiple Looks}
+\section{Statistical Power and Multiple Looks}
 
 The primary statistical result is not conventionally significant. The
 full-refusal asymmetry is $5$ API-only full refusals versus $0$ app-only full
@@ -35,7 +35,7 @@ be treated as independent discoveries. This thesis therefore uses them as
 exploratory diagnostics and keeps the main inference on the paired refusal test,
 the tiered case evidence, and the correction audit.
 
-\subsection{Repetition Coverage Remains Targeted}
+\section{Repetition Coverage Remains Targeted}
 
 The substantive divergence analysis begins from one submission per prompt per
 channel. To bound stochasticity, the API channels were re-collected for two
@@ -73,7 +73,7 @@ affects only an extension baseline, not the core OpenAI API-versus-app
 comparison, but it should be disclosed. A future run would re-collect Gemini with
 thinking enabled despite the lower throughput.
 
-\subsection{The Deployment-Stack Confound (Construct Validity)}
+\section{The Deployment-Stack Confound (Construct Validity)}
 
 This is the central limitation, and it is a limit on the construct rather than a
 detail of execution. The API condition has an explicit \texttt{gpt-4o} model
@@ -103,7 +103,7 @@ factors would need provider cooperation or a controlled wrapper that toggles
 system prompt, tools, and locale independently; that is beyond a black-box thesis
 and is named in future work.
 
-\subsection{Screenshot and OCR Dependence}
+\section{Screenshot and OCR Dependence}
 
 The consumer-app channel relies on screenshot-backed transcription. This is
 methodologically defensible because it preserves the visible user interface, but
@@ -118,7 +118,7 @@ S035 and S038. It also avoids quoting raw high-risk outputs in the main text.
 Future work should combine screenshots with direct text export where possible,
 while still preserving visual evidence for UI-surface signatures.
 
-\subsection{Manual Review and Reliability}
+\section{Manual Review and Reliability}
 
 Manual review is necessary because many differences require judgment. For
 example, distinguishing a full refusal from a safe redirect, or a minor caution
@@ -139,7 +139,7 @@ refusal contrast. Thus the reliability limitation narrows the interpretation of
 the softest label, but it does not make the main deployment-surface finding
 depend on that label.
 
-\subsection{Temporal Drift}
+\section{Temporal Drift}
 
 Both API and consumer-app systems can change over time. Model versions, default
 tools, app UI, source display, browsing behavior, safety phrasing, and routing
@@ -156,7 +156,7 @@ association between session position and substantive divergence
 (Section~\ref{sec:order-robustness}), so within-session drift is unlikely to
 explain the retained case set; only across-session drift remains out of scope.
 
-\subsection{No Internal Mechanism Access}
+\section{No Internal Mechanism Access}
 
 The study has no access to hidden system prompts, moderation classifiers, routing
 rules, retrieval policies, or account-level personalization internals. It cannot
@@ -169,7 +169,7 @@ aligned with the evidence. The thesis therefore uses phrases such as
 ``observable divergence'', ``visible sources'', and ``documented access
 conditions'' rather than causal claims about hidden mechanisms.
 
-\subsection{High-Risk Prompt Redaction}
+\section{High-Risk Prompt Redaction}
 
 Category B includes high-risk prompts from sources such as Do-Not-Answer and
 HarmBench. The private local bank contains executable text for controlled
@@ -181,14 +181,14 @@ The appendix mitigates this by reporting source, category, risk level, expected
 behavior, final labels, and claim-safe summaries. A trusted reviewer with access
 to the private local repository can inspect the raw materials if needed.
 
-\subsection{Vendor Baseline Boundaries}
+\section{Vendor Baseline Boundaries}
 
 Claude and Gemini are included as API-only baselines. They contextualize the
 OpenAI result but do not support consumer-app claims for those vendors. The
 thesis therefore does not compare Claude API to a Claude app, nor Gemini API to a
 Gemini app. Treating those baselines as app comparisons would exceed the data.
 
-\subsection{Compactness of the Empirical Scope}
+\section{Compactness of the Empirical Scope}
 
 The empirical core of this thesis is deliberately compact: one provider's
 API/app pair, sixty prompts, one app submission per prompt, and a single primary
@@ -199,7 +199,7 @@ generalization, as discussed above, but it is also what makes the evidence chain
 fully checkable end to end. Breadth was traded for verifiability, and the thesis
 states the trade openly rather than treating coverage as free.
 
-\subsection{Summary of Validity Boundary}
+\section{Summary of Validity Boundary}
 
 Together, these limitations define the valid claim:
 

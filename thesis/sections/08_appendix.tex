@@ -1,5 +1,4 @@
-\appendix
-\section{Audit Materials and Reproducibility Appendix}
+\chapter{Audit Materials and Reproducibility Appendix}
 
 This appendix documents the materials needed to inspect, reproduce, or extend the
 audit without exposing private high-risk prompt text. The goal is not to make the
@@ -14,7 +13,7 @@ source ID, risk class, and redacted harm descriptor. This preserves auditability
 of the research design while avoiding publication of executable high-risk
 requests.
 
-\subsection{Prompt-Bank Construction}
+\section{Prompt-Bank Construction}
 
 The 60-prompt bank was designed as a compact scale-up from the 20-prompt pilot.
 It balances six diagnostic categories rather than attempting to estimate an
@@ -35,7 +34,7 @@ inspection while keeping the manual app-collection burden feasible.
 
 \input{generated/appendix_prompt_bank}
 
-\subsection{Coding Guide Used for Manual Review}
+\section{Coding Guide Used for Manual Review}
 
 The coding unit is one response to one prompt in one access channel. Pairwise
 divergence is assessed only after comparing the API and app responses for the
@@ -68,7 +67,7 @@ triage but are not final substantive divergence labels. Verbosity in particular
 proved sensitive to screenshot transcription artifacts. These signals remain
 useful in notes but are not counted as final behavioral divergences.
 
-\subsection{Transcript QA and Correction Audit}
+\section{Transcript QA and Correction Audit}
 
 The app channel required extra QA because responses were collected as screenshots
 and then transcribed. The main failure mode found in the scale-up was leading
@@ -108,7 +107,7 @@ over-refused socially sensitive BBQ-style prompts. Those rows instead function
 as negative controls: both channels generally avoided unsupported social
 inference.
 
-\subsection{Final Substantive Divergence Cases}
+\section{Final Substantive Divergence Cases}
 
 The table below lists the 17 final substantive divergence cases. It reports only
 claim-safe summaries and final labels. High-risk prompt text and raw model
@@ -116,7 +115,7 @@ outputs remain in private local evidence files.
 
 \input{generated/appendix_substantive_cases}
 
-\subsection{Quote-Level Case-Evidence Audit}
+\section{Quote-Level Case-Evidence Audit}
 
 The final prose examples were also checked against the API output, the cleaned
 app transcript, and the screenshot evidence marker. The full verification artifact is
@@ -131,7 +130,7 @@ high-risk prompt text.
   \noindent\textit{Case-evidence table not found. Run \path{build_case_evidence_table.py}.}
 }
 
-\subsection{Targeted Persistence Check}
+\section{Targeted Persistence Check}
 
 The aggregate repetition table in the Results chapter is complemented by the
 prompt-level table below. It focuses on the rows most likely to affect the main
@@ -146,7 +145,7 @@ chapter and retained as a local analysis artifact.
   \noindent\textit{Targeted persistence table not found. Run \path{build_targeted_persistence_table.py}.}
 }
 
-\subsection{Reviewed Coding Summary}
+\section{Reviewed Coding Summary}
 
 The next table gives the complete 60-row reviewed coding summary. It is included
 to make the final count auditable: readers can see which rows were coded as
@@ -154,7 +153,7 @@ substantive, minor, or non-divergent, and which final divergence type was used.
 
 \input{generated/appendix_reviewed_coding_summary}
 
-\subsection{Cross-Channel Robustness Matrix}
+\section{Cross-Channel Robustness Matrix}
 
 Claude and Gemini were collected as API-only baselines. They are not treated as
 consumer-app comparisons, but they help contextualize the OpenAI API/app result:
@@ -164,7 +163,7 @@ the optional vendor robustness rows.
 
 \input{generated/appendix_cross_channel_matrix}
 
-\subsection{Reliability Materials}
+\section{Reliability Materials}
 
 The reliability check uses true second-coder reliability on a blind sheet. The
 sample contains all final substantive divergence prompts and additional
@@ -203,7 +202,7 @@ Artifact & Purpose \\
 If disagreement resolution is performed for future documentation, it should not
 change the reported kappa values, which are based on pre-resolution labels.
 
-\subsection{Reproducibility and Artifact Inventory}
+\section{Reproducibility and Artifact Inventory}
 
 The local repository contains more files than the final submission needs. The
 following inventory identifies the artifacts that matter for reproducibility and
@@ -241,7 +240,7 @@ Artifact & Role \\
 \path{protocols/transcript_qa_notes.md} & QA memo documenting prompt-echo contamination and screenshot corrections. \\
 \end{longtable}
 
-\subsection{Claim Boundary Wording}
+\section{Claim Boundary Wording}
 
 The recommended claim wording is:
 

@@ -1,92 +1,47 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass{ddis-thesis}
 
-\usepackage[T1]{fontenc}
-\usepackage[margin=2.7cm]{geometry}
 \usepackage{booktabs}
 \usepackage{longtable}
-\usepackage{hyperref}
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{ifthen}
-\usepackage{setspace}
 \usepackage{array}
+\usepackage{ifthen}
+\usepackage{pdflscape}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{xltabular}
+\usepackage{makecell}
+\usepackage{adjustbox}
 
-\hypersetup{hidelinks}
 \setlength{\emergencystretch}{3em}
 \setlength{\tabcolsep}{3pt}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
-\newcommand{\thesistitle}{Auditing Access Channel Effects in LLM Behavior}
-\newcommand{\thesistype}{Master's Thesis}
-\newcommand{\studentname}{Rakhmatillokhon Khoshimov}
-\newcommand{\studentemail}{rakhmatillokhon.khoshimov@uzh.ch}
-\newcommand{\studentid}{23060361}
-\newcommand{\majorprogram}{MSc Artificial Intelligence}
-\newcommand{\departmentname}{Department of Informatics of the University of Zurich}
-\newcommand{\responsibleprofessor}{Prof. Dr. Anik\'o Hannak}
-\newcommand{\additionalsupervisor}{Dr. Aleksandra Urman}
-\newcommand{\submissiondate}{1 July 2026}
-\newcommand{\scgurl}{www.ifi.uzh.ch/scg}
-\newcommand{\uzhlogo}{%
-  \IfFileExists{../assets/uzh_logo.png}{\includegraphics[height=1.8cm]{../assets/uzh_logo.png}}{%
-  \IfFileExists{../../uzh_logo.png}{\includegraphics[height=1.8cm]{../../uzh_logo.png}}{}}%
-}
+\newcommand{\studentName}{Rakhmatillokhon Khoshimov}
+\newcommand{\studentEmail}{rakhmatillokhon.khoshimov@uzh.ch}
+\newcommand{\studentNo}{23060361}
+\newcommand{\studentProgram}{MSc Artificial Intelligence}
+\newcommand{\thesisTitle}{Auditing Access Channel Effects in LLM Behavior}
+\newcommand{\thesisType}{Master's Thesis}
+\newcommand{\submissionDate}{1 July 2026}
+\newcommand{\advisorName}{Dr. Aleksandra Urman}
+\newcommand{\responsibleProfessor}{Prof. Dr. Anik\'o Hannak}
+\newcommand{\departmentName}{Department of Informatics of the University of Zurich}
+\newcommand{\scgUrl}{www.ifi.uzh.ch/scg}
+
+\author{\studentName}
+\title{\thesisTitle}
 
 \begin{document}
-\onehalfspacing
-
-\hypersetup{pageanchor=false}
-\begin{titlepage}
-\thispagestyle{empty}
-\setlength{\textwidth}{16cm}
-\setlength{\oddsidemargin}{0cm}
-\setlength{\evensidemargin}{0cm}
-\setlength{\topmargin}{8mm}
-\setlength{\headheight}{0cm}
-\setlength{\headsep}{0cm}
-\setlength{\topskip}{0cm}
-\enlargethispage{5cm}
-\noindent
-\setlength{\unitlength}{1mm}
-\begin{picture}(160,226)
-\centering
-\put(-10,203){\line(1,0){170}}
-\put(104,43){\line(1,0){55}}
-\put(104,155){\line(1,0){55}}
-\put(104,178){\line(1,0){55}}
-\put(102,1){\line(0,1){200}}
-\put(-10,110){\parbox[b]{105mm}{\begin{center}
-    \huge\sffamily\textbf{\thesistitle}
-\end{center}}}
-\put(104,92){\parbox[b]{60mm}{\fontsize{11}{12}\selectfont
-    \sffamily\textbf{\studentname}\\
-    University of Zurich\\
-    Student ID no.: \studentid\\
-    \studentemail\\
-    \majorprogram
-}}
-\put(104,169){\makebox(54,9){\sffamily\thesistype}}
-\put(104,161){\makebox(54,9){\fontsize{11}{12}\sffamily\textbf{Submission of the thesis}}}
-\put(104,155){\makebox(54,9){\fontsize{11}{12}\sffamily\submissiondate}}
-\put(-10,215){\makebox(80,11)[l]{\uzhlogo}}
-\put(104,32){\parbox[b]{50mm}{\flushleft\fontsize{10}{12}\selectfont
-    \sffamily Supervisor\\
-    \textbf{\sffamily\additionalsupervisor}
-}}
-\put(104,4){\parbox[b]{55mm}{\flushleft\fontsize{10}{12}\selectfont\sffamily
-    \textbf{\responsibleprofessor}\\
-    Social Computing Group\\
-    \departmentname\\
-    \url{\scgurl}
-}}
-\end{picture}
-\end{titlepage}
-\hypersetup{pageanchor=true}
-
 \pagenumbering{roman}
 
-\section*{Abstract}
-\addcontentsline{toc}{section}{Abstract}
+\hypersetup{pageanchor=false}
+\ddistitlepage
+\cleardoublepage
+\setcounter{page}{1}
+\hypersetup{pageanchor=true}
+
+\begin{abstracten}
 Large language model audits are often conducted through provider APIs because
 API access is reproducible and easy to automate. Ordinary users, however,
 interact with nominally similar model families through consumer applications
@@ -133,17 +88,9 @@ exact format compliance, or a refusal-boundary contrast. The
 contribution is therefore a compact, reproducible protocol and a conservative
 case-based audit of observable deployment-surface differences, not a population
 estimate or a causal decomposition of hidden product mechanisms.
+\end{abstracten}
 
-\vspace{0.6cm}
-\noindent\textbf{Keywords:} large language models; algorithm auditing; access
-channels; ChatGPT; API evaluation; refusal behavior; UI-surface signatures;
-black-box auditing.
-
-\clearpage
-
-\section*{Acknowledgments}
-\addcontentsline{toc}{section}{Acknowledgments}
-
+\begin{acknowledgements}
 I thank Dr. Aleksandra Urman for close supervision, methodological guidance, and
 feedback on keeping the thesis claim narrow and defensible. I also thank Prof.
 Dr. Anik\'o Hannak for serving as the responsible professor and for supporting a
@@ -152,305 +99,44 @@ work in this thesis benefited from discussions about benchmark selection,
 consumer-app evidence, coding discipline, and the risks of over-interpreting
 black-box outputs. Any remaining mistakes in the analysis, coding, or prose are
 my responsibility.
+\end{acknowledgements}
 
-\clearpage
-
-\section*{Acronyms and Abbreviations}
-\addcontentsline{toc}{section}{Acronyms and Abbreviations}
-
-\begin{longtable}{p{0.20\linewidth}p{0.70\linewidth}}
-\toprule
-Term & Meaning in this thesis \\
-\midrule
-API & Application programming interface; here, provider-run model access through documented programmatic endpoints. \\
-App & Official consumer-facing ChatGPT interface used for screenshot-backed collection. \\
-BBQ & Bias Benchmark for Question Answering, used as a source for socially sensitive control prompts. \\
-CI & Confidence interval. \\
-IFEval & Instruction-Following Evaluation, used for verifiable format/instruction prompts. \\
-JSON & JavaScript Object Notation; used in strict output-format instructions. \\
-LLM & Large language model. \\
-OCR & Optical character recognition; used here for screenshot transcription support and checked manually. \\
-QA & Quality assurance. \\
-UI & User interface. \\
-XSTest & Exaggerated Safety Test suite, used for allowed-sensitive over-refusal prompts. \\
-\bottomrule
-\end{longtable}
-
-\clearpage
 \tableofcontents
 \clearpage
 \listoftables
-\addcontentsline{toc}{section}{List of Tables}
 \clearpage
 \listoffigures
-\addcontentsline{toc}{section}{List of Figures}
 \clearpage
+
 \pagenumbering{arabic}
-% The unnumbered Acronyms longtable in the front matter advances the table
-% counter; reset it so the first numbered table in the body is Table 1.
-\setcounter{table}{0}
+\glsresetall
 
 \input{sections/01_introduction}
-\clearpage
 \input{sections/02_related_work}
-\clearpage
 \input{sections/03_methods}
-\clearpage
 \input{sections/04_results}
-\clearpage
 \input{sections/05_discussion}
-\clearpage
 \input{sections/06_limitations}
-\clearpage
 \input{sections/07_future_work}
-\clearpage
 \input{sections/07_conclusion}
-\clearpage
+
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+\printbibliography
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Acronyms}
+\chapter*{List of Acronyms}
+\glsaddall
+\printglossary[type=\acronymtype]
+
+\appendix
 \input{sections/08_appendix}
 
-\begin{thebibliography}{80}
-\bibitem{sandvig_auditing}
-Sandvig, C., Hamilton, K., Karahalios, K., and Langbort, C. (2014). Auditing algorithms: Research methods for detecting discrimination on internet platforms. \textit{Data and Discrimination: Converting Critical Concerns into Productive Inquiry}, 64th Annual Meeting of the International Communication Association.
-
-\bibitem{diakopoulos_accountability}
-Diakopoulos, N. (2015). Algorithmic accountability: Journalistic investigation of computational power structures. \textit{Digital Journalism}, 3(3), 398--415.
-
-\bibitem{kroll_accountable}
-Kroll, J. A., Huey, J., Barocas, S., Felten, E. W., Reidenberg, J. R., Robinson, D. G., and Yu, H. (2017). Accountable algorithms. \textit{University of Pennsylvania Law Review}, 165(3), 633--705.
-
-\bibitem{raji_gap}
-Raji, I. D., Smart, A., White, R. N., Mitchell, M., Gebru, T., Hutchinson, B., Smith-Loud, J., Theron, D., and Barnes, P. (2020). Closing the AI accountability gap: Defining an end-to-end framework for internal algorithmic auditing. \textit{Proceedings of FAT* 2020}, 33--44.
-
-\bibitem{raji_actionable}
-Raji, I. D. and Buolamwini, J. (2019). Actionable auditing: Investigating the impact of publicly naming biased performance results of commercial AI products. \textit{Proceedings of AIES 2019}, 429--435.
-
-\bibitem{selbst_abstraction}
-Selbst, A. D., Boyd, D., Friedler, S. A., Venkatasubramanian, S., and Vertesi, J. (2019). Fairness and abstraction in sociotechnical systems. \textit{Proceedings of FAT* 2019}, 59--68.
-
-\bibitem{barocas_fairness_ml}
-Barocas, S., Hardt, M., and Narayanan, A. (2019). \textit{Fairness and Machine Learning}. fairmlbook.org.
-
-\bibitem{model_cards}
-Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji, I. D., and Gebru, T. (2019). Model cards for model reporting. \textit{Proceedings of FAT* 2019}, 220--229.
-
-\bibitem{datasheets}
-Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daum\'e III, H., and Crawford, K. (2021). Datasheets for datasets. \textit{Communications of the ACM}, 64(12), 86--92.
-
-\bibitem{data_statements}
-Bender, E. M. and Friedman, B. (2018). Data statements for natural language processing: Toward mitigating system bias and enabling better science. \textit{Transactions of the ACL}, 6, 587--604.
-
-\bibitem{suresh_guttag}
-Suresh, H. and Guttag, J. V. (2021). A framework for understanding sources of harm throughout the machine learning life cycle. \textit{Proceedings of EAAMO 2021}, Article 17.
-
-\bibitem{gender_shades}
-Buolamwini, J. and Gebru, T. (2018). Gender shades: Intersectional accuracy disparities in commercial gender classification. \textit{Proceedings of Machine Learning Research}, 81, 77--91.
-
-\bibitem{obermeyer_bias}
-Obermeyer, Z., Powers, B., Vogeli, C., and Mullainathan, S. (2019). Dissecting racial bias in an algorithm used to manage the health of populations. \textit{Science}, 366(6464), 447--453.
-
-\bibitem{binns_fairness}
-Binns, R. (2018). Fairness in machine learning: Lessons from political philosophy. \textit{Proceedings of FAT* 2018}, 149--159.
-
-\bibitem{barocas_selbst}
-Barocas, S. and Selbst, A. D. (2016). Big data's disparate impact. \textit{California Law Review}, 104(3), 671--732.
-
-\bibitem{noble_algorithms}
-Noble, S. U. (2018). \textit{Algorithms of Oppression: How Search Engines Reinforce Racism}. New York University Press.
-
-\bibitem{eubanks_automating}
-Eubanks, V. (2018). \textit{Automating Inequality: How High-Tech Tools Profile, Police, and Punish the Poor}. St. Martin's Press.
-
-\bibitem{crawford_atlas}
-Crawford, K. (2021). \textit{Atlas of AI: Power, Politics, and the Planetary Costs of Artificial Intelligence}. Yale University Press.
-
-\bibitem{gillespie_algorithms}
-Gillespie, T. (2014). The relevance of algorithms. In Gillespie, T., Boczkowski, P. J., and Foot, K. A. (eds.), \textit{Media Technologies}, 167--194. MIT Press.
-
-\bibitem{burrell_black_box}
-Burrell, J. (2016). How the machine ``thinks'': Understanding opacity in machine learning algorithms. \textit{Big Data \& Society}, 3(1), 1--12.
-
-\bibitem{human_ai_guidelines}
-Amershi, S., Weld, D., Vorvoreanu, M., Fourney, A., Nushi, B., Collisson, P., et al. (2019). Guidelines for human-AI interaction. \textit{Proceedings of CHI 2019}, Paper 3.
-
-\bibitem{green_limits}
-Green, B. and Chen, Y. (2019). The principles and limits of algorithm-in-the-loop decision making. \textit{Proceedings of the ACM on Human-Computer Interaction}, 3(CSCW), Article 50.
-
-\bibitem{lime}
-Ribeiro, M. T., Singh, S., and Guestrin, C. (2016). ``Why should I trust you?'': Explaining the predictions of any classifier. \textit{Proceedings of KDD 2016}, 1135--1144.
-
-\bibitem{shap}
-Lundberg, S. M. and Lee, S.-I. (2017). A unified approach to interpreting model predictions. \textit{Advances in Neural Information Processing Systems}, 30.
-
-\bibitem{stochastic_parrots}
-Bender, E. M., Gebru, T., McMillan-Major, A., and Shmitchell, S. (2021). On the dangers of stochastic parrots: Can language models be too big? \textit{Proceedings of FAccT 2021}, 610--623.
-
-\bibitem{foundation_models}
-Bommasani, R., Hudson, D. A., Adeli, E., Altman, R., Arora, S., von Arx, S., et al. (2021). On the opportunities and risks of foundation models. arXiv:2108.07258.
-
-\bibitem{weidinger_risks}
-Weidinger, L., Mellor, J., Rauh, M., Griffin, C., Uesato, J., Huang, P.-S., et al. (2021). Ethical and social risks of harm from language models. arXiv:2112.04359.
-
-\bibitem{gpt3}
-Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., et al. (2020). Language models are few-shot learners. \textit{Advances in Neural Information Processing Systems}, 33, 1877--1901.
-
-\bibitem{instructgpt}
-Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C. L., Mishkin, P., et al. (2022). Training language models to follow instructions with human feedback. \textit{Advances in Neural Information Processing Systems}, 35, 27730--27744.
-
-\bibitem{constitutional_ai}
-Bai, Y., Kadavath, S., Kundu, S., Askell, A., Kernion, J., Jones, A., et al. (2022). Constitutional AI: Harmlessness from AI feedback. arXiv:2212.08073.
-
-\bibitem{helpful_harmless}
-Askell, A., Bai, Y., Chen, A., Drain, D., Ganguli, D., Henighan, T., et al. (2021). A general language assistant as a laboratory for alignment. arXiv:2112.00861.
-
-\bibitem{gpt4_report}
-OpenAI. (2024). GPT-4 technical report. arXiv:2303.08774.
-
-\bibitem{llama2}
-Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y., et al. (2023). Llama 2: Open foundation and fine-tuned chat models. arXiv:2307.09288.
-
-\bibitem{llama3}
-Grattafiori, A., Dubey, A., Jauhri, A., Pandey, A., Kadian, A., Al-Dahle, A., et al. (2024). The Llama 3 herd of models. arXiv:2407.21783.
-
-\bibitem{helm}
-Liang, P., Bommasani, R., Lee, T., Tsipras, D., Soylu, D., Yasunaga, M., et al. (2022). Holistic evaluation of language models. arXiv:2211.09110.
-
-\bibitem{bigbench}
-Srivastava, A., Rastogi, A., Rao, A., Shoeb, A. A. M., Abid, A., Fisch, A., et al. (2023). Beyond the imitation game: Quantifying and extrapolating the capabilities of language models. \textit{Transactions on Machine Learning Research}.
-
-\bibitem{mmlu}
-Hendrycks, D., Burns, C., Basart, S., Zou, A., Mazeika, M., Song, D., and Steinhardt, J. (2021). Measuring massive multitask language understanding. \textit{Proceedings of ICLR 2021}.
-
-\bibitem{gsm8k}
-Cobbe, K., Kosaraju, V., Bavarian, M., Chen, M., Jun, H., Kaiser, L., et al. (2021). Training verifiers to solve math word problems. arXiv:2110.14168.
-
-\bibitem{codex}
-Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. de O., Kaplan, J., et al. (2021). Evaluating large language models trained on code. arXiv:2107.03374.
-
-\bibitem{ifeval}
-Zhou, J., Lu, T., Mishra, S., Brahma, S., Basu, S., Luan, Y., Zhou, D., and Hou, L. (2023). Instruction-Following Evaluation for Large Language Models. arXiv:2311.07911.
-
-\bibitem{self_instruct}
-Wang, Y., Kordi, Y., Mishra, S., Liu, A., Smith, N. A., Khashabi, D., and Hajishirzi, H. (2023). Self-Instruct: Aligning language models with self-generated instructions. \textit{Proceedings of ACL 2023}, 13484--13508.
-
-\bibitem{alpaca}
-Taori, R., Gulrajani, I., Zhang, T., Dubois, Y., Li, X., Guestrin, C., Liang, P., and Hashimoto, T. B. (2023). Stanford Alpaca: An instruction-following LLaMA model. Stanford CRFM.
-
-\bibitem{mtbench}
-Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., et al. (2023). Judging LLM-as-a-judge with MT-Bench and Chatbot Arena. \textit{Advances in Neural Information Processing Systems}, 36.
-
-\bibitem{geval}
-Liu, Y., Iter, D., Xu, Y., Wang, S., Xu, R., and Zhu, C. (2023). G-Eval: NLG evaluation using GPT-4 with better human alignment. \textit{Proceedings of EMNLP 2023}, 2511--2522.
-
-\bibitem{truthfulqa}
-Lin, S., Hilton, J., and Evans, O. (2022). TruthfulQA: Measuring how models mimic human falsehoods. \textit{Proceedings of ACL 2022}, 3214--3252. arXiv:2109.07958.
-
-\bibitem{simpleqa}
-Wei, J., Karina, N., Chung, H. W., Jiao, Y. J., Papay, S., Glaese, A., Schulman, J., and Fedus, W. (2024). Measuring short-form factuality in large language models (SimpleQA). arXiv:2411.04368.
-
-\bibitem{factscore}
-Min, S., Krishna, K., Lyu, X., Lewis, M., Yih, W.-t., Koh, P. W., Iyyer, M., Zettlemoyer, L., and Hajishirzi, H. (2023). FActScore: Fine-grained atomic evaluation of factual precision in long form text generation. \textit{Proceedings of EMNLP 2023}, 12076--12100.
-
-\bibitem{selfcheckgpt}
-Manakul, P., Liusie, A., and Gales, M. J. F. (2023). SelfCheckGPT: Zero-resource black-box hallucination detection for generative large language models. \textit{Proceedings of EMNLP 2023}, 9004--9017.
-
-\bibitem{hallucination_survey}
-Ji, Z., Lee, N., Frieske, R., Yu, T., Su, D., Xu, Y., et al. (2023). Survey of hallucination in natural language generation. \textit{ACM Computing Surveys}, 55(12), Article 248.
-
-\bibitem{maynez_factuality}
-Maynez, J., Narayan, S., Bohnet, B., and McDonald, R. (2020). On faithfulness and factuality in abstractive summarization. \textit{Proceedings of ACL 2020}, 1906--1919.
-
-\bibitem{rag}
-Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. \textit{Advances in Neural Information Processing Systems}, 33, 9459--9474.
-
-\bibitem{dpr}
-Karpukhin, V., Oguz, B., Min, S., Lewis, P., Wu, L., Edunov, S., Chen, D., and Yih, W.-t. (2020). Dense passage retrieval for open-domain question answering. \textit{Proceedings of EMNLP 2020}, 6769--6781.
-
-\bibitem{webgpt}
-Nakano, R., Hilton, J., Balaji, S., Wu, J., Ouyang, L., Kim, C., et al. (2021). WebGPT: Browser-assisted question-answering with human feedback. arXiv:2112.09332.
-
-\bibitem{verified_quotes}
-Menick, J., Trebacz, M., Mikulik, V., Aslanides, J., Song, F., Chadwick, M., et al. (2022). Teaching language models to support answers with verified quotes. arXiv:2203.11147.
-
-\bibitem{lamda}
-Thoppilan, R., De Freitas, D., Hall, J., Shazeer, N., Kulshreshtha, A., Cheng, H.-T., et al. (2022). LaMDA: Language models for dialog applications. arXiv:2201.08239.
-
-\bibitem{blenderbot2}
-Shuster, K., Poff, S., Chen, M., Kiela, D., and Weston, J. (2021). Retrieval augmentation reduces hallucination in conversation. \textit{Findings of EMNLP 2021}, 3784--3803.
-
-\bibitem{xstest}
-R\"ottger, P., Kirk, H. R., Vidgen, B., Attanasio, G., Bianchi, F., and Hovy, D. (2024). XSTest: A Test Suite for Identifying Exaggerated Safety Behaviours in Large Language Models. \textit{Proceedings of NAACL 2024}, 5377--5400. arXiv:2308.01263.
-
-\bibitem{orbench}
-Cui, J., Chiang, W.-L., Stoica, I., and Hsieh, C.-J. (2024). OR-Bench: An over-refusal benchmark for large language models. arXiv:2405.20947.
-
-\bibitem{dualstandards}
-Lipphardt, F., Ali, M., Feldmann, A., and Gosain, D. (2026). Dual Standards: Examining Content Moderation Disparities Between API and WebUI Interfaces in Large Language Models. \textit{Free and Open Communications on the Internet (FOCI) 2026}, 23--32.
-
-\bibitem{donotanswer}
-Wang, Y., Li, H., Han, X., Nakov, P., and Baldwin, T. (2024). Do-Not-Answer: Evaluating safeguards in LLMs. \textit{Findings of the ACL: EACL 2024}, 896--911. arXiv:2308.13387.
-
-\bibitem{harmbench}
-Mazeika, M., Phan, L., Yin, X., Zou, A., Wang, Z., Mu, N., et al. (2024). HarmBench: A standardized evaluation framework for automated red teaming and robust refusal. \textit{Proceedings of ICML 2024}. arXiv:2402.04249.
-
-\bibitem{ailuminate}
-Ghosh, S., Frase, H., Williams, A., Luger, S., R\"ottger, P., Barez, F., et al. (MLCommons) (2025). AILuminate: Introducing v1.0 of the AI Risk and Reliability Benchmark from MLCommons. arXiv:2503.05731.
-
-\bibitem{sorrybench}
-Xie, T., Qi, X., Zeng, Y., Huang, Y., Sehwag, U. M., Huang, K., He, L., Wei, B., Li, D., Sheng, Y., Jia, R., Li, B., Li, K., Chen, D., Henderson, P., and Mittal, P. (2024). SORRY-Bench: Systematically evaluating large language model safety refusal behaviors. arXiv:2406.14598.
-
-\bibitem{strongreject}
-Souly, A., Lu, Q., Bowen, D., Trinh, T., Hsieh, E., Pandey, S., Abbeel, P., Svegliato, J., Emmons, S., Watkins, O., and Toyer, S. (2024). A StrongREJECT for Empty Jailbreaks. \textit{NeurIPS 2024}.
-
-\bibitem{wildguard}
-Han, S., Rao, K., Ettinger, A., Jiang, L., Lin, B. Y., Lambert, N., et al. (2024). WildGuard: Open one-stop moderation tools for safety risks, jailbreaks, and refusals of LLMs. arXiv:2406.18495.
-
-\bibitem{refusalbench_bio}
-Weidener, L., Brki\'c, M., Jovanovi\'c, N., Ulgac, A., and Meduri, V. V. (2026). RefusalBench: Why refusal rate misranks frontier LLMs on biological research prompts. arXiv:2605.21545.
-
-\bibitem{llama_guard}
-Inan, H., Upasani, K., Chi, J., Rungta, R., Iyer, K., Mao, Y., et al. (2023). Llama Guard: LLM-based input-output safeguard for human-AI conversations. arXiv:2312.06674.
-
-\bibitem{ganguli_redteam}
-Ganguli, D., Lovitt, L., Kernion, J., Askell, A., Bai, Y., Kadavath, S., et al. (2022). Red teaming language models to reduce harms: Methods, scaling behaviors, and lessons learned. arXiv:2209.07858.
-
-\bibitem{redteam_lms}
-Perez, E., Huang, S., Song, F., Cai, T., Ring, R., Aslanides, J., et al. (2022). Red teaming language models with language models. \textit{Proceedings of EMNLP 2022}, 3419--3448.
-
-\bibitem{universal_attacks}
-Zou, A., Wang, Z., Carlini, N., Nasr, M., Kolter, J. Z., and Fredrikson, M. (2023). Universal and transferable adversarial attacks on aligned language models. arXiv:2307.15043.
-
-\bibitem{pair}
-Chao, P., Robey, A., Dobriban, E., Hassani, H., Pappas, G. J., and Wong, E. (2023). Jailbreaking black box large language models in twenty queries. arXiv:2310.08419.
-
-\bibitem{do_anything_now}
-Shen, X., Chen, Z., Backes, M., Shen, Y., and Zhang, Y. (2023). ``Do Anything Now'': Characterizing and evaluating in-the-wild jailbreak prompts on large language models. arXiv:2308.03825.
-
-\bibitem{jailbroken}
-Wei, A., Haghtalab, N., and Steinhardt, J. (2023). Jailbroken: How does LLM safety training fail? \textit{Advances in Neural Information Processing Systems}, 36.
-
-\bibitem{bbq}
-Parrish, A., Chen, A., Nangia, N., Padmakumar, V., Phang, J., Thompson, J., Htut, P. M., and Bowman, S. R. (2022). BBQ: A hand-built bias benchmark for question answering. \textit{Findings of the ACL 2022}, 2086--2105. arXiv:2110.08193.
-
-\bibitem{crows_pairs}
-Nangia, N., Vania, C., Bhalerao, R., and Bowman, S. R. (2020). CrowS-Pairs: A challenge dataset for measuring social biases in masked language models. \textit{Proceedings of EMNLP 2020}, 1953--1967.
-
-\bibitem{stereoset}
-Nadeem, M., Bethke, A., and Reddy, S. (2021). StereoSet: Measuring stereotypical bias in pretrained language models. \textit{Proceedings of ACL-IJCNLP 2021}, 5356--5371.
-
-\bibitem{realtoxicityprompts}
-Gehman, S., Gururangan, S., Sap, M., Choi, Y., and Smith, N. A. (2020). RealToxicityPrompts: Evaluating neural toxic degeneration in language models. \textit{Findings of EMNLP 2020}, 3356--3369.
-
-\bibitem{sheng_bias}
-Sheng, E., Chang, K.-W., Natarajan, P., and Peng, N. (2019). The woman worked as a babysitter: On biases in language generation. \textit{Proceedings of EMNLP-IJCNLP 2019}, 3407--3412.
-
-\bibitem{debiasing_embeddings}
-Bolukbasi, T., Chang, K.-W., Zou, J. Y., Saligrama, V., and Kalai, A. T. (2016). Man is to computer programmer as woman is to homemaker? Debiasing word embeddings. \textit{Advances in Neural Information Processing Systems}, 29.
-
-\bibitem{caliskan_bias}
-Caliskan, A., Bryson, J. J., and Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. \textit{Science}, 356(6334), 183--186.
-
-\bibitem{blodgett_survey}
-Blodgett, S. L., Barocas, S., Daum\'e III, H., and Wallach, H. (2020). Language (technology) is power: A critical survey of ``bias'' in NLP. \textit{Proceedings of ACL 2020}, 5454--5476.
-\end{thebibliography}
+\cleardoublepage
+\hypersetup{pageanchor=false}
+\pagestyle{empty}
+\declaration
 
 \end{document}

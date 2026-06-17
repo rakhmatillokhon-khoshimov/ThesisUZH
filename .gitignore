@@ -21,11 +21,18 @@ venv/
 # LaTeX build artifacts
 thesis/main.pdf
 *.aux
+*.acn
+*.acr
+*.alg
 *.bbl
 *.bcf
 *.blg
 *.fdb_latexmk
 *.fls
+*.glg
+*.glo
+*.gls
+*.ist
 *.lof
 *.log
 *.lot

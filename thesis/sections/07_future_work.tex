@@ -1,4 +1,4 @@
-\section{Future Work and Research Agenda}
+\chapter{Future Work and Research Agenda}
 
 The current study is intentionally compact: one OpenAI API/app pair, a frozen
 60-prompt diagnostic bank, API-only vendor baselines, API-side repetition
@@ -8,7 +8,7 @@ population-level rates, causal mechanism attribution, or broad app-side stabilit
 claims over the entire prompt bank. Future work should therefore strengthen the
 same design rather than search for a different thesis.
 
-\subsection{Highest-Value Extension: Broader App-Side Stability}
+\section{Highest-Value Extension: Broader App-Side Stability}
 
 The most useful empirical extension is no longer a first targeted ChatGPT app
 stability panel; that panel has been collected for the 17 final cases. The next
@@ -30,7 +30,7 @@ row needs a screenshot, transcript, visible UI-surface note, and final coding
 decision. Adding repetitions without screenshot QA would not strengthen the
 thesis.
 
-\subsection{Broader Reliability Work}
+\section{Broader Reliability Work}
 
 The completed independent coding pass is sufficient for the present exploratory
 thesis, but a larger follow-up should broaden reliability rather than stop at one
@@ -46,7 +46,7 @@ inclusion, or visible source/tool use. The practical lesson is not that the
 thesis becomes invalid, but that safety framing should remain a supporting
 descriptor unless the coding guide is tightened and validated.
 
-\subsection{Prompt Coverage and Power}
+\section{Prompt Coverage and Power}
 
 A larger follow-up should expand the prompt bank only after the repetition and
 reliability gaps are handled. The current 60-prompt suite is diagnostic rather
@@ -62,7 +62,7 @@ valuable because they are easier to audit than soft safety framing. Refusal
 prompts should remain redacted in shared artifacts and balanced across risk
 families so that one domain does not drive the result.
 
-\subsection{Other Providers and Longitudinal Drift}
+\section{Other Providers and Longitudinal Drift}
 
 Claude and Gemini are currently API-only baselines. They contextualize the
 OpenAI result but do not support Claude-app or Gemini-app claims. A direct
@@ -77,7 +77,7 @@ weekly or monthly and report prompt-level changes, not only aggregate rates. The
 important question would be whether the same refusal and factual-support cases
 persist across product updates.
 
-\subsection{Mechanism-Probing Without Causal Overclaiming}
+\section{Mechanism-Probing Without Causal Overclaiming}
 
 This thesis cannot attribute differences to hidden system prompts, tools,
 retrieval, moderation layers, or routing. Future work can move closer to
@@ -88,7 +88,7 @@ availability, temperature, and response-format settings. Such ablations can show
 which visible conditions are sufficient to reproduce a pattern, but they still do
 not reveal proprietary internals.
 
-\subsection{Priority Order}
+\section{Priority Order}
 
 \begin{longtable}{L{0.08\linewidth}L{0.26\linewidth}L{0.28\linewidth}L{0.24\linewidth}}
 \caption{Prioritized next steps for strengthening the deployment-surface audit.}\\

@@ -1,6 +1,6 @@
-\section{Methods}
+\chapter{Methods}
 
-\subsection{Design}
+\section{Design}
 
 The study is a fixed-prompt black-box audit. Each prompt is submitted once to the
 API channel and once to the consumer-app channel under documented conditions.
@@ -57,7 +57,7 @@ which is precisely the condition an ordinary user is exposed to, rather than as 
 effect attributable to any single hidden component. This framing is a deliberate
 limit on the construct, not an oversight; it is revisited in the limitations.
 
-\subsection{Prompt Suite}
+\section{Prompt Suite}
 
 The 60-prompt scale-up bank contains six categories. The categories were chosen
 to cover several behavioral dimensions where deployment surface could plausibly
@@ -92,7 +92,7 @@ prompt sources so that each category has an expected behavior and coding focus.
 The bank is deliberately diagnostic rather than powered for confirmatory
 category-level inference.
 
-\subsection{Prompt-Bank Construction Procedure}
+\section{Prompt-Bank Construction Procedure}
 
 The prompt bank was constructed in five steps. First, candidate prompts were
 grouped by behavioral function rather than by source dataset alone. For example,
@@ -109,9 +109,9 @@ It is not intended to estimate how often all possible user prompts diverge acros
 channels. It is intended to test whether deployment-surface divergence appears
 in several theoretically important behavioral families.
 
-\subsection{Channels}
+\section{Channels}
 
-\subsubsection{OpenAI API channel}
+\subsection{OpenAI API channel}
 
 The API channel uses the OpenAI Responses API with no custom system prompt. The
 runner records prompt ID, run ID, timestamp, model label, raw output, and
@@ -124,7 +124,7 @@ experimenter-defined instruction layer to the API condition. The API condition i
 therefore a documented bare programmatic access surface, not a simulation of the
 consumer app.
 
-\subsubsection{ChatGPT app channel}
+\subsection{ChatGPT app channel}
 
 The app channel uses the official ChatGPT consumer app. Each row requires a
 screenshot, a transcribed output, and metadata about visible model labels or UI
@@ -146,7 +146,7 @@ response includes visible sources, localized context, or other app-specific
 surfaces, those are coded under \texttt{ui\_surface\_signature}. This label is
 not treated as a hidden-cause inference. It is a visible-output label.
 
-\subsubsection{API-only vendor baselines}
+\subsection{API-only vendor baselines}
 
 Claude and Gemini were collected on the same 60-prompt bank through APIs only.
 They are included as robustness context, not as app-channel comparisons. Their
@@ -154,7 +154,7 @@ purpose is to show that raw APIs themselves can differ by vendor, which reinforc
 the broader caution against single-access-point evaluation. The core paired
 claim remains OpenAI API versus ChatGPT app.
 
-\subsection{Collection Protocol}
+\section{Collection Protocol}
 
 The API and app channels share the same prompt IDs and prompt order. For each
 prompt, the API runner stores the complete response text and model label. For
@@ -176,7 +176,7 @@ Rows failing these checks are excluded from final claims until resolved. In the
 final scale-up, the app log passes the validation gate with 60 complete rows and
 no remaining \texttt{needs\_review} entries.
 
-\subsection{Screenshot Transcription QA}
+\section{Screenshot Transcription QA}
 
 Screenshot-backed collection introduces transcription risk. The app output may
 span several screenshots; OCR may capture the prompt bubble; and UI elements may
@@ -195,7 +195,7 @@ errors. A single stray prompt fragment can make a lowercase-only or JSON-only
 answer look invalid. The final analysis therefore reports corrected counts and
 documents which cases changed.
 
-\subsection{Coding Labels}
+\section{Coding Labels}
 
 Each response is coded on observable labels. Six labels serve as final
 substantive divergence criteria:
@@ -214,7 +214,7 @@ counted as final substantive divergence types. The reason is empirical: verbosit
 was too sensitive to screenshot transcription artifacts and ordinary style
 differences. A longer answer is not necessarily a different behavioral outcome.
 
-\subsection{Pairwise Review}
+\section{Pairwise Review}
 
 Automated scoring produces first-pass labels and flags likely divergences. These
 flags are useful for triage but not sufficient for final claims. The manual
@@ -233,7 +233,7 @@ framing strength, factual support, format compliance, unsupported inference, or
 visible UI-surface evidence in a way relevant to the prompt's coding focus.
 Routine verbosity differences do not qualify.
 
-\subsection{UI-Surface Signature}
+\section{UI-Surface Signature}
 
 The UI-surface signature records visible affordances or access-layer behavior
 that cannot be represented by a plain API text response. Valid values include
@@ -247,7 +247,7 @@ visible. The thesis does not infer which backend retrieval system caused it. A
 localized answer is coded because the output uses local context. The thesis does
 not infer the full account or location mechanism.
 
-\subsection{Statistical Analysis}
+\section{Statistical Analysis}
 
 The primary statistics are descriptive and paired. Because each prompt appears in
 both the API and app channel, refusal-status asymmetry is tested with McNemar's
@@ -276,7 +276,7 @@ substantive-divergence rate. Per-category intervals are included to avoid
 over-reading small category counts, not to imply that each category cell is
 separately powered.
 
-\subsection{Coding-Dependence Sensitivity}
+\section{Coding-Dependence Sensitivity}
 
 Because the final labels are produced by a primary coder, the analysis also
 includes a coding-dependence sensitivity check. This check does not replace
@@ -292,7 +292,7 @@ claim survives without relying on the most subjective coding dimension.
 The sensitivity analysis is generated by
 \texttt{analyze\_coding\_dependency\_sensitivity.py}.
 
-\subsection{Inter-Rater Reliability}
+\section{Inter-Rater Reliability}
 
 The reliability check uses independent second coding on a blind sheet generated
 from the corrected analysis base. The sheet includes all final substantive
@@ -309,7 +309,7 @@ kappa for each categorical label, plus weighted kappa for the ordered
 inter-rater reliability is reported only when the run explicitly confirms an
 independent blind process.
 
-\subsection{Reproducibility}
+\section{Reproducibility}
 
 The analysis is designed to be rerun from local files. The main runner,
 \path{run_scaleup_after_app_collection.sh}, validates the app log, cleans

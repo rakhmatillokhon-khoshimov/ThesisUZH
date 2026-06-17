@@ -1,4 +1,4 @@
-\section{Introduction}
+\chapter{Introduction}
 
 Large language model (LLM) evaluations are usually easier to run through APIs
 than through consumer applications. APIs expose explicit model labels, allow
@@ -34,7 +34,7 @@ application. Instead, it asks a narrower and more defensible black-box question:
 do a bare API configuration and the official productized app deployment produce
 different observable behavior on the same fixed prompt bank?
 
-\subsection{Motivation}
+\section{Motivation}
 
 The motivation is practical. If a safety audit runs only through an API, it may
 miss behavior that ordinary users experience through the official app. A refusal
@@ -54,7 +54,7 @@ of black-box auditing to LLM access channels: hold the prompt bank fixed, collec
 outputs under documented conditions, code only observable behavior, and avoid
 causal claims that the evidence cannot support.
 
-\subsection{Research Objective}
+\section{Research Objective}
 
 The primary research question is:
 
@@ -76,7 +76,7 @@ claim is about observable differences between one bare API condition and one
 official ChatGPT app deployment, not about all possible LLM products and not
 about an isolated model-only channel effect.
 
-\subsection{Scope and Claim Boundary}
+\section{Scope and Claim Boundary}
 
 The thesis is an algorithm-auditing study, not a model-engineering project. It
 does not propose a new model, optimize a benchmark, or evaluate the absolute
@@ -97,7 +97,7 @@ the API. It also cannot conclude that a hidden moderation layer is responsible.
 The unit of analysis is the observable response under documented access
 conditions.
 
-\subsection{Design Overview}
+\section{Design Overview}
 
 The study proceeds in three stages. First, a 20-prompt pilot established the
 collection and coding workflow. The pilot revealed that simple automated
@@ -119,7 +119,7 @@ not refusals. The final count is therefore lower but more defensible: 17 of 60
 pairs show substantive observable divergences, of which 10 have response-core
 anchors and seven are product-surface or context cases.
 
-\subsection{Contributions}
+\section{Contributions}
 
 The thesis makes four contributions.
 
@@ -147,7 +147,7 @@ sources and localized context are retained as deployment-surface evidence, but
 they are separated from the smaller set of more theoretically interesting
 response-behavior shifts.
 
-\subsection{Thesis Structure}
+\section{Thesis Structure}
 
 Section 2 reviews auditing, safety, factuality, bias, and evaluation-validity
 work. Section 3 describes the design, channels, collection protocol, coding

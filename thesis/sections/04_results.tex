@@ -1,4 +1,4 @@
-\section{Results}
+\chapter{Results}
 
 This chapter reports the corrected 60-prompt scale-up. The core comparison is a
 bare OpenAI Responses API condition (\texttt{gpt-4o}, no custom system prompt)
@@ -12,7 +12,7 @@ robustness baselines. All counts describe observable behavior; no causal claim i
 made about hidden system prompts, internal guardrails, tools, retrieval, or
 routing.
 
-\subsection{Collection Completeness}
+\section{Collection Completeness}
 
 \begin{longtable}{lrl}
 \caption{Collection completeness by channel.}\\
@@ -42,7 +42,7 @@ comparability is handled as a construct-validity limitation rather than as a
 completed control, because the archived screenshots do not reliably capture a
 visible app model label.
 
-\subsection{Transcription QA and Corrected Counts}
+\section{Transcription QA and Corrected Counts}
 
 App responses were transcribed from screenshots. A QA pass found that some app
 transcripts began with a fragment of the prompt text. This was an OCR or
@@ -96,7 +96,7 @@ observable divergences. The 17 cases are an audit inventory; the tiering below
 separates response-core shifts from expected product-surface and context
 affordances.
 
-\subsection{Substantive Divergences: An Honest Tiering}
+\section{Substantive Divergences: An Honest Tiering}
 
 After manual review of the corrected cleaned data, 17 of 60 pairs show a
 substantive observable divergence. Reporting all 17 as a single headline would
@@ -118,7 +118,7 @@ has the user's locale, and the thesis does not treat them as evidence of a deepe
 behavioral difference. The remainder of this chapter leads with the Tier-1 core
 and is explicit about which claims rest on behavior versus affordance.
 
-\subsection{Targeted ChatGPT-App Repetition Check}
+\section{Targeted ChatGPT-App Repetition Check}
 
 The largest remaining robustness question was whether the ChatGPT-app side of
 the 17 final cases was merely a single-sample artifact. To address this directly,
@@ -164,7 +164,7 @@ browser-recorded GIFs into the private evidence archive. The main interpretive
 value here is the screenshot-backed transcript-level persistence of the refusal
 and factuality anchors.
 
-\subsection{Substantive Divergences by Category}
+\section{Substantive Divergences by Category}
 
 The auto-generated category and UI-surface tables follow.
 
@@ -183,7 +183,7 @@ Instruction following contributes one final format-compliance case. The social
 recommendation category contributes zero final substantive cases after
 correction, making it a negative control for the over-refusal interpretation.
 
-\subsection{Category A: Allowed-Sensitive Prompts}
+\section{Category A: Allowed-Sensitive Prompts}
 
 Category A tests whether a channel overreacts to safe prompts that contain risky
 surface words. Most Category A prompts do not produce final substantive
@@ -202,7 +202,7 @@ affordances. They are useful for documenting the app surface, but they are not
 treated as surprising behavioral evidence in the same way as refusal-boundary or
 factual-support cases.
 
-\subsection{Category B: Refusal-Expected Prompts}
+\section{Category B: Refusal-Expected Prompts}
 
 Category B is the strongest refusal-posture category. Six of ten prompts show
 final substantive divergence. The pattern is not that the app complies with
@@ -224,7 +224,7 @@ framing and provided a correction with visible sources. This case is not merely
 about refusal quantity; it is about refusing a harmful premise while preserving
 truthful framing.
 
-\subsection{Category C: Boundary Safety Framing}
+\section{Category C: Boundary Safety Framing}
 
 Category C contains answerable safety-sensitive prompts. The expected behavior is
 not a full refusal. A good answer should provide useful guidance while avoiding
@@ -244,7 +244,7 @@ or context that cannot appear in a plain API text response under the same
 collection design. These are app-affordance findings, not proof of a different
 underlying model.
 
-\subsection{Category D: Instruction Following}
+\section{Category D: Instruction Following}
 
 Category D contains verifiable format and instruction-following prompts. After
 correction, only S039 remains as a final substantive divergence. This result is
@@ -259,7 +259,7 @@ illustrates why screenshot-backed app collection requires QA: format labels are
 fragile, and the thesis should report only those that survive visual evidence
 checks.
 
-\subsection{Category E: Social Recommendation Negative Controls}
+\section{Category E: Social Recommendation Negative Controls}
 
 Category E is the corrected negative-control category. These prompts adapt
 BBQ-style socially sensitive questions into decision prompts that explicitly ask
@@ -281,7 +281,7 @@ social-recommendation divergence rate below the observed rates in the
 refusal-expected category ($6/10$), while leaving room for smaller effects that
 a ten-prompt cell cannot exclude.
 
-\subsection{Category F: Neutral Factual Controls}
+\section{Category F: Neutral Factual Controls}
 
 Category F tests short factual controls. Four of ten prompts are substantive:
 S051, S052, S054, and S056. Three of these are factuality divergences where the
@@ -296,7 +296,7 @@ answer is supported and how much evidence the user receives. A factuality audit
 that uses only an API endpoint may therefore underestimate the consumer app's
 source-grounded behavior, or at least measure a different access condition.
 
-\subsection{Refusal Posture Across Channels}
+\section{Refusal Posture Across Channels}
 
 The clearest refusal contrast is in refusal-expected prompts. On the raw APIs,
 full-refusal counts already differ by vendor, and the ChatGPT app's posture
@@ -349,7 +349,7 @@ redirect-marker counts near $4.5$), which anticipates the channel-agreement
 result below. These are descriptive counts on ten prompts; they support the
 coded refusal-granularity finding but are not an independent test of it.
 
-\subsection{Statistical Summary}
+\section{Statistical Summary}
 
 Because each prompt is measured on both channels, channel comparisons are paired
 on \texttt{prompt\_id}. The binary full-refusal label is therefore summarized
@@ -387,7 +387,7 @@ observed audit, not as a population-level estimate over all prompts. The value o
 the test is that it prevents overclaiming: the refusal asymmetry is complete in
 direction but underpowered at the current sample size.
 
-\subsection{Coding-Dependence Sensitivity}
+\section{Coding-Dependence Sensitivity}
 
 A separate threat is that the headline count might depend on a judgment-heavy
 label. The most subjective final label is \texttt{safety\_framing}: deciding
@@ -409,7 +409,7 @@ all 17 final cases. This does not remove the value of independent reliability
 coding, but it means the main deployment-surface claim is not carried by the
 softest coding dimension.
 
-\subsection{Secondary Mechanism and Verbosity Checks}
+\section{Secondary Mechanism and Verbosity Checks}
 
 The corrected dataset also supports a second layer of analysis that was not
 used to define the headline count. These checks ask how much work is being done
@@ -447,7 +447,7 @@ social rows, yet the final substantive divergence count in that category is
 zero. Verbosity therefore cannot explain the reported deployment-surface cases by
 itself.
 
-\subsection{Exploratory Pattern Checks and Multiplicity}
+\section{Exploratory Pattern Checks and Multiplicity}
 
 The paired refusal test asks \emph{whether} the two deployment surfaces differ; a
 complementary question is \emph{where} the retained cases appear. This second
@@ -481,7 +481,7 @@ honest conclusion is therefore that the current dataset gives a directional,
 underpowered refusal signal and a set of concrete cases, not a confirmed
 population-level effect.
 
-\subsection{Collection-Order, Prompt-Surface, and Interval Robustness Checks}
+\section{Collection-Order, Prompt-Surface, and Interval Robustness Checks}
 \label{sec:order-robustness}
 
 Three further inexpensive checks probe whether the retained case set could be an
@@ -523,7 +523,7 @@ $241$ (ChatGPT app) to $437$ (Gemini API). Response style is a channel trait in
 its own right across all four collected surfaces, which further cautions against
 reading verbosity differences as substantive divergence.
 
-\subsection{Objective Lexical Divergence}
+\section{Objective Lexical Divergence}
 
 The substantive-divergence label is a human judgment. As an independent,
 reproducible cross-check that uses none of the project's coders, we measured raw
@@ -546,7 +546,7 @@ about $3\times$, and it carries roughly twice as many hedging markers
 app deployment is more verbose and more heavily caveated in this collection, but
 verbosity is not counted as a substantive divergence by itself.
 
-\subsection{Within-Channel Versus Between-Channel Lexical Divergence}
+\section{Within-Channel Versus Between-Channel Lexical Divergence}
 
 A single-shot lexical comparison leaves one open question: gpt-4o is sampled
 stochastically, so even two API calls with the same prompt produce different
@@ -587,7 +587,7 @@ bounds API-side stochasticity only; it complements, and is consistent with, the
 label-level stability analysis below. Like the other lexical analyses, it is an
 exploratory description of the same 60 prompts, not a second confirmatory test.
 
-\subsection{Representative Case Themes}
+\section{Representative Case Themes}
 
 \paragraph{Refusal boundary shifts.}
 On a HarmBench cyber-intrusion prompt (S020), the API replied only that it could
@@ -617,7 +617,7 @@ finding, not a broad claim that the app fails format instructions. The narrownes
 is a strength: it shows the analysis removed false positives before reporting the
 final count.
 
-\subsection{Cross-Vendor Robustness}
+\section{Cross-Vendor Robustness}
 
 Claude and Gemini were run on the same 60 prompts via API only. They support no
 app-channel claim, but they provide useful context. Under the corrected
@@ -626,7 +626,7 @@ full-refusal coding, refusal-expected full refusals are OpenAI API 5, Claude API
 single API run should therefore not be treated as representative of a model
 family, a provider, or the consumer-app experience.
 
-\subsection{Which Channels Behave Alike}
+\section{Which Channels Behave Alike}
 
 The vendor baselines also let us ask a sharper question than ``do APIs differ'':
 when channels disagree on refusal posture, \emph{which channels resemble each
@@ -657,7 +657,7 @@ redirection. This supports the narrower point that the bare OpenAI API condition
 is not a reliable proxy for the productized ChatGPT app on refusal posture. It
 does not establish shared mechanisms among the other channels.
 
-\subsection{Within-Channel Repetition Stability}
+\section{Within-Channel Repetition Stability}
 
 A natural objection to a single-submission audit is that the observed divergences
 might be model stochasticity rather than a deployment-surface difference. To
@@ -698,7 +698,7 @@ refusal cases, factual controls, UI-surface cases, and S039. In that subset, the
 OpenAI API refusal label is stable across all three runs for every listed row;
 the observed variability is instead confined to the softer safety-framing label.
 
-\subsection{Human Inter-Rater Reliability}
+\section{Human Inter-Rater Reliability}
 
 The independent blind second-coder pass covers 54 coding units from 27 prompts:
 all final substantive cases and matched controls. Table~\ref{tab:human-irr}
