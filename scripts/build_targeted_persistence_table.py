@@ -209,7 +209,7 @@ def write_tex(path: Path, rows: list[dict[str, str]]) -> None:
         r"\footnotesize",
         r"\setlength{\tabcolsep}{2pt}",
         r"\begin{longtable}{L{0.07\linewidth}L{0.16\linewidth}L{0.18\linewidth}L{0.18\linewidth}L{0.16\linewidth}L{0.17\linewidth}}",
-        r"\caption{Targeted prompt-level persistence check for high-value rows. The table uses existing OpenAI API r1/r2/r3 outputs and the project classifiers. It checks API-side stochasticity for Category B refusal prompts, factual controls, UI-surface cases, and S039; app-side repetitions were not collected.}\\",
+        r"\caption{Targeted prompt-level persistence check for high-value rows. The table uses existing OpenAI API r1/r2/r3 outputs and the project classifiers. It checks API-side stochasticity for Category B refusal prompts, factual controls, UI-surface cases, and S039; app-side repetitions are reported separately for the 17 final cases.}\\",
         r"\toprule",
         r"ID & Selection & Cross-channel signal & API refusal pattern & API safety pattern & Persistence \\",
         r"\midrule",
