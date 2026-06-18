@@ -52,7 +52,7 @@ On this macOS TeX Live install, `make thesis` falls back to
 `/usr/local/texlive/2025/bin/universal-darwin/makeglossaries` if
 `makeglossaries` is not on `PATH`.
 
-The repository was verified to compile to a 103-page PDF.
+The repository was verified to compile to a 96-page PDF.
 
 ## Reproducibility Boundary
 
