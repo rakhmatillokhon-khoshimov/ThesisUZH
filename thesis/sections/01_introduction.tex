@@ -1,147 +1,73 @@
 \chapter{Introduction}
 
-Large language model (LLM) evaluations are usually easier to run through APIs
-than through consumer applications. APIs expose explicit model labels, allow
-repeatable calls, and produce structured logs that can be analyzed with scripts.
-This is why many benchmark and safety studies treat the API as the practical
-measurement surface for model behavior. For many real users, however, the
-dominant access point is not an API. It is a consumer application such as the
-official ChatGPT app. That application can add interface defaults, visible tool
-use, source cards, account or location context, session state, response
-formatting, export constraints, moderation banners, and product-level routing
-that are not visible in a plain API completion.
+Large language model (LLM) evaluations are usually easiest to run through APIs.
+Programmatic access makes it possible to fix prompts, set sampling parameters,
+log responses, and repeat collections in a controlled way. This is the logic
+behind benchmark suites such as HELM by Liang et al.\ \cite*{helm}, which
+emphasize standardized scenarios, metrics, and collection conditions. But most end users do not
+encounter LLMs through bare evaluation endpoints. They encounter productized
+applications with interface defaults, source displays, tool use, personalization,
+moderation messages, and session context. For audit work, those layers are not
+just presentation: they can change the answer a user receives.
 
-This thesis asks whether that distinction matters empirically. The central
-object is not an abstract model in isolation, but the observable behavior a user
-receives through a documented deployment surface. A model provider may expose a
-family of related systems through several surfaces: a Responses API, a consumer
-chat interface, mobile or desktop clients, browsing-enabled modes, enterprise
-wrappers, and third-party orchestration layers. Even if these systems are
-nominally related, the surrounding access layer can change what is visible to
-the user. An API answer may be plain text; an app answer may include source
-cards, localized suggestions, or different safety phrasing. An API may provide a
-bare refusal; an app may decline the harmful part of a request while offering a
-bounded alternative. Conversely, an app may fail a strict output-format
-instruction because the interface renders a visual divider or inserts extra
-framing. These are not minor cosmetic details when the goal is to audit safety,
-fairness, factuality, or compliance, but they also do not prove that the same
-underlying model would behave differently in isolation.
+This thesis treats the deployment surface as part of the system under audit.
+That choice follows the broader algorithm-auditing tradition described by
+Sandvig et al.\ \cite*{sandvig_auditing}, where controlled inputs are used to
+study opaque deployed systems from their observable outputs. It also follows
+Raji et al.'s accountability work \cite*{raji_gap}, which argues that audits
+must document the system boundary and the conditions under which evidence is
+collected. This framing is especially important for foundation-model systems
+because their risks are sociotechnical and deployment-dependent, not only
+properties of a model checkpoint, as discussed by Bommasani et al.\
+\cite*{foundation_models} and Weidinger et al.\ \cite*{weidinger_risks}.
 
-The thesis therefore treats deployment surface as an audit-relevant condition.
-It does not try to reverse engineer the hidden system prompt, moderation stack,
-tool policy, retrieval layer, session state, or routing policy of a proprietary
-application. Instead, it asks a narrower and more defensible black-box question:
-do a bare API configuration and the official productized app deployment produce
-different observable behavior on the same fixed prompt bank?
+The closest related access-surface study is Dual Standards by Lipphardt et al.\
+\cite*{dualstandards}, which compares moderation behavior between API and WebUI
+interfaces for LLMs. Its relevance is not that the same direction of effect
+should appear here. Rather, it shows that API and WebUI surfaces can be
+empirically non-equivalent. This thesis asks the same kind of access-surface
+question in a narrower setting: a bare OpenAI API condition compared with the
+official ChatGPT app on one frozen diagnostic prompt bank.
 
-The motivation is practical. If a safety audit runs only through an API, it may
-miss behavior that ordinary users experience through the official app. A refusal
-rate measured through the API may not match the refusal posture in the app. A
-factuality benchmark run without retrieval may not match an app response that
-uses visible sources. A format-compliance test may pass in the API and fail in
-the app because the interface adds formatting or because the app chooses a more
-conversational answer style. These differences affect how an evaluation should
-be interpreted.
-
-The access-channel problem is also methodological. Many LLM evaluations are
-careful about prompts, sampling, model labels, and scoring, but they often treat
-the access surface as an implementation detail. For algorithm auditing, that is
-a risky assumption. The audited system is the system a user actually encounters,
-not only the endpoint that is easiest to automate. This thesis adapts the logic
-of black-box auditing to LLM access channels: hold the prompt bank fixed, collect
-outputs under documented conditions, code only observable behavior, and avoid
-causal claims that the evidence cannot support.
-
-The primary research question is:
+The research question is:
 
 \begin{quote}
 How do observable outputs differ between a bare OpenAI API condition and the
 official productized ChatGPT app deployment on a frozen diagnostic prompt suite?
 \end{quote}
 
-The core empirical comparison is OpenAI Responses API versus the official
-ChatGPT consumer app. The API side uses \texttt{gpt-4o} with no custom system
-prompt. The app side uses screenshot-backed collection from the official
-consumer interface under documented account and collection conditions. The
-archived screenshots do not reliably preserve an in-frame app model label, and
-the app remains a productized deployment with hidden instructions, tools,
-retrieval, routing, and session state. Claude and Gemini API runs are included
-only as optional vendor baselines.
-This preserves a narrow thesis scope: the main
-claim is about observable differences between one bare API condition and one
-official ChatGPT app deployment, not about all possible LLM products and not
-about an isolated model-only channel effect.
-
-The thesis is an algorithm-auditing study, not a model-engineering project. It
-does not propose a new model, optimize a benchmark, or evaluate the absolute
-safety of a provider. It uses a fixed set of prompts as audit instruments and
-asks whether the bare API condition and the productized app deployment produce
-different observable outputs. This distinction matters because the strongest
-possible causal interpretations are not available from the evidence. When the
-app produces a sourced answer and the API produces an unsupported memory answer,
-the thesis can report a visible source-surface difference and a factuality
-difference. It cannot prove which internal retrieval policy, routing decision,
-hidden instruction, or tool state caused that difference unless the mechanism is
-visible.
-
-The same discipline applies to safety behavior. If the API gives a bare refusal
-and the app gives a safe redirect, the thesis can report a refusal-posture
-difference. It cannot conclude that the app is globally safer or less safe than
-the API. It also cannot conclude that a hidden moderation layer is responsible.
-The unit of analysis is the observable response under documented access
+The study uses a 60-prompt bank covering allowed-sensitive over-refusal,
+refusal-expected guardrailing, boundary safety framing, instruction following,
+socially sensitive recommendations, and neutral factual controls. The core
+comparison is the OpenAI Responses API using \texttt{gpt-4o} with no custom
+system prompt versus screenshot-backed collection from the official ChatGPT
+consumer app. Claude and Gemini API runs are included only as optional baselines.
+The design deliberately keeps the claim narrow. It does not isolate the effect
+of a hidden system prompt, retrieval policy, tool policy, routing decision, or
+moderation layer. The evidence supports only observable differences between a
+bare API condition and a productized app deployment under documented collection
 conditions.
 
-The study proceeds in three stages. First, a 20-prompt pilot established the
-collection and coding workflow. The pilot revealed that simple automated
-divergence flags were not enough: verbosity and wording differences often looked
-large while being substantively minor, and screenshot evidence required careful
-transcription QA. Second, the prompt bank was scaled to 60 prompts across six
-categories grounded in recognized benchmark sources: allowed-sensitive
-over-refusal, refusal-expected guardrailing, boundary safety framing,
-instruction following, socially sensitive recommendations, and neutral factual
-controls. Third, a full API/app collection was completed, cleaned, manually
-reviewed, and summarized in generated tables.
+The empirical result is a compact diagnostic audit, not a population estimate.
+After transcript correction and manual review, 17 of 60 API/app pairs show
+substantive observable divergences. Ten have response-core anchors, mainly
+refusal-granularity and factual-control differences. Seven are product-surface
+or context cases, such as visible sources or localized information. Targeted app
+repetitions for the divergent cases support most of the original case inventory
+while keeping app-side stability claims scoped to that packet. Inter-rater
+reliability also sharpens the interpretation: refusal status is reliable, while
+soft safety-framing strength is treated only as supporting evidence.
 
-The final analysis is deliberately conservative. Automated scoring is used for
-triage, but final substantive cases require manual review. The app transcript
-pipeline includes prompt-echo cleaning and screenshot-backed corrections. Social
-recommendation rows that initially looked like possible over-refusal cases were
-recoded after correction: ``cannot determine'' answers are treated as answers,
-not refusals. The final count is therefore lower but more defensible: 17 of 60
-pairs show substantive observable divergences, of which 10 have response-core
-anchors and seven are product-surface or context cases.
+The contribution is therefore methodological as much as empirical. The thesis
+operationalizes deployment surface as an audit variable, builds a
+benchmark-grounded prompt suite, applies a manually reviewed divergence taxonomy,
+and preserves screenshot-backed evidence with correction and reliability
+materials. Its central conclusion is cautious: for this prompt bank and
+collection window, the bare API condition is not a neutral proxy for the official
+ChatGPT app. LLM audits should therefore name and document the access surface
+they evaluate.
 
-The thesis makes four contributions.
-
-\begin{enumerate}
-  \item It operationalizes deployment surface as a concrete audit variable for
-  LLM behavior, rather than treating bare API access as a neutral proxy for all
-  user experiences.
-  \item It contributes a 60-prompt, six-category deployment-surface audit design
-  grounded in existing benchmark families while keeping high-risk prompts
-  redacted in shared artifacts.
-  \item It develops and applies a manually reviewed divergence taxonomy covering
-  refusal status, safety framing, format compliance, unsupported inference,
-  factuality, and UI-surface signatures.
-  \item It documents a reproducible pipeline for screenshot-backed app evidence,
-  transcript QA, correction audit, pairwise scoring, manual review, statistical
-  summaries, and reliability preparation.
-\end{enumerate}
-
-The empirical contribution is a completed 60-prompt bare OpenAI API versus
-productized ChatGPT app comparison. The strongest corrected response-core
-patterns are refusal-granularity differences on refusal-expected prompts and
-factuality differences on short factual controls where app retrieval surfaces
-support the expected answer. App-only UI-surface signatures such as visible
-sources and localized context are retained as deployment-surface evidence, but
-they are separated from the smaller set of more theoretically interesting
-response-behavior shifts.
-
-Section 2 reviews auditing, safety, factuality, bias, and evaluation-validity
-work. Section 3 describes the design, channels, collection protocol, coding
-labels, analysis pipeline, and reliability plan. Section 4 reports the corrected
-scale-up results; Section 5 discusses their implications; Section 6 states
-limitations; Section 7 outlines future work; and Section 8 concludes. The
-appendix provides the redacted prompt bank, coding guide, transcript-QA
-correction audit, reviewed coding summary, cross-channel matrix, reliability
-materials, and artifact inventory.
+Section 2 reviews related work. Section 3 describes the method. Section 4
+reports results. Sections 5 to 8 discuss implications, limitations, future work,
+and conclusions. The appendix provides the redacted prompt bank, coding guide,
+correction audit, reliability materials, and artifact inventory.
