@@ -83,7 +83,7 @@ not rewrite responses freely; it encodes only screenshot-verified fixes that
 changed coding risk.
 
 \begin{longtable}{p{0.10\linewidth}p{0.22\linewidth}p{0.28\linewidth}p{0.30\linewidth}}
-\caption{Screenshot-backed transcript corrections applied before final scoring.}\\
+\caption[Screenshot-backed transcript corrections]{Screenshot-backed transcript corrections applied before final scoring.}\\
 \toprule
 Row & Issue & Correction effect & Claim impact \\
 \midrule
@@ -208,14 +208,14 @@ The local repository contains more files than the final submission needs. The
 following inventory identifies the artifacts that matter for reproducibility and
 for interpreting the Results chapter.
 
-A cleaned public replication repository is available at
-\url{https://github.com/rakhmatillokhon-khoshimov/ThesisUZH}. The repository
-contains the thesis source, analysis scripts, redacted prompt metadata, and
-summary-level result artifacts. Restricted raw prompts, raw model outputs, API
-logs, screenshots, and private reliability keys are excluded.
+A cleaned public replication package can be prepared from the artifacts listed
+below. It should contain the thesis source, analysis scripts, redacted prompt
+metadata, and summary-level result artifacts. Restricted raw prompts, raw model
+outputs, API logs, screenshots, and private reliability keys should remain
+excluded.
 
 \begin{longtable}{L{0.43\linewidth}L{0.47\linewidth}}
-\caption{Key local artifacts for reproducing or auditing the thesis analysis.}\\
+\caption[Key local artifacts for reproducing the analysis]{Key local artifacts for reproducing or auditing the thesis analysis.}\\
 \toprule
 Artifact & Role \\
 \midrule

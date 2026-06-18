@@ -156,9 +156,9 @@ def main() -> int:
 
     if any_coded and not args.confirm_independent:
         report = {
-            "method": "not_reported",
+            "method": "guarded_until_independence_confirmed",
             "status": "pending_independence_confirmation",
-            "n_units_total": 0,
+            "n_units_total": len(key),
             "labels": {},
             "note": (
                 "Second-coder label columns are present, but true human IRR is "
@@ -170,7 +170,7 @@ def main() -> int:
         report["method"] = "true_inter_rater"
         report["status"] = "reported_after_independence_confirmation"
     else:
-        report["method"] = "not_reported"
+        report["method"] = "pending_second_coder_labels"
         report["status"] = "pending_second_coder_labels"
 
     args.out_json.parent.mkdir(parents=True, exist_ok=True)

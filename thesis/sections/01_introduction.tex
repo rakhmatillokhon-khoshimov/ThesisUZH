@@ -1,73 +1,74 @@
 \chapter{Introduction}
 
-Large language model (LLM) evaluations are usually easiest to run through APIs.
-Programmatic access makes it possible to fix prompts, set sampling parameters,
-log responses, and repeat collections in a controlled way. This is the logic
+Large language model (LLM) evaluations are usually easiest to run through APIs,
+where prompts, sampling, and logging can be fixed and repeated. This is the logic
 behind benchmark suites such as HELM by Liang et al.\ \cite*{helm}, which
-emphasize standardized scenarios, metrics, and collection conditions. But most end users do not
-encounter LLMs through bare evaluation endpoints. They encounter productized
-applications with interface defaults, source displays, tool use, personalization,
-moderation messages, and session context. For audit work, those layers are not
-just presentation: they can change the answer a user receives.
+emphasizes standardized scenarios, metrics, and collection conditions. But most
+end users do not encounter LLMs through bare evaluation endpoints. They use
+productized applications whose interface defaults, source displays, tools,
+personalization, moderation, and session context are not mere presentation. Those
+layers can change the answer a user receives.
 
-This thesis treats the deployment surface as part of the system under audit.
-That choice follows the broader algorithm-auditing tradition described by
-Sandvig et al.\ \cite*{sandvig_auditing}, where controlled inputs are used to
-study opaque deployed systems from their observable outputs. It also follows
-Raji et al.'s accountability work \cite*{raji_gap}, which argues that audits
-must document the system boundary and the conditions under which evidence is
-collected. This framing is especially important for foundation-model systems
-because their risks are sociotechnical and deployment-dependent, not only
-properties of a model checkpoint, as discussed by Bommasani et al.\
-\cite*{foundation_models} and Weidinger et al.\ \cite*{weidinger_risks}.
+This thesis treats the deployment surface as part of the system under audit. That
+choice follows the algorithm auditing tradition of Sandvig et al.\
+\cite*{sandvig_auditing}, where controlled inputs probe opaque deployed systems
+through their observable outputs, and Raji et al.'s accountability work
+\cite*{raji_gap}, which argues that audits must document the system boundary and
+collection conditions. The framing matters for foundation model systems because
+their risks are sociotechnical and deployment dependent, as discussed by
+Bommasani et al.\ \cite*{foundation_models} and Weidinger et al.\
+\cite*{weidinger_risks}.
 
-The closest related access-surface study is Dual Standards by Lipphardt et al.\
-\cite*{dualstandards}, which compares moderation behavior between API and WebUI
-interfaces for LLMs. Its relevance is not that the same direction of effect
-should appear here. Rather, it shows that API and WebUI surfaces can be
-empirically non-equivalent. This thesis asks the same kind of access-surface
-question in a narrower setting: a bare OpenAI API condition compared with the
-official ChatGPT app on one frozen diagnostic prompt bank.
+Two access surfaces are distinguished. The \emph{API condition} is a bare
+programmatic call to a provider endpoint with no custom system prompt. The
+\emph{app} is the official ChatGPT consumer web application at chatgpt.com, opened
+in an ordinary logged in browser session rather than called through code, and it
+may wrap the model in system instructions, tools, retrieval, moderation, and
+session and locale context. This web surface is the kind of interface that
+Lipphardt et al.\ \cite*{dualstandards} call a WebUI in Dual Standards, which
+finds that API and WebUI access can be empirically distinct.
 
-The research question is:
+This thesis asks one main research question.
 
 \begin{quote}
 How do observable outputs differ between a bare OpenAI API condition and the
-official productized ChatGPT app deployment on a frozen diagnostic prompt suite?
+official productized ChatGPT app deployment on a frozen diagnostic prompt bank?
 \end{quote}
 
-The study uses a 60-prompt bank covering allowed-sensitive over-refusal,
-refusal-expected guardrailing, boundary safety framing, instruction following,
+The study uses a bank of 60 prompts spanning allowed sensitive over refusal,
+refusal expected guardrailing, boundary safety framing, instruction following,
 socially sensitive recommendations, and neutral factual controls. The core
-comparison is the OpenAI Responses API using \texttt{gpt-4o} with no custom
-system prompt versus screenshot-backed collection from the official ChatGPT
-consumer app. Claude and Gemini API runs are included only as optional baselines.
-The design deliberately keeps the claim narrow. It does not isolate the effect
-of a hidden system prompt, retrieval policy, tool policy, routing decision, or
-moderation layer. The evidence supports only observable differences between a
-bare API condition and a productized app deployment under documented collection
-conditions.
+comparison is the OpenAI Responses API running GPT-4o with no custom system
+prompt against screenshot backed collection from the ChatGPT web app, in a single
+window in June 2026. The API model was fixed to GPT-4o to keep the programmatic
+condition explicit and stable. The app screenshots do not reliably preserve an
+in-frame model selector, so the app condition is treated as the observed
+productized ChatGPT deployment rather than as verified hard evidence of the same
+model endpoint. Claude and Gemini API runs serve only as optional baselines. The
+design does not isolate any single hidden component such as a system prompt,
+tool, retrieval, or routing policy, and it supports only observable differences
+between the two conditions under documented collection conditions.
 
-The empirical result is a compact diagnostic audit, not a population estimate.
-After transcript correction and manual review, 17 of 60 API/app pairs show
-substantive observable divergences. Ten have response-core anchors, mainly
-refusal-granularity and factual-control differences. Seven are product-surface
-or context cases, such as visible sources or localized information. Targeted app
-repetitions for the divergent cases support most of the original case inventory
-while keeping app-side stability claims scoped to that packet. Inter-rater
-reliability also sharpens the interpretation: refusal status is reliable, while
-soft safety-framing strength is treated only as supporting evidence.
+The stakes are practical. Regulators, journalists, and researchers increasingly
+use API based audits to describe how a deployed model behaves, yet ordinary users
+meet it through the app. If the surfaces diverge, an API only audit can
+misdescribe what users actually receive, so conclusions drawn for policy may not
+match the deployed product. The result here is a compact diagnostic audit, and
+after transcript correction and manual review, 17 of 60 paired prompts diverge
+substantively, with the bare API refusing more often than the app on refusal
+expected prompts.
 
-The contribution is therefore methodological as much as empirical. The thesis
-operationalizes deployment surface as an audit variable, builds a
-benchmark-grounded prompt suite, applies a manually reviewed divergence taxonomy,
-and preserves screenshot-backed evidence with correction and reliability
-materials. Its central conclusion is cautious: for this prompt bank and
-collection window, the bare API condition is not a neutral proxy for the official
-ChatGPT app. LLM audits should therefore name and document the access surface
-they evaluate.
+This thesis makes four contributions.
 
-Section 2 reviews related work. Section 3 describes the method. Section 4
-reports results. Sections 5 to 8 discuss implications, limitations, future work,
-and conclusions. The appendix provides the redacted prompt bank, coding guide,
+\begin{itemize}
+\item It operationalizes the deployment surface as an audit variable.
+\item It builds a benchmark grounded prompt bank and a reviewed divergence taxonomy.
+\item It preserves screenshot backed evidence with correction and reliability materials.
+\item It shows the bare API is not a neutral proxy for the app, so audits should
+name the access surface they evaluate.
+\end{itemize}
+
+Chapter 2 reviews related work. Chapter 3 describes the method. Chapter 4 reports
+results. Chapters 5 to 8 cover implications, limitations, future work, and
+conclusions. The appendix provides the redacted prompt bank, coding guide,
 correction audit, reliability materials, and artifact inventory.

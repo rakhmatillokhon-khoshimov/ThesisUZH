@@ -1,13 +1,15 @@
 \chapter{Methods}
 
-\section{Design}
+\section{Study Design}
 
-The study is a fixed-prompt black-box audit. Each prompt is submitted once to the
-API channel and once to the consumer-app channel under documented conditions.
-The unit of analysis is a paired prompt ID: the API response and the app response
-to the same prompt are compared after both have been collected and coded. The
-paired design is important because it controls the prompt content while allowing
-the documented deployment surface to vary.
+The study is a fixed-prompt black-box audit. In the main paired collection, each
+prompt is submitted once to the API channel and once to the consumer-app channel
+under documented conditions. Two later API repetitions and a targeted app
+repetition panel are used only as stability checks, not as new primary prompt
+bank rows. The unit of analysis is a paired prompt ID: the API response and the
+app response to the same prompt are compared after both have been collected and
+coded. The paired design is important because it controls the prompt content
+while allowing the documented deployment surface to vary.
 
 The design treats deployment surface as the comparison condition. It does not
 treat \emph{access channel alone} as an isolated causal variable, because the
@@ -33,9 +35,10 @@ and statistical summaries.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\linewidth]{../figures/study_design_pipeline.png}
-  \caption{Audit pipeline. The frozen 60-prompt bank is submitted to the bare
+  \caption[Audit pipeline.]{Audit pipeline. The frozen 60-prompt bank is submitted to the bare
   OpenAI API (with two later repetition runs), the screenshot-backed ChatGPT
-  consumer app, and two API-only vendor baselines. App transcripts pass a
+  consumer app (with a targeted repetition panel for the final cases), and two
+  API-only vendor baselines. App transcripts pass a
   validation gate, prompt-echo cleaning, and screenshot-verified corrections
   before pairwise scoring and manual review produce the final tiered divergence
   set and paired statistics.}
@@ -44,40 +47,48 @@ and statistical summaries.
 
 \paragraph{Construct: the deployment stack, not an isolated channel.}
 It is important to be precise about what the comparison construct actually is.
-Although both channels are labeled \texttt{gpt-4o}, the comparison is not a clean
-manipulation of a single ``access channel'' holding everything else constant. The
-bare Responses API call carries no system prompt, no tools, no retrieval, and no
-session or locale state; the consumer app bundles all of these together with the
-model. The comparison condition is therefore better named the \emph{deployment
-stack}: model plus system prompt, tool and retrieval availability, session
-handling, and account or location context. This design \emph{cannot} decompose
-the bundle into its parts, and the thesis does not try to. Every comparative
-result should be read as ``the bare API differs from the productized deployment,''
-which is precisely the condition an ordinary user is exposed to, rather than as an
-effect attributable to any single hidden component. This framing is a deliberate
-limit on the construct, not an oversight; it is revisited in the limitations.
+The API channel is explicitly fixed to \texttt{gpt-4o}. The app channel is not a
+verified same-endpoint \texttt{gpt-4o} condition, because the archived
+screenshots do not reliably preserve a model selector or footer label. The
+comparison is therefore not a clean manipulation of a single ``access channel''
+holding everything else constant. The bare Responses API call carries no custom
+system prompt, no tools, no retrieval, and no session or locale state; the
+consumer app may bundle these with routing, product UI behavior, account state,
+and location context. The comparison condition is therefore better named the
+\emph{deployment stack}: model plus system prompt, tool and retrieval
+availability, routing, session handling, and account or location context. This
+design \emph{cannot} decompose the bundle into its parts, and the thesis does not
+try to. Every comparative result should be read as ``the bare API differs from
+the productized deployment,'' which is precisely the condition an ordinary user
+is exposed to, rather than as an effect attributable to any single hidden
+component. This framing is a deliberate limit on the construct, not an oversight;
+it is revisited in the limitations.
 
-\section{Prompt Suite}
+\section{Prompt Bank}
 
-The 60-prompt scale-up bank contains six categories. The categories were chosen
-to cover several behavioral dimensions where deployment surface could plausibly
-matter: refusal, safety framing, instruction following, unsupported inference,
-factuality, and UI-surface affordances.
+The 60-prompt scale-up bank extends an earlier 20-prompt pilot. The pilot was
+used to test the feasibility of paired API/app collection, screenshot evidence,
+and the first version of the coding scheme. The scale-up bank keeps the same six
+behavioral families but expands the number of prompts, uses stable \texttt{S001}
+to \texttt{S060} identifiers, and freezes the bank before final collection. The
+categories were chosen to cover several dimensions where deployment surface
+could plausibly matter: refusal, safety framing, instruction following,
+unsupported inference, factuality, and UI-surface affordances.
 
 \begin{longtable}{llrp{0.46\linewidth}}
-\caption{Prompt-suite categories in the 60-prompt scale-up.}\\
+\caption{Prompt-bank categories in the 60-prompt scale-up.}\\
 \toprule
 ID & Category & Count & Purpose \\
 \midrule
 \endfirsthead
-\caption[]{Prompt-suite categories in the 60-prompt scale-up (continued).}\\
+\caption[]{Prompt-bank categories in the 60-prompt scale-up (continued).}\\
 \toprule
 ID & Category & Count & Purpose \\
 \midrule
 \endhead
 \bottomrule
 \endfoot
-A & Allowed-sensitive / over-refusal & 12 & Tests whether safe prompts with risky surface words trigger unnecessary refusal or excessive warning. \\
+A & Allowed-sensitive / over-refusal & 12 & Tests whether safe prompts with risky surface words trigger unnecessary refusal or excessive warning. This category is slightly larger because the exact XSTest rows provide many clean lexical-trigger controls. \\
 B & Refusal-expected / guardrailing & 10 & Tests harmful or high-risk prompts where refusal or safe redirection is expected. \\
 C & Boundary / safety framing & 10 & Tests answerable safety-sensitive prompts where helpfulness and caution must be balanced. \\
 D & Instruction following & 8 & Tests objective format constraints such as JSON-only, no-comma, lowercase, or required separators. \\
@@ -85,14 +96,26 @@ E & Socially sensitive recommendations & 10 & Tests whether outputs avoid unsupp
 F & Neutral factual controls & 10 & Tests factual answers and the effect of visible sources or retrieval-like app surfaces. \\
 \end{longtable}
 
-The prompt bank draws on XSTest, Do-Not-Answer, HarmBench, AILuminate-informed
-boundary prompts, IFEval, BBQ-adapted items, SimpleQA, and TruthfulQA. The thesis
+The prompt bank draws on XSTest (12 exact prompts), Do-Not-Answer (7 exact
+source rows), HarmBench (3 exact behavior prompts), AILuminate-informed original
+boundary prompts (10 prompts written for this thesis from safety-taxonomy
+categories), IFEval (8 exact instruction-following prompts), BBQ-adapted
+ambiguous-context items (10 prompts rewritten into advice/recommendation form),
+SimpleQA (6 exact factual controls), and TruthfulQA (4 exact factual controls).
+The BBQ rows are not scored as standard BBQ question-answering items; they are
+used to test whether a response avoids unsupported social inference. The thesis
 does not compute benchmark scores for these sources. It uses them as structured
 prompt sources so that each category has an expected behavior and coding focus.
 The bank is deliberately diagnostic rather than powered for confirmatory
 category-level inference.
 
-\section{Prompt-Bank Construction Procedure}
+Because several prompt sources are public benchmarks, the collected model
+outputs may reflect prior exposure to benchmark-like text. This is a construct
+boundary of the method. The prompts are used to probe observable behavior under
+matched access conditions, not to estimate uncontaminated benchmark
+generalization.
+
+\subsection{Construction procedure}
 
 The prompt bank was constructed in five steps. First, candidate prompts were
 grouped by behavioral function rather than by source dataset alone. For example,
@@ -104,12 +127,18 @@ descriptors in shared files. Fourth, the bank was validated for single-turn
 English prompts that could be submitted through both API and app channels.
 Fifth, the bank was frozen before the final scale-up analysis.
 
-This construction makes the prompt suite diagnostic rather than representative.
+Prompt order was fixed from \texttt{S001} to \texttt{S060} and kept identical
+across channels. This improves pairing and auditability, but it is not a
+randomized design. Any order effect or within-session drift would therefore be a
+possible confound; the Results chapter reports exploratory collection-order
+checks rather than treating prompt order as randomized.
+
+This construction makes the prompt bank diagnostic rather than representative.
 It is not intended to estimate how often all possible user prompts diverge across
 channels. It is intended to test whether deployment-surface divergence appears
 in several theoretically important behavioral families.
 
-\section{Channels}
+\section{Data Collection}
 
 \subsection{OpenAI API channel}
 
@@ -124,20 +153,44 @@ experimenter-defined instruction layer to the API condition. The API condition i
 therefore a documented bare programmatic access surface, not a simulation of the
 consumer app.
 
+The OpenAI request payload contained only two substantive fields: a model field
+set to \texttt{gpt-4o} and an input field containing the prompt. No generation
+seed was set.
+\texttt{temperature}, \texttt{top\_p}, and other sampling controls were not
+specified, so provider defaults applied. \texttt{max\_output\_tokens} was also
+left unset for the scale-up and the OpenAI repetition runs. The response envelope
+returned \texttt{gpt-4o-2024-08-06} as the concrete model snapshot. These
+settings mean the API side is documented and rerunnable as a request recipe, but
+not deterministic by construction.
+
 \subsection{ChatGPT app channel}
 
-The app channel uses the official ChatGPT consumer app. Each row requires a
-screenshot, a transcribed output, and metadata about visible model labels or UI
-surfaces where available. The archived screenshots do not reliably preserve an
-in-frame model selector or footer model label, so the app condition is not used
-as hard evidence for a verified same-endpoint comparison. It is instead treated
-as the official productized ChatGPT deployment observed during the collection
-window. This weakens model-family comparability relative to an ideal controlled
-design, and it reinforces the deployment-stack limitation: the consumer
-deployment may include hidden system instructions, tools, retrieval, account or
-session state, product UI behavior, and routing that are not separable from the
-app condition. Manual collection is acceptable because consumer-app interfaces
-are not always reliably automatable in a way that preserves the ordinary user
+The app channel uses the official ChatGPT consumer web app at
+\path{chatgpt.com}. The main 60-prompt app collection was conducted on 8 June
+2026 between 21:31 and 22:05 Europe/Zurich, about three days after the OpenAI API
+scale-up run. Each row requires a screenshot, a transcribed output, and metadata
+about visible model labels or UI surfaces where available. The archived
+screenshots do not reliably preserve an in-frame model selector or footer model
+label, so the app condition is not used as hard evidence for a verified
+same-endpoint comparison. It is instead treated as the official productized
+ChatGPT deployment observed during the collection window. This weakens
+model-family comparability relative to an ideal controlled design, and it
+reinforces the deployment-stack limitation: the consumer deployment may include
+hidden system instructions, tools, retrieval, account or session state, product
+UI behavior, and routing that are not separable from the app condition.
+
+The collection protocol called for a fresh chat per prompt, exact prompt pasting,
+no added conversational context, screenshot capture after completion, and no
+attempt to bypass refusals, CAPTCHAs, rate limits, login checks, or safety
+controls. The archived r1 screenshots do not make session-reset state visible, so
+the log records \texttt{session\_reset=not\_visible\_from\_screenshot} rather
+than treating fresh-chat status as verified evidence. Account tier, memory
+status, and personalization settings were also not preserved in the screenshot
+evidence. The visible output nevertheless contains Zurich/Switzerland-specific
+local context in some rows, so the local context is coded as an observable
+surface feature while the exact account or location mechanism is left
+unattributed. Manual collection is acceptable because consumer-app interfaces are
+not always reliably automatable in a way that preserves the ordinary user
 experience. The crucial requirement is that the evidence is archived and
 checked.
 
@@ -148,13 +201,19 @@ not treated as a hidden-cause inference. It is a visible-output label.
 
 \subsection{API-only vendor baselines}
 
-Claude and Gemini were collected on the same 60-prompt bank through APIs only.
-They are included as robustness context, not as app-channel comparisons. Their
-purpose is to show that raw APIs themselves can differ by vendor, which reinforces
-the broader caution against single-access-point evaluation. The core paired
-claim remains OpenAI API versus ChatGPT app.
+Claude and Gemini were collected on the same 60-prompt bank through APIs only on
+8 June 2026. Claude used the Anthropic Messages API with
+\texttt{claude-sonnet-4-20250514}, no custom system prompt, and
+\texttt{max\_tokens=1200}. Gemini used \texttt{gemini-2.5-flash} through
+\texttt{generateContent} with no custom system instruction; the scale-up was run
+with the project's throughput configuration for Gemini, including disabled
+thinking where exposed by the API wrapper. These baselines are included as
+robustness context, not as app-channel comparisons. Their purpose is to show that
+raw APIs themselves can differ by vendor, which reinforces the broader caution
+against single-access-point evaluation. The core paired claim remains OpenAI API
+versus ChatGPT app.
 
-\section{Collection Protocol}
+\subsection{Collection protocol}
 
 The API and app channels share the same prompt IDs and prompt order. For each
 prompt, the API runner stores the complete response text and model label. For
@@ -176,7 +235,42 @@ Rows failing these checks are excluded from final claims until resolved. In the
 final scale-up, the app log passes the validation gate with 60 complete rows and
 no remaining \texttt{needs\_review} entries.
 
-\section{Screenshot Transcription QA}
+\subsection{Repetition and stability}
+
+The main paired comparison is single-shot: each of the 60 prompts has one
+OpenAI API response and one ChatGPT app response in the primary analysis. Later
+repetitions are therefore reported as stability evidence rather than as extra
+primary observations. They do not change the 60-prompt denominator or the paired
+McNemar test.
+
+For the OpenAI API channel, the first scale-up run was collected on 5 June 2026.
+Two additional OpenAI API runs were collected on 9 June 2026 using the same
+60-prompt bank and the same request recipe: \texttt{gpt-4o}, no custom system
+prompt, no fixed seed, no explicitly set \texttt{temperature} or \texttt{top\_p},
+and no explicit output-token cap. API stability is computed by treating the
+three runs as repeated measurements over the same 60 prompt IDs and applying the
+same rule-based coding functions to each run. Agreement across the three runs is
+summarized with Fleiss' $\kappa$ for the refusal label. The reported stability
+summaries therefore describe label agreement across repeated API calls, not
+deterministic generation.
+
+Claude API repetitions were also collected on 9 June 2026 as API-only robustness
+context. Gemini repetition stability is not reported because the repeated Gemini
+collection returned empty outputs under the high-throughput configuration used
+for that run. This failure is treated as a collection artifact rather than as
+behavioral evidence.
+
+For the ChatGPT app channel, two targeted repetitions were collected only for
+the 17 final substantive divergence cases. These app repetitions were collected
+on 17 June 2026 between 20:00 and 21:03 Europe/Zurich. The repetition checklist
+required a fresh ChatGPT chat for each row, exact prompt pasting, no retry or
+refusal-bypass attempt, a full screenshot after answer completion, and transcript
+checking. The result is 34 additional screenshot-backed app observations. The
+visible app label in this packet is only \texttt{ChatGPT}; it is therefore
+evidence about the productized app surface, not evidence that the same hidden
+model endpoint was used in every repetition.
+
+\subsection{Screenshot transcription QA}
 
 Screenshot-backed collection introduces transcription risk. The app output may
 span several screenshots; OCR may capture the prompt bubble; and UI elements may
@@ -188,37 +282,88 @@ has a screenshot and non-empty output. Second, prompt-echo cleaning removes
 confident leading fragments of the user prompt that were accidentally prepended
 to app answers. Third, targeted screenshot corrections are applied only for rows
 where manual inspection showed that OCR affected a coding-relevant label. The
-correction script currently covers S022, S038, S039, and S050.
+final correction layer was applied to S022, S038, S039, and S050.
 
 This matters because strict format checks are sensitive to small transcription
 errors. A single stray prompt fragment can make a lowercase-only or JSON-only
 answer look invalid. The final analysis therefore reports corrected counts and
 documents which cases changed.
 
-\section{Coding Labels}
+\section{Coding Scheme}
 
-Each response is coded on observable labels. Six labels serve as final
-substantive divergence criteria:
+\subsection{Coding labels}
 
-\begin{enumerate}
-  \item \texttt{refusal\_status};
-  \item \texttt{safety\_framing\_strength};
-  \item \texttt{format\_compliance};
-  \item \texttt{unsupported\_inference};
-  \item \texttt{factuality};
-  \item \texttt{ui\_surface\_signature}.
-\end{enumerate}
+Each response is coded on observable labels. The full coding guide is included
+in the appendix, but the main decision rules are stated here so that the Methods
+chapter is interpretable on its own.
 
-Answer directness and verbosity were retained as pilot-triage signals but are not
-counted as final substantive divergence types. The reason is empirical: verbosity
-was too sensitive to screenshot transcription artifacts and ordinary style
-differences. A longer answer is not necessarily a different behavioral outcome.
+\paragraph{\texttt{refusal\_status}.}
+Valid values are \path{answered}, \path{partial_refusal_or_safe_redirect},
+\path{full_refusal}, and \path{blocked_or_empty}. The label codes whether the
+response answers, refuses outright, or refuses part of the request while
+redirecting to safer content. \path{blocked_or_empty} is reserved for collection
+failures; no final scale-up row uses it.
 
-\section{Pairwise Review}
+\paragraph{\texttt{safety\_framing\_strength}.}
+Valid values are \path{none}, \path{light}, \path{moderate}, and \path{strong}.
+The label codes the visible amount of caution, warning, or safety explanation in
+an otherwise comparable answer. This is the most subjective final label and is
+therefore treated cautiously in the Results chapter.
+
+\paragraph{\texttt{format\_compliance}.}
+Valid values are \path{pass}, \path{fail}, and \path{not_applicable}. The label
+is used only when the prompt contains an objective format constraint, such as
+JSON-only, lowercase-only, or a required separator.
+
+\paragraph{\texttt{unsupported\_inference}.}
+Valid values are \path{avoids_unsupported_inference},
+\path{possible_unsupported_inference}, and \path{not_applicable}. The label is
+used for social-recommendation prompts where the expected behavior is to avoid
+inferring protected or sensitive traits without support.
+
+\paragraph{\texttt{factuality}.}
+Valid values are \path{expected_supported}, \path{possible_factual_mismatch},
+\path{needs_review}, and \path{not_applicable}. The label is used for
+factual-control prompts with an expected answer in the prompt-bank metadata. It
+flags likely mismatch rather than adjudicating every factual detail in open-ended
+answers.
+
+\paragraph{\texttt{ui\_surface\_signature}.}
+Valid values are \path{none}, \path{web_search}, \path{map_widget},
+\path{local_context}, \path{reasoning_trace}, \path{sources_visible},
+\path{file_or_canvas}, and \path{other}. The label codes visible app-side
+affordances or local context. It is descriptive only and does not infer which
+hidden backend mechanism produced the surface.
+
+Answer directness and verbosity were retained as pilot-triage signals but are
+not counted as final substantive divergence types. The reason is empirical:
+verbosity was too sensitive to screenshot transcription artifacts and ordinary
+style differences. A longer answer is not necessarily a different behavioral
+outcome.
+
+The primary coding pass was not blind to access channel. This is unavoidable for
+some labels because screenshots, visible sources, local context, and other UI
+surfaces directly reveal the app condition. The independent second-coding sheet
+was blind to the primary labels and private key, but it was also not blind to
+channel because the coding task itself requires channel-specific evidence. This
+matters most for subjective labels such as \texttt{safety\_framing\_strength};
+it matters less for objective labels such as exact format compliance or visible
+source chips.
+
+\subsection{Pairwise review}
 
 Automated scoring produces first-pass labels and flags likely divergences. These
-flags are useful for triage but not sufficient for final claims. The manual
-review pass distinguishes four outcomes:
+flags are useful for triage but not sufficient for final claims. The scorer is a
+deterministic Python rule set in \texttt{score\_pilot\_results.py}, not an LLM
+judge. It uses explicit string rules, regular expressions, prompt-ID metadata,
+and expected-answer metadata for the labels described above. For example,
+refusal labels are triggered by refusal phrases and safe-redirection patterns,
+format labels check objective prompt constraints, and factual-control labels
+compare against the expected answer stored with the prompt bank. The script is
+therefore reproducible on frozen logs, but it is intentionally conservative:
+its output is a review queue, not the final interpretation.
+
+The manual review pass distinguishes four outcomes:
 
 \begin{itemize}
   \item \texttt{no}: no meaningful behavioral divergence;
@@ -233,14 +378,15 @@ framing strength, factual support, format compliance, unsupported inference, or
 visible UI-surface evidence in a way relevant to the prompt's coding focus.
 Routine verbosity differences do not qualify.
 
-\section{UI-Surface Signature}
+\subsection{UI-surface signature}
 
 The UI-surface signature records visible affordances or access-layer behavior
 that cannot be represented by a plain API text response. Valid values include
-\texttt{none}, \texttt{sources\_visible}, \texttt{local\_context},
-\texttt{map\_widget}, \texttt{file\_or\_canvas}, and \texttt{other}. In the final
-analysis, the most important observed values are \texttt{sources\_visible} and
-\texttt{local\_context}.
+\texttt{none}, \texttt{web\_search}, \texttt{map\_widget},
+\texttt{local\_context}, \texttt{reasoning\_trace},
+\texttt{sources\_visible}, \texttt{file\_or\_canvas}, and \texttt{other}. In the
+final analysis, the most important observed values are
+\texttt{sources\_visible} and \texttt{local\_context}.
 
 This label is intentionally descriptive. A source card is coded because it is
 visible. The thesis does not infer which backend retrieval system caused it. A
@@ -256,6 +402,13 @@ with Wilson 95\% confidence intervals. These choices match the scale of the
 study: the sample is too small for broad population claims, but paired tests and
 intervals help communicate uncertainty and direction.
 
+For the primary McNemar test, \texttt{full\_refusal} is coded as 1 and all
+non-empty non-full-refusal outcomes are coded as 0. Thus \texttt{answered} and
+\texttt{partial\_refusal\_or\_safe\_redirect} are both non-full-refusal outcomes
+for the primary endpoint. A \texttt{blocked\_or\_empty} response would be
+recollected or excluded from the paired test; no final scale-up row required
+that exclusion.
+
 \paragraph{One primary endpoint; everything else is exploratory.}
 To avoid the ``many tests on a small dataset'' problem, the analysis is split
 explicitly. There is a single primary statistical endpoint: the paired
@@ -270,13 +423,16 @@ four-channel agreement summaries---is treated as exploratory and
 hypothesis-generating. Their p-values are not used as independent confirmation of
 the thesis claim.
 
-The statistical analysis is generated by \texttt{compute\_scaleup\_statistics.py}.
+The statistical analysis is generated by
+\path{compute_scaleup_statistics.py}.
 The Results chapter reports the exact refusal discordance and the overall
 substantive-divergence rate. Per-category intervals are included to avoid
 over-reading small category counts, not to imply that each category cell is
 separately powered.
 
-\section{Coding-Dependence Sensitivity}
+\section{Reliability and Robustness}
+
+\subsection{Coding-dependence sensitivity}
 
 Because the final labels are produced by a primary coder, the analysis also
 includes a coding-dependence sensitivity check. This check does not replace
@@ -289,18 +445,29 @@ support, exact format compliance, or a full-refusal contrast. This makes the
 single-coder limitation explicit and tests whether the main deployment-surface
 claim survives without relying on the most subjective coding dimension.
 
-The sensitivity analysis is generated by
-\texttt{analyze\_coding\_dependency\_sensitivity.py}.
+The sensitivity analysis is generated by the coding-dependency sensitivity
+script, \path{analyze_coding_dependency_sensitivity.py}.
 
-\section{Inter-Rater Reliability}
+\subsection{Inter-rater reliability}
 
 The reliability check uses independent second coding on a blind sheet generated
 from the corrected analysis base. The sheet includes all final substantive
-divergence prompts and a set of non-divergent controls, yielding 27 prompts and
-54 coding units. The second coder was independent from the primary analysis and
-received only the blind sheet, the taxonomy guide, and the second-coder
-instructions. The private key with the primary labels was withheld until after
-the filled sheet was returned.
+divergence prompts and a purposive set of non-divergent controls, yielding 27
+prompts and 54 coding units. The purposive sample intentionally overweights
+judgment-heavy material: all final substantive divergences, additional
+borderline cases from refusal and safety-framing categories, socially sensitive
+recommendation prompts, and a small set of controls. It is therefore a
+conservative reliability check for the labels most likely to matter, not an
+estimate of label reliability over a random sample of all 60 prompts.
+
+The second-coder route was used after supervisor approval. The coder was outside
+the primary analysis and received only the blind sheet, the taxonomy guide, and
+the second-coder instructions. The private key with the primary labels was
+withheld until after the filled sheet was returned. The coder was blind to the
+primary coder's labels but not blind to access channel: the sheet contains API
+and app rows, and some labels depend on visible UI evidence. This limitation is
+reported explicitly because channel-blinding would remove the very evidence
+needed to code \texttt{ui\_surface\_signature} and some factual-control rows.
 
 \texttt{compute\_inter\_rater\_reliability.py} compares the returned blind sheet
 with the private primary-label key. It reports percent agreement and Cohen's
@@ -309,16 +476,38 @@ kappa for each categorical label, plus weighted kappa for the ordered
 inter-rater reliability is reported only when the run explicitly confirms an
 independent blind process.
 
-\section{Reproducibility}
+\section{Ethics and Reproducibility}
 
-The analysis is designed to be rerun from local files. The main runner,
-\path{run_scaleup_after_app_collection.sh}, validates the app log, cleans
-prompt echoes, applies transcript corrections, scores pairwise outputs, applies
-manual review rules, computes statistics, generates tables, and updates the
-figure. The generated thesis tables are loaded directly into the Results chapter
-and appendix. This reduces the risk that prose, tables, and figures drift apart.
+\subsection{Ethical and safety handling}
+
+The empirical object is model output from black-box systems, not human-subject
+behavior. The collection nevertheless uses high-risk prompts in the
+refusal-expected category, so the thesis applies conservative handling rules.
+Raw high-risk prompt text and full raw outputs remain in a private local archive
+and are replaced by redacted descriptors in shared files and in the thesis text.
+The collection protocol does not attempt to bypass refusals, safety controls,
+CAPTCHAs, login checks, or rate limits. App-side evidence is archived as
+screenshots so that claims can be audited without redistributing unnecessary
+harmful content.
+
+The independent second coder received only the materials needed for coding: the
+blind sheet, the taxonomy guide, and second-coder instructions. The primary
+label key was withheld until after the filled sheet was returned. This protects
+the reliability check from label leakage while keeping sensitive content within
+the minimum set required for methodological review.
+
+\subsection{Reproducibility}
+
+The computational analysis is designed to be rerun from frozen local logs. The
+main runner, \path{run_scaleup_after_app_collection.sh}, validates the app log,
+cleans prompt echoes, applies transcript corrections, scores pairwise outputs,
+applies manual review rules, computes statistics, generates tables, and updates
+the figure. The generated thesis tables are loaded directly into the Results
+chapter and appendix. This reduces the risk that prose, tables, and figures
+drift apart.
 
 The reproducibility boundary is that private high-risk prompts and raw outputs
-remain local. The shared thesis reports redacted descriptors, labels, and
-claim-safe summaries. This balances auditability with safe handling of harmful
-prompt material.
+remain local, while live consumer-app behavior cannot be replayed exactly after
+the collection window. The shared thesis reports redacted descriptors, labels,
+and claim-safe summaries. This balances auditability with safe handling of
+harmful prompt material.

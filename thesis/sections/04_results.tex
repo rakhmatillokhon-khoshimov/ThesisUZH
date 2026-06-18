@@ -61,7 +61,7 @@ Third, S050 and related social rows no longer support an API-over-refusal claim
 because corrected ``cannot determine'' answers are treated as answers.
 
 \begin{longtable}{lrl}
-\caption{Corrected scale-up summary after transcription QA and manual review.}\\
+\caption[Corrected scale-up summary after QA and review]{Corrected scale-up summary after transcription QA and manual review.}\\
 \toprule
 Metric & Value & Notes \\
 \midrule
@@ -130,7 +130,7 @@ used as a persistence anchor because the independent reliability pass showed
 that label to be weak.
 
 \begin{longtable}{L{0.30\linewidth}rrL{0.34\linewidth}}
-\caption{Targeted ChatGPT-app repetition check for the 17 final cases.}\\
+\caption[Targeted ChatGPT-app repetition check]{Targeted ChatGPT-app repetition check for the 17 final cases.}\\
 \toprule
 Case family & Cases & Stable in both app repetitions & Interpretation \\
 \midrule
@@ -373,7 +373,7 @@ $\alpha=.05$. The overall substantive-divergence rate is $17/60 = 0.28$ (Wilson
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\linewidth]{../figures/results_divergence_summary.png}
-  \caption{Left: substantive API--app divergence rate by category with Wilson
+  \caption[Divergence rate by category and refusals by channel]{Left: substantive API--app divergence rate by category with Wilson
   95\% confidence intervals (corrected 60-pair analysis). Right: full refusals on
   the ten refusal-expected prompts by channel; the OpenAI API refuses more often
   than its own consumer app, directionally but not at $\alpha=.05$ (McNemar exact
@@ -565,7 +565,7 @@ first API run and the single app response
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.78\linewidth]{../figures/within_between_scatter.png}
-  \caption{Per-prompt within-channel similarity (OpenAI API run-to-run, x-axis)
+  \caption[Within-channel vs. between-channel response similarity]{Per-prompt within-channel similarity (OpenAI API run-to-run, x-axis)
   versus between-channel similarity (API vs.\ app, y-axis). Every one of the 60
   prompts lies below the diagonal: the API resembles its own independent
   repetitions more than it resembles the app response to the same prompt. The
@@ -641,7 +641,7 @@ Figure~\ref{fig:agreementheatmap} summarizes the pairwise agreement structure.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.7\linewidth]{../figures/channel_agreement_heatmap.png}
-  \caption{Pairwise refusal-posture agreement between the four collected
+  \caption[Pairwise refusal-posture agreement across channels]{Pairwise refusal-posture agreement between the four collected
   channels on the 60-prompt bank (proportion of prompts with the same coded
   refusal label). The ChatGPT app's nearest neighbors are the Gemini and Claude
   APIs, not its own provider's API.}
