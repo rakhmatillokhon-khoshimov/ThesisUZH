@@ -20,7 +20,7 @@ visible sources, localized support information, or similar app affordances. The
 surface cases matter for audits of user experience, but the theoretical core is
 the smaller refusal/factuality/format set.
 
-\section{What the Deployment Surface Changes}
+\section{What Changes}
 
 The results show three broad kinds of deployment-surface difference. The first
 is refusal granularity. The API more often produces a bare full refusal on
@@ -39,7 +39,7 @@ answer. A UI-surface difference changes the evidence environment of the answer,
 but it is less surprising because consumer apps are designed to expose product
 affordances that bare APIs do not.
 
-\section{Refusal Posture Is Not a Simple Safety Ranking}
+\paragraph{Refusal posture is not a simple safety ranking.}
 
 The corrected results do not support a simple claim that the app is safer, less
 safe, stricter, or more permissive than the API. The refusal pattern is more
@@ -57,7 +57,7 @@ avoid harmful compliance, but they do not provide the same user experience. For
 auditing deployment surfaces, refusal quality and granularity are part of the
 observable behavior.
 
-\section{The Importance of Negative Controls}
+\paragraph{Negative controls.}
 
 The corrected Category E result is a useful guardrail against overclaiming.
 Earlier in the analysis process, some socially sensitive BBQ-style rows appeared
@@ -74,7 +74,7 @@ the observed deployment-surface difference is not a generic social-sensitivity
 over-refusal pattern. It is concentrated in refusal granularity, factual support,
 and a smaller set of visible app affordances.
 
-\section{UI-Surface Signatures as Context, Not the Core Result}
+\paragraph{UI-surface signatures.}
 
 The UI-surface signature is a useful methodological addition, but it should not
 be confused with the strongest behavioral result. Many LLM evaluations compare
@@ -109,7 +109,7 @@ question: what happens under the bare API condition. The consumer app is a
 different deployment surface with its own visible behavior. A mature audit program
 should record both where possible.
 
-\section{Interpretation of the Statistical Result}
+\paragraph{Statistical interpretation.}
 
 The statistical summary is intentionally modest. The McNemar exact test gives
 $p=0.062$ for full-refusal discordance, which is directional but not significant
@@ -125,7 +125,7 @@ but not precise enough to support broad claims about all prompts. This is
 appropriate for a Master's thesis-scale black-box audit only if the conclusion is
 framed as case-based and exploratory rather than confirmatory.
 
-\section{Where the Cases Concentrate, and Whether It Is Noise}
+\section{Evidence Strength and Robustness}
 
 Two further analyses sharpen the interpretation beyond the headline rate, but
 neither should be over-read. First, the retained cases are not uniform across the
@@ -162,7 +162,7 @@ safety-framing wording label ($\kappa\approx0.55$) is itself informative: it
 justifies leaning on the refusal and factuality labels for the substantive
 claims and treating framing wording as a softer, supporting signal.
 
-\section{Coding Reliability Without Letting a Soft Label Carry the Claim}
+\paragraph{Coding reliability.}
 
 The completed independent coding pass clarifies which parts of the taxonomy are
 solid and which should stay cautious. Agreement is strongest for refusal status,
@@ -183,7 +183,7 @@ matter of subjective framing judgment. The positive cases are tied to screenshot
 expected-answer checks, format constraints, and excerpt-level evidence, while
 safety framing remains a useful but secondary descriptor.
 
-\section{Evidence Discipline and Correction}
+\paragraph{Evidence discipline and correction.}
 
 One of the strongest methodological lessons from the project is that screenshot
 evidence must be treated carefully. Without prompt-echo cleaning and targeted
@@ -218,7 +218,7 @@ treating a bare API as the provider's consumer-app proxy. It should be read as
 observable agreement among coded labels, not as evidence of shared internal
 mechanisms or as an additional primary finding.
 
-\section{What This Thesis Does Not Show}
+\section{Boundaries and Recommendations}
 
 The thesis does not show that one deployment surface is globally better. It does
 not show that the app always uses retrieval, that the API never uses safety
@@ -232,7 +232,7 @@ different observable behavior on a frozen benchmark-grounded prompt bank. Those
 differences are concrete enough that deployment surface should be recorded and
 audited, not treated as a neutral implementation detail.
 
-\section{Practical Recommendations}
+\paragraph{Practical recommendations.}
 
 For researchers, the recommendation is to report the deployment surface as part
 of the experimental condition and avoid generalizing from API-only evidence to

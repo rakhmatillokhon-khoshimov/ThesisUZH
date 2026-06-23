@@ -12,6 +12,7 @@ pipeline schematic labels.
 """
 import csv
 import json
+import textwrap
 from pathlib import Path
 
 import matplotlib
@@ -90,41 +91,58 @@ def fig_agreement_heatmap():
 
 
 def fig_pipeline():
-    fig, ax = plt.subplots(figsize=(8.6, 4.4))
+    fig, ax = plt.subplots(figsize=(9.2, 4.4))
     ax.axis("off")
 
-    def box(x, y, w, h, text, fc="#EAF0F8", ec="#4C72B0", fs=8.6):
+    def box(x, y, w, h, text, fc="#EAF0F8", ec="#4C72B0", fs=7.4, wrap=20):
         ax.add_patch(plt.Rectangle((x, y), w, h, fc=fc, ec=ec, lw=1.3,
                                    joinstyle="round"))
-        ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=fs)
+        wrapped = "\n".join(
+            textwrap.fill(line, width=wrap, break_long_words=False)
+            for line in text.split("\n")
+        )
+        ax.text(x + w / 2, y + h / 2, wrapped, ha="center", va="center",
+                fontsize=fs, linespacing=1.08)
 
     def arrow(x1, y1, x2, y2):
         ax.annotate("", xy=(x2, y2), xytext=(x1, y1),
                     arrowprops=dict(arrowstyle="->", lw=1.2, color="#444444"))
 
     # column 1: prompt bank
-    box(0.005, 0.40, 0.165, 0.26, "Frozen 60-prompt bank\n6 categories\n(benchmark-grounded,\nhigh-risk rows redacted)", fs=8.2)
+    box(0.02, 0.40, 0.18, 0.26,
+        "Frozen 60-prompt bank\n6 categories\nbenchmark grounded\nhigh-risk rows redacted",
+        fs=7.1, wrap=20)
     # column 2: two channels
-    box(0.225, 0.66, 0.18, 0.22, "OpenAI Responses API\ngpt-4o, no system prompt\n+ r2/r3 repetitions")
-    box(0.225, 0.14, 0.18, 0.22, "ChatGPT consumer app\nscreenshot-backed\nmanual collection")
-    box(0.225, 0.42, 0.18, 0.14, "Claude / Gemini APIs\n(vendor baselines)", fc="#F4F4F4", ec="#999999", fs=8.0)
+    box(0.25, 0.66, 0.20, 0.22,
+        "OpenAI Responses API\ngpt-4o\nno system prompt\nr2/r3 repetitions",
+        fs=7.2, wrap=22)
+    box(0.25, 0.14, 0.20, 0.22,
+        "ChatGPT consumer app\nscreenshot-backed\nmanual collection",
+        fs=7.2, wrap=22)
+    box(0.25, 0.42, 0.20, 0.14, "Claude and Gemini APIs\nvendor baselines",
+        fc="#F4F4F4", ec="#999999", fs=7.0, wrap=22)
     # column 3: QA
-    box(0.47, 0.14, 0.16, 0.22, "Transcription QA:\nvalidation gate,\nprompt-echo cleaning,\nscreenshot corrections")
+    box(0.50, 0.14, 0.18, 0.22,
+        "Transcription QA\nvalidation gate\nprompt-echo cleaning\nscreenshot corrections",
+        fs=7.0, wrap=22)
     # column 4: scoring + review
-    box(0.685, 0.40, 0.15, 0.26, "Automated pairwise\nscoring (triage)\n+ manual review\n(6 final labels)", fs=8.2)
+    box(0.72, 0.40, 0.17, 0.26,
+        "Pairwise scoring\nmanual review\nsix final labels", fs=7.2, wrap=18)
     # column 5: outputs
-    box(0.885, 0.56, 0.105, 0.26, "17 substantive\ncases, tiered\n10 / 4 / 3", fc="#FDEEE9", ec="#C44E52")
-    box(0.885, 0.20, 0.105, 0.26, "Paired stats,\nsensitivity,\nstability,\nreliability prep", fc="#FDEEE9", ec="#C44E52")
+    box(0.92, 0.56, 0.075, 0.26, "17 cases\n10 core\n7 surface",
+        fc="#FDEEE9", ec="#C44E52", fs=7.0, wrap=12)
+    box(0.92, 0.20, 0.075, 0.26, "Stats\nsensitivity\nstability\nIRR",
+        fc="#FDEEE9", ec="#C44E52", fs=7.0, wrap=12)
 
-    arrow(0.165, 0.62, 0.225, 0.74)
-    arrow(0.165, 0.49, 0.225, 0.49)
-    arrow(0.165, 0.44, 0.225, 0.27)
-    arrow(0.405, 0.25, 0.47, 0.25)
-    arrow(0.63, 0.27, 0.69, 0.45)
-    arrow(0.405, 0.74, 0.66, 0.58)
-    arrow(0.405, 0.49, 0.69, 0.51)
-    arrow(0.83, 0.57, 0.885, 0.66)
-    arrow(0.83, 0.48, 0.885, 0.34)
+    arrow(0.20, 0.62, 0.25, 0.74)
+    arrow(0.20, 0.49, 0.25, 0.49)
+    arrow(0.20, 0.44, 0.25, 0.27)
+    arrow(0.45, 0.25, 0.50, 0.25)
+    arrow(0.68, 0.27, 0.72, 0.45)
+    arrow(0.45, 0.74, 0.72, 0.58)
+    arrow(0.45, 0.49, 0.72, 0.51)
+    arrow(0.89, 0.57, 0.92, 0.66)
+    arrow(0.89, 0.48, 0.92, 0.34)
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     fig.tight_layout()
