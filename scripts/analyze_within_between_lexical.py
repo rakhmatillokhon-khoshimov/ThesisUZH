@@ -194,14 +194,14 @@ def main() -> None:
 \\begin{{table}}[t]\\centering\\small
 \\caption{{Within-channel versus between-channel lexical similarity (token Jaccard) on the {n} fully repeated prompts. Within-channel is the mean similarity of the three OpenAI API repetition pairs on the same prompt; between-channel is the similarity of the first API run to the single ChatGPT app response. Exploratory paired comparison.}}
 \\label{{tab:withinbetween}}
-\\begin{{tabular}}{{lcc}}
+\\begin{{tabular}}{{@{{}}L{{0.56\\linewidth}}cc@{{}}}}
 \\toprule
 Comparison & Mean Jaccard & Median Jaccard \\\\
 \\midrule
 Within OpenAI API (r1/r2/r3 pairs) & {summary['within_jaccard_mean']:.2f} & {summary['within_jaccard_median']:.2f} \\\\
 Between channels (API r1 vs.\\ app) & {summary['between_jaccard_mean']:.2f} & {summary['between_jaccard_median']:.2f} \\\\
 \\midrule
-\\multicolumn{{3}}{{l}}{{Within $>$ between on {n_pos}/{n} prompts (sign test $p={sign_p:.2g}$; Wilcoxon $z={z:.2f}$, $p={p:.2g}$)}} \\\\
+\\multicolumn{{3}}{{@{{}}L{{0.90\\linewidth}}@{{}}}}{{Within $>$ between on {n_pos}/{n} prompts (sign test $p={sign_p:.2g}$; Wilcoxon $z={z:.2f}$, $p={p:.2g}$)}} \\\\
 \\bottomrule
 \\end{{tabular}}
 \\end{{table}}

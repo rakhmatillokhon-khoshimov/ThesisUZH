@@ -122,10 +122,12 @@ def div_label(value: str) -> str:
 
 def write_prompt_bank(rows: list[dict[str, str]]) -> None:
     lines = [
+        r"\begin{landscape}",
         r"\begingroup",
         r"\setlength{\tabcolsep}{2pt}",
-        r"\begin{small}",
-        r"\begin{longtable}{@{}L{0.07\linewidth}L{0.13\linewidth}L{0.14\linewidth}L{0.07\linewidth}L{0.13\linewidth}L{0.38\linewidth}@{}}",
+        r"\renewcommand{\arraystretch}{0.92}",
+        r"\begin{scriptsize}",
+        r"\begin{longtable}{@{}L{0.05\linewidth}L{0.15\linewidth}L{0.16\linewidth}L{0.05\linewidth}L{0.12\linewidth}L{0.40\linewidth}@{}}",
         r"\caption[Redacted 60-prompt scale-up bank]{Redacted 60-prompt scale-up bank. Category B prompt text remains redacted in shared thesis artifacts; the private local bank contains executable collection text.}\\",
         r"\toprule",
         r"ID & Source & Category & Risk & Expected & Shared prompt or descriptor \\",
@@ -149,7 +151,7 @@ def write_prompt_bank(rows: list[dict[str, str]]) -> None:
             row["prompt_text_or_redacted_text"],
         ]
         lines.append(" & ".join(tex(cell) for cell in cells) + r" \\")
-    lines += [r"\end{longtable}", r"\end{small}", r"\endgroup"]
+    lines += [r"\end{longtable}", r"\end{scriptsize}", r"\endgroup", r"\end{landscape}"]
     (OUT / "appendix_prompt_bank.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
