@@ -59,24 +59,15 @@ and statistical summaries.
   \label{fig:pipeline}
 \end{figure}
 
-\paragraph{Construct: the deployment stack, not an isolated channel.}
-It is important to be precise about what the comparison construct actually is.
-The API channel is explicitly fixed to \texttt{gpt-4o}. The app channel is not a
-verified same-endpoint \texttt{gpt-4o} condition, because the archived
-screenshots do not reliably preserve a model selector or footer label. The
-comparison is therefore not a clean manipulation of a single ``access channel''
-holding everything else constant. The bare Responses API call carries no custom
-system prompt, no tools, no retrieval, and no session or locale state; the
-consumer app may bundle these with routing, product UI behavior, account state,
-and location context. The comparison condition is therefore better named the
-\emph{deployment stack}: model plus system prompt, tool and retrieval
-availability, routing, session handling, and account or location context. This
-design \emph{cannot} decompose the bundle into its parts, and the thesis does not
-try to. Every comparative result should be read as ``the bare API differs from
-the productized deployment,'' which is precisely the condition an ordinary user
-is exposed to, rather than as an effect attributable to any single hidden
-component. This framing is a deliberate limit on the construct, not an oversight;
-it is revisited in the limitations.
+\paragraph{Construct: the deployment stack.}
+The comparison construct is the observable deployment stack. The API condition is
+explicitly fixed to \texttt{gpt-4o}; the app condition is the official ChatGPT
+consumer deployment observed during collection, where screenshots do not
+reliably preserve a model selector or footer label. The app may include model
+routing, hidden instructions, tools, retrieval, UI rendering, session state, and
+account or location context. The study therefore compares a documented bare API
+surface with the product surface a user actually meets. It does not attribute an
+observed difference to one hidden component.
 
 \section{Prompt Bank}
 
@@ -131,9 +122,6 @@ The BBQ rows are not scored as standard BBQ question-answering items; they are
 used to test whether a response avoids unsupported social inference. The thesis
 does not compute benchmark scores for these sources. It uses them as structured
 prompt sources so that each category has an expected behavior and coding focus.
-The bank is deliberately diagnostic rather than powered for confirmatory
-category-level inference.
-
 Because several prompt sources are public benchmarks, the collected model
 outputs may reflect prior exposure to benchmark-like text. This is a construct
 boundary of the method. The prompts are used to probe observable behavior under
@@ -157,11 +145,6 @@ across channels. This improves pairing and auditability, but it is not a
 randomized design. Any order effect or within-session drift would therefore be a
 possible confound; the Results chapter reports exploratory collection-order
 checks rather than treating prompt order as randomized.
-
-This construction makes the prompt bank diagnostic rather than representative.
-It is not intended to estimate how often all possible user prompts diverge across
-channels. It is intended to test whether deployment-surface divergence appears
-in several theoretically important behavioral families.
 
 \section{Data Collection}
 
@@ -214,10 +197,16 @@ status, and personalization settings were also not preserved in the screenshot
 evidence. The visible output nevertheless contains Zurich/Switzerland-specific
 local context in some rows, so the local context is coded as an observable
 surface feature while the exact account or location mechanism is left
-unattributed. Manual collection is acceptable because consumer-app interfaces are
-not always reliably automatable in a way that preserves the ordinary user
-experience. The crucial requirement is that the evidence is archived and
-checked.
+unattributed.
+
+The app run was collected manually because the thesis prioritizes a traceable
+consumer-surface record: one full screenshot, one transcript, and one reviewable
+evidence row per prompt. This choice improves auditability but creates the
+study's main scaling bottleneck. Browser automation with Playwright or Selenium,
+DOM capture where available, and OCR-backed screenshot checks would be the
+engineering path to hundreds of app prompts. The present design should therefore
+be read as a high-care diagnostic collection, not as the scalable endpoint of the
+method.
 
 The app channel records visible UI affordances separately from text content. If a
 response includes visible sources, localized context, or other app-specific
@@ -423,9 +412,18 @@ not infer the full account or location mechanism.
 The primary statistics are descriptive and paired. Because each prompt appears in
 both the API and app channel, refusal-status asymmetry is tested with McNemar's
 exact test on the binary full-refusal label. Divergence proportions are reported
-with Wilson 95\% confidence intervals. These choices match the scale of the
-study: the sample is too small for broad population claims, but paired tests and
-intervals help communicate uncertainty and direction.
+with Wilson 95\% confidence intervals.
+
+\paragraph{Power and sample size.}
+The study is underpowered for a confirmatory empirical NLP claim. With 60 paired
+prompts, the primary endpoint depends on the discordant pairs, not on the full
+denominator. The observed refusal table contains five API-only full refusals and
+zero app-only full refusals; under the exact two-sided McNemar test this gives
+$p=0.0625$. One additional one-directional discordant pair would cross the
+conventional threshold ($2\cdot0.5^6=0.03125$), which shows how little margin the
+test has at this scale. The thesis therefore uses the test as a disciplined
+summary of a case-based audit rather than as the sole proof of a population-level
+effect.
 
 For the primary McNemar test, \texttt{full\_refusal} is coded as 1 and all
 non-empty non-full-refusal outcomes are coded as 0. Thus \texttt{answered} and

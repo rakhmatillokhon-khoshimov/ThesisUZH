@@ -1,15 +1,9 @@
 \chapter{Discussion}
 
-The completed scale-up supports a narrower claim than ``the same model behaves
-differently because of access channel.'' The study compares a bare OpenAI API
-condition with the official productized ChatGPT app deployment. The app
-screenshots archive the consumer surface, but they do not reliably preserve an
-in-frame model label. Even if a product label is visible in some app sessions,
-the app also includes hidden instructions, tools, retrieval, UI rendering,
-session state, routing, and possible account or location context. Those
-components cannot be separated with this design. The defensible claim is
-therefore about observable deployment-surface differences, not a clean
-same-model causal manipulation.
+The completed scale-up supports a deployment-surface claim, not a same-model
+causal claim. The study compares a bare OpenAI API condition with the official
+productized ChatGPT app deployment and interprets only observable differences
+between those surfaces.
 
 Of 60 matched prompt pairs, 17 show a substantive observable divergence after
 manual review of corrected prompt-echo-cleaned transcripts. The important
@@ -111,19 +105,11 @@ should record both where possible.
 
 \paragraph{Statistical interpretation.}
 
-The statistical summary is intentionally modest. The McNemar exact test gives
-$p=0.062$ for full-refusal discordance, which is directional but not significant
-at $\alpha=.05$. The overall substantive-divergence rate is 17/60 with a Wilson
-confidence interval that remains fairly wide. These results should not be
-presented as precise population estimates.
-
-The value of the statistics is different: they discipline the interpretation.
-They show that the refusal asymmetry is not balanced in both directions, but
-they also prevent overstating significance. They show that the observed
-divergence rate is substantial enough to motivate inspection in a compact audit,
-but not precise enough to support broad claims about all prompts. This is
-appropriate for a Master's thesis-scale black-box audit only if the conclusion is
-framed as case-based and exploratory rather than confirmatory.
+The primary McNemar result does not reach $\alpha=.05$, so it should not be sold
+as a confirmatory finding. Its role is to summarize the refusal direction and
+keep the thesis honest about uncertainty. The argument therefore rests on the
+case inventory, corrected evidence chain, and repetition results rather than on a
+single p-value.
 
 \section{Evidence Strength and Robustness}
 
@@ -202,9 +188,8 @@ why the appendix includes the correction table and reviewed coding summary.
 The Claude and Gemini API baselines show that raw API conditions differ by
 vendor. Even when restricted to APIs, vendors differ on refusal-expected prompts.
 This is useful context, but it is not another app-comparison result. It
-reinforces the general methodological point that a single access point is not
-representative of the LLM ecosystem and may not be representative of a provider's
-own consumer experience.
+reinforces the general methodological point that a single access point should not
+stand in for an unevaluated deployment surface.
 
 The thesis keeps the vendor baselines secondary because there are no Claude or
 Gemini app collections. Treating those API baselines as equivalent to app
@@ -220,17 +205,13 @@ mechanisms or as an additional primary finding.
 
 \section{Boundaries and Recommendations}
 
-The thesis does not show that one deployment surface is globally better. It does
-not show that the app always uses retrieval, that the API never uses safety
-context, or that refusal differences are caused by a particular hidden policy.
-It also does not show that the observed rates generalize to all possible prompts.
-The prompt bank is diagnostic, not representative.
-
-The correct interpretation is narrower and stronger: under documented collection
-conditions, the bare API condition and productized app deployment produced
-different observable behavior on a frozen benchmark-grounded prompt bank. Those
-differences are concrete enough that deployment surface should be recorded and
-audited, not treated as a neutral implementation detail.
+The thesis does not show that one deployment surface is globally better or that a
+particular hidden policy caused the differences. The correct interpretation is
+narrower and stronger: under documented collection conditions, the bare API
+condition and productized app deployment produced different observable behavior
+on a frozen benchmark-grounded prompt bank. Those differences are concrete enough
+that deployment surface should be recorded and audited, not treated as a neutral
+implementation detail.
 
 \paragraph{Practical recommendations.}
 

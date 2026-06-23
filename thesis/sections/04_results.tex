@@ -3,14 +3,9 @@
 This chapter reports the corrected 60-prompt scale-up. The core comparison is a
 bare OpenAI Responses API condition (\texttt{gpt-4o}, no custom system prompt)
 against the official productized ChatGPT app deployment, one submission per
-prompt under documented conditions. The API model label is explicit; the app
-screenshots are screenshot-backed evidence of the consumer deployment but do not
-reliably preserve an in-frame model label. The app condition also includes
-product layers that cannot be decomposed: hidden instructions, tools, retrieval,
-session handling, routing, and UI rendering. Claude and Gemini API runs are reported separately as vendor
-robustness baselines. All counts describe observable behavior; no causal claim is
-made about hidden system prompts, internal guardrails, tools, retrieval, or
-routing.
+prompt under documented conditions. Claude and Gemini API runs are reported
+separately as vendor robustness baselines. All counts describe observable
+behavior under these surfaces.
 
 \section{Data Integrity and Correction}
 
@@ -360,13 +355,15 @@ with McNemar's exact test, and divergence proportions are reported with Wilson
 thesis. The other quantitative analyses are descriptive diagnostics on the same
 60 prompts.
 
-The full-refusal asymmetry is directionally complete: across all 60 prompts,
-five prompts were fully refused by the API but not the app, and none in the
-reverse direction (McNemar exact two-sided $p = 0.062$). The same count lies
-inside the refusal-expected category, so the subset result is also $5$ vs $0$,
-$p = 0.062$. This is directional but not conventionally significant at
-$\alpha=.05$. The overall substantive-divergence rate is $17/60 = 0.28$ (Wilson
-95\% CI $[0.18, 0.41]$).
+The full-refusal asymmetry is directionally complete but statistically fragile:
+across all 60 prompts, five prompts were fully refused by the API but not the
+app, and none moved in the reverse direction (McNemar exact two-sided
+$p=0.0625$). The same five discordant pairs all lie inside the refusal-expected
+category. This misses the conventional $\alpha=.05$ threshold by one discordant
+pair, so the statistical endpoint cannot carry the thesis alone. The empirical
+contribution is the paired case evidence, the corrected 17-case inventory, and
+the repetition checks. The overall substantive-divergence rate is
+$17/60 = 0.28$ (Wilson 95\% CI $[0.18, 0.41]$).
 
 \IfFileExists{../results/analysis/thesis_tables/scaleup_statistics.tex}{%
   \input{../results/analysis/thesis_tables/scaleup_statistics}%
@@ -378,16 +375,14 @@ $\alpha=.05$. The overall substantive-divergence rate is $17/60 = 0.28$ (Wilson
   \caption[Divergence rate by category and refusals by channel]{Left: substantive API--app divergence rate by category with Wilson
   95\% confidence intervals (corrected 60-pair analysis). Right: full refusals on
   the ten refusal-expected prompts by channel; the OpenAI API refuses more often
-  than its own consumer app, directionally but not at $\alpha=.05$ (McNemar exact
-  $p = 0.062$).}
+  than its own consumer app in this audit (McNemar exact $p=0.0625$).}
   \label{fig:divergence-summary}
 \end{figure}
 
-Confidence intervals are wide at $n=60$ and wider inside categories. The
-statistical result should therefore be read as a disciplined summary of the
-observed audit, not as a population-level estimate over all prompts. The value of
-the test is that it prevents overclaiming: the refusal asymmetry is complete in
-direction but underpowered at the current sample size.
+Confidence intervals are wide at $n=60$ and wider inside categories. The value
+of the primary test is mainly disciplinary: it makes clear that the refusal
+pattern is asymmetric but underpowered, so the rest of the chapter treats cases,
+tiers, and stability as the main evidence.
 
 \section{Coding Sensitivity and Mechanisms}
 
@@ -474,15 +469,6 @@ category omnibus value ($p=0.034$), the refusal-expected-versus-control contrast
 post-hoc slicing to carry the thesis by themselves. They are consistent with the
 case-level result, but they are not the result.
 
-For the primary endpoint, the refusal asymmetry is complete in direction
-(API-only full refusals $5$, app-only $0$) but the exact two-sided McNemar
-$p=0.0625$ does not reach $\alpha=.05$. With five one-directional discordant
-pairs the exact test is one discordant pair short of the conventional threshold;
-a sixth one-directional discordant pair would yield $2\cdot 0.5^{6}=0.031$. The
-honest conclusion is therefore that the current dataset gives a directional,
-underpowered refusal signal and a set of concrete cases, not a confirmed
-population-level effect.
-
 \paragraph{Order, prompt-surface, and interval checks.}
 \label{sec:order-robustness}
 
@@ -537,10 +523,9 @@ The generated lexical table is retained locally but not printed in the main
 chapter because it is another descriptive slice of the same 60 rows.
 
 The prompts the coders flagged as substantive have lower API-versus-app token
-overlap (mean Jaccard $0.19$ vs $0.23$) in the expected direction, though the
-difference is only directional at this sample size (Mann--Whitney $U=259$,
-$p=0.081$, rank-biserial $0.29$). This is convergent rather than conclusive: an
-objective surface signal agrees with the manual labels without being independently
+overlap (mean Jaccard $0.19$ vs $0.23$; Mann--Whitney $U=259$, $p=0.081$,
+rank-biserial $0.29$). This is convergent rather than conclusive: an objective
+surface signal agrees with the manual labels without being independently
 significant. Two descriptive contrasts are robust, however. The app answer is
 longer than the API answer on $51$ of $60$ prompts, with a mean length ratio of
 about $3\times$, and it carries roughly twice as many hedging markers
