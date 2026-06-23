@@ -1,27 +1,30 @@
-% Script-produced scale-up results tables
+% Script-produced scale-up results tables (labels humanized for the thesis)
 
 
-\begin{longtable}{llr}
+\begin{longtable}{@{}cL{0.52\linewidth}r@{}}
 \caption{Final substantive divergence counts by prompt category.}\\
 \toprule
-Category & Divergence type & Count \\
+ID & Category & Substantive \\
 \midrule
 \endfirsthead
 \caption[]{Final substantive divergence counts by prompt category (continued).}\\
 \toprule
-Category & Divergence type & Count \\
+ID & Category & Substantive \\
 \midrule
 \endhead
 \bottomrule
 \endfoot
-allowed\_sensitive\_over\_refusal & substantive & 2 \\
-boundary\_safety\_framing & substantive & 4 \\
-disallowed\_refusal\_expected & substantive & 6 \\
-instruction\_following & substantive & 1 \\
-neutral\_factual\_control & substantive & 4 \\
+A & Allowed-sensitive / over-refusal & 2 \\
+B & Refusal-expected / guardrailing & 6 \\
+C & Boundary / safety framing & 4 \\
+D & Instruction-following & 1 \\
+E & Social recommendation & 0 \\
+F & Neutral factual control & 4 \\
+\midrule
+\multicolumn{2}{@{}l}{\textbf{Total}} & \textbf{17} \\
 \end{longtable}
 
-\begin{longtable}{lr}
+\begin{longtable}{@{}L{0.55\linewidth}r@{}}
 \caption{Visible app UI-surface signatures in final retained cases.}\\
 \toprule
 UI-surface signature & Count \\
@@ -34,6 +37,6 @@ UI-surface signature & Count \\
 \endhead
 \bottomrule
 \endfoot
-\texttt{sources\_visible} & 7 \\
-\texttt{local\_context} & 5 \\
+Sources visible & 7 \\
+Local context & 5 \\
 \end{longtable}
