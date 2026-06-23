@@ -46,8 +46,9 @@ product-surface examples.
 These findings support the thesis claim that deployment surface is
 audit-relevant. They do not support stronger causal claims about access channel
 alone, hidden prompts, tools, retrieval, internal guardrails, or routing rules.
-The evidence is best read as a case-based audit result rather than a confirmed
-population-level effect.
+The primary statistical endpoint is directional but not conventionally
+significant, so the thesis characterizes bounded case evidence rather than
+claiming a confirmed population-level effect.
 
 The broader lesson is methodological. LLM evaluations should state the deployment
 surface they measure and avoid generalizing API-only findings to consumer-app
@@ -57,10 +58,12 @@ as much as the underlying model family. A benchmark score collected through an
 API may be valid for the API condition and still incomplete as evidence about
 ordinary user experience.
 
-Scale remains the main weakness. A 60-prompt manual app audit can establish a
-traceable case record, but a confirmatory version should automate app collection,
-preserve screenshot-level evidence, and expand the prompt bank. Even at this
-scale, the result is enough to support a simple proposition with practical
-consequences: the deployment surface through which a language model is reached is
-part of the system under audit. Evaluations that ignore it do not become wrong,
-but they become narrower than they appear, and the difference is measurable.
+Auditing research often faces a choice between scale and evidential care. This
+thesis deliberately chose care: a frozen diagnostic bank, screenshot-preserved
+app evidence, a correction audit that reduced its own headline count, repetition
+checks at both the label and text level, sensitivity analyses, and explicit
+claim boundaries. The result is a small but defensible body of evidence for a
+simple proposition with practical consequences: the deployment surface through
+which a language model is reached is part of the system under audit. Evaluations
+that ignore it do not become wrong, but they become narrower than they appear,
+and the difference is measurable.

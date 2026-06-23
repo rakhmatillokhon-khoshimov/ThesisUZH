@@ -1,20 +1,21 @@
-\chapter{Future Work}
+\chapter{Future Work and Research Agenda}
 
-The current study proves a compact audit workflow, not a scalable benchmark
-pipeline. It covers one OpenAI API/app pair, a frozen 60-prompt bank, API-only
-vendor baselines, API-side repetition checks, and a targeted ChatGPT-app
-repetition check for the 17 final cases. The next step is to keep the same
-evidence standard while removing the manual app-collection bottleneck.
+The current study is intentionally compact: one OpenAI API/app pair, a frozen
+60-prompt diagnostic bank, API-only vendor baselines, API-side repetition
+checks, and a targeted ChatGPT-app repetition check for the 17 final cases. The
+result is sufficient for a case-based black-box thesis claim, but not for
+population-level rates, causal mechanism attribution, or broad app-side stability
+claims over the entire prompt bank. Future work should therefore strengthen the
+same design rather than search for a different thesis.
 
-\section{Highest-Value Extension: Automated App-Side Stability}
+\section{Highest-Value Extension: Broader App-Side Stability}
 
-The most useful empirical extension is broader app-side repetition with partial
-automation. The 17-case targeted stability panel has already been collected; a
-follow-up should repeat the full 60-prompt ChatGPT-app collection, then scale to a
-pre-registered larger bank. Browser automation with Playwright or Selenium should
-open fresh chats, paste prompts, wait for completion, save screenshots, capture
-DOM text where available, run OCR fallback, and write an evidence manifest with
-visible model labels, tool indicators, and source surfaces.
+The most useful empirical extension is no longer a first targeted ChatGPT app
+stability panel; that panel has been collected for the 17 final cases. The next
+step is broader app-side repetition coverage, not a large new prompt bank. A
+follow-up should repeat either the full 60-prompt ChatGPT-app collection or a
+pre-registered larger subset, ideally in fresh sessions and with the visible
+model selector captured when possible.
 
 The output should be a compact prompt-level table: stable, partially stable, or
 unstable. Stable means the same divergence label appears again. Partially stable
@@ -24,10 +25,10 @@ reader question beyond the current targeted panel: whether non-divergent rows
 remain non-divergent and whether the observed stability pattern holds outside
 the final-case subset.
 
-The automation should preserve the current evidence discipline. Each new row
-still needs a screenshot, transcript, visible UI-surface note, and final coding
-decision. Automation without screenshot QA would add volume without solving the
-auditability problem.
+The same repetition pass should keep the current evidence discipline. Each new
+row needs a screenshot, transcript, visible UI-surface note, and final coding
+decision. Adding repetitions without screenshot QA would not strengthen the
+thesis.
 
 \section{Broader Reliability Work}
 
@@ -47,11 +48,12 @@ descriptor unless the coding guide is tightened and validated.
 
 \section{Prompt Coverage and Power}
 
-A confirmatory version needs larger category cells, a pre-specified primary
-endpoint, and a fixed multiple-comparison plan. Scaling from 60 to several
-hundred prompts is the direct way to address the current McNemar power problem,
-but that scale is practical only if app collection is automated and screenshot
-QA is made routine.
+A larger follow-up should expand the prompt bank only after the repetition and
+reliability gaps are handled. The current 60-prompt bank is diagnostic rather
+than representative, and the primary refusal endpoint is directional but not
+conventionally significant. A confirmatory version would need larger category
+cells, a pre-specified primary endpoint, and a fixed multiple-comparison plan for
+moderator analyses.
 
 The most useful expansion would add objective instruction-following prompts and
 more balanced refusal-boundary subcategories. Objective format constraints such
@@ -101,14 +103,15 @@ Rank & Task & Immediate output & Why it matters \\
 \endhead
 \bottomrule
 \endfoot
-1 & Automated full-bank app repetitions & Stability table with screenshots, transcripts, and manifests & Tests whether the targeted stability pattern holds beyond the 17 final cases. \\
-2 & Larger automated prompt bank & Better-powered confirmatory audit & Separates durable patterns from small-cell effects. \\
+1 & Full-bank ChatGPT app repetitions & Stability table with screenshots and transcripts & Tests whether the targeted stability pattern holds beyond the 17 final cases. \\
+2 & Larger prompt bank & Better-powered confirmatory audit & Separates durable patterns from small-cell effects. \\
 3 & Other consumer apps & Provider-specific API/app matrices & Tests whether the access-surface issue generalizes. \\
 4 & Longitudinal waves & Drift report by prompt and category & Measures persistence over product updates. \\
 5 & Broader reliability coding & Multi-coder reliability report on a larger subset & Quantifies where the taxonomy remains dependable at scale. \\
 6 & Surface ablations & Search, memory, locale, tool, and system-prompt condition notes & Narrows plausible explanations without claiming hidden mechanisms. \\
 \end{longtable}
 
-This agenda turns the thesis into a larger engineering program: automate the app
-surface, preserve screenshot-level evidence, expand the prompt bank, and then
-test stability, reliability, and generality before making stronger claims.
+This agenda keeps the thesis claim appropriately bounded. The current evidence
+supports a conservative audit finding: a bare API condition is not automatically
+a proxy for the productized consumer-app deployment. The next work should test
+stability, reliability, and generality before making stronger claims.

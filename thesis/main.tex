@@ -58,23 +58,21 @@ into its parts.
 
 Using a frozen bank of 60 prompts across six categories, responses are coded for
 refusal status, safety framing, instruction-format compliance, unsupported
-inference, factuality, and visible interface signatures. Manual review finds 17
-substantive divergences. Ten form the behavioral core (six refusal cases, three
-factual support cases, and one instruction format case) and seven are
-product-surface or context cases. The clearest pattern is directional but
-underpowered: on refusal expected prompts the bare API refuses more often than
-the app, with five API-only full refusals and no app-only full refusals (McNemar
-exact $p=0.0625$).
+inference, factuality, and visible interface signatures. Manual review finds 17 substantive
+divergences. Ten form the behavioral core (six refusal cases, three factual
+support cases, and one instruction format case) and seven are product-surface or
+context cases. The clearest pattern is directional. On refusal expected prompts
+the bare API refuses more often than the app, although the asymmetry is not
+conventionally significant (McNemar exact $p = 0.062$).
 
 Repetition and reliability checks frame how far the cases extend. The API refusal
 label is stable across repeated API runs (Fleiss $\kappa = 1.0$), and 14 of the
 17 cases reproduce in two fresh app repetitions. An independent blind
-second-coder pass on 54 coding units shows strong agreement on the core labels,
-while safety framing is too weak to carry the claim. The contribution is a
-compact reproducible protocol and a case-based audit, not a confirmatory
-population estimate. The central conclusion is that the bare API is not a
-neutral proxy for the ChatGPT app, so audits should name the access surface they
-evaluate.
+second-coder pass on 54 coding units shows strong agreement on the core labels, while
+safety framing is too weak to carry the claim. The contribution is a compact
+reproducible protocol and a conservative case-based audit. The central conclusion
+is that the bare API is not a neutral proxy for the ChatGPT app, so audits should
+name the access surface they evaluate.
 \par
 \endgroup
 \end{abstracten}

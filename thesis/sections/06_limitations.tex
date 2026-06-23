@@ -7,23 +7,24 @@ validity and how they bound interpretation.
 
 \section{Sample Size and Statistical Power}
 
-The empirical base is small. Sixty paired prompts and 17 retained substantive
-cases are enough for a compact diagnostic audit, but not for a strict
-confirmatory NLP evaluation. The prompt bank covers several important behavioral
-families, but it is not a random sample of user prompts; the observed $17/60$
-divergence rate is therefore a rate inside this benchmark-grounded bank, not an
-expected rate for ChatGPT or API use in general. Category cells of roughly ten
-prompts leave especially wide intervals.
+The 60-prompt bank is diagnostic, not representative. It covers several important
+behavioral families but is not a random sample of user prompts, so the observed
+$17/60$ divergence rate is a rate within this benchmark-grounded bank, not an
+expected rate for all ChatGPT or OpenAI API interactions. Category-level counts
+are smaller still: ten prompts can show a suggestive pattern but leave a wide
+confidence interval, which is why the Results report Wilson intervals and describe
+category findings as indicative rather than precise.
 
-The primary statistical endpoint also falls short of conventional significance:
+The primary statistical result is directional but not conventionally significant:
 the full-refusal asymmetry is $5$ API-only refusals versus $0$ app-only refusals
-(McNemar exact $p=0.0625$). With this exact test, one additional
-one-directional discordant pair would have crossed $\alpha=.05$. The result is
-therefore a directional refusal signal plus concrete case evidence, not a
-confirmed population-level effect. The moderator analyses---category,
+(McNemar exact $p=0.0625$). The correct reading is ``directional asymmetry in a
+compact audit, supported by concrete cases and needing a larger confirmatory
+replication,'' not ``proved asymmetry.'' The moderator analyses---category,
 source-family, risk-level, lexical, and channel-agreement slices---reuse the same
-60 prompts, so their raw p-values are descriptive rather than independent
-discoveries.
+60 prompts, so their raw p-values describe where retained cases cluster but are
+not independent discoveries. The main inference therefore rests on the paired
+refusal test, the tiered case evidence, and the correction audit; everything else
+is exploratory.
 
 \section{Repetition Coverage Remains Targeted}
 
@@ -75,7 +76,7 @@ core. Separating these factors would need provider cooperation or a controlled
 wrapper that toggles system prompt, tools, and locale independently; that is
 beyond a black-box thesis and is named in future work.
 
-\section{Measurement, Manual Collection, and Coder Reliability}
+\section{Measurement: Screenshots, OCR, and Coder Reliability}
 
 The consumer-app channel relies on screenshot-backed transcription. This preserves
 the visible interface but introduces transcription risk: OCR can capture prompt
@@ -84,15 +85,6 @@ applies prompt-echo cleaning and targeted screenshot corrections, but residual
 risk remains, and it affects format-compliance claims most strongly---which is why
 the thesis reports only one final format-compliance case (S039, after excluding
 S035 and S038) and avoids quoting raw high-risk outputs in the main text.
-
-Manual app collection is also a real engineering bottleneck. It kept the
-consumer-app evidence traceable, but it limited the main paired audit to 60
-prompts. A better-powered follow-up should automate much of the app-side
-collection with browser control such as Playwright or Selenium, DOM capture where
-the interface permits it, OCR fallback, screenshot hashing, and automated
-evidence manifests. That pipeline could scale the same design from dozens to
-hundreds of prompts while still preserving visual proof. The present thesis does
-not solve that scaling problem; it documents a careful smaller audit.
 
 Manual review is likewise necessary because many distinctions require judgment,
 such as full refusal versus safe redirect, or minor caution versus substantive
