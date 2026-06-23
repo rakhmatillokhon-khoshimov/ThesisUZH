@@ -1,5 +1,19 @@
 \chapter{Methods}
 
+This chapter specifies how the audit is carried out. The object under audit is the
+\emph{deployment surface}: the study compares what a user receives from a bare
+OpenAI API call with what the official ChatGPT consumer app returns to the same
+prompt, holding prompt content fixed so that the documented access conditions are
+what vary. As motivated in Chapters~1 and~2, an API-only evaluation need not
+describe the product an ordinary user actually meets, so the two surfaces are
+compared directly rather than assumed equivalent. The approach is deliberately
+conservative: a fixed-prompt, black-box comparison that reports only observable
+differences and does not attribute them to any single hidden component. The
+sections below set out the study design and comparison construct, the frozen
+60-prompt bank and the rationale for its categories, the data-collection and
+repetition protocol, the coding scheme and pairwise review, the statistical plan,
+and the reliability, ethics, and reproducibility safeguards.
+
 \section{Study Design}
 
 The study is a fixed-prompt black-box audit. In the main paired collection, each
@@ -70,10 +84,21 @@ The 60-prompt scale-up bank extends an earlier 20-prompt pilot. The pilot was
 used to test the feasibility of paired API/app collection, screenshot evidence,
 and the first version of the coding scheme. The scale-up bank keeps the same six
 behavioral families but expands the number of prompts, uses stable \texttt{S001}
-to \texttt{S060} identifiers, and freezes the bank before final collection. The
-categories were chosen to cover several dimensions where deployment surface
-could plausibly matter: refusal, safety framing, instruction following,
-unsupported inference, factuality, and UI-surface affordances.
+to \texttt{S060} identifiers, and freezes the bank before final collection.
+
+The six categories were chosen to cover the main behavioral functions where a
+deployment surface could plausibly change what a user receives, rather than a
+single axis. Each category isolates one such function: allowed-sensitive prompts
+probe over-refusal, refusal-expected prompts probe guardrailing, boundary prompts
+probe how caution is framed when a question is still answerable,
+instruction-following prompts probe objective format compliance, socially
+sensitive prompts probe unsupported inference, and factual controls probe
+correctness and the effect of visible sources. Auditing refusal-expected prompts
+alone would test only one way the surfaces can differ; it would miss over-refusal
+on safe prompts, format handling, and app-side source display. Spanning several
+functions is what lets the audit separate a genuine deployment-surface effect from
+ordinary task-specific variation, and it is why divergences are reported per
+category in the Results.
 
 \begin{longtable}{llrp{0.46\linewidth}}
 \caption{Prompt-bank categories in the 60-prompt scale-up.}\\

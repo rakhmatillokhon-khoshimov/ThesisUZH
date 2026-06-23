@@ -1,203 +1,122 @@
 \chapter{Limitations}
 
-The study is intentionally narrow. Its strength is that it makes a specific
-bare-API-versus-productized-app comparison under documented conditions. Its
-limitations follow from that same design. This section states the main threats
-to validity and how they affect interpretation.
+The study is intentionally narrow. Its strength is a specific
+bare-API-versus-productized-app comparison under documented conditions, and its
+limitations follow from that same design. This chapter states the main threats to
+validity and how they bound interpretation.
 
-\section{Prompt-Bank Size and Representativeness}
+\section{Sample Size and Statistical Power}
 
-The 60-prompt bank is diagnostic, not representative. It is large enough to
-cover several important behavioral families, but it is not a random sample of
-user prompts. The observed 17/60 divergence rate should therefore not be read as
-the expected divergence rate for all ChatGPT or OpenAI API interactions. It is a
-rate within this benchmark-grounded prompt bank.
+The 60-prompt bank is diagnostic, not representative. It covers several important
+behavioral families but is not a random sample of user prompts, so the observed
+$17/60$ divergence rate is a rate within this benchmark-grounded bank, not an
+expected rate for all ChatGPT or OpenAI API interactions. Category-level counts
+are smaller still: ten prompts can show a suggestive pattern but leave a wide
+confidence interval, which is why the Results report Wilson intervals and describe
+category findings as indicative rather than precise.
 
-The category-level counts are even smaller. A category with ten prompts can show
-a suggestive pattern, but its confidence interval remains wide. This is why the
-Results chapter reports Wilson intervals and describes category findings as
-indicative rather than precise. Future work should repeat the design with larger
-category samples and multiple repetitions.
-
-\section{Statistical Power and Multiple Looks}
-
-The primary statistical result is not conventionally significant. The
-full-refusal asymmetry is $5$ API-only full refusals versus $0$ app-only full
-refusals, giving McNemar exact $p=0.0625$. This is directional and case-relevant,
-but it does not cross $\alpha=.05$. The correct conclusion is therefore not
-``proved asymmetry''; it is ``directional asymmetry in a compact audit, supported
-by concrete cases and needing a larger confirmatory replication.''
-
-The moderator analyses are weaker still. Category, source-family, risk-level,
-lexical, channel-agreement, and other slices reuse the same 60 prompts. Their
-raw p-values can help describe where retained cases cluster, but they should not
-be treated as independent discoveries. This thesis therefore uses them as
-exploratory diagnostics and keeps the main inference on the paired refusal test,
-the tiered case evidence, and the correction audit.
+The primary statistical result is directional but not conventionally significant:
+the full-refusal asymmetry is $5$ API-only refusals versus $0$ app-only refusals
+(McNemar exact $p=0.0625$). The correct reading is ``directional asymmetry in a
+compact audit, supported by concrete cases and needing a larger confirmatory
+replication,'' not ``proved asymmetry.'' The moderator analyses---category,
+source-family, risk-level, lexical, and channel-agreement slices---reuse the same
+60 prompts, so their raw p-values describe where retained cases cluster but are
+not independent discoveries. The main inference therefore rests on the paired
+refusal test, the tiered case evidence, and the correction audit; everything else
+is exploratory.
 
 \section{Repetition Coverage Remains Targeted}
 
-The substantive divergence analysis begins from one submission per prompt per
-channel. To bound stochasticity, the API channels were re-collected for two
-additional repetitions, and the resulting within-channel stability is high for
-the refusal label (Fleiss $\kappa=1.0$ for OpenAI \texttt{gpt-4o}, $\kappa=0.74$
-for Claude; see Table~\ref{tab:stability}). The same repetitions also show, at
-the raw-text level, that the API resembles its own re-runs more than it
-resembles the app on every prompt in the bank
-(Figure~\ref{fig:withinbetween}). This reduces concern that the API side of the
-refusal result is merely stochastic.
-
-The app side was also repeated, but only for the high-value subset: the 17 final
-substantive cases were collected twice more in fresh ChatGPT-app chats. This is
-the right stress test for the thesis claim because it targets exactly the rows
-where an app-side flip would matter most. The result strengthens the core
-interpretation: all six refusal-boundary cases and all three factual-support
-cases reproduced in both app repetitions. It does not, however, turn the study
-into a fully repeated 60-prompt app panel. Two visible-source-only cases did not
-reproduce their original UI-surface anchor, and the single format case reproduced
-in only one of two repetitions. The app repetition evidence should therefore be
-read as a targeted robustness check for the retained cases, not as a general
-estimate of app-side stability across the whole prompt bank.
-
-Because the app repetitions were collected through a browser-based collection workflow, the
-transcripts, screenshot identifiers, source GIFs, and extracted final-frame PNGs
-must remain together in the private evidence package. This makes the late
-repetition panel screenshot-backed, but it is still a targeted 17-case panel
-rather than a full replacement for the original screenshot-backed 60-pair
-collection.
-
-A second gap is that Gemini repetition stability could not be measured: the
-high-throughput configuration used for the scale-up (thinking disabled) returns
-empty outputs on re-collection, so its repeated runs were not codeable. This
-affects only an extension baseline, not the core OpenAI API-versus-app
-comparison, but it should be disclosed. A future run would re-collect Gemini with
-thinking enabled despite the lower throughput.
+The substantive analysis begins from one submission per prompt per channel. To
+bound stochasticity, the API channels were re-collected twice; within-channel
+stability is high for the refusal label (Fleiss $\kappa=1.0$ for OpenAI
+\texttt{gpt-4o}, $\kappa=0.74$ for Claude; see Table~\ref{tab:stability}), and at
+the raw-text level the API resembles its own re-runs more than it resembles the
+app on every prompt (Figure~\ref{fig:withinbetween}). The app side was repeated
+only for the high-value subset---the 17 final cases, collected twice more in fresh
+ChatGPT-app chats---which is the right stress test because it targets exactly the
+rows where an app-side flip would matter most. All six refusal-boundary cases and
+all three factual-support cases reproduced in both app repetitions; two
+visible-source-only cases did not reproduce their UI-surface anchor, and the
+single format case reproduced in only one of two. The app repetition evidence is
+therefore a targeted robustness check for the retained cases, not a full repeated
+60-prompt app panel. Separately, Gemini repetition stability could not be measured
+because the high-throughput configuration (thinking disabled) returned empty
+outputs on re-collection; this affects only an extension baseline, not the core
+OpenAI API-versus-app comparison, and a future run would re-collect Gemini with
+thinking enabled.
 
 \section{The Deployment-Stack Confound (Construct Validity)}
 
-This is the central limitation, and it is a limit on the construct rather than a
-detail of execution. The API condition has an explicit \texttt{gpt-4o} model
-label, but the archived app screenshots do not reliably preserve an in-frame app
-model label. The comparison therefore cannot rule out model-label, routing, or
-product-configuration differences inside the app condition. Even a visible app
-label would not be enough to make the conditions identical: the bare Responses
-API call carries no system prompt, no tools, no retrieval, and no session or
-locale state, whereas the consumer app may bundle system instructions, tool and
-retrieval availability, routing, session handling, and account or location
-context together with the model. The comparison construct is therefore the whole
-\emph{deployment stack}, and this design cannot decompose it: an observed
+This is the central limitation, and it limits the construct rather than the
+execution. The API condition has an explicit \texttt{gpt-4o} label, but the
+archived app screenshots do not reliably preserve an in-frame model label, so the
+comparison cannot rule out model-label, routing, or product-configuration
+differences inside the app. Even a visible label would not make the conditions
+identical: the bare Responses API call carries no system prompt, tools, retrieval,
+or session and locale state, whereas the consumer app may bundle all of these with
+routing and account context. The comparison construct is therefore the whole
+\emph{deployment stack}, and the design cannot decompose it---an observed
 difference could come from the system prompt, from tool or retrieval availability,
-from locale, or from any combination, and the black-box data cannot attribute it
-to one component.
-
-Two consequences follow, and both are honored in the claims. First, no result is
-phrased as ``the access channel causes'' a behavior; results are phrased as ``the
-bare API differs from the productized deployment.'' That bundled comparison is
-exactly the contrast an ordinary user experiences, so it is a meaningful object of
-audit even though it is not a clean manipulation. Second, the affordance-tier
-divergences (visible sources, localized context) are the cases where the confound
-is most obvious---they are essentially direct consequences of the app having tools
-and locale---which is precisely why the Results down-weight them relative to the
-refusal-boundary and factual-correction core. A design that could separate these
-factors would need provider cooperation or a controlled wrapper that toggles
-system prompt, tools, and locale independently; that is beyond a black-box thesis
-and is named in future work.
-
-\section{Screenshot and OCR Dependence}
-
-The consumer-app channel relies on screenshot-backed transcription. This is
-methodologically defensible because it preserves the visible user interface, but
-it introduces transcription risk. OCR can capture prompt text, omit text at
-screen boundaries, misread punctuation, or miss UI-only elements. The final
-analysis applies prompt-echo cleaning and targeted screenshot corrections, but
-residual transcription risk remains.
-
-This limitation affects format-compliance claims most strongly. The thesis
-therefore reports only one final format-compliance case, S039, after excluding
-S035 and S038. It also avoids quoting raw high-risk outputs in the main text.
-Future work should combine screenshots with direct text export where possible,
-while still preserving visual evidence for UI-surface signatures.
-
-\section{Manual Review and Reliability}
-
-Manual review is necessary because many differences require judgment. For
-example, distinguishing a full refusal from a safe redirect, or a minor caution
-from substantive safety framing, cannot always be done reliably with simple
-string rules. The independent blind reliability pass confirms this split. Core
-labels such as refusal status, format compliance, unsupported inference, and
-factuality show acceptable-to-strong agreement, while
-\texttt{safety\_framing\_strength} has weak agreement (Cohen's $\kappa=0.06$;
-weighted $\kappa=0.27$).
-
-This limits how safety-framing differences should be interpreted. They are useful
-as descriptive context, but they should not carry a final substantive claim by
-themselves. The coding-dependence sensitivity check addresses exactly this
-problem: no final substantive divergence depends on safety framing alone. Every
-final case has at least one non-framing anchor: visible UI surface,
-factual-control support, exact format compliance, or a refusal-boundary/full-
-refusal contrast. Thus the reliability limitation narrows the interpretation of
-the softest label, but it does not make the main deployment-surface finding
-depend on that label.
-
-\section{Temporal Drift}
-
-Both API and consumer-app systems can change over time. Model versions, default
-tools, app UI, source display, browsing behavior, safety phrasing, and routing
-can all drift. The thesis records timestamps and collection folders, but the
-results are still tied to the collection period. A future run could produce a
-different pattern.
-
-Temporal drift does not invalidate the audit; it defines its scope. The claim is
-that deployment-surface divergence was observed under the documented 2026
-collection conditions. The stronger claim that the same divergences persist over
-time would require repeated longitudinal collection. Within the single app
-collection session itself, however, a collection-order check found no
-association between session position and substantive divergence
-(Section~\ref{sec:order-robustness}), so within-session drift is unlikely to
-explain the retained case set; only across-session drift remains out of scope.
-
-\section{No Internal Mechanism Access}
-
-The study has no access to hidden system prompts, moderation classifiers, routing
-rules, retrieval policies, or account-level personalization internals. It cannot
-attribute a difference to a specific hidden component. The UI-surface signature
+from locale, or from any combination, and black-box data cannot attribute it to one
+component. The study likewise has no access to hidden system prompts, moderation
+classifiers, routing rules, or personalization internals; the UI-surface signature
 records what is visible, not why it appeared.
 
-This limitation is shared by most black-box audits of proprietary systems. The
-appropriate response is not to avoid auditing, but to keep the interpretation
-aligned with the evidence. The thesis therefore uses phrases such as
-``observable divergence'', ``visible sources'', and ``documented access
-conditions'' rather than causal claims about hidden mechanisms.
+Two consequences follow, and both are honored in the claims. First, no result is
+phrased as ``the access channel causes'' a behavior; results read as ``the bare
+API differs from the productized deployment,'' which is exactly the contrast an
+ordinary user experiences, so it is a meaningful object of audit even though it is
+not a clean manipulation. Second, the affordance-tier divergences (visible
+sources, localized context) are where the confound is most obvious---they are
+near-direct consequences of the app having tools and locale---which is why the
+Results down-weight them relative to the refusal-boundary and factual-correction
+core. Separating these factors would need provider cooperation or a controlled
+wrapper that toggles system prompt, tools, and locale independently; that is
+beyond a black-box thesis and is named in future work.
 
-\section{High-Risk Prompt Redaction}
+\section{Measurement: Screenshots, OCR, and Coder Reliability}
 
-Category B includes high-risk prompts from sources such as Do-Not-Answer and
-HarmBench. The private local bank contains executable text for controlled
-collection, but shared thesis artifacts use redacted descriptors. This protects
-against unnecessary dissemination of harmful prompt text but slightly reduces
-external inspectability.
+The consumer-app channel relies on screenshot-backed transcription. This preserves
+the visible interface but introduces transcription risk: OCR can capture prompt
+text, omit text at screen boundaries, or misread punctuation. The final analysis
+applies prompt-echo cleaning and targeted screenshot corrections, but residual
+risk remains, and it affects format-compliance claims most strongly---which is why
+the thesis reports only one final format-compliance case (S039, after excluding
+S035 and S038) and avoids quoting raw high-risk outputs in the main text.
 
-The appendix mitigates this by reporting source, category, risk level, expected
-behavior, final labels, and claim-safe summaries. A trusted reviewer with access
-to the private local repository can inspect the raw materials if needed.
+Manual review is likewise necessary because many distinctions require judgment,
+such as full refusal versus safe redirect, or minor caution versus substantive
+safety framing. The independent blind reliability pass confirms a clean split:
+refusal status, format compliance, unsupported inference, and factuality show
+acceptable-to-strong agreement, while \texttt{safety\_framing\_strength} is weak
+(Cohen's $\kappa=0.06$; weighted $\kappa=0.27$). Safety-framing differences are
+therefore used only as descriptive context, and the coding-dependence check
+confirms that no final substantive divergence rests on safety framing alone: every
+retained case has a non-framing anchor---visible UI surface, factual-control
+support, exact format compliance, or a refusal-boundary/full-refusal contrast.
 
-\section{Vendor Baseline Boundaries}
+\section{Scope Boundaries: Drift, Redaction, Baselines, and Breadth}
 
-Claude and Gemini are included as API-only baselines. They contextualize the
-OpenAI result but do not support consumer-app claims for those vendors. The
-thesis therefore does not compare Claude API to a Claude app, nor Gemini API to a
-Gemini app. Treating those baselines as app comparisons would exceed the data.
-
-\section{Compactness of the Empirical Scope}
-
-The empirical core of this thesis is deliberately compact: one provider's
-API/app pair, sixty prompts, one app submission per prompt, and a single primary
-statistical endpoint. The appendices are comparatively extensive because they
-serve auditability: every final case can be traced to a screenshot, a corrected
-transcript, and a coding row. The compact scope is a limitation for
-generalization, as discussed above, but it is also what makes the evidence chain
-fully checkable end to end. Breadth was traded for verifiability, and the thesis
-states the trade openly rather than treating coverage as free.
+Several further boundaries define rather than invalidate the audit. \emph{Temporal
+drift:} both API and app systems can change---model versions, default tools, UI,
+source display, safety phrasing, and routing---so the results are tied to the
+documented 2026 collection window; within the app session itself, a
+collection-order check found no association between session position and
+substantive divergence (Section~\ref{sec:order-robustness}), so within-session
+drift is unlikely to explain the case set, while across-session drift remains out
+of scope. \emph{Redaction:} Category B high-risk prompts appear as redacted
+descriptors in shared artifacts, which slightly reduces external inspectability,
+mitigated by the appendix reporting source, category, risk level, expected
+behavior, final labels, and claim-safe summaries for every case. \emph{Baselines:}
+Claude and Gemini are API-only and contextualize the OpenAI result but do not
+support consumer-app claims for those vendors. \emph{Breadth:} the empirical core
+is deliberately compact---one provider's API/app pair, sixty prompts, one app
+submission per prompt, one primary statistical endpoint---and the appendices are
+extensive precisely so that every case traces to a screenshot, a corrected
+transcript, and a coding row. Breadth was traded for end-to-end verifiability, and
+the thesis states the trade openly rather than treating coverage as free.
 
 \section{Summary of Validity Boundary}
 
