@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Build a prompt-level persistence table for high-value repetition rows.
+"""Build a prompt level persistence table for high value repetition rows.
 
 The aggregate repetition table is useful, but the thesis also needs a compact
 view of the rows a reader is most likely to scrutinize: Category B refusal
-cases, factual controls, UI-surface cases, and S039. This script uses existing
-OpenAI API r1/r2/r3 outputs and the reviewed cross-channel coding sheet.
+cases, factual controls, UI surface cases, and S039. This script uses existing
+OpenAI API r1/r2/r3 outputs and the reviewed cross channel coding sheet.
 """
 from __future__ import annotations
 
@@ -14,16 +14,16 @@ from pathlib import Path
 
 import score_pilot_results as S
 
-ROOT = Path(__file__).resolve().parents[1]
-CLEAN = ROOT / "results" / "analysis"
+ROOT = Path(__file__).resolve().parent
+CLEAN = ROOT / "pilot_outputs" / "20260608" / "analysis_scaleup_cleaned"
 OUT = CLEAN / "stability"
 OUT.mkdir(parents=True, exist_ok=True)
 
 REVIEWED = CLEAN / "scaleup_human_reviewed_coding_sheet.csv"
 OPENAI_REPS = {
-    "r1": ROOT / "data" / "private" / "20260605" / "openai_api_scaleup_60" / "responses",
-    "r2": ROOT / "data" / "private" / "20260609" / "reps" / "openai_api" / "responses",
-    "r3": ROOT / "data" / "private" / "20260609" / "reps" / "openai_api" / "responses",
+    "r1": ROOT / "pilot_outputs" / "20260605" / "openai_api_scaleup_60" / "responses",
+    "r2": ROOT / "pilot_outputs" / "20260609" / "reps" / "openai_api" / "responses",
+    "r3": ROOT / "pilot_outputs" / "20260609" / "reps" / "openai_api" / "responses",
 }
 
 CSV_FIELDS = [
@@ -100,7 +100,7 @@ def display_label(value: str) -> str:
     for source, target in replacements.items():
         value = value.replace(source, target)
     value = value.replace("_", " ")
-    value = value.replace(";", "; ")
+    value = value.replace(";", ", ")
     while "  " in value:
         value = value.replace("  ", " ")
     return value
@@ -154,15 +154,15 @@ def build_rows() -> list[dict[str, str]]:
         if refusal_stable and safety_stable:
             summary = "refusal and safety stable"
         elif refusal_stable:
-            summary = "refusal stable; safety varies"
+            summary = "refusal stable, safety varies"
         elif safety_stable:
-            summary = "refusal varies; safety stable"
+            summary = "refusal varies, safety stable"
         else:
             summary = "refusal and safety vary"
 
         rows.append({
             "prompt_id": reviewed["prompt_id"],
-            "selection_reason": "; ".join(reasons),
+            "selection_reason": ", ".join(reasons),
             "category_id": reviewed["category_id"],
             "category": reviewed["category"],
             "final_cross_channel_type": reviewed.get("final_divergence_type", "none") or "none",
@@ -185,10 +185,10 @@ def write_markdown(path: Path, rows: list[dict[str, str]]) -> None:
         "# Targeted Persistence Table",
         "",
         "High-value rows selected from Category B refusal cases, factual controls, "
-        "UI-surface cases, and S039. Patterns use existing OpenAI API r1/r2/r3 "
+        "UI surface cases, and S039. Patterns use existing OpenAI API r1/r2/r3 "
         "outputs and the project classifiers.",
         "",
-        "| ID | Selection | Cross-channel signal | API refusal r1/r2/r3 | API safety r1/r2/r3 | Persistence |",
+        "| ID | Selection | Cross channel signal | API refusal r1/r2/r3 | API safety r1/r2/r3 | Persistence |",
         "|---|---|---|---|---|---|",
     ]
     for row in rows:
@@ -209,14 +209,14 @@ def write_tex(path: Path, rows: list[dict[str, str]]) -> None:
         r"\footnotesize",
         r"\setlength{\tabcolsep}{2pt}",
         r"\begin{longtable}{L{0.07\linewidth}L{0.16\linewidth}L{0.18\linewidth}L{0.18\linewidth}L{0.16\linewidth}L{0.17\linewidth}}",
-        r"\caption{Targeted prompt-level persistence check for high-value rows. The table uses existing OpenAI API r1/r2/r3 outputs and the project classifiers. It checks API-side stochasticity for Category B refusal prompts, factual controls, UI-surface cases, and S039; app-side repetitions are reported separately for the 17 final cases.}\\",
+        r"\caption[Targeted prompt level persistence check]{Targeted prompt level persistence check for high value rows. The table uses existing OpenAI API r1/r2/r3 outputs and the project classifiers. It checks API side stochasticity for Category B refusal prompts, factual controls, UI surface cases, and S039. App side repetitions are reported separately for the 17 final cases.}\\",
         r"\toprule",
-        r"ID & Selection & Cross-channel signal & API refusal pattern & API safety pattern & Persistence \\",
+        r"ID & Selection & Cross channel signal & API refusal pattern & API safety pattern & Persistence \\",
         r"\midrule",
         r"\endfirsthead",
-        r"\caption[]{Targeted prompt-level persistence check (continued).}\\",
+        r"\caption[]{Targeted prompt level persistence check (continued).}\\",
         r"\toprule",
-        r"ID & Selection & Cross-channel signal & API refusal pattern & API safety pattern & Persistence \\",
+        r"ID & Selection & Cross channel signal & API refusal pattern & API safety pattern & Persistence \\",
         r"\midrule",
         r"\endhead",
         r"\bottomrule",

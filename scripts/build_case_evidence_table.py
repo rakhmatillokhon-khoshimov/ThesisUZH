@@ -8,9 +8,9 @@ The table is an audit aid, not a new scorer. It joins:
   * screenshot paths.
 
 Outputs:
-  * results/analysis/evidence/case_evidence_table.csv
-  * results/analysis/evidence/case_evidence_table.md
-  * thesis/generated/appendix_case_evidence_table.tex
+  * analysis_scaleup_cleaned/evidence/case_evidence_table.csv
+  * analysis_scaleup_cleaned/evidence/case_evidence_table.md
+  * thesis_draft/generated/appendix_case_evidence_table.tex
 
 High-risk prompt text is never written. Evidence excerpts are short and
 claim-oriented so the table can be shared as a verification record without
@@ -23,13 +23,13 @@ import json
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-ANALYSIS = ROOT / "results" / "analysis"
+ROOT = Path(__file__).resolve().parent
+ANALYSIS = ROOT / "pilot_outputs" / "20260608" / "analysis_scaleup_cleaned"
 REVIEWED = ANALYSIS / "scaleup_human_reviewed_coding_sheet.csv"
-APP_LOG = ROOT / "data" / "private" / "20260608" / "chatgpt_app_scaleup_60_cleaned" / "chatgpt_app_log_private.csv"
-API_RESPONSES = ROOT / "data" / "private" / "20260605" / "openai_api_scaleup_60" / "responses"
+APP_LOG = ROOT / "pilot_outputs" / "20260608" / "chatgpt_app_scaleup_60_cleaned" / "chatgpt_app_log_private.csv"
+API_RESPONSES = ROOT / "pilot_outputs" / "20260605" / "openai_api_scaleup_60" / "responses"
 OUT = ANALYSIS / "evidence"
-TEX_OUT = ROOT / "thesis" / "generated" / "appendix_case_evidence_table.tex"
+TEX_OUT = ROOT / "thesis_draft" / "generated" / "appendix_case_evidence_table.tex"
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -52,6 +52,9 @@ def clean_text(text: str) -> str:
     }
     for old, new in replacements.items():
         text = text.replace(old, new)
+    text = text.replace("**", "")
+    text = re.sub(r"(?<=[a-z])-(?=[a-z])", " ", text)
+    text = re.sub(r"\b[a-z]{4,}\.\.\.\s+\+1\b", "...", text)
     # Common OCR artifact in the app transcripts: a capital I read as a pipe.
     text = re.sub(r"(^|\s)\|\s+(?=can|can't|cannot|would|will|am|was|have|do)\b", r"\1I ", text)
     text = re.sub(r"\s+", " ", text)
@@ -96,7 +99,7 @@ def claim(row: dict[str, str]) -> str:
             f"app {label(row['app_refusal_status'])}"
         )
     if "ui_surface_signature" in parts:
-        claims.append(f"app-only UI surface: {label(row['app_ui_surface_signature'])}")
+        claims.append(f"app only UI surface: {label(row['app_ui_surface_signature'])}")
     if "safety_framing" in parts:
         claims.append(
             f"safety framing differs: API {label(row['api_safety_framing'])}, "
@@ -112,7 +115,7 @@ def claim(row: dict[str, str]) -> str:
             f"format compliance differs: API {label(row['api_format_compliance'])}, "
             f"app {label(row['app_format_compliance'])}"
         )
-    return "; ".join(claims) if claims else "substantive observable divergence"
+    return ", ".join(claims) if claims else "substantive observable divergence"
 
 
 def api_output(prompt_id: str) -> str:
@@ -178,12 +181,12 @@ def main() -> int:
         "\\setlength{\\tabcolsep}{2pt}",
         "\\begin{scriptsize}",
         "\\begin{longtable}{@{}L{0.06\\linewidth}L{0.18\\linewidth}L{0.20\\linewidth}L{0.20\\linewidth}L{0.28\\linewidth}@{}}",
-        "\\caption{Quote-level evidence audit for the 17 final substantive cases. Full screenshot paths are stored in the CSV evidence table; this appendix shows shortened verification evidence.}\\\\",
+        "\\caption[Quote level evidence audit for the 17 final cases]{Quote level evidence audit for the 17 final substantive cases. Full screenshot paths are stored in the CSV evidence table. This appendix shows shortened verification evidence.}\\\\",
         "\\toprule",
         "ID & Type & API evidence & App evidence & Final checked claim \\\\",
         "\\midrule",
         "\\endfirsthead",
-        "\\caption[]{Quote-level evidence audit (continued).}\\\\",
+        "\\caption[]{Quote level evidence audit (continued).}\\\\",
         "\\toprule",
         "ID & Type & API evidence & App evidence & Final checked claim \\\\",
         "\\midrule",

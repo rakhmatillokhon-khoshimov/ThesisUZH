@@ -17,9 +17,9 @@ category findings as indicative rather than precise.
 
 The primary statistical result is directional but not conventionally significant.
 The full refusal asymmetry is $5$ API only refusals versus $0$ app only refusals
-(McNemar exact $p=0.0625$). The correct reading is ``directional asymmetry in a
+(McNemar exact $p=0.0625$). The correct reading is a directional asymmetry in a
 compact audit, supported by concrete cases and needing a larger confirmatory
-replication,'' not ``proved asymmetry.'' The moderator analyses by category,
+replication. It is not a proved asymmetry. The moderator analyses by category,
 source family, risk level, lexical pattern, and channel agreement reuse the same
 60 prompts, so their raw p values describe where retained cases cluster but are
 not independent discoveries. The main inference therefore rests on the paired
@@ -43,7 +43,8 @@ single format case reproduced in only one of two. The app repetition evidence is
 therefore a targeted robustness check for the retained cases, not a full repeated
 60 prompt app panel. Separately, Gemini repetition stability could not be measured
 because the high throughput configuration (thinking disabled) returned empty
-outputs in the repeated collection. This affects only an extension baseline, not the core
+outputs in the repeated collection. This affects only an extension baseline, not
+the core
 OpenAI API versus app comparison, and a future run would collect Gemini again with
 thinking enabled.
 
@@ -64,9 +65,9 @@ component. The study likewise has no access to hidden system prompts, moderation
 classifiers, routing rules, or personalization internals. The UI surface signature
 records what is visible, not why it appeared.
 
-Two consequences follow, and both are honored in the claims. First, no result is
-phrased as ``the access channel causes'' a behavior. Results read as ``the bare
-API differs from the productized deployment,'' which is exactly the contrast an
+Two consequences follow, and both are honored in the claims. First, no result
+says that the access channel causes a behavior. The results say that the bare
+API differs from the productized deployment, which is exactly the contrast an
 ordinary user experiences, so it is a meaningful object of audit even though it is
 not a clean manipulation. Second, the affordance tier divergences (visible
 sources, localized context) are where the confound is most obvious. They are
@@ -94,8 +95,9 @@ acceptable to strong agreement, while \texttt{safety\_framing\_strength} is weak
 (Cohen's $\kappa=0.06$, weighted $\kappa=0.27$). Safety framing differences are
 therefore used only as descriptive context, and the coding dependence check
 confirms that no final substantive divergence rests on safety framing alone. Every
-retained case has a non framing anchor: visible UI surface, factual control
-support, exact format compliance, or a refusal boundary/full refusal contrast.
+retained case has an anchor other than safety framing: visible UI surface,
+factual control support, exact format compliance, or a refusal boundary or full
+refusal contrast.
 
 \section{Scope Boundaries: Drift, Redaction, Baselines, and Breadth}
 
@@ -109,10 +111,10 @@ drift is unlikely to explain the case set. Across session drift remains out of
 scope. \emph{Redaction:} Category B high risk prompts appear as redacted
 descriptors in shared artifacts. This slightly reduces external inspectability,
 but the appendix mitigates it by reporting source, category, risk level, expected
-behavior, final labels, and claim safe summaries for every case. \emph{Baselines:}
+behavior, final labels, and release safe summaries for every case. \emph{Baselines:}
 Claude and Gemini are API only and contextualize the OpenAI result, but they do not
 support consumer app claims for those vendors. \emph{Breadth:} the empirical core
-is deliberately compact: one provider's API/app pair, sixty prompts, one app
+is deliberately compact: one provider's API and app pair, sixty prompts, one app
 submission per prompt, and one primary statistical endpoint. The appendices are
 extensive precisely so that every case traces to a screenshot, a corrected
 transcript, and a coding row. Breadth was traded for end to end verifiability, and

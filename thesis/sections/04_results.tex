@@ -4,10 +4,11 @@ This chapter reports the corrected 60 prompt scale up. The core comparison is a
 bare OpenAI Responses API condition (\texttt{gpt-4o}, no custom system prompt)
 against the official productized ChatGPT app deployment, one submission per
 prompt under documented conditions. The API model label is explicit. The app
-screenshots are screenshot backed evidence of the consumer deployment but do not
+screenshots provide archived evidence of the consumer deployment but do not
 reliably preserve an in frame model label. The app condition also includes
 product layers that cannot be decomposed: hidden instructions, tools, retrieval,
-session handling, routing, and UI rendering. Claude and Gemini API runs are reported separately as vendor
+session handling, routing, and UI rendering. Claude and Gemini API runs are
+reported separately as vendor
 robustness baselines. All counts describe observable behavior. No causal claim is
 made about hidden system prompts, internal guardrails, tools, retrieval, or
 routing.
@@ -88,7 +89,7 @@ Substantive after review & \textbf{17} & final count used below \\
 The per label rows count how often each divergence label appears among the 17
 final cases. Because one case can carry several labels (for example a refusal
 divergence accompanied by visible sources), the label rows sum to more than 17.
-the mutually exclusive mechanism decomposition is reported in the secondary
+The mutually exclusive mechanism decomposition is reported in the secondary
 checks below and in the tiering.
 
 The correction lowered the headline count relative to the earlier pass, but it
@@ -110,8 +111,8 @@ tier them by what actually differs (\texttt{analyze\_divergence\_tiers.py}).
 }{}
 
 The nontrivial core is the Tier 1 \emph{behavioral} set: $10/60$ pairs (Wilson
-95\% $[0.09, 0.28]$) where the response itself differs. It contains six refusal boundary
-flips, three factual/retrieval corrections, and one verifiable format failure.
+95\% $[0.09, 0.28]$) where the response itself differs. It contains six refusal
+boundary flips, three factual or retrieval corrections, and one verifiable format failure.
 The other seven are access \emph{affordances}: four where the app renders visible
 sources without changing the answer category, and three where the app adds
 account or location context. The locale cases in particular (for example the
@@ -125,9 +126,9 @@ and is explicit about which claims rest on behavior versus affordance.
 The largest remaining robustness question was whether the ChatGPT app side of
 the 17 final cases was merely a single sample artifact. To address this directly,
 the 17 final substantive prompts were recollected twice in fresh ChatGPT app
-chats (\texttt{r2} and \texttt{r3}) and rescored against the same non framing
-anchor used in the original case: refusal status, factuality, exact format
-compliance, or visible UI/local context signature. Safety framing strength is not
+chats (\texttt{r2} and \texttt{r3}) and rescored against the same original
+anchor while excluding safety framing: refusal status, factuality, exact format
+compliance, or visible UI or local context signature. Safety framing strength is not
 used as a persistence anchor because the independent reliability pass showed
 that label to be weak.
 
@@ -146,7 +147,7 @@ Case family & Cases & Stable in both app repetitions & Interpretation \\
 \endfoot
 Refusal boundary anchors & 6 & 6 & All Category B refusal granularity cases reproduced in both fresh app runs. \\
 Factual support anchors & 3 & 3 & All factual control cases where the app gave the expected supported answer reproduced in both fresh app runs. \\
-Pure UI/context affordance cases & 7 & 5 & Local context and source surface cases mostly reproduced, but S023 and S032 did not reproduce the original visible source anchor. \\
+Pure UI and context affordance cases & 7 & 5 & Local context and source surface cases mostly reproduced, but S023 and S032 did not reproduce the original visible source anchor. \\
 Format compliance anchor & 1 & 0 & S039 reproduced the app side format failure in one of two app repetitions and passed in the other. \\
 \midrule
 All final cases & 17 & 14 & One additional case was partially persistent, leaving two cases unstable under the original anchor rule. \\
@@ -168,7 +169,7 @@ and factuality anchors.
 
 \section{Where Divergences Concentrate}
 
-The script produced category and UI surface tables follow.
+The generated category and UI surface tables follow.
 
 \IfFileExists{../results/analysis/thesis_tables/scaleup_results_tables.tex}{%
   \input{../results/analysis/thesis_tables/scaleup_results_tables}%
@@ -178,7 +179,8 @@ The script produced category and UI surface tables follow.
 
 Divergences appear in five of the six categories. The highest rate is in
 refusal expected prompts, where six of ten prompts are substantive after review.
-Boundary and safety framing prompts and neutral factual controls each contribute four
+Boundary and safety framing prompts and neutral factual controls each contribute
+four
 substantive cases. Allowed sensitive over refusal contributes two cases, both
 driven by UI surface or safety framing differences rather than blanket refusal.
 Instruction following contributes one final format compliance case. The social
@@ -233,7 +235,7 @@ not a full refusal. A good answer should provide useful guidance while avoiding
 operational harm. The final substantive cases in this category are S023, S024,
 S031, and S032.
 
-The most common Category C divergence is UI surface rather than answer/refusal
+The most common Category C divergence is UI surface rather than answer or refusal
 status. S023 and S032 include visible sources in the app. S024 and S031 include
 local context. These outputs change what the user can act on. For self harm
 support and public safety escalation, localized emergency context can matter. For
@@ -253,7 +255,7 @@ correction, only S039 remains as a final substantive divergence. This result is
 conservative. S035 and S038 were removed from the final format claim after
 prompt echo cleaning and screenshot recheck. The final S039 case shows that the
 API satisfies a required separator constraint while the app omits the exact
-separator and renders a different divider like structure.
+separator and renders a different divider structure.
 
 The small number of final format cases is methodologically useful. It shows that
 the study did not inflate app format failures from OCR artifacts. It also
@@ -273,7 +275,7 @@ The final substantive count is zero out of ten. Earlier coding treated some
 ``cannot determine'' style answers as refusals, which created a misleading
 over refusal story. After correction, those answers are coded as the expected
 behavior. This matters because it prevents the thesis from overstating the access
-effect. The app/API divergence is not a blanket social sensitivity difference.
+effect. The app and API divergence is not a blanket social sensitivity difference.
 It is concentrated in refusal granularity, UI surface, and factual grounding.
 
 The negative control can also be stated with its uncertainty rather than as a
@@ -285,7 +287,7 @@ a ten prompt cell cannot exclude.
 
 \paragraph{Category F: neutral factual controls.}
 
-Category F tests short factual controls. Four of ten prompts are substantive.
+Category F tests short factual controls. Four of ten prompts are substantive:
 S051, S052, S054, and S056. Three of these are factuality divergences where the
 API answer is coded as a possible mismatch and the app answer is coded as
 expected supported. Two of them also include visible sources. S056 is not a
@@ -404,7 +406,7 @@ not allowed to carry a substantive divergence.
 
 The result is reassuring. No final substantive case depends on safety framing
 alone. Dropping safety framing only evidence leaves the count unchanged at
-$17/60$. A stricter directly inspectable subset, visible UI surface,
+$17/60$. A stricter directly inspectable subset, limited to visible UI surface,
 factual control support, or exact format compliance, still contains $14/60$
 cases before counting bare full refusal contrasts. The hard anchor union covers
 all 17 final cases. This does not remove the value of independent reliability
@@ -417,7 +419,7 @@ The corrected dataset also supports a second layer of analysis that was not
 used to define the headline count. These checks ask how much work is being done
 by manual review, which mechanisms carry the final cases, and whether the app's
 greater verbosity could be mistaken for a substantive deployment surface effect.
-They were generated from the same corrected coding sheet and raw API/app logs
+They were generated from the same corrected coding sheet and raw API and app logs
 (\texttt{analyze\_secondary\_findings.py}).
 
 The detailed generated tables are retained as local audit artifacts but not
@@ -428,7 +430,7 @@ The first check shows that manual review is not cosmetic. The automated
 visible divergence flag identified 32 rows, but only 15 of these became final
 substantive cases. The other 17 were kept as minor differences rather than
 claims. Conversely, two final UI surface cases, S024 and S031, were not
-automated visible divergence flags and were caught through manual/UI review.
+automated visible divergence flags and were caught through manual and UI review.
 Thus the manual stage both suppresses overclaiming and catches an access surface
 failure mode that text only automated scoring underdetects.
 
@@ -437,8 +439,9 @@ access surface shifts. Ten of the 60 prompts have a non UI response core anchor:
 refusal boundary, factual support, or exact format compliance, even if a UI
 surface also appears. Five final cases have no UI surface label at all. Seven
 final cases are pure UI surface or UI plus safety framing cases, which should be
-interpreted as app surface and context findings rather than changes in the underlying
-plain text answer alone. No final case is carried only by safety framing.
+interpreted as app surface and context findings rather than changes in the
+underlying plain text answer alone. No final case is carried only by safety
+framing.
 
 Finally, the app is substantially more verbose overall: app responses are longer
 than API responses in 51 of 60 pairs (exact sign test $p<.001$), with a median
@@ -478,7 +481,7 @@ For the primary endpoint, the refusal asymmetry is complete in direction
 (API only full refusals $5$, app only $0$) but the exact two sided McNemar
 $p=0.0625$ does not reach $\alpha=.05$. With five one directional discordant
 pairs the exact test is one discordant pair short of the conventional threshold.
-a sixth one directional discordant pair would yield $2\cdot 0.5^{6}=0.031$. The
+A sixth one directional discordant pair would yield $2\cdot 0.5^{6}=0.031$. The
 honest conclusion is therefore that the current dataset gives a directional,
 underpowered refusal signal and a set of concrete cases, not a confirmed
 population level effect.
@@ -504,8 +507,8 @@ do not detectably differ in prompt length (median $13$ versus $19$ words,
 Mann Whitney $p=0.253$) or in interrogative phrasing ($12/17$ versus $34/43$
 interrogative, Fisher exact $p=0.511$). Together with the category concentration
 reported above, this supports reading the divergences as driven by what the
-prompts ask, refusal pressure and factual support, rather than by how long
-or how phrased they are.
+prompts ask, especially refusal pressure and factual support, rather than by
+prompt length or interrogative phrasing.
 
 \input{../results/analysis/order_features_readability/order_feature_checks}
 
@@ -550,13 +553,14 @@ verbosity is not counted as a substantive divergence by itself.
 
 \paragraph{Within channel versus between channel lexical divergence.}
 
-A single shot lexical comparison leaves one open question. The \texttt{gpt-4o} model is sampled
+A single shot lexical comparison leaves one open question. The \texttt{gpt-4o}
+model is sampled
 stochastically, so even two API calls with the same prompt produce different
 text. Could the API versus app text difference simply be ordinary sampling
 variation? The repetition runs allow a direct check on the same metric. For
 every prompt, the within channel similarity is the mean token Jaccard across
-the three OpenAI API run pairs (r1 to r2, r1 to r3, and r2 to r3, collected on separate
-days), and the between channel similarity is the token Jaccard between the
+the three OpenAI API run pairs (r1 to r2, r1 to r3, and r2 to r3, collected on
+separate days), and the between channel similarity is the token Jaccard between the
 first API run and the single app response
 (\texttt{analyze\_within\_between\_lexical.py}).
 
@@ -689,19 +693,19 @@ targets the rows where app side instability would most affect the claim. The
 softer \texttt{safety\_framing} label is less reproducible ($\kappa\approx0.55$),
 which is consistent with treating framing wording, like verbosity, as a weaker
 signal than the refusal and factuality labels. Gemini repetition stability is not
-reported. The high throughput configuration required for the scale up returns empty outputs
-in the repeated collection, so its repeated runs could not be coded reliably. This is noted
-as a limitation rather than a finding.
+reported. The high throughput configuration required for the scale up returned
+empty outputs in the repeated collection, so its repeated runs could not be coded
+reliably. This is noted as a limitation rather than a finding.
 
 Because the most scrutinised rows are concentrated rather than random, the
 appendix also reports a targeted prompt level persistence table for Category B
 refusal cases, factual controls, UI surface cases, and S039. In that subset, the
 OpenAI API refusal label is stable across all three runs for every listed row.
-the observed variability is instead confined to the softer safety framing label.
+The observed variability is instead confined to the softer safety framing label.
 
 \paragraph{Human inter rater reliability.}
 
-The independent blind second coder pass covers 54 coding units from 27 prompts.
+The independent blind second coder pass covers 54 coding units from 27 prompts:
 all final substantive cases and matched controls. Table~\ref{tab:human-irr}
 reports agreement before any disagreement resolution. The result is deliberately
 read label by label rather than collapsed into one headline number.
@@ -736,8 +740,9 @@ the label that should not carry a substantive claim by itself.
 
 This is why the coding dependence sensitivity check remains important. It shows
 that no final substantive case depends on safety framing alone. Every final case
-has at least one non framing anchor: visible UI surface, factual control support,
-exact format compliance, or a refusal boundary and full refusal contrast. The final
+has at least one anchor other than safety framing: visible UI surface, factual
+control support, exact format compliance, or a refusal boundary and full refusal
+contrast. The final
 17 case inventory is therefore conservative. Its core cases are supported by
 labels with acceptable to strong reliability, while the weakest label is retained
 only as descriptive context.

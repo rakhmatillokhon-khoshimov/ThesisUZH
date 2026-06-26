@@ -1,6 +1,7 @@
-\chapter{Future Work and Research Agenda}
+\chapter{Future Work}
 
-The current study is intentionally compact. It covers one OpenAI API/app pair, a frozen
+The current study is intentionally compact. It covers one OpenAI API and app
+pair, a frozen
 60 prompt diagnostic bank, API only vendor baselines, API side repetition
 checks, and a targeted ChatGPT app repetition check for the 17 final cases. The
 result is sufficient for a case based black box thesis claim, but not for
@@ -17,11 +18,13 @@ follow up should repeat either the full 60 prompt ChatGPT app collection or a
 preregistered larger subset, ideally in fresh sessions and with the visible
 model selector captured when possible.
 
-The output should be a compact prompt level table with three values: stable, partially stable, or
+The output should be a compact prompt level table with three values: stable,
+partially stable, or
 unstable. Stable means the same divergence label appears again. Partially stable
 means the same direction recurs but at least one run changes label. Unstable
 means the divergence disappears or reverses. This directly answers the main
-reader question beyond the current targeted panel. It asks whether non divergent rows
+reader question beyond the current targeted panel. It asks whether non divergent
+rows
 remain non divergent and whether the observed stability pattern holds outside
 the final case subset.
 
@@ -42,7 +45,7 @@ The main improvement should target \texttt{safety\_framing\_strength}. That
 label had weak agreement in the current study, so future work should either
 simplify it into coarser categories or replace it with more objective indicators,
 such as explicit refusal, explicit redirection, cited authority, crisis resource
-inclusion, or visible source/tool use. The practical lesson is not that the
+inclusion, or visible source or tool use. The practical lesson is not that the
 thesis becomes invalid, but that safety framing should remain a supporting
 descriptor unless the coding guide is tightened and validated.
 
@@ -68,7 +71,7 @@ Claude and Gemini are currently API only baselines. They contextualize the
 OpenAI result but do not support Claude app or Gemini app claims. A direct
 extension would collect official consumer app outputs for those providers using
 the same screenshot protocol and coding guide. Claims should then be framed as
-provider specific API/app pairs, not as a single leaderboard.
+provider specific API and app pairs, not as a single leaderboard.
 
 The study should also be repeated over time. LLM products can change model
 routing, search behavior, visible citations, memory, and safety wording without
@@ -105,7 +108,7 @@ Rank & Task & Immediate output & Why it matters \\
 \endfoot
 1 & Full bank ChatGPT app repetitions & Stability table with screenshots and transcripts & Tests whether the targeted stability pattern holds beyond the 17 final cases. \\
 2 & Larger prompt bank & Better powered confirmatory audit & Separates durable patterns from small cell effects. \\
-3 & Other consumer apps & Provider specific API/app matrices & Tests whether the access surface issue generalizes. \\
+3 & Other consumer apps & Provider specific API and app matrices & Tests whether the access surface issue generalizes. \\
 4 & Longitudinal waves & Drift report by prompt and category & Measures persistence over product updates. \\
 5 & Broader reliability coding & Multi coder reliability report on a larger subset & Quantifies where the taxonomy remains dependable at scale. \\
 6 & Surface ablations & Search, memory, locale, tool, and system prompt condition notes & Narrows plausible explanations without claiming hidden mechanisms. \\

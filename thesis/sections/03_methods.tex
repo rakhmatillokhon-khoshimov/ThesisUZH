@@ -8,8 +8,8 @@ what vary. As motivated in Chapters~1 and~2, an API only evaluation need not
 describe the product an ordinary user actually meets, so the two surfaces are
 compared directly rather than assumed equivalent. The approach is deliberately
 conservative. It is a fixed prompt black box comparison that reports only
-observable differences and does not attribute them to any single hidden component. The
-sections below set out the study design and comparison construct, the frozen
+observable differences and does not attribute them to any single hidden
+component. The sections below set out the study design and comparison construct, the frozen
 60 prompt bank and the rationale for its categories, the data collection and
 repetition protocol, the coding scheme and pairwise review, the statistical plan,
 and the reliability, ethics, and reproducibility safeguards.
@@ -32,7 +32,7 @@ rendering, and session state that are not available to the researcher. The core
 comparison is:
 
 \begin{itemize}
-  \item OpenAI Responses API using \texttt{gpt-4o}, no custom system prompt
+  \item OpenAI Responses API using \texttt{gpt-4o}, with no custom system prompt
   \item the official ChatGPT consumer app, collected through screenshot backed
   manual runs.
 \end{itemize}
@@ -72,16 +72,16 @@ and location context. The comparison condition is therefore better named the
 \emph{deployment stack}: model plus system prompt, tool and retrieval
 availability, routing, session handling, and account or location context. This
 design \emph{cannot} decompose the bundle into its parts, and the thesis does not
-try to. Every comparative result should be read as ``the bare API differs from
-the productized deployment,'' which is precisely the condition an ordinary user
-is exposed to, rather than as an effect attributable to any single hidden
+try to. Every comparative result should therefore be read as evidence that the
+bare API differs from the productized deployment. That is precisely the contrast
+an ordinary user is exposed to, but it is not evidence of any single hidden
 component. This framing is a deliberate limit on the construct, not an oversight.
-it is revisited in the limitations.
+It is revisited in the limitations.
 
 \section{Prompt Bank}
 
 The 60 prompt scale up bank extends an earlier 20 prompt pilot. The pilot was
-used to test the feasibility of paired API/app collection, screenshot evidence,
+used to test the feasibility of paired API and app collection, screenshot evidence,
 and the first version of the coding scheme. The scale up bank keeps the same six
 behavioral families but expands the number of prompts, uses stable \texttt{S001}
 to \texttt{S060} identifiers, and freezes the bank before final collection.
@@ -113,9 +113,9 @@ ID & Category & Count & Purpose \\
 \endhead
 \bottomrule
 \endfoot
-A & Allowed sensitive / over refusal & 12 & Tests whether safe prompts with risky surface words trigger unnecessary refusal or excessive warning. This category is slightly larger because the exact XSTest rows provide many clean lexical trigger controls. \\
-B & Refusal expected / guardrailing & 10 & Tests harmful or high risk prompts where refusal or safe redirection is expected. \\
-C & Boundary / safety framing & 10 & Tests answerable safety sensitive prompts where helpfulness and caution must be balanced. \\
+A & Allowed sensitive (over refusal) & 12 & Tests whether safe prompts with risky surface words trigger unnecessary refusal or excessive warning. This category is slightly larger because the exact XSTest rows provide many clean lexical trigger controls. \\
+B & Refusal expected (guardrailing) & 10 & Tests harmful or high risk prompts where refusal or safe redirection is expected. \\
+C & Boundary (safety framing) & 10 & Tests answerable safety sensitive prompts where helpfulness and caution must be balanced. \\
 D & Instruction following & 8 & Tests objective format constraints such as JSON only, no comma, lowercase, or required separators. \\
 E & Socially sensitive recommendations & 10 & Tests whether outputs avoid unsupported social or protected attribute inference. \\
 F & Neutral factual controls & 10 & Tests factual answers and the effect of visible sources or retrieval like app surfaces. \\
@@ -208,7 +208,7 @@ The collection protocol called for a fresh chat per prompt, exact prompt pasting
 no added conversational context, screenshot capture after completion, and no
 attempt to bypass refusals, CAPTCHAs, rate limits, login checks, or safety
 controls. The archived r1 screenshots do not make session reset state visible, so
-the log records \texttt{session\_reset=not\_visible\_from\_screenshot} rather
+the log records \path{session_reset=not_visible_from_screenshot} rather
 than treating fresh chat status as verified evidence. Account tier, memory
 status, and personalization settings were also not preserved in the screenshot
 evidence. The visible output nevertheless contains Zurich or Switzerland specific
@@ -372,7 +372,7 @@ surfaces directly reveal the app condition. The independent second coding sheet
 was blind to the primary labels and private key, but it was also not blind to
 channel because the coding task itself requires channel specific evidence. This
 matters most for subjective labels such as \texttt{safety\_framing\_strength}.
-it matters less for objective labels such as exact format compliance or visible
+It matters less for objective labels such as exact format compliance or visible
 source chips.
 
 \paragraph{Pairwise review.}
@@ -394,7 +394,7 @@ The manual review pass distinguishes four outcomes:
   \item \texttt{no}: no meaningful behavioral divergence
   \item \texttt{minor}: wording, style, or weak framing difference
   \item \texttt{yes}: substantive observable divergence
-  \item corrected/excluded: a row whose earlier label depended on transcription
+  \item corrected or excluded: a row whose earlier label depended on transcription
   or coding error.
 \end{itemize}
 
@@ -484,7 +484,7 @@ recommendation prompts, and a small set of controls. It is therefore a
 conservative reliability check for the labels most likely to matter, not an
 estimate of label reliability over a random sample of all 60 prompts.
 
-The second coder route was used after supervisor approval. The coder was outside
+The second coder procedure was used after supervisor approval. The coder was outside
 the primary analysis and received only the blind sheet, the taxonomy guide, and
 the second coder instructions. The private key with the primary labels was
 withheld until after the filled sheet was returned. The coder was blind to the
@@ -532,4 +532,4 @@ drift apart.
 
 The boundary is that private high risk prompts and raw outputs remain local, and
 live app behavior cannot be replayed exactly. The shared thesis uses redacted
-descriptors and claim safe summaries.
+descriptors and release safe summaries.

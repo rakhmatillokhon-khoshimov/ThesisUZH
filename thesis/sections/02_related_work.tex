@@ -15,9 +15,10 @@ principle. It probes an opaque deployed system through controlled inputs and
 observable outputs, and it makes the deployed product, not an abstract model, the
 unit of analysis. Auditing has been framed as a way to detect differential
 treatment on platforms whose internal mechanisms are unavailable
-\parencite{sandvig_auditing}. The logic transfers to proprietary LLMs. An evaluator cannot see
-hidden instructions, tool policies, routing, or moderation, but can still compare
-outputs collected under documented conditions. Product level audits show why the
+\parencite{sandvig_auditing}. The logic transfers to proprietary LLMs. An
+evaluator cannot see hidden instructions, tool policies, routing, or moderation,
+but can still compare outputs collected under documented conditions. Product
+level audits show why the
 deployed system is the right unit. The \emph{Gender Shades} audit
 \parencite{gender_shades} exposed intersectional accuracy gaps in commercial
 classifiers that aggregate scores had hidden. Publishing such audits can change
@@ -37,19 +38,19 @@ up in Section~\ref{sec:llm-measurement-reliability}.
 This section establishes the premise the thesis rests on. Assistant behavior is a
 property of the deployed system, and the access surface is itself an empirical
 variable. Modern LLM behavior is shaped by far more than pretraining. GPT-3
-\parencite{gpt3} established prompt based task performance, InstructGPT
-\parencite{instructgpt} showed that instruction tuning with human feedback
-reshapes what a model will and will not do, and Anthropic's helpful, honest, and
-harmless work \parencite{helpful_harmless} and Constitutional AI
-\parencite{constitutional_ai} make the same point for safety. Assistant behavior
+established prompt based task performance \parencite{gpt3}. InstructGPT showed
+that instruction tuning with human feedback reshapes what a model will and will
+not do \parencite{instructgpt}. Anthropic's helpful, honest, and harmless work
+and Constitutional AI make the same point for safety
+\parencite{helpful_harmless,constitutional_ai}. Assistant behavior
 is a trained, system level property, not raw next token continuation. Foundation
 model risk work adds that risks depend on how models are adapted and deployed
 \parencite{foundation_models,weidinger_risks}. The deployed system, not the bare
 model, is what an audit must measure. Benchmarks are the standard
 instrument. MMLU \parencite{mmlu}, GSM8K \parencite{gsm8k}, HumanEval
 \parencite{codex}, BIG-bench \parencite{bigbench}, and HELM \parencite{helm} are
-prominent examples. They are
-almost always run through programmatic APIs, which leaves open whether the
+prominent examples. They are almost always run through programmatic APIs, which
+leaves open whether the
 behavior they measure is the behavior a user receives through an app. A small but
 growing literature treats the access surface itself as the variable. The closest
 precedent is \emph{Dual Standards} \parencite{dualstandards}, which gives
@@ -65,15 +66,15 @@ the official app on one fixed diagnostic prompt bank.
 
 \section{Safety and Refusal Calibration}
 
-This section sources the high risk, boundary, and over refusal prompts in the bank
-and the coding distinctions a refusal audit needs. Safety benchmarks supply the
+This section grounds the high risk, boundary, and over refusal prompts in the
+bank and the coding distinctions a refusal audit needs. Safety benchmarks supply the
 high risk and boundary prompts. Do-Not-Answer \parencite{donotanswer} curates
 prompts a responsible model should decline. HarmBench \parencite{harmbench}
 standardizes refusal evaluation. AILuminate \parencite{ailuminate} organizes
 product level risk categories. Moderation classifiers such as Llama Guard
 \parencite{llama_guard} show that a provider can place a filter between user and
 model that, from a black box view, is part of the deployment stack. Refusal
-benchmarks sharpen how a non answer is coded. SORRY-Bench \parencite{sorrybench},
+benchmarks sharpen refusal and partial answer coding. SORRY-Bench \parencite{sorrybench},
 StrongREJECT \parencite{strongreject}, and WildGuard \parencite{wildguard}
 evaluate refusal and jailbreak behavior, while biological research RefusalBench
 \parencite{refusalbench_bio} is the key caution. A single refusal rate can misrank
@@ -82,9 +83,9 @@ distinguishes full refusal, partial refusal, and safe redirection rather than
 treating every non answer alike. Over refusal work motivates the benign half of
 the design. XSTest \parencite{xstest} targets exaggerated safety on clearly safe
 prompts with risky surface words, and OR-Bench \parencite{orbench} scales over
-refusal evaluation. Red teaming and jailbreak research
-\parencite{ganguli_redteam,redteam_lms,universal_attacks,pair} is background rather
-than a prompt source. This thesis uses
+refusal evaluation. Red teaming and jailbreak research is background rather than
+a prompt source \parencite{ganguli_redteam,redteam_lms,universal_attacks,pair}.
+This thesis uses
 plain diagnostic prompts so that any differences read as deployment surface
 effects rather than jailbreak artifacts.
 
@@ -98,13 +99,13 @@ constraints that can be scored without subjective judgment, and it flags a
 practical app evaluation hazard: rendered markdown or transcription artifacts can
 mimic format failures unless screenshots are checked, which is why format compliance
 divergences are coded conservatively here. Factuality fills three roles.
-Short answer benchmarks SimpleQA \parencite{simpleqa} and TruthfulQA
-\parencite{truthfulqa} define when a model should simply be correct.
+Short answer benchmarks SimpleQA and TruthfulQA define when a model should
+simply be correct \parencite{simpleqa,truthfulqa}.
 Hallucination studies
 \parencite{maynez_factuality,hallucination_survey,factscore,selfcheckgpt}
 motivate separating unsupported memory answers from evidence supported ones.
-Retrieval work \parencite{dpr,rag,webgpt,verified_quotes,blenderbot2} shows that adding
-visible sources changes the factual support a user receives. Because the app can
+Retrieval work shows that adding visible sources changes the factual support a
+user receives \parencite{dpr,rag,webgpt,verified_quotes,blenderbot2}. Because the app can
 display sources while the bare API cannot, visible sources are coded as a
 deployment surface signature rather than dismissed as cosmetic. Socially sensitive
 inference is a negative control. Work on bias in embeddings and generated text
