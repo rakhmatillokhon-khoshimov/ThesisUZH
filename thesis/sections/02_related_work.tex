@@ -66,24 +66,23 @@ the official app on one fixed diagnostic prompt bank.
 
 \section{Safety and Refusal Calibration}
 
-This section grounds the high risk, boundary, and over refusal prompts in the
+This section grounds the high risk, boundary, and over-refusal prompts in the
 bank and the coding distinctions a refusal audit needs. Safety benchmarks supply the
 high risk and boundary prompts. Do-Not-Answer \parencite{donotanswer} curates
 prompts a responsible model should decline. HarmBench \parencite{harmbench}
 standardizes refusal evaluation. AILuminate \parencite{ailuminate} organizes
 product level risk categories. Moderation classifiers such as Llama Guard
 \parencite{llama_guard} show that a provider can place a filter between user and
-model that, from a black box view, is part of the deployment stack. Refusal
+model that, from a black-box view, is part of the deployment stack. Refusal
 benchmarks sharpen refusal and partial answer coding. SORRY-Bench \parencite{sorrybench},
 StrongREJECT \parencite{strongreject}, and WildGuard \parencite{wildguard}
 evaluate refusal and jailbreak behavior, while biological research RefusalBench
 \parencite{refusalbench_bio} is the key caution. A single refusal rate can misrank
 systems when safe, useful engagement is possible. This thesis therefore
 distinguishes full refusal, partial refusal, and safe redirection rather than
-treating every non answer alike. Over refusal work motivates the benign half of
+treating every non answer alike. Over-refusal work motivates the benign half of
 the design. XSTest \parencite{xstest} targets exaggerated safety on clearly safe
-prompts with risky surface words, and OR-Bench \parencite{orbench} scales over
-refusal evaluation. Red teaming and jailbreak research is background rather than
+prompts with risky surface words, and OR-Bench \parencite{orbench} scales over-refusal evaluation. Red teaming and jailbreak research is background rather than
 a prompt source \parencite{ganguli_redteam,redteam_lms,universal_attacks,pair}.
 This thesis uses
 plain diagnostic prompts so that any differences read as deployment surface
@@ -126,9 +125,9 @@ motivates the repetition and reliability machinery in Chapter 3. First, outputs
 are nondeterministic. The same prompt can produce different responses across runs
 and hardware from floating point and batching effects alone, before any deliberate
 sampling \parencite{llm_nondeterminism}, so an
-audit that collects a single response per condition can mistake run to run noise
+audit that collects a single response per condition can mistake run-to-run noise
 for an access surface difference. This is why this thesis repeats the API
-condition and reports run to run stability. Second, scaling the coding of
+condition and reports run-to-run stability. Second, scaling the coding of
 open ended outputs invites automated judging, but MT-Bench \parencite{mtbench}
 and G-Eval \parencite{geval} document sensitivity to prompt wording and answer
 position, so automated labels need human checking rather than blind trust. Third,
@@ -148,7 +147,7 @@ access surface can change that behavior, and measuring a generative system
 requires controlling for nondeterminism and coder subjectivity. What it does not
 provide is a compact, evidence backed, paired audit that holds a fixed diagnostic
 prompt bank constant while directly comparing a bare OpenAI API condition with the
-official ChatGPT app, coding only observable differences with screenshot backed
+official ChatGPT app, coding only observable differences with screenshot-backed
 evidence and reliability controls. That is the contribution of this thesis.
 
 The same framing bounds the claims. The study can show that observable outputs

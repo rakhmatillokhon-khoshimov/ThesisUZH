@@ -4,10 +4,10 @@ This chapter specifies how the audit is carried out. The object under audit is t
 \emph{deployment surface}: the study compares what a user receives from a bare
 OpenAI API call with what the official ChatGPT consumer app returns to the same
 prompt, holding prompt content fixed so that the documented access conditions are
-what vary. As motivated in Chapters~1 and~2, an API only evaluation need not
+what vary. As motivated in Chapters~1 and~2, an API-only evaluation need not
 describe the product an ordinary user actually meets, so the two surfaces are
 compared directly rather than assumed equivalent. The approach is deliberately
-conservative. It is a fixed prompt black box comparison that reports only
+conservative. It is a fixed prompt black-box comparison that reports only
 observable differences and does not attribute them to any single hidden
 component. The sections below set out the study design and comparison construct, the frozen
 60 prompt bank and the rationale for its categories, the data collection and
@@ -16,7 +16,7 @@ and the reliability, ethics, and reproducibility safeguards.
 
 \section{Study Design}
 
-The study is a fixed prompt black box audit. In the main paired collection, each
+The study is a fixed prompt black-box audit. In the main paired collection, each
 prompt is submitted once to the API channel and once to the consumer app channel
 under documented conditions. Two later API repetitions and a targeted app
 repetition panel are used only as stability checks, not as new primary prompt
@@ -33,7 +33,7 @@ comparison is:
 
 \begin{itemize}
   \item OpenAI Responses API using \texttt{gpt-4o}, with no custom system prompt
-  \item the official ChatGPT consumer app, collected through screenshot backed
+  \item the official ChatGPT consumer app, collected through screenshot-backed
   manual runs.
 \end{itemize}
 
@@ -50,10 +50,10 @@ and statistical summaries.
   \centering
   \includegraphics[width=\linewidth]{../figures/study_design_pipeline.pdf}
   \caption[Audit pipeline.]{Audit pipeline. The frozen 60 prompt bank is submitted to the bare
-  OpenAI API (with two later repetition runs), the screenshot backed ChatGPT
+  OpenAI API (with two later repetition runs), the screenshot-backed ChatGPT
   consumer app (with a targeted repetition panel for the final cases), and two
-  API only vendor baselines. App transcripts pass a
-  validation gate, prompt echo cleaning, and screenshot verified corrections
+  API-only vendor baselines. App transcripts pass a
+  validation gate, prompt-echo cleaning, and screenshot-verified corrections
   before pairwise scoring and manual review produce the final tiered divergence
   set and paired statistics.}
   \label{fig:pipeline}
@@ -62,7 +62,7 @@ and statistical summaries.
 \paragraph{Construct: the deployment stack, not an isolated channel.}
 It is important to be precise about what the comparison construct actually is.
 The API channel is explicitly fixed to \texttt{gpt-4o}. The app channel is not a
-verified same endpoint \texttt{gpt-4o} condition, because the archived
+verified same-endpoint \texttt{gpt-4o} condition, because the archived
 screenshots do not reliably preserve a model selector or footer label. The
 comparison is therefore not a clean manipulation of a single ``access channel''
 holding everything else constant. The bare Responses API call carries no custom
@@ -89,13 +89,13 @@ to \texttt{S060} identifiers, and freezes the bank before final collection.
 The six categories were chosen to cover the main behavioral functions where a
 deployment surface could plausibly change what a user receives, rather than a
 single axis. Each category isolates one such function: allowed sensitive prompts
-probe over refusal, refusal expected prompts probe guardrailing, boundary prompts
+probe over-refusal, refusal-expected prompts probe guardrailing, boundary prompts
 probe how caution is framed when a question is still answerable,
 instruction following prompts probe objective format compliance, socially
 sensitive prompts probe unsupported inference, and factual controls probe
-correctness and the effect of visible sources. Auditing refusal expected prompts
-alone would test only one way the surfaces can differ. It would miss over refusal
-on safe prompts, format handling, and app side source display. Spanning several
+correctness and the effect of visible sources. Auditing refusal-expected prompts
+alone would test only one way the surfaces can differ. It would miss over-refusal
+on safe prompts, format handling, and app-side source display. Spanning several
 functions is what lets the audit separate a genuine deployment surface effect from
 ordinary task specific variation, and it is why divergences are reported per
 category in the Results.
@@ -113,8 +113,8 @@ ID & Category & Count & Purpose \\
 \endhead
 \bottomrule
 \endfoot
-A & Allowed sensitive (over refusal) & 12 & Tests whether safe prompts with risky surface words trigger unnecessary refusal or excessive warning. This category is slightly larger because the exact XSTest rows provide many clean lexical trigger controls. \\
-B & Refusal expected (guardrailing) & 10 & Tests harmful or high risk prompts where refusal or safe redirection is expected. \\
+A & Allowed sensitive (over-refusal) & 12 & Tests whether safe prompts with risky surface words trigger unnecessary refusal or excessive warning. This category is slightly larger because the exact XSTest rows provide many clean lexical trigger controls. \\
+B & Refusal-expected (guardrailing) & 10 & Tests harmful or high risk prompts where refusal or safe redirection is expected. \\
 C & Boundary (safety framing) & 10 & Tests answerable safety sensitive prompts where helpfulness and caution must be balanced. \\
 D & Instruction following & 8 & Tests objective format constraints such as JSON only, no comma, lowercase, or required separators. \\
 E & Socially sensitive recommendations & 10 & Tests whether outputs avoid unsupported social or protected attribute inference. \\
@@ -197,7 +197,7 @@ screenshot, a transcribed output, and metadata about visible model labels or UI
 surfaces where available. The archived
 screenshots do not reliably preserve an in frame model selector or footer model
 label, so the app condition is not used as hard evidence for a verified
-same endpoint comparison. It is instead treated as the official productized
+same-endpoint comparison. It is instead treated as the official productized
 ChatGPT deployment observed in the app condition. This weakens model family
 comparability relative to an ideal controlled design, and it
 reinforces the deployment stack limitation. The consumer deployment may include
@@ -224,7 +224,7 @@ response includes visible sources, localized context, or other app specific
 surfaces, those are coded under \texttt{ui\_surface\_signature}. This label is
 not treated as a hidden cause inference. It is a visible output label.
 
-\paragraph{API only vendor baselines.}
+\paragraph{API-only vendor baselines.}
 
 Claude and Gemini were collected on the same 60 prompt bank through APIs only
 during the same audit window. Claude used the Anthropic Messages API with
@@ -262,7 +262,7 @@ no remaining \texttt{needs\_review} entries.
 
 \paragraph{Repetition and stability.}
 
-The main paired comparison is single shot. Each of the 60 prompts has one
+The main paired comparison is single-shot. Each of the 60 prompts has one
 OpenAI API response and one ChatGPT app response in the primary analysis. Later
 repetitions are therefore reported as stability evidence rather than as extra
 primary observations. They do not change the 60 prompt denominator or the paired
@@ -279,7 +279,7 @@ summarized with Fleiss' $\kappa$ for the refusal label. The reported stability
 summaries therefore describe label agreement across repeated API calls, not
 deterministic generation.
 
-Claude API repetitions were also collected as API only robustness context.
+Claude API repetitions were also collected as API-only robustness context.
 Gemini repetition stability is not reported because the repeated Gemini
 collection returned empty outputs under the high throughput configuration used
 for that run. This failure is treated as a collection artifact rather than as
@@ -289,20 +289,20 @@ For the ChatGPT app channel, two targeted repetitions were collected only for
 the 17 final substantive divergence cases. The repetition checklist required a
 fresh ChatGPT chat for each row, exact prompt pasting, no retry or
 refusal bypass attempt, a full screenshot after answer completion, and transcript
-checking. The result is 34 additional screenshot backed app observations. The
+checking. The result is 34 additional screenshot-backed app observations. The
 visible app label in this packet is only \texttt{ChatGPT}. It is therefore
 evidence about the productized app surface, not evidence that the same hidden
 model endpoint was used in every repetition.
 
 \paragraph{Screenshot transcription QA.}
 
-Screenshot backed collection introduces transcription risk. The app output may
+Screenshot-backed collection introduces transcription risk. The app output may
 span several screenshots. OCR may capture the prompt bubble, and UI elements may
 be confused with text. The thesis therefore treats transcription QA as part of
 the method rather than as a post hoc cleanup detail.
 
 The QA process has three layers. First, import validation checks that every row
-has a screenshot and nonempty output. Second, prompt echo cleaning removes
+has a screenshot and nonempty output. Second, prompt-echo cleaning removes
 confident leading fragments of the user prompt that were accidentally prepended
 to app answers. Third, targeted screenshot corrections are applied only for rows
 where manual inspection showed that OCR affected a coding relevant label. The
@@ -355,13 +355,13 @@ answers.
 \paragraph{\texttt{ui\_surface\_signature}.}
 Valid values are \path{none}, \path{web_search}, \path{map_widget},
 \path{local_context}, \path{reasoning_trace}, \path{sources_visible},
-\path{file_or_canvas}, and \path{other}. The label codes visible app side
+\path{file_or_canvas}, and \path{other}. The label codes visible app-side
 affordances or local context. It is descriptive only and does not infer which
 hidden backend mechanism produced the surface.
 
 Answer directness and verbosity were retained as pilot triage signals but are
 not counted as final substantive divergence types. The reason is empirical:
-verbosity was too sensitive to screenshot transcription artifacts and ordinary
+verbosity was too sensitive to screenshot-transcription artifacts and ordinary
 style differences. A longer answer is not necessarily a different behavioral
 outcome.
 
@@ -441,7 +441,7 @@ test. Because the design was not preregistered and the prompt bank is compact,
 even this endpoint is interpreted conservatively. Every other quantitative
 comparison in this thesis is treated as exploratory. This includes the category,
 source family, and risk level associations, the between category contrasts, the
-lexical cross checks, the within channel versus between channel similarity
+lexical cross checks, the within-channel versus between-channel similarity
 comparison, the refusal style marker counts, and the four channel agreement
 summaries. Their p values are not used as independent confirmation of
 the thesis claim.
@@ -503,13 +503,13 @@ independent blind process.
 
 \paragraph{Ethical and safety handling.}
 
-The empirical object is model output from black box systems, not human subject
+The empirical object is model output from black-box systems, not human subject
 behavior. The collection nevertheless uses high risk prompts in the
-refusal expected category, so the thesis applies conservative handling rules.
+refusal-expected category, so the thesis applies conservative handling rules.
 Raw high risk prompt text and full raw outputs remain in a private local archive
 and are replaced by redacted descriptors in shared files and in the thesis text.
 The collection protocol does not attempt to bypass refusals, safety controls,
-CAPTCHAs, login checks, or rate limits. App side evidence is archived as
+CAPTCHAs, login checks, or rate limits. App-side evidence is archived as
 screenshots so that claims can be audited without redistributing unnecessary
 harmful content.
 

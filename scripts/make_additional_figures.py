@@ -155,6 +155,7 @@ def fig_pipeline():
 
     fig.tight_layout()
     fig.savefig(VIS / "study_design_pipeline.png")
+    fig.savefig(VIS / "study_design_pipeline.pdf")
     plt.close(fig)
 
 

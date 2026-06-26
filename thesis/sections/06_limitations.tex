@@ -9,14 +9,14 @@ validity and how they bound interpretation.
 
 The 60 prompt bank is diagnostic, not representative. It covers several important
 behavioral families but is not a random sample of user prompts, so the observed
-$17/60$ divergence rate is a rate within this benchmark grounded bank, not an
+$17/60$ divergence rate is a rate within this benchmark-grounded bank, not an
 expected rate for all ChatGPT or OpenAI API interactions. Category level counts
 are smaller still: ten prompts can show a suggestive pattern but leave a wide
 confidence interval, which is why the Results report Wilson intervals and describe
 category findings as indicative rather than precise.
 
 The primary statistical result is directional but not conventionally significant.
-The full refusal asymmetry is $5$ API only refusals versus $0$ app only refusals
+The full refusal asymmetry is $5$ API-only refusals versus $0$ app-only refusals
 (McNemar exact $p=0.0625$). The correct reading is a directional asymmetry in a
 compact audit, supported by concrete cases and needing a larger confirmatory
 replication. It is not a proved asymmetry. The moderator analyses by category,
@@ -34,9 +34,9 @@ stability is high for the refusal label (Fleiss $\kappa=1.0$ for OpenAI
 \texttt{gpt-4o}, $\kappa=0.74$ for Claude, see Table~\ref{tab:stability}), and at
 the raw text level the API resembles its own reruns more than it resembles the
 app on every prompt (Figure~\ref{fig:withinbetween}). The app side was repeated
-only for the high value subset, namely the 17 final cases collected twice more in fresh
+only for the high-value subset, namely the 17 final cases collected twice more in fresh
 ChatGPT app chats. This is the right stress test because it targets exactly the
-rows where an app side flip would matter most. All six refusal boundary cases and
+rows where an app-side flip would matter most. All six refusal boundary cases and
 all three factual support cases reproduced in both app repetitions. Two
 visible source only cases did not reproduce their UI surface anchor, and the
 single format case reproduced in only one of two. The app repetition evidence is
@@ -60,7 +60,7 @@ or session and locale state, whereas the consumer app may bundle all of these wi
 routing and account context. The comparison construct is therefore the whole
 \emph{deployment stack}, and the design cannot decompose it. An observed
 difference could come from the system prompt, from tool or retrieval availability,
-from locale, or from any combination, and black box data cannot attribute it to one
+from locale, or from any combination, and black-box data cannot attribute it to one
 component. The study likewise has no access to hidden system prompts, moderation
 classifiers, routing rules, or personalization internals. The UI surface signature
 records what is visible, not why it appeared.
@@ -75,14 +75,14 @@ near direct consequences of the app having tools and locale, which is why the
 Results down weight them relative to the refusal boundary and factual correction
 core. Separating these factors would need provider cooperation or a controlled
 wrapper that toggles system prompt, tools, and locale independently. That is
-beyond a black box thesis and is named in future work.
+beyond a black-box thesis and is named in future work.
 
 \section{Measurement: Screenshots, OCR, and Coder Reliability}
 
-The consumer app channel relies on screenshot backed transcription. This preserves
+The consumer app channel relies on screenshot-backed transcription. This preserves
 the visible interface but introduces transcription risk. OCR can capture prompt
 text, omit text at screen boundaries, or misread punctuation. The final analysis
-applies prompt echo cleaning and targeted screenshot corrections, but residual
+applies prompt-echo cleaning and targeted screenshot corrections, but residual
 risk remains, and it affects format compliance claims most strongly. This is why
 the thesis reports only one final format compliance case (S039, after excluding
 S035 and S038) and avoids quoting raw high risk outputs in the main text.
@@ -112,7 +112,7 @@ scope. \emph{Redaction:} Category B high risk prompts appear as redacted
 descriptors in shared artifacts. This slightly reduces external inspectability,
 but the appendix mitigates it by reporting source, category, risk level, expected
 behavior, final labels, and release safe summaries for every case. \emph{Baselines:}
-Claude and Gemini are API only and contextualize the OpenAI result, but they do not
+Claude and Gemini are API-only baselines that contextualize the OpenAI result, but they do not
 support consumer app claims for those vendors. \emph{Breadth:} the empirical core
 is deliberately compact: one provider's API and app pair, sixty prompts, one app
 submission per prompt, and one primary statistical endpoint. The appendices are
@@ -125,7 +125,7 @@ the thesis states the trade openly rather than treating coverage as free.
 Together, these limitations define the valid claim:
 
 \begin{quote}
-On a frozen, benchmark grounded 60 prompt bank, a bare OpenAI API condition and
+On a frozen, benchmark-grounded 60 prompt bank, a bare OpenAI API condition and
 the official productized ChatGPT app deployment produced different observable
 behavior under documented collection conditions, with the strongest response core
 differences in refusal granularity and factual support, plus a smaller set of

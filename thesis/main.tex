@@ -51,7 +51,7 @@ is reproducible and easy to automate. Ordinary users instead interact with
 consumer applications that add system instructions, tools, retrieval, session
 handling, location context, and visible interface features. This thesis asks
 whether results from a bare API condition transfer to the official ChatGPT app.
-The design is a black box comparison, not a causal test of the access channel. It
+The design is a black-box comparison, not a causal test of the access channel. It
 compares the OpenAI Responses API running GPT 4o with no custom system prompt
 against the official ChatGPT app, whose hidden product stack cannot be separated
 into its parts.
@@ -61,7 +61,7 @@ refusal status, safety framing, instruction format compliance, unsupported
 inference, factuality, and visible interface signatures. Manual review finds 17
 substantive divergences. Ten form the behavioral core, with six refusal cases,
 three factual support cases, and one instruction format case. Seven are product
-surface or context cases. The clearest pattern is directional. On refusal expected prompts
+surface or context cases. The clearest pattern is directional. On refusal-expected prompts
 the bare API refuses more often than the app, although the asymmetry is not
 conventionally significant (McNemar exact $p = 0.0625$).
 
@@ -70,7 +70,7 @@ label is stable across repeated API runs (Fleiss $\kappa = 1.0$), and 14 of the
 17 cases reproduce in two fresh app repetitions. An independent blind
 second coder pass on 54 coding units shows strong agreement on the core labels.
 Safety framing is too weak to carry the claim. The contribution is a compact
-reproducible protocol and a conservative case based audit. The central conclusion
+reproducible protocol and a conservative case-based audit. The central conclusion
 is that the bare API is not a neutral proxy for the ChatGPT app, so audits should
 name the access surface they evaluate.
 \par
@@ -88,7 +88,7 @@ Dr. Anik\'o Hannak for serving as the responsible professor and for supporting
 this Social Computing Group project. I am also grateful to the independent
 second coder, whose blind coding pass made the reliability analysis possible. The
 empirical work benefited from discussions about benchmark selection, consumer app
-evidence, coding discipline, and the risks of overinterpreting black box
+evidence, coding discipline, and the risks of overinterpreting black-box
 outputs. Any remaining mistakes are my own.
 \par
 \endgroup

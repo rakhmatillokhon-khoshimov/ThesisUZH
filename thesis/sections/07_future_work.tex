@@ -2,10 +2,10 @@
 
 The current study is intentionally compact. It covers one OpenAI API and app
 pair, a frozen
-60 prompt diagnostic bank, API only vendor baselines, API side repetition
+60 prompt diagnostic bank, API-only vendor baselines, API-side repetition
 checks, and a targeted ChatGPT app repetition check for the 17 final cases. The
-result is sufficient for a case based black box thesis claim, but not for
-population level rates, causal mechanism attribution, or broad app side stability
+result is sufficient for a case-based black-box thesis claim, but not for
+population-level rates, causal mechanism attribution, or broad app-side stability
 claims over the entire prompt bank. Future work should therefore strengthen the
 same design rather than search for a different thesis.
 
@@ -13,12 +13,12 @@ same design rather than search for a different thesis.
 
 The most useful empirical extension is no longer a first targeted ChatGPT app
 stability panel. That panel has been collected for the 17 final cases. The next
-step is broader app side repetition coverage, not a large new prompt bank. A
+step is broader app-side repetition coverage, not a large new prompt bank. A
 follow up should repeat either the full 60 prompt ChatGPT app collection or a
 preregistered larger subset, ideally in fresh sessions and with the visible
 model selector captured when possible.
 
-The output should be a compact prompt level table with three values: stable,
+The output should be a compact prompt-level table with three values: stable,
 partially stable, or
 unstable. Stable means the same divergence label appears again. Partially stable
 means the same direction recurs but at least one run changes label. Unstable
@@ -66,7 +66,7 @@ families so that one domain does not drive the result.
 
 \section{Other Providers and Longitudinal Drift}
 
-Claude and Gemini are currently API only baselines. They contextualize the
+Claude and Gemini are currently API-only baselines. They contextualize the
 OpenAI result but do not support Claude app or Gemini app claims. A direct
 extension would collect official consumer app outputs for those providers using
 the same screenshot protocol and coding guide. Claims should then be framed as
@@ -75,7 +75,7 @@ provider specific API and app pairs, not as a single leaderboard.
 The study should also be repeated over time. LLM products can change model
 routing, search behavior, visible citations, memory, and safety wording without
 obvious public notice. A longitudinal audit could rerun the same prompt bank
-weekly or monthly and report prompt level changes, not only aggregate rates. The
+weekly or monthly and report prompt-level changes, not only aggregate rates. The
 important question would be whether the same refusal and factual support cases
 persist across product updates.
 

@@ -10,7 +10,7 @@ layers change the observable output, then the deployment surface must be part of
 the audit design.
 
 The methodological contribution is a reproducible protocol for comparing API and
-consumer app behavior using fixed prompts, structured logs, screenshot backed app
+consumer app behavior using fixed prompts, structured logs, screenshot-backed app
 evidence, transcript QA, visible UI surface coding, pairwise manual review, and
 conservative statistical summaries. The thesis also contributes a practical
 coding variable, \texttt{ui\_surface\_signature}, for recording visible
@@ -18,22 +18,22 @@ app specific affordances without inferring hidden mechanisms.
 
 The empirical contribution is a completed 60 prompt bare OpenAI API versus
 productized ChatGPT app comparison with full pairwise coverage. Manual review of
-corrected prompt echo cleaned transcripts finds 17 substantive observable
+corrected prompt-echo-cleaned transcripts finds 17 substantive observable
 divergences, but the thesis does not treat all 17 as equally strong. The core
 behavioral subset is smaller. It contains six refusal boundary cases, three factual support
 cases, and one format compliance case. The strongest corrected patterns are:
 
 \begin{itemize}
-  \item on refusal expected prompts, the API more often gives bare full refusals,
+  \item on refusal-expected prompts, the API more often gives bare full refusals,
   while the app gives bounded safe redirects
   \item the app exposes visible sources and account localized context absent from
   plain API text responses, which are retained as product surface findings rather
   than the main behavioral result
-  \item on short factual controls, the app's retrieval backed or source visible
+  \item on short factual controls, the app's retrieval-backed or source-visible
   answers are sometimes coded as supported where the API's memory based answer is
   coded as a possible mismatch
   \item after correction, socially sensitive BBQ style rows do not support an
-  API over refusal claim and instead serve as negative controls
+  API over-refusal claim and instead serve as negative controls
 \end{itemize}
 
 The targeted app repetition check further sharpens this interpretation. The
@@ -51,7 +51,7 @@ significant, so the thesis characterizes bounded case evidence rather than
 claiming a confirmed population level effect.
 
 The broader lesson is methodological. LLM evaluations should state the deployment
-surface they measure and avoid generalizing API only findings to consumer app
+surface they measure and avoid generalizing API-only findings to consumer app
 settings without validation. This is especially important for safety,
 compliance, factuality, and fairness work, where the user facing answer matters
 as much as the underlying model family. A benchmark score collected through an

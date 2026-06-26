@@ -18,7 +18,7 @@ requests.
 The 60 prompt bank was designed as a compact scale up from the 20 prompt pilot.
 It balances six diagnostic categories rather than attempting to estimate an
 overall population level rate of model behavior. The categories are:
-allowed sensitive over refusal, refusal expected guardrailing, boundary safety
+allowed sensitive over-refusal, refusal-expected guardrailing, boundary safety
 framing, instruction following, socially sensitive recommendations, and neutral
 factual controls. This composition is intentionally heterogeneous because the
 deployment surface question concerns several observable behaviors at once:
@@ -64,31 +64,31 @@ UI surface signature & \path{none}, \path{web_search}, \path{map_widget}, \path{
 
 Two further signals, answer directness and verbosity, were used during pilot
 triage but are not final substantive divergence labels. Verbosity in particular
-proved sensitive to screenshot transcription artifacts. These signals remain
+proved sensitive to screenshot-transcription artifacts. These signals remain
 useful in notes but are not counted as final behavioral divergences.
 
 \section{Transcript QA and Correction Audit}
 
 The app channel required extra QA because responses were collected as screenshots
 and then transcribed. The main failure mode found in the scale up was leading
-prompt echo contamination. The screenshot region sometimes included the tail of
+prompt-echo contamination. The screenshot region sometimes included the tail of
 the user prompt, and OCR or transcription prepended that fragment to the model
 answer. This artifact affected strict surface labels more than refusal or
 factual substance.
 
-The reproducible prompt echo cleaner removed 13 confident leading echoes. A
+The reproducible prompt-echo cleaner removed 13 confident leading echoes. A
 targeted screenshot correction layer then corrected four rows before scoring:
 S022, S038, S039, and S050. The correction layer is intentionally narrow. It does
-not rewrite responses freely. It encodes only screenshot verified fixes that
+not rewrite responses freely. It encodes only screenshot-verified fixes that
 changed coding risk.
 
 \begin{longtable}{@{}L{0.10\linewidth}L{0.22\linewidth}L{0.28\linewidth}L{0.30\linewidth}@{}}
-\caption[Screenshot backed transcript corrections]{Screenshot backed transcript corrections applied before final scoring.}\\
+\caption[Screenshot-backed transcript corrections]{Screenshot-backed transcript corrections applied before final scoring.}\\
 \toprule
 Row & Issue & Correction effect & Claim impact \\
 \midrule
 \endfirsthead
-\caption[]{Screenshot backed transcript corrections (continued).}\\
+\caption[]{Screenshot-backed transcript corrections (continued).}\\
 \toprule
 Row & Issue & Correction effect & Claim impact \\
 \midrule
@@ -98,7 +98,7 @@ Row & Issue & Correction effect & Claim impact \\
 S022 & App transcript needed correction for a refusal boundary case. & App coded as a bounded safe redirect with visible sources. & Added as a substantive Category B divergence. \\
 S038 & OCR made valid JSON look malformed. & App output corrected to valid JSON only. & Removed from final format compliance divergences. \\
 S039 & Separator behavior required screenshot confirmation. & App output confirmed to omit the required six asterisk separator. & Retained as the only final format compliance case. \\
-S050 & Transcript began mid answer after prompt echo cleaning. & App answer corrected to begin with the intended insufficiency framing. & Removed support for the earlier social over refusal interpretation. \\
+S050 & Transcript began mid answer after prompt-echo cleaning. & App answer corrected to begin with the intended insufficiency framing. & Removed support for the earlier social over-refusal interpretation. \\
 \end{longtable}
 
 The most important substantive consequence of this QA pass is claim discipline.
@@ -134,7 +134,7 @@ high risk prompt text.
 \section{Targeted Persistence Check}
 
 The aggregate repetition table in the Results chapter is complemented by the
-prompt level table below. It focuses on the rows most likely to affect the main
+prompt-level table below. It focuses on the rows most likely to affect the main
 claims: Category B refusal cases, factual controls, visible UI surface cases, and
 S039. The table uses existing OpenAI API repetitions. The targeted ChatGPT app
 repetition check for the same final case subset is summarized in the Results
@@ -156,7 +156,7 @@ not divergent, and which final divergence type was used.
 
 \section{Cross Channel Robustness Matrix}
 
-Claude and Gemini were collected as API only baselines. They are not treated as
+Claude and Gemini were collected as API-only baselines. They are not treated as
 consumer app comparisons, but they help contextualize the OpenAI API and app
 result. Even raw APIs differ in refusal posture on the same prompt bank. The matrix below
 therefore separates the core OpenAI API vs ChatGPT app channel comparison from
@@ -231,20 +231,20 @@ Artifact & Role \\
 \path{data/prompts/prompt_bank_60.csv} & Shared redacted 60 prompt bank used for reporting and appendix tables. \\
 \path{data/private/prompt_bank_60_private.csv} & Restricted prompt bank with executable high risk prompt text. Not for public release. \\
 \path{data/private/openai_api_scaleup_60/} & Restricted OpenAI API scale up collection logs. \\
-\path{data/private/chatgpt_app_scaleup_60/} & Restricted screenshot backed ChatGPT app collection archive. \\
-\path{data/private/chatgpt_app_scaleup_60_cleaned/} & Restricted prompt echo cleaned and screenshot corrected app log used for final analysis. \\
+\path{data/private/chatgpt_app_scaleup_60/} & Restricted screenshot-backed ChatGPT app collection archive. \\
+\path{data/private/chatgpt_app_scaleup_60_cleaned/} & Restricted prompt-echo-cleaned and screenshot-corrected app log used for final analysis. \\
 \path{results/analysis/} & Final corrected scale up analysis directory. \\
 \path{scripts/score_pilot_results.py} & First pass scorer for refusal, format, factuality, safety framing, and UI labels. \\
 \path{scripts/apply_scaleup_manual_review.py} & Applies final review rules that distinguish minor from substantive divergences. \\
 \path{scripts/compute_scaleup_statistics.py} & Computes McNemar exact tests and Wilson confidence intervals. \\
-\path{scripts/analyze_within_between_lexical.py} & Compares within channel (API r1, r2, r3) and between channel (API vs.\ app) token Jaccard similarity per prompt. \\
+\path{scripts/analyze_within_between_lexical.py} & Compares within-channel (API r1, r2, r3) and between-channel (API vs.\ app) token Jaccard similarity per prompt. \\
 \path{scripts/analyze_refusal_style_markers.py} & Counts transcription robust inability and redirect markers on Category B responses for all four channels. \\
 \path{scripts/make_results_figure.py} & Regenerates the Results figure from current analysis outputs. \\
 \path{scripts/make_additional_figures.py} & Regenerates the pipeline, within and between scatter, and channel agreement figures. \\
 \path{results/analysis/scaleup_human_reviewed_coding_sheet.csv} & Final reviewed coding sheet for all 60 rows. \\
 \path{results/analysis/evidence/case_evidence_table.csv} & Quote level verification table for the 17 final substantive cases, including screenshot evidence markers and API and app evidence excerpts. \\
 \path{results/case_summaries.md} & Claim safe prose summary of the 17 final substantive cases. \\
-\path{protocols/transcript_qa_notes.md} & QA memo documenting prompt echo contamination and screenshot corrections. \\
+\path{protocols/transcript_qa_notes.md} & QA memo documenting prompt-echo contamination and screenshot corrections. \\
 \end{longtable}
 
 \section{Claim Boundary Wording}
@@ -265,4 +265,4 @@ rule caused the behavior.
 
 This distinction is central to the thesis. The audit can show that the access
 channel is an empirically relevant condition. It cannot identify proprietary
-internal mechanisms from black box outputs alone.
+internal mechanisms from black-box outputs alone.
