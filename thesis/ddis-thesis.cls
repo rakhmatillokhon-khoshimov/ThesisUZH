@@ -30,10 +30,7 @@
 \RequirePackage{lmodern}
 \RequirePackage{helvet}
 \RequirePackage[toc, numberedsection, acronym]{glossaries}
-\RequirePackage[backend=biber, maxcitenames=2, maxbibnames=3, style=authoryear, natbib=true]{biblatex}
-\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
-\DeclareDelimFormat{multicitedelim}{\addsemicolon\space}
-\DeclareDelimFormat{compcitedelim}{\addsemicolon\space}
+\RequirePackage[backend=biber, style=apa, natbib=true]{biblatex}
 
 \makeglossaries
 \setglossarysection{section}
