@@ -30,7 +30,13 @@
 \RequirePackage{lmodern}
 \RequirePackage{helvet}
 \RequirePackage[toc, numberedsection, acronym]{glossaries}
-\RequirePackage[backend=biber, style=apa, natbib=true]{biblatex}
+\RequirePackage[backend=biber, style=authoryear, maxcitenames=2, mincitenames=1, maxbibnames=99, giveninits=true, uniquename=false, uniquelist=false, natbib=true]{biblatex}
+\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+\DeclareDelimFormat{multicitedelim}{\addsemicolon\space}
+\DeclareDelimFormat{compcitedelim}{\addsemicolon\space}
+\DeclareDelimFormat[parencite]{finalnamedelim}{%
+  \ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+  \addspace\&\space}
 
 \makeglossaries
 \setglossarysection{section}
@@ -71,7 +77,7 @@
 % Original name = Contents
 \renewcommand{\contentsname}{Table of Contents}
 % Original name = Bibliography
-\renewcommand\bibname{References}
+\renewcommand\bibname{Bibliography}
 
 \newenvironment{abstracten}{%
   \chapter*{Abstract}
@@ -99,7 +105,7 @@
 \renewcommand{\sectionautorefname}{Section}
 \renewcommand{\subsectionautorefname}{Section}
 \renewcommand{\subsubsectionautorefname}{Section}
-\renewcommand{\bibname}{References}
+\renewcommand{\bibname}{Bibliography}
 }
 
 % Add fancy headers and footers
@@ -151,7 +157,4 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
-\DefineBibliographyStrings{english}{%
-  andothers = {\textit{et al}\adddot}
-}
 \endinput
