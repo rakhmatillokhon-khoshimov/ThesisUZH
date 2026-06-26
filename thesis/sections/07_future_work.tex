@@ -1,62 +1,62 @@
 \chapter{Future Work and Research Agenda}
 
-The current study is intentionally compact: one OpenAI API/app pair, a frozen
-60-prompt diagnostic bank, API-only vendor baselines, API-side repetition
-checks, and a targeted ChatGPT-app repetition check for the 17 final cases. The
-result is sufficient for a case-based black-box thesis claim, but not for
-population-level rates, causal mechanism attribution, or broad app-side stability
+The current study is intentionally compact. It covers one OpenAI API/app pair, a frozen
+60 prompt diagnostic bank, API only vendor baselines, API side repetition
+checks, and a targeted ChatGPT app repetition check for the 17 final cases. The
+result is sufficient for a case based black box thesis claim, but not for
+population level rates, causal mechanism attribution, or broad app side stability
 claims over the entire prompt bank. Future work should therefore strengthen the
 same design rather than search for a different thesis.
 
-\section{Highest-Value Extension: Broader App-Side Stability}
+\section{Highest Value Extension: Broader App Side Stability}
 
 The most useful empirical extension is no longer a first targeted ChatGPT app
-stability panel; that panel has been collected for the 17 final cases. The next
-step is broader app-side repetition coverage, not a large new prompt bank. A
-follow-up should repeat either the full 60-prompt ChatGPT-app collection or a
-pre-registered larger subset, ideally in fresh sessions and with the visible
+stability panel. That panel has been collected for the 17 final cases. The next
+step is broader app side repetition coverage, not a large new prompt bank. A
+follow up should repeat either the full 60 prompt ChatGPT app collection or a
+preregistered larger subset, ideally in fresh sessions and with the visible
 model selector captured when possible.
 
-The output should be a compact prompt-level table: stable, partially stable, or
+The output should be a compact prompt level table with three values: stable, partially stable, or
 unstable. Stable means the same divergence label appears again. Partially stable
 means the same direction recurs but at least one run changes label. Unstable
 means the divergence disappears or reverses. This directly answers the main
-reader question beyond the current targeted panel: whether non-divergent rows
-remain non-divergent and whether the observed stability pattern holds outside
-the final-case subset.
+reader question beyond the current targeted panel. It asks whether non divergent rows
+remain non divergent and whether the observed stability pattern holds outside
+the final case subset.
 
 The same repetition pass should keep the current evidence discipline. Each new
-row needs a screenshot, transcript, visible UI-surface note, and final coding
+row needs a screenshot, transcript, visible UI surface note, and final coding
 decision. Adding repetitions without screenshot QA would not strengthen the
 thesis.
 
 \section{Broader Reliability Work}
 
 The completed independent coding pass is sufficient for the present exploratory
-thesis, but a larger follow-up should broaden reliability rather than stop at one
-blind coder. The next pass should double-code a larger random subset, include
-additional app repetitions, and pre-register disagreement-resolution rules before
+thesis, but a larger follow up should broaden reliability rather than stop at one
+blind coder. The next pass should double code a larger random subset, include
+additional app repetitions, and preregister disagreement resolution rules before
 looking at the results.
 
 The main improvement should target \texttt{safety\_framing\_strength}. That
 label had weak agreement in the current study, so future work should either
 simplify it into coarser categories or replace it with more objective indicators,
-such as explicit refusal, explicit redirection, cited authority, crisis-resource
+such as explicit refusal, explicit redirection, cited authority, crisis resource
 inclusion, or visible source/tool use. The practical lesson is not that the
 thesis becomes invalid, but that safety framing should remain a supporting
 descriptor unless the coding guide is tightened and validated.
 
 \section{Prompt Coverage and Power}
 
-A larger follow-up should expand the prompt bank only after the repetition and
-reliability gaps are handled. The current 60-prompt bank is diagnostic rather
+A larger follow up should expand the prompt bank only after the repetition and
+reliability gaps are handled. The current 60 prompt bank is diagnostic rather
 than representative, and the primary refusal endpoint is directional but not
 conventionally significant. A confirmatory version would need larger category
-cells, a pre-specified primary endpoint, and a fixed multiple-comparison plan for
+cells, a prespecified primary endpoint, and a fixed multiple comparison plan for
 moderator analyses.
 
-The most useful expansion would add objective instruction-following prompts and
-more balanced refusal-boundary subcategories. Objective format constraints such
+The most useful expansion would add objective instruction following prompts and
+more balanced refusal boundary subcategories. Objective format constraints such
 as JSON validity, exact separators, forbidden punctuation, and token counts are
 valuable because they are easier to audit than soft safety framing. Refusal
 prompts should remain redacted in shared artifacts and balanced across risk
@@ -64,34 +64,34 @@ families so that one domain does not drive the result.
 
 \section{Other Providers and Longitudinal Drift}
 
-Claude and Gemini are currently API-only baselines. They contextualize the
-OpenAI result but do not support Claude-app or Gemini-app claims. A direct
-extension would collect official consumer-app outputs for those providers using
+Claude and Gemini are currently API only baselines. They contextualize the
+OpenAI result but do not support Claude app or Gemini app claims. A direct
+extension would collect official consumer app outputs for those providers using
 the same screenshot protocol and coding guide. Claims should then be framed as
-provider-specific API/app pairs, not as a single leaderboard.
+provider specific API/app pairs, not as a single leaderboard.
 
 The study should also be repeated over time. LLM products can change model
 routing, search behavior, visible citations, memory, and safety wording without
 obvious public notice. A longitudinal audit could rerun the same prompt bank
-weekly or monthly and report prompt-level changes, not only aggregate rates. The
-important question would be whether the same refusal and factual-support cases
+weekly or monthly and report prompt level changes, not only aggregate rates. The
+important question would be whether the same refusal and factual support cases
 persist across product updates.
 
-\section{Mechanism-Probing Without Causal Overclaiming}
+\section{Mechanism Probing Without Causal Overclaiming}
 
 This thesis cannot attribute differences to hidden system prompts, tools,
 retrieval, moderation layers, or routing. Future work can move closer to
 mechanism only by adding controlled surface ablations. For the app, this means
 documenting whether search, memory, location permissions, and visible tool
 indicators are enabled. For the API, it means varying system prompts, tool
-availability, temperature, and response-format settings. Such ablations can show
+availability, temperature, and response format settings. Such ablations can show
 which visible conditions are sufficient to reproduce a pattern, but they still do
 not reveal proprietary internals.
 
 \section{Priority Order}
 
 \begin{longtable}{L{0.08\linewidth}L{0.26\linewidth}L{0.28\linewidth}L{0.24\linewidth}}
-\caption[Prioritized next steps for the deployment-surface audit]{Prioritized next steps for strengthening the deployment-surface audit.}\\
+\caption[Prioritized next steps for the deployment surface audit]{Prioritized next steps for strengthening the deployment surface audit.}\\
 \toprule
 Rank & Task & Immediate output & Why it matters \\
 \midrule
@@ -103,15 +103,15 @@ Rank & Task & Immediate output & Why it matters \\
 \endhead
 \bottomrule
 \endfoot
-1 & Full-bank ChatGPT app repetitions & Stability table with screenshots and transcripts & Tests whether the targeted stability pattern holds beyond the 17 final cases. \\
-2 & Larger prompt bank & Better-powered confirmatory audit & Separates durable patterns from small-cell effects. \\
-3 & Other consumer apps & Provider-specific API/app matrices & Tests whether the access-surface issue generalizes. \\
+1 & Full bank ChatGPT app repetitions & Stability table with screenshots and transcripts & Tests whether the targeted stability pattern holds beyond the 17 final cases. \\
+2 & Larger prompt bank & Better powered confirmatory audit & Separates durable patterns from small cell effects. \\
+3 & Other consumer apps & Provider specific API/app matrices & Tests whether the access surface issue generalizes. \\
 4 & Longitudinal waves & Drift report by prompt and category & Measures persistence over product updates. \\
-5 & Broader reliability coding & Multi-coder reliability report on a larger subset & Quantifies where the taxonomy remains dependable at scale. \\
-6 & Surface ablations & Search, memory, locale, tool, and system-prompt condition notes & Narrows plausible explanations without claiming hidden mechanisms. \\
+5 & Broader reliability coding & Multi coder reliability report on a larger subset & Quantifies where the taxonomy remains dependable at scale. \\
+6 & Surface ablations & Search, memory, locale, tool, and system prompt condition notes & Narrows plausible explanations without claiming hidden mechanisms. \\
 \end{longtable}
 
 This agenda keeps the thesis claim appropriately bounded. The current evidence
-supports a conservative audit finding: a bare API condition is not automatically
-a proxy for the productized consumer-app deployment. The next work should test
+supports a conservative audit finding. A bare API condition is not automatically
+a proxy for the productized consumer app deployment. The next work should test
 stability, reliability, and generality before making stronger claims.

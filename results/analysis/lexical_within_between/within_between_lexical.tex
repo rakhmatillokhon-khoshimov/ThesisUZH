@@ -1,6 +1,6 @@
 % Script-produced by analyze_within_between_lexical.py
 \begin{table}[t]\centering\small
-\caption[Within- vs. between-channel lexical similarity]{Within-channel versus between-channel lexical similarity (token Jaccard) on the 60 fully repeated prompts. Within-channel is the mean similarity of the three OpenAI API repetition pairs on the same prompt; between-channel is the similarity of the first API run to the single ChatGPT app response. Exploratory paired comparison.}
+\caption[Within versus between channel lexical similarity]{Within channel versus between channel lexical similarity (token Jaccard) on the 60 fully repeated prompts. Within channel is the mean similarity of the three OpenAI API repetition pairs on the same prompt, and between channel is the similarity of the first API run to the single ChatGPT app response. Exploratory paired comparison.}
 \label{tab:withinbetween}
 \begin{tabular}{@{}L{0.56\linewidth}cc@{}}
 \toprule
@@ -9,7 +9,7 @@ Comparison & Mean Jaccard & Median Jaccard \\
 Within OpenAI API (r1/r2/r3 pairs) & 0.47 & 0.42 \\
 Between channels (API r1 vs.\ app) & 0.22 & 0.21 \\
 \midrule
-\multicolumn{3}{@{}L{0.90\linewidth}@{}}{Within $>$ between on 60/60 prompts (sign test $p=1.7e-18$; Wilcoxon $z=-6.74$, $p=1.6e-11$)} \\
+\multicolumn{3}{@{}L{0.90\linewidth}@{}}{Within $>$ between on 60/60 prompts (sign test $p=1.7e-18$, Wilcoxon $z=-6.74$, $p=1.6e-11$)} \\
 \bottomrule
 \end{tabular}
 \end{table}

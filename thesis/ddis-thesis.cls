@@ -31,6 +31,8 @@
 \RequirePackage{helvet}
 \RequirePackage[toc, numberedsection, acronym]{glossaries}
 \RequirePackage[backend=biber, maxcitenames=2, maxbibnames=3, style=authoryear, natbib=true]{biblatex}
+\DeclareDelimFormat{multicitedelim}{\addcomma\space}
+\DeclareDelimFormat{compcitedelim}{\addcomma\space}
 
 \makeglossaries
 \setglossarysection{section}

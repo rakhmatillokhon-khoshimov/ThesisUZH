@@ -1,111 +1,112 @@
 \chapter{Related Work}
 
 This chapter reviews only the work that motivates the study design. It is
-organized around five themes---algorithm auditing; LLM behavior and access
-surfaces; safety and refusal calibration; control and factuality tasks; and the
-reliability of LLM measurement---then positions the thesis. Each section states
-what it contributes to an access-surface audit and what it leaves open. The
-empirical prompts group into six behavioral families (Categories A--F in
+organized around five themes: algorithm auditing, LLM behavior and access
+surfaces, safety and refusal calibration, control and factuality tasks, and the
+reliability of LLM measurement. It then positions the thesis. Each section states
+what it contributes to an access surface audit and what it leaves open. The
+empirical prompts group into six behavioral families (Categories A through F in
 Chapter 3), described here by behavioral function rather than category letter.
 
 \section{Algorithm Auditing}
 
 Algorithm auditing supplies both the method this thesis adopts and its guiding
-principle: probe an opaque deployed system through controlled inputs and
-observable outputs, and make the deployed product---not an abstract model---the
+principle. It probes an opaque deployed system through controlled inputs and
+observable outputs, and it makes the deployed product, not an abstract model, the
 unit of analysis. Sandvig et al.\ \cite*{sandvig_auditing} frame auditing as a way
 to detect differential treatment on platforms whose internal mechanisms are
-unavailable. The logic transfers to proprietary LLMs: an evaluator cannot see
+unavailable. The logic transfers to proprietary LLMs. An evaluator cannot see
 hidden instructions, tool policies, routing, or moderation, but can still compare
-outputs collected under documented conditions. Product-level audits show why the
+outputs collected under documented conditions. Product level audits show why the
 deployed system is the right unit. Gender Shades \cite*{gender_shades} exposed
 intersectional accuracy gaps in commercial classifiers that aggregate scores had
-hidden; Raji and Buolamwini \cite*{raji_actionable} showed that publishing such
-audits changed vendor behavior; and Obermeyer et al.\ \cite*{obermeyer_bias} found
+hidden. Raji and Buolamwini \cite*{raji_actionable} showed that publishing such
+audits changed vendor behavior. Obermeyer et al.\ \cite*{obermeyer_bias} found
 racial bias in a deployed healthcare tool. Accountability work makes the system
-boundary explicit: Raji et al.\ \cite*{raji_gap} document evidence, scope, and
+boundary explicit. Raji et al.\ \cite*{raji_gap} document evidence, scope, and
 deployment assumptions together, while Selbst et al.\ \cite*{selbst_abstraction}
 and Suresh and Guttag \cite*{suresh_guttag} warn that evaluations fail when they
 abstract away deployment context. A consumer app is therefore part of the deployed
 condition, not a transparent wrapper around an endpoint. What this literature does
-not supply is a method for auditing \emph{generative, non-deterministic} text
-systems, where the same input can yield different outputs; that problem is taken
-up in Section~2.5.
+not supply is a method for auditing \emph{generative, nondeterministic} text
+systems, where the same input can yield different outputs. That problem is taken
+up in Section~\ref{sec:llm-measurement-reliability}.
 
 \section{LLM Behavior, Deployment, and Access Surfaces}
 
-This section establishes the premise the thesis rests on: assistant behavior is a
+This section establishes the premise the thesis rests on. Assistant behavior is a
 property of the deployed system, and the access surface is itself an empirical
 variable. Modern LLM behavior is shaped by far more than pretraining. GPT-3
-\cite*{gpt3} established prompt-based task performance, InstructGPT
+\cite*{gpt3} established prompt based task performance, InstructGPT
 \cite*{instructgpt} showed that instruction tuning with human feedback reshapes
 what a model will and will not do, and Anthropic's helpful, honest, and harmless
 work \cite*{helpful_harmless} and Constitutional AI \cite*{constitutional_ai} make
-the same point for safety: assistant behavior is a trained, system-level property,
-not raw next-token continuation. Bommasani et al.\ \cite*{foundation_models} and
-Weidinger et al.\ \cite*{weidinger_risks} add that foundation-model risks depend on
-how models are adapted and deployed---so the deployed system, not the bare model,
-is what an audit must measure. Benchmarks are the standard instrument---MMLU
+the same point for safety. Assistant behavior is a trained, system level property,
+not raw next token continuation. Bommasani et al.\ \cite*{foundation_models} and
+Weidinger et al.\ \cite*{weidinger_risks} add that foundation model risks depend on
+how models are adapted and deployed. The deployed system, not the bare model,
+is what an audit must measure. Benchmarks are the standard instrument. MMLU
 \cite*{mmlu}, GSM8K \cite*{gsm8k}, HumanEval
-\cite*{codex}, BIG-bench \cite*{bigbench}, and HELM \cite*{helm}---but they are
+\cite*{codex}, BIG-bench \cite*{bigbench}, and HELM \cite*{helm} are prominent
+examples. They are
 almost always run through programmatic APIs, which leaves open whether the
 behavior they measure is the behavior a user receives through an app. A small but
 growing literature treats the access surface itself as the variable. The closest
 precedent, Dual Standards by Lipphardt et al.\ \cite*{dualstandards}, gives
-empirical evidence that moderation differs between API and WebUI access; notably it
-finds the WebUI \emph{more} restrictive---the opposite direction to this thesis,
+empirical evidence that moderation differs between API and WebUI access. It
+finds the WebUI \emph{more} restrictive, the opposite direction to this thesis,
 which is exactly why the claim here is only that the surfaces differ, not that they
 differ in a fixed direction. Two further results make the app a moving, opaque
-target: Chen et al.\ \cite*{chatgpt_drift} show the same named service can change
+target. Chen et al.\ \cite*{chatgpt_drift} show the same named service can change
 within months, and Zhang et al.\ \cite*{prompt_extraction} show consumer systems
-wrap the model in partly extractable hidden prompts. What remains missing---and
-what this thesis supplies---is a direct, paired comparison of a bare API against
+wrap the model in partly extractable hidden prompts. What remains missing, and
+what this thesis supplies, is a direct, paired comparison of a bare API against
 the official app on one fixed diagnostic prompt bank.
 
 \section{Safety and Refusal Calibration}
 
-This section sources the high-risk, boundary, and over-refusal prompts in the bank
+This section sources the high risk, boundary, and over refusal prompts in the bank
 and the coding distinctions a refusal audit needs. Safety benchmarks supply the
-high-risk and boundary prompts: Do-Not-Answer \cite*{donotanswer} curates prompts
-a responsible model should decline; HarmBench \cite*{harmbench} standardizes
-refusal evaluation; AILuminate \cite*{ailuminate} organizes product-level risk
-categories; and moderation classifiers such as Llama Guard \cite*{llama_guard}
+high risk and boundary prompts. Do-Not-Answer \cite*{donotanswer} curates prompts
+a responsible model should decline. HarmBench \cite*{harmbench} standardizes
+refusal evaluation. AILuminate \cite*{ailuminate} organizes product level risk
+categories. Moderation classifiers such as Llama Guard \cite*{llama_guard}
 show that a provider can place a filter between user and model that, from a
-black-box view, is part of the deployment stack. Refusal benchmarks sharpen how a
-non-answer is coded: SORRY-Bench \cite*{sorrybench}, StrongREJECT
+black box view, is part of the deployment stack. Refusal benchmarks sharpen how a
+non answer is coded. SORRY-Bench \cite*{sorrybench}, StrongREJECT
 \cite*{strongreject}, and WildGuard \cite*{wildguard} evaluate refusal and
-jailbreak behavior, while the biological-research RefusalBench of Weidener et al.\
-\cite*{refusalbench_bio} is the key caution---a single refusal rate can misrank
+jailbreak behavior, while the biological research RefusalBench of Weidener et al.\
+\cite*{refusalbench_bio} is the key caution. A single refusal rate can misrank
 systems when safe, useful engagement is possible. This thesis therefore
 distinguishes full refusal, partial refusal, and safe redirection rather than
-treating every non-answer alike. Over-refusal work motivates the benign half of
-the design: XSTest \cite*{xstest} targets exaggerated safety on clearly safe
-prompts with risky surface words, and OR-Bench \cite*{orbench} scales over-refusal
-evaluation. Red-teaming and jailbreak research
+treating every non answer alike. Over refusal work motivates the benign half of
+the design. XSTest \cite*{xstest} targets exaggerated safety on clearly safe
+prompts with risky surface words, and OR-Bench \cite*{orbench} scales over refusal
+evaluation. Red teaming and jailbreak research
 \cite*{ganguli_redteam,redteam_lms,universal_attacks,pair} is background rather
-than a prompt source; this thesis uses
-plain diagnostic prompts so that any differences read as deployment-surface
+than a prompt source. This thesis uses
+plain diagnostic prompts so that any differences read as deployment surface
 effects rather than jailbreak artifacts.
 
 \section{Control and Factuality Tasks}
 
-Beyond safety, the bank needs control families---instruction following,
-factuality, and socially sensitive inference---that separate deployment-surface
-effects from ordinary task variation; this section justifies them. IFEval
-\cite*{ifeval} motivates instruction-following items with explicit, checkable
+Beyond safety, the bank needs control families: instruction following,
+factuality, and socially sensitive inference. These separate deployment surface
+effects from ordinary task variation. IFEval
+\cite*{ifeval} motivates instruction following items with explicit, checkable
 constraints that can be scored without subjective judgment, and it flags a
-practical app-evaluation hazard: rendered markdown or transcription artifacts can
-mimic format failures unless screenshots are checked, which is why format-compliance
-divergences are coded conservatively here. Factuality fills three roles:
-short-answer benchmarks SimpleQA \cite*{simpleqa} and TruthfulQA
-\cite*{truthfulqa} define when a model should simply be correct; hallucination
+practical app evaluation hazard: rendered markdown or transcription artifacts can
+mimic format failures unless screenshots are checked, which is why format compliance
+divergences are coded conservatively here. Factuality fills three roles.
+short answer benchmarks SimpleQA \cite*{simpleqa} and TruthfulQA
+\cite*{truthfulqa} define when a model should simply be correct. Hallucination
 studies \cite*{maynez_factuality,hallucination_survey,factscore,selfcheckgpt}
-motivate separating unsupported memory answers from evidence-supported ones; and
+motivate separating unsupported memory answers from evidence supported ones.
 retrieval work \cite*{dpr,rag,webgpt,verified_quotes,blenderbot2} shows that adding
 visible sources changes the factual support a user receives. Because the app can
 display sources while the bare API cannot, visible sources are coded as a
-deployment-surface signature rather than dismissed as cosmetic. Socially sensitive
-inference is a negative control: work on bias in embeddings and generated text
+deployment surface signature rather than dismissed as cosmetic. Socially sensitive
+inference is a negative control. Work on bias in embeddings and generated text
 \cite*{caliskan_bias,debiasing_embeddings,sheng_bias,realtoxicityprompts} shows
 that models absorb demographic associations, Blodgett et al.\
 \cite*{blodgett_survey} argue that bias claims require explicit normative
@@ -115,42 +116,43 @@ determine from the information given'' as correct rather than as a refusal, so
 these controls do not inflate the refusal result.
 
 \section{Reliability of LLM Measurement}
+\label{sec:llm-measurement-reliability}
 
 Auditing a generative system raises two measurement problems a classification
-audit does not---non-determinism and coder subjectivity---and this section
+audit does not: nondeterminism and coder subjectivity. This section
 motivates the repetition and reliability machinery in Chapter 3. First, outputs
-are non-deterministic: Yuan et al.\ \cite*{llm_nondeterminism} show that the same
+are nondeterministic. Yuan et al.\ \cite*{llm_nondeterminism} show that the same
 prompt can produce different responses across runs and hardware from
-floating-point and batching effects alone, before any deliberate sampling, so an
-audit that collects a single response per condition can mistake run-to-run noise
-for an access-surface difference---which is why this thesis repeats the API
-condition and reports run-to-run stability. Second, scaling the coding of
-open-ended outputs invites automated judging, but MT-Bench \cite*{mtbench} and
+floating point and batching effects alone, before any deliberate sampling, so an
+audit that collects a single response per condition can mistake run to run noise
+for an access surface difference. This is why this thesis repeats the API
+condition and reports run to run stability. Second, scaling the coding of
+open ended outputs invites automated judging, but MT-Bench \cite*{mtbench} and
 G-Eval \cite*{geval} document sensitivity to prompt wording and answer position,
 so automated labels need human checking rather than blind trust. Third, human
-coding must be quantified: Cohen's \cite*{cohen_kappa} and Fleiss's
+coding must be quantified. Cohen's \cite*{cohen_kappa} and Fleiss's
 \cite*{fleiss_kappa} kappa coefficients, with McHugh's \cite*{mchugh_kappa}
 guidance on interpreting kappa magnitudes, are the standard instruments. This
-thesis combines all three---repetition for non-determinism, automated coding
-checked against an independent blind second coder, and kappa-based inter-rater
-reliability---so that a reported divergence is unlikely to be an artifact of
+thesis combines all three: repetition for nondeterminism, automated coding
+checked against an independent blind second coder, and kappa based inter rater
+reliability. A reported divergence is therefore unlikely to be an artifact of
 stochasticity or coder subjectivity.
 
 \section{Positioning of This Thesis}
 
 Taken together, the cited work establishes three points and leaves one open. LLM
-behavior is a property of the deployed system rather than the bare model; the
-access surface can change that behavior; and measuring a generative system
-requires controlling for non-determinism and coder subjectivity. What it does not
-provide is a compact, evidence-backed, paired audit that holds a fixed diagnostic
+behavior is a property of the deployed system rather than the bare model. The
+access surface can change that behavior, and measuring a generative system
+requires controlling for nondeterminism and coder subjectivity. What it does not
+provide is a compact, evidence backed, paired audit that holds a fixed diagnostic
 prompt bank constant while directly comparing a bare OpenAI API condition with the
-official ChatGPT app, coding only observable differences with screenshot-backed
+official ChatGPT app, coding only observable differences with screenshot backed
 evidence and reliability controls. That is the contribution of this thesis.
 
 The same framing bounds the claims. The study can show that observable outputs
 differ under documented access conditions, but it cannot identify the hidden
-system prompt, retrieval policy, tool-routing decision, or moderation component
-behind a given app output. Naming those components is left to future work; the
-implication that survives is narrow and practical---LLM evaluations should name the
+system prompt, retrieval policy, tool routing decision, or moderation component
+behind a given app output. Naming those components is left to future work. The
+implication that survives is narrow and practical. LLM evaluations should name the
 access surface they measure and validate app behavior directly rather than
 assuming it from API results.
