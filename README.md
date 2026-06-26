@@ -52,7 +52,7 @@ On this macOS TeX Live install, `make thesis` falls back to
 `/usr/local/texlive/2025/bin/universal-darwin/makeglossaries` if
 `makeglossaries` is not on `PATH`.
 
-The repository was verified to compile to a 102-page PDF.
+The repository was verified to compile to a 94-page PDF.
 
 ## Reproducibility Boundary
 
@@ -70,12 +70,12 @@ See `docs/DATA_ACCESS.md` for the exact exclusion policy.
 
 ## Key Results Snapshot
 
-- Complete OpenAI API vs ChatGPT app pairs: 60/60.
-- Final substantive observable divergences after review: 17/60.
-- Response-core subset: 10/60.
+- Complete OpenAI API and ChatGPT app pairs: 60 of 60.
+- Final substantive observable divergences after review: 17 of 60.
+- Response-core subset: 10 of 60.
 - Full-refusal asymmetry: API-only 5, app-only 0; McNemar exact `p=0.0625`.
 - OpenAI API refusal label stability across three API runs: Fleiss `kappa=1.0`.
-- Within-channel API lexical similarity exceeded API-vs-app similarity on 60/60
+- Within-channel API lexical similarity exceeded API-to-app similarity on all 60
   prompts.
 - Human inter-rater reliability on 54 blind coding units: refusal status,
   format compliance, and unsupported inference `kappa=1.0`; factuality
