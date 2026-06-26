@@ -10,22 +10,22 @@ personalization, moderation, and session context are not mere presentation. Thos
 layers can change the answer a user receives.
 
 This thesis treats the deployment surface as part of the system under audit. That
-choice follows the algorithm auditing tradition of \textcite{sandvig_auditing},
-where controlled inputs probe opaque deployed systems through their observable
-outputs, and accountability work by \textcite{raji_gap}, which argues that
-audits must document the system boundary and
-collection conditions. The framing matters for foundation model systems because
-their risks are sociotechnical and deployment dependent, as discussed by
-\textcite{foundation_models} and \textcite{weidinger_risks}.
+choice follows the algorithm auditing tradition, where controlled inputs probe
+opaque deployed systems through their observable outputs
+\parencite{sandvig_auditing}. It also follows accountability work arguing that
+audits must document the system boundary and collection conditions
+\parencite{raji_gap}. The framing matters for foundation model systems because
+their risks are sociotechnical and deployment dependent
+\parencite{foundation_models,weidinger_risks}.
 
 Two access surfaces are distinguished. The \emph{API condition} is a bare
 programmatic call to a provider endpoint with no custom system prompt. The
 \emph{app} is the official ChatGPT consumer web application at chatgpt.com, opened
 in an ordinary logged in browser session rather than called through code, and it
 may wrap the model in system instructions, tools, retrieval, moderation, and
-session and locale context. This web surface is the kind of interface that
-\textcite{dualstandards} call a WebUI in \emph{Dual Standards}, which finds that
-API and WebUI access can be empirically distinct.
+session and locale context. This web surface corresponds to WebUI access in
+\emph{Dual Standards}, which finds that API and WebUI access can be empirically
+distinct \parencite{dualstandards}.
 
 This thesis asks one main research question.
 

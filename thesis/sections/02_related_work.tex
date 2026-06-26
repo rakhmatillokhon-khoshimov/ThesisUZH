@@ -13,20 +13,20 @@ Chapter 3), described here by behavioral function rather than category letter.
 Algorithm auditing supplies both the method this thesis adopts and its guiding
 principle. It probes an opaque deployed system through controlled inputs and
 observable outputs, and it makes the deployed product, not an abstract model, the
-unit of analysis. \textcite{sandvig_auditing} frame auditing as a way to detect
-differential treatment on platforms whose internal mechanisms are
-unavailable. The logic transfers to proprietary LLMs. An evaluator cannot see
+unit of analysis. Auditing has been framed as a way to detect differential
+treatment on platforms whose internal mechanisms are unavailable
+\parencite{sandvig_auditing}. The logic transfers to proprietary LLMs. An evaluator cannot see
 hidden instructions, tool policies, routing, or moderation, but can still compare
 outputs collected under documented conditions. Product level audits show why the
 deployed system is the right unit. The \emph{Gender Shades} audit
 \parencite{gender_shades} exposed intersectional accuracy gaps in commercial
-classifiers that aggregate scores had hidden. \textcite{raji_actionable} showed
-that publishing such audits changed vendor behavior. \textcite{obermeyer_bias}
-found racial bias in a deployed healthcare tool. Accountability work makes the
-system boundary explicit. \textcite{raji_gap} document evidence, scope, and
-deployment assumptions together, while \textcite{selbst_abstraction} and
-\textcite{suresh_guttag} warn that evaluations fail when they abstract away
-deployment context. A consumer app is therefore part of the deployed
+classifiers that aggregate scores had hidden. Publishing such audits can change
+vendor behavior \parencite{raji_actionable}. A deployed healthcare tool was also
+shown to contain racial bias \parencite{obermeyer_bias}. Accountability work
+makes the system boundary explicit by documenting evidence, scope, and deployment
+assumptions together \parencite{raji_gap}. Broader sociotechnical critiques warn
+that evaluations fail when they abstract away deployment context
+\parencite{selbst_abstraction,suresh_guttag}. A consumer app is therefore part of the deployed
 condition, not a transparent wrapper around an endpoint. What this literature does
 not supply is a method for auditing \emph{generative, nondeterministic} text
 systems, where the same input can yield different outputs. That problem is taken
@@ -42,10 +42,10 @@ variable. Modern LLM behavior is shaped by far more than pretraining. GPT-3
 reshapes what a model will and will not do, and Anthropic's helpful, honest, and
 harmless work \parencite{helpful_harmless} and Constitutional AI
 \parencite{constitutional_ai} make the same point for safety. Assistant behavior
-is a trained, system level property, not raw next token continuation.
-\textcite{foundation_models} and \textcite{weidinger_risks} add that foundation
-model risks depend on how models are adapted and deployed. The deployed system,
-not the bare model, is what an audit must measure. Benchmarks are the standard
+is a trained, system level property, not raw next token continuation. Foundation
+model risk work adds that risks depend on how models are adapted and deployed
+\parencite{foundation_models,weidinger_risks}. The deployed system, not the bare
+model, is what an audit must measure. Benchmarks are the standard
 instrument. MMLU \parencite{mmlu}, GSM8K \parencite{gsm8k}, HumanEval
 \parencite{codex}, BIG-bench \parencite{bigbench}, and HELM \parencite{helm} are
 prominent examples. They are
@@ -57,9 +57,9 @@ empirical evidence that moderation differs between API and WebUI access. It
 finds the WebUI \emph{more} restrictive, the opposite direction to this thesis,
 which is exactly why the claim here is only that the surfaces differ, not that they
 differ in a fixed direction. Two further results make the app a moving, opaque
-target. \textcite{chatgpt_drift} show the same named service can change within
-months, and \textcite{prompt_extraction} show consumer systems wrap the model in
-partly extractable hidden prompts. What remains missing, and
+target. The same named service can change within months, and consumer systems can
+wrap the model in partly extractable hidden prompts
+\parencite{chatgpt_drift,prompt_extraction}. What remains missing, and
 what this thesis supplies, is a direct, paired comparison of a bare API against
 the official app on one fixed diagnostic prompt bank.
 
@@ -109,9 +109,9 @@ display sources while the bare API cannot, visible sources are coded as a
 deployment surface signature rather than dismissed as cosmetic. Socially sensitive
 inference is a negative control. Work on bias in embeddings and generated text
 \parencite{caliskan_bias,debiasing_embeddings,sheng_bias,realtoxicityprompts}
-shows that models absorb demographic associations, \textcite{blodgett_survey}
-argue that bias claims require explicit normative grounding, and BBQ
-\parencite{bbq} is built so the correct response is often to decline an
+shows that models absorb demographic associations. Bias claims require explicit
+normative grounding \parencite{blodgett_survey}, and BBQ \parencite{bbq} is
+built so the correct response is often to decline an
 unsupported demographic inference. This thesis therefore codes ``cannot
 determine from the information given'' as correct rather than as a refusal, so
 these controls do not inflate the refusal result.
@@ -122,18 +122,18 @@ these controls do not inflate the refusal result.
 Auditing a generative system raises two measurement problems a classification
 audit does not: nondeterminism and coder subjectivity. This section
 motivates the repetition and reliability machinery in Chapter 3. First, outputs
-are nondeterministic. \textcite{llm_nondeterminism} show that the same
-prompt can produce different responses across runs and hardware from
-floating point and batching effects alone, before any deliberate sampling, so an
+are nondeterministic. The same prompt can produce different responses across runs
+and hardware from floating point and batching effects alone, before any deliberate
+sampling \parencite{llm_nondeterminism}, so an
 audit that collects a single response per condition can mistake run to run noise
 for an access surface difference. This is why this thesis repeats the API
 condition and reports run to run stability. Second, scaling the coding of
 open ended outputs invites automated judging, but MT-Bench \parencite{mtbench}
 and G-Eval \parencite{geval} document sensitivity to prompt wording and answer
 position, so automated labels need human checking rather than blind trust. Third,
-human coding must be quantified. Kappa coefficients from \textcite{cohen_kappa}
-and \textcite{fleiss_kappa}, with interpretation guidance from
-\textcite{mchugh_kappa}, are the standard instruments. This
+human coding must be quantified. Kappa coefficients are the standard instruments,
+with established interpretation guidance
+\parencite{cohen_kappa,fleiss_kappa,mchugh_kappa}. This
 thesis combines all three: repetition for nondeterminism, automated coding
 checked against an independent blind second coder, and kappa based inter rater
 reliability. A reported divergence is therefore unlikely to be an artifact of
