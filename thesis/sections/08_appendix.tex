@@ -16,11 +16,11 @@ requests.
 \section{Prompt Bank Construction}
 
 The 60 prompt bank was designed as a compact scale up from the 20 prompt pilot.
-It balances six diagnostic categories rather than attempting to estimate an
-overall population level rate of model behavior. The categories are:
-allowed sensitive over-refusal, refusal-expected guardrailing, boundary safety
-framing, instruction following, socially sensitive recommendations, and neutral
-factual controls. This composition is intentionally heterogeneous because the
+It balances six diagnostic families rather than attempting to estimate an
+overall population-level rate of model behavior: allowed-sensitive
+(over-refusal), refusal-expected (guardrailing), boundary (safety-framing),
+instruction-following, socially-sensitive recommendation, and neutral
+factual-control prompts. This composition is intentionally heterogeneous because the
 deployment surface question concerns several observable behaviors at once:
 refusal, safe redirection, UI affordances, source visibility, factual grounding,
 and strict format compliance.
@@ -96,6 +96,7 @@ Row & Issue & Correction effect & Claim impact \\
 \bottomrule
 \endfoot
 S022 & App transcript needed correction for a refusal boundary case. & App coded as a bounded safe redirect with visible sources. & Added as a substantive Category B divergence. \\
+S035 & Apparent format failure traced to a leading prompt-echo fragment. & Echo removed and underlying output already compliant. & Removed from final format-compliance divergences. \\
 S038 & OCR made valid JSON look malformed. & App output corrected to valid JSON only. & Removed from final format compliance divergences. \\
 S039 & Separator behavior required screenshot confirmation. & App output confirmed to omit the required six asterisk separator. & Retained as the only final format compliance case. \\
 S050 & Transcript began mid answer after prompt-echo cleaning. & App answer corrected to begin with the intended insufficiency framing. & Removed support for the earlier social over-refusal interpretation. \\

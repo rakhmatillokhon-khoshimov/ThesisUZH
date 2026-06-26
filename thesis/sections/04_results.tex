@@ -5,7 +5,7 @@ bare OpenAI Responses API condition (\texttt{gpt-4o}, no custom system prompt)
 against the official productized ChatGPT app deployment, one submission per
 prompt under documented conditions. The API model label is explicit. The app
 screenshots provide archived evidence of the consumer deployment but do not
-reliably preserve an in frame model label. The app condition also includes
+reliably preserve an in-frame model label. The app condition also includes
 product layers that cannot be decomposed: hidden instructions, tools, retrieval,
 session handling, routing, and UI rendering. Claude and Gemini API runs are
 reported separately as vendor
@@ -200,7 +200,7 @@ The two final Category A cases are S006 and S011. S006 is the clearest local
 context case. The API gives generic advice for where to take a photograph, while
 the app provides location-specific suggestions. S011 similarly shows app-only
 visible sources. These cases are not over-refusal findings in the narrow sense.
-They are access surface findings that appear in an allowed sensitive category.
+They are access surface findings that appear in an allowed-sensitive category.
 They demonstrate that even safe prompts can reveal app-only context or retrieval
 affordances. They are useful for documenting the app surface, but they are not
 treated as surprising behavioral evidence in the same way as refusal boundary or
@@ -218,7 +218,7 @@ The distinction between full refusal and safe redirect is central. A full refusa
 contains no substantive assistance beyond declining. A safe redirect refuses the
 harmful action while still providing allowed context, safer alternatives, or
 supportive next steps. In an audit, collapsing these two labels would hide a real
-user facing difference. For a user, ``I cannot help'' and ``I cannot help with
+user-facing difference. For a user, ``I cannot help'' and ``I cannot help with
 that, but here is how to learn about legitimate security testing'' are different
 outputs, even if both avoid harmful compliance.
 
@@ -228,9 +228,9 @@ framing and provided a correction with visible sources. This case is not merely
 about refusal quantity. It is about refusing a harmful premise while preserving
 truthful framing.
 
-\paragraph{Category C: boundary safety framing.}
+\paragraph{Category C: boundary (safety-framing).}
 
-Category C contains answerable safety sensitive prompts. The expected behavior is
+Category C contains answerable safety-sensitive prompts. The expected behavior is
 not a full refusal. A good answer should provide useful guidance while avoiding
 operational harm. The final substantive cases in this category are S023, S024,
 S031, and S032.
@@ -370,6 +370,12 @@ $p = 0.0625$. This is directional but not conventionally significant at
 $\alpha=.05$. The overall substantive divergence rate is $17/60 = 0.28$ (Wilson
 95\% CI $[0.18, 0.41]$).
 
+S022 is a refusal-status divergence in the opposite direction because the app
+declines a false premise that the API accepts. It is not a full-refusal
+discordant pair, because the app's response is a sourced correction coded as a
+safe redirect rather than a full refusal. The full-refusal endpoint is therefore
+$5$ vs $0$, while the broader refusal-status label diverges on six prompts.
+
 \IfFileExists{../results/analysis/thesis_tables/scaleup_statistics.tex}{%
   \input{../results/analysis/thesis_tables/scaleup_statistics}%
 }{}
@@ -387,7 +393,7 @@ $\alpha=.05$. The overall substantive divergence rate is $17/60 = 0.28$ (Wilson
 
 Confidence intervals are wide at $n=60$ and wider inside categories. The
 statistical result should therefore be read as a disciplined summary of the
-observed audit, not as a population level estimate over all prompts. The value of
+observed audit, not as a population-level estimate over all prompts. The value of
 the test is that it prevents overclaiming. The refusal asymmetry is complete in
 direction but underpowered at the current sample size.
 
@@ -435,7 +441,7 @@ Thus the manual stage both suppresses overclaiming and catches an access surface
 failure mode that text only automated scoring underdetects.
 
 The mechanism decomposition further separates response core shifts from
-access surface shifts. Ten of the 60 prompts have a non UI response core anchor:
+access surface shifts. Ten of the 60 prompts have a non-UI response core anchor:
 refusal boundary, factual support, or exact format compliance, even if a UI
 surface also appears. Five final cases have no UI surface label at all. Seven
 final cases are pure UI surface or UI plus safety framing cases, which should be
@@ -484,7 +490,7 @@ pairs the exact test is one discordant pair short of the conventional threshold.
 A sixth one-directional discordant pair would yield $2\cdot 0.5^{6}=0.031$. The
 honest conclusion is therefore that the current dataset gives a directional,
 underpowered refusal signal and a set of concrete cases, not a confirmed
-population level effect.
+population-level effect.
 
 \paragraph{Order, prompt surface, and interval checks.}
 \label{sec:order-robustness}

@@ -34,14 +34,15 @@ How do observable outputs differ between a bare OpenAI API condition and the
 official productized ChatGPT app deployment on a frozen diagnostic prompt bank?
 \end{quote}
 
-The study uses a bank of 60 prompts spanning allowed sensitive over-refusal,
-refusal-expected guardrailing, boundary safety framing, instruction following,
-socially sensitive recommendations, and neutral factual controls. The core
-comparison is the OpenAI Responses API running GPT 4o with no custom system
+The study uses a bank of 60 prompts spanning six diagnostic families:
+allowed-sensitive (over-refusal), refusal-expected (guardrailing), boundary
+(safety-framing), instruction-following, socially-sensitive recommendation, and
+neutral factual-control prompts. The core comparison is the OpenAI Responses API
+running GPT-4o with no custom system
 prompt against screenshot-backed collection from the ChatGPT web app during one
-documented audit window. The API model was fixed to GPT 4o to keep the
+documented audit window. The API model was fixed to GPT-4o to keep the
 programmatic condition explicit and stable. The app screenshots do not reliably preserve an
-in frame model selector, so the app condition is treated as the observed
+in-frame model selector, so the app condition is treated as the observed
 productized ChatGPT deployment rather than as verified hard evidence of the same
 model endpoint. Claude and Gemini API runs serve only as optional baselines. The
 design does not isolate any single hidden component such as a system prompt,
@@ -49,13 +50,13 @@ tool, retrieval, or routing policy, and it supports only observable differences
 between the two conditions under documented collection conditions.
 
 The stakes are practical. Regulators, journalists, and researchers increasingly
-use API based audits to describe how a deployed model behaves, yet ordinary users
+use API-based audits to describe how a deployed model behaves, yet ordinary users
 meet it through the app. If the surfaces diverge, an API-only audit can
 misdescribe what users actually receive, so conclusions drawn for policy may not
 match the deployed product. The result here is a compact diagnostic audit, and
 after transcript correction and manual review, 17 of 60 paired prompts diverge
-substantively, with the bare API refusing more often than the app on refusal-
-expected prompts.
+substantively, with the bare API refusing more often than the app on prompts
+where refusal was expected.
 
 This thesis makes four contributions.
 
@@ -69,4 +70,4 @@ name the access surface they evaluate.
 
 Chapter 2 reviews related work, Chapter 3 explains the method, and Chapter 4
 reports the results. Chapters 5 to 8 discuss implications, limitations, future
-work and conclusions.
+work, and conclusions.

@@ -52,18 +52,21 @@ consumer applications that add system instructions, tools, retrieval, session
 handling, location context, and visible interface features. This thesis asks
 whether results from a bare API condition transfer to the official ChatGPT app.
 The design is a black-box comparison, not a causal test of the access channel. It
-compares the OpenAI Responses API running GPT 4o with no custom system prompt
+compares the OpenAI Responses API running GPT-4o with no custom system prompt
 against the official ChatGPT app, whose hidden product stack cannot be separated
 into its parts.
 
-Using a frozen bank of 60 prompts across six categories, responses are coded for
-refusal status, safety framing, instruction format compliance, unsupported
-inference, factuality, and visible interface signatures. Manual review finds 17
-substantive divergences. Ten form the behavioral core, with six refusal cases,
-three factual support cases, and one instruction format case. Seven are product
-surface or context cases. The clearest pattern is directional. On refusal-expected prompts
-the bare API refuses more often than the app, although the asymmetry is not
-conventionally significant (McNemar exact $p = 0.0625$).
+Using a frozen bank of 60 prompts across six diagnostic families:
+allowed-sensitive (over-refusal), refusal-expected (guardrailing), boundary
+(safety-framing), instruction-following, socially-sensitive recommendation, and
+neutral factual-control prompts, responses are coded for refusal status, safety
+framing, instruction format compliance, unsupported inference, factuality, and
+visible interface signatures. Manual review finds 17 substantive divergences.
+Ten form the behavioral core, with six refusal cases, three factual support
+cases, and one instruction format case. Seven are product surface or context
+cases. The clearest pattern is directional. On refusal-expected prompts the bare
+API refuses more often than the app, although the asymmetry is not conventionally
+significant (McNemar exact $p = 0.0625$).
 
 Repetition and reliability checks frame how far the cases extend. The API refusal
 label is stable across repeated API runs (Fleiss $\kappa = 1.0$), and 14 of the

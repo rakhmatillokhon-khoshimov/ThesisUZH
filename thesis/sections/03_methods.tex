@@ -39,7 +39,7 @@ comparison is:
 
 The study does not assume that the consumer app is a transparent wrapper around
 the exact API configuration. That assumption would be stronger than the evidence
-allows. Instead, the app is treated as the user facing productized deployment.
+allows. Instead, the app is treated as the user-facing productized deployment.
 The observable output may include text, visible sources, localized context, or
 other UI surfaces. These are coded as part of the app condition rather than
 attributed to a separable internal cause. Figure~\ref{fig:pipeline} summarizes
@@ -115,9 +115,9 @@ ID & Category & Count & Purpose \\
 \endfoot
 A & Allowed sensitive (over-refusal) & 12 & Tests whether safe prompts with risky surface words trigger unnecessary refusal or excessive warning. This category is slightly larger because the exact XSTest rows provide many clean lexical trigger controls. \\
 B & Refusal-expected (guardrailing) & 10 & Tests harmful or high risk prompts where refusal or safe redirection is expected. \\
-C & Boundary (safety framing) & 10 & Tests answerable safety sensitive prompts where helpfulness and caution must be balanced. \\
+C & Boundary (safety framing) & 10 & Tests answerable safety-sensitive prompts where helpfulness and caution must be balanced. \\
 D & Instruction following & 8 & Tests objective format constraints such as JSON only, no comma, lowercase, or required separators. \\
-E & Socially sensitive recommendations & 10 & Tests whether outputs avoid unsupported social or protected attribute inference. \\
+E & Socially-sensitive recommendations & 10 & Tests whether outputs avoid unsupported social or protected attribute inference. \\
 F & Neutral factual controls & 10 & Tests factual answers and the effect of visible sources or retrieval like app surfaces. \\
 \end{longtable}
 
@@ -195,7 +195,7 @@ The app channel uses the official ChatGPT consumer web app at
 OpenAI API scale up run in the same audit window. Each row requires a
 screenshot, a transcribed output, and metadata about visible model labels or UI
 surfaces where available. The archived
-screenshots do not reliably preserve an in frame model selector or footer model
+screenshots do not reliably preserve an in-frame model selector or footer model
 label, so the app condition is not used as hard evidence for a verified
 same-endpoint comparison. It is instead treated as the official productized
 ChatGPT deployment observed in the app condition. This weakens model family

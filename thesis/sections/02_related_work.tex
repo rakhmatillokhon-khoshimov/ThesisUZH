@@ -21,7 +21,7 @@ but can still compare outputs collected under documented conditions. Product
 level audits show why the
 deployed system is the right unit. The \emph{Gender Shades} audit
 \parencite{gender_shades} exposed intersectional accuracy gaps in commercial
-classifiers that aggregate scores had hidden. Publishing such audits can change
+classifiers, gaps that aggregate accuracy scores had concealed. Publishing such audits can change
 vendor behavior \parencite{raji_actionable}. A deployed healthcare tool was also
 shown to contain racial bias \parencite{obermeyer_bias}. Accountability work
 makes the system boundary explicit by documenting evidence, scope, and deployment
@@ -55,7 +55,7 @@ behavior they measure is the behavior a user receives through an app. A small bu
 growing literature treats the access surface itself as the variable. The closest
 precedent is \emph{Dual Standards} \parencite{dualstandards}, which gives
 empirical evidence that moderation differs between API and WebUI access. It
-finds the WebUI \emph{more} restrictive, the opposite direction to this thesis,
+finds the WebUI \emph{more} restrictive, the opposite of the direction found here,
 which is exactly why the claim here is only that the surfaces differ, not that they
 differ in a fixed direction. Two further results make the app a moving, opaque
 target. The same named service can change within months, and consumer systems can
@@ -71,14 +71,15 @@ bank and the coding distinctions a refusal audit needs. Safety benchmarks supply
 high risk and boundary prompts. Do-Not-Answer \parencite{donotanswer} curates
 prompts a responsible model should decline. HarmBench \parencite{harmbench}
 standardizes refusal evaluation. AILuminate \parencite{ailuminate} organizes
-product level risk categories. Moderation classifiers such as Llama Guard
+product-level risk categories. Moderation classifiers such as Llama Guard
 \parencite{llama_guard} show that a provider can place a filter between user and
 model that, from a black-box view, is part of the deployment stack. Refusal
 benchmarks sharpen refusal and partial answer coding. SORRY-Bench \parencite{sorrybench},
 StrongREJECT \parencite{strongreject}, and WildGuard \parencite{wildguard}
-evaluate refusal and jailbreak behavior, while biological research RefusalBench
-\parencite{refusalbench_bio} is the key caution. A single refusal rate can misrank
-systems when safe, useful engagement is possible. This thesis therefore
+evaluate refusal and jailbreak behavior, while RefusalBench
+\parencite{refusalbench_bio}, in the biological-research domain, supplies the
+key caution: a single refusal rate can misrank systems when safe, useful
+engagement is possible. This thesis therefore
 distinguishes full refusal, partial refusal, and safe redirection rather than
 treating every non answer alike. Over-refusal work motivates the benign half of
 the design. XSTest \parencite{xstest} targets exaggerated safety on clearly safe
@@ -91,7 +92,7 @@ effects rather than jailbreak artifacts.
 \section{Control and Factuality Tasks}
 
 Beyond safety, the bank needs control families: instruction following,
-factuality, and socially sensitive inference. These separate deployment surface
+factuality, and socially-sensitive inference. These separate deployment surface
 effects from ordinary task variation. IFEval
 \parencite{ifeval} motivates instruction following items with explicit, checkable
 constraints that can be scored without subjective judgment, and it flags a
@@ -106,7 +107,7 @@ motivate separating unsupported memory answers from evidence supported ones.
 Retrieval work shows that adding visible sources changes the factual support a
 user receives \parencite{dpr,rag,webgpt,verified_quotes,blenderbot2}. Because the app can
 display sources while the bare API cannot, visible sources are coded as a
-deployment surface signature rather than dismissed as cosmetic. Socially sensitive
+deployment surface signature rather than dismissed as cosmetic. Socially-sensitive
 inference is a negative control. Work on bias in embeddings and generated text
 \parencite{caliskan_bias,debiasing_embeddings,sheng_bias,realtoxicityprompts}
 shows that models absorb demographic associations. Bias claims require explicit
