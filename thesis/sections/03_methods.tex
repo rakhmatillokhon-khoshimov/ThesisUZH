@@ -169,9 +169,9 @@ in several theoretically important behavioral families.
 
 The API channel uses the OpenAI Responses API with no custom system prompt. The
 runner records prompt ID, run ID, timestamp, model label, raw output, and
-structured metadata. The scale up API collection completed all 60 rows on 5 June
-2026. API outputs are stored in private logs for full review and in shared or
-generated summaries for thesis reporting.
+structured metadata. The scale up API collection completed all 60 rows. API
+outputs are stored in private logs for full review and in shared or generated
+summaries for thesis reporting.
 
 The absence of a custom system prompt is part of the design. It avoids adding an
 experimenter defined instruction layer to the API condition. The API condition is
@@ -191,15 +191,15 @@ not deterministic by construction.
 \paragraph{ChatGPT app channel.}
 
 The app channel uses the official ChatGPT consumer web app at
-\path{chatgpt.com}. The main 60 prompt app collection was conducted on 8 June
-2026 between 21:31 and 22:05 Europe/Zurich, about three days after the OpenAI API
-scale up run. Each row requires a screenshot, a transcribed output, and metadata
-about visible model labels or UI surfaces where available. The archived
+\path{chatgpt.com}. The main 60 prompt app collection was conducted after the
+OpenAI API scale up run in the same audit window. Each row requires a
+screenshot, a transcribed output, and metadata about visible model labels or UI
+surfaces where available. The archived
 screenshots do not reliably preserve an in frame model selector or footer model
 label, so the app condition is not used as hard evidence for a verified
 same endpoint comparison. It is instead treated as the official productized
-ChatGPT deployment observed during the collection window. This weakens
-model family comparability relative to an ideal controlled design, and it
+ChatGPT deployment observed in the app condition. This weakens model family
+comparability relative to an ideal controlled design, and it
 reinforces the deployment stack limitation. The consumer deployment may include
 hidden system instructions, tools, retrieval, account or session state, product
 UI behavior, and routing that are not separable from the app condition.
@@ -226,8 +226,8 @@ not treated as a hidden cause inference. It is a visible output label.
 
 \paragraph{API only vendor baselines.}
 
-Claude and Gemini were collected on the same 60 prompt bank through APIs only on
-8 June 2026. Claude used the Anthropic Messages API with
+Claude and Gemini were collected on the same 60 prompt bank through APIs only
+during the same audit window. Claude used the Anthropic Messages API with
 \texttt{claude-sonnet-4-20250514}, no custom system prompt, and
 \texttt{max\_tokens=1200}. Gemini used \texttt{gemini-2.5-flash} through
 \texttt{generateContent} with no custom system instruction. The scale up was run
@@ -268,9 +268,9 @@ repetitions are therefore reported as stability evidence rather than as extra
 primary observations. They do not change the 60 prompt denominator or the paired
 McNemar test.
 
-For the OpenAI API channel, the first scale up run was collected on 5 June 2026.
-Two additional OpenAI API runs were collected on 9 June 2026 using the same
-60 prompt bank and the same request recipe: \texttt{gpt-4o}, no custom system
+For the OpenAI API channel, the first scale up run was the primary run. Two
+additional OpenAI API runs were collected later using the same 60 prompt bank
+and the same request recipe: \texttt{gpt-4o}, no custom system
 prompt, no fixed seed, no explicitly set \texttt{temperature} or \texttt{top\_p},
 and no explicit output token cap. API stability is computed by treating the
 three runs as repeated measurements over the same 60 prompt IDs and applying the
@@ -279,16 +279,15 @@ summarized with Fleiss' $\kappa$ for the refusal label. The reported stability
 summaries therefore describe label agreement across repeated API calls, not
 deterministic generation.
 
-Claude API repetitions were also collected on 9 June 2026 as API only robustness
-context. Gemini repetition stability is not reported because the repeated Gemini
+Claude API repetitions were also collected as API only robustness context.
+Gemini repetition stability is not reported because the repeated Gemini
 collection returned empty outputs under the high throughput configuration used
 for that run. This failure is treated as a collection artifact rather than as
 behavioral evidence.
 
 For the ChatGPT app channel, two targeted repetitions were collected only for
-the 17 final substantive divergence cases. These app repetitions were collected
-on 17 June 2026 between 20:00 and 21:03 Europe/Zurich. The repetition checklist
-required a fresh ChatGPT chat for each row, exact prompt pasting, no retry or
+the 17 final substantive divergence cases. The repetition checklist required a
+fresh ChatGPT chat for each row, exact prompt pasting, no retry or
 refusal bypass attempt, a full screenshot after answer completion, and transcript
 checking. The result is 34 additional screenshot backed app observations. The
 visible app label in this packet is only \texttt{ChatGPT}. It is therefore

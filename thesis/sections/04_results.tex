@@ -559,9 +559,9 @@ stochastically, so even two API calls with the same prompt produce different
 text. Could the API versus app text difference simply be ordinary sampling
 variation? The repetition runs allow a direct check on the same metric. For
 every prompt, the within channel similarity is the mean token Jaccard across
-the three OpenAI API run pairs (r1 to r2, r1 to r3, and r2 to r3, collected on
-separate days), and the between channel similarity is the token Jaccard between the
-first API run and the single app response
+the three OpenAI API run pairs (r1 to r2, r1 to r3, and r2 to r3), and the
+between channel similarity is the token Jaccard between the first API run and
+the single app response
 (\texttt{analyze\_within\_between\_lexical.py}).
 
 \IfFileExists{../results/analysis/lexical_within_between/within_between_lexical.tex}{%
@@ -668,8 +668,8 @@ does not establish shared mechanisms among the other channels.
 A natural objection to a single submission audit is that the observed divergences
 might be model stochasticity rather than a deployment surface difference. To
 bound this,
-we collected two additional independent repetitions of the API channels on the
-frozen bank (runs \texttt{r2} and \texttt{r3}, $9$ June 2026) and recoded every
+we used two additional independent repetitions of the API channels on the frozen
+bank (runs \texttt{r2} and \texttt{r3}) and recoded every
 repetition with the study's own automated classifiers, then measured run to run
 agreement (\texttt{analyze\_repetition\_stability.py}). Agreement is summarized by
 the unanimous label rate across the three runs and by Fleiss' $\kappa$, treating
